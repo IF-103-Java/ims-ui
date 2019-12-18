@@ -1,0 +1,57 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Unit</th>
+    <th>Description</th>
+    <th>Volume</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of items">
+    <td>{{item.name}}</td>
+    <td>{{item.unit}}</td>
+    <td>{{item.description}}</td>
+    <td>{{item.volume}}</td>
+    <td>{{item.id}}</td>
+    <td><button class="btn btn-danger" (click)="findSavedItemByItem(item)"></button></td>
+   </tr>
+  <p>Add Item</p>
+
+  </tbody>
+</table>
+<div class="col-sm-6">
+  <form  >
+  <div class="form-group">
+    <label for="name">Name:</label>
+ <input type="text" [(ngModel)]="item.name" name="name" class="form-control" id="name">
+  </div>
+  <div class="form-group">
+    <label for="unit">Unit:</label>
+    <input  [(ngModel)]="item.unit" name="unit" class="form-control" id="unit">
+  </div>
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <input  [(ngModel)]="item.description" name="description" class="form-control" id="description">
+  </div>
+  <div class="form-group">
+    <label for="volume">Volume:</label>
+    <input  [(ngModel)]="item.volume" name="volume" class="form-control" id="volume">
+  </div>
+  <div class="form-group">
+    <label for="accountId">Account Id:</label>
+    <input  [(ngModel)]="item.accountId"  name="accountId" class="form-control" id="accountId">
+  </div>
+
+<button class="btn btn-danger" (click)="createItem()"> Create Item</button>
+  <p>{{item.name}}</p>
+  <p>{{item.unit}}</p>
+  <p>{{item.description}}</p>
+  <p>{{item.volume}}</p>
+  <p>{{item.accountId}}</p>
+  <br/>
+  <br/>
+</form>
+</div>
+
+
