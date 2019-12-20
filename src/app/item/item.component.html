@@ -1,10 +1,20 @@
-<table class="table table-striped">
+<div class="row">
+
+    <table class="table table-striped table-bordered col-sm-4">
   <thead>
+
+    <div class="form-group">
+      <label for="size">Size:</label>
+      <input   [(ngModel)]="size" name="size" type="number" min="1" max="20" class="form-control" id="size" >
+       <button class="btn btn-danger" (click)="research()">research</button>
+    </div>
+
+
   <tr>
-    <th>Name</th>
-    <th>Unit</th>
-    <th>Description</th>
-    <th>Volume</th>
+    <th><button (click)="sortValue=sort[0]"><a class='glyphicon glyphicon-arrow-up' (click)="direction='asc'"></a><a class='glyphicon glyphicon-arrow-down' (click)="direction='desc'"></a>Name</button></th>
+    <th ><button (click)="sortValue=sort[1]"><a class='glyphicon glyphicon-arrow-up'></a><a class='glyphicon glyphicon-arrow-down'></a>Unit</button></th>
+    <th ><button (click)="sortValue=sort[2]"><a class='glyphicon glyphicon-arrow-up'></a><a class='glyphicon glyphicon-arrow-down'></a>Description</button></th>
+    <th ><button (click)="sortValue=sort[3]"><a class='glyphicon glyphicon-arrow-up'></a><a class='glyphicon glyphicon-arrow-down'></a>Volume</button></th>
   </tr>
   </thead>
   <tbody>
@@ -13,45 +23,39 @@
     <td>{{item.unit}}</td>
     <td>{{item.description}}</td>
     <td>{{item.volume}}</td>
-    <td>{{item.id}}</td>
-    <td><button class="btn btn-danger" (click)="findSavedItemByItem(item)"></button></td>
-   </tr>
+    <a class="glyphicon glyphicon-plus"></a>
+    <a class="glyphicon glyphicon-minus"></a>
+    </tr>
   <p>Add Item</p>
-
   </tbody>
+<ul class="pagination" [(ngModel)]="page">
+  <li class="page-item"><a class="page-link" (click)="decrement()">Previous</a></li>
+  <li class="page-item"><a class="page-link"(click)="page=1">1</a></li>
+  <li class="page-item"><a class="page-link"(click)="page=2">2</a></li>
+  <li class="page-item"><a class="page-link" (click)="page=3">3</a></li>
+  <li class="page-item"><a class="page-link" (click)="page=4">4</a></li>
+  <li class="page-item"><a class="page-link" (click)="page=5">5</a></li>
+   <li class="page-item"><a class="page-link" (click)="increment()">Next</a></li>
+</ul>
+
 </table>
-<div class="col-sm-6">
+
+<div >
   <form  >
-  <div class="form-group">
-    <label for="name">Name:</label>
- <input type="text" [(ngModel)]="item.name" name="name" class="form-control" id="name">
-  </div>
-  <div class="form-group">
-    <label for="unit">Unit:</label>
-    <input  [(ngModel)]="item.unit" name="unit" class="form-control" id="unit">
-  </div>
-  <div class="form-group">
-    <label for="description">Description:</label>
-    <input  [(ngModel)]="item.description" name="description" class="form-control" id="description">
-  </div>
-  <div class="form-group">
-    <label for="volume">Volume:</label>
-    <input  [(ngModel)]="item.volume" name="volume" class="form-control" id="volume">
-  </div>
-  <div class="form-group">
-    <label for="accountId">Account Id:</label>
-    <input  [(ngModel)]="item.accountId"  name="accountId" class="form-control" id="accountId">
-  </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" [(ngModel)]="item.name" name="name" class="form-control" id="name">
+      <label for="unit">Unit:</label>
+      <input type="text" [(ngModel)]="item.unit" name="unit" class="form-control" id="unit">
+      <label for="description">Description:</label>
+      <input type="text" [(ngModel)]="item.description" name="description" class="form-control" id="description">
+      <label for="volume">Volume:</label>
+      <input type="text" [(ngModel)]="item.volume" name="volume" class="form-control" id="volume">
+      <label for="account">AccountId:</label>
+      <input type="text" [(ngModel)]="item.accountId" name="account" class="form-control" id="account">
+<button class="btn btn-success" (click)="addItem()"></button>
+    </div>
 
-<button class="btn btn-danger" (click)="createItem()"> Create Item</button>
-  <p>{{item.name}}</p>
-  <p>{{item.unit}}</p>
-  <p>{{item.description}}</p>
-  <p>{{item.volume}}</p>
-  <p>{{item.accountId}}</p>
-  <br/>
-  <br/>
-</form>
+  </form>
 </div>
-
-
+</div>

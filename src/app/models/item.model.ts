@@ -1,21 +1,11 @@
 export class Item {
 
-  id: number;
+  id: bigint;
   name: string;
   unit: string;
   description: string;
   volume: number;
-  accountId: number;
+  accountId: bigint;
   active: boolean;
-  public itemToString()  {
-    return 'itemDto{' +
-      'id=' + this.id +
-      ', name=' + this.name + '\'' +
-      ', unit=' + this.unit + '\'' +
-      ', description=' + this.description + '\'' +
-      ', volume=' + this.volume +
-      ', accountId=' + this.accountId +
-      ', active=' + this.active +
-      '}';
-  }
-  }
+
+}
