@@ -1,0 +1,17 @@
+<p>item-create works!</p>
+<form  >
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" [(ngModel)]="item.name" name="name" class="form-control" id="name">
+    <label for="unit">Unit:</label>
+    <input type="text" [(ngModel)]="item.unit" name="unit" class="form-control" id="unit">
+    <label for="description">Description:</label>
+    <input type="text" [(ngModel)]="item.description" name="description" class="form-control" id="description">
+    <label for="volume">Volume:</label>
+    <input type="text" [(ngModel)]="item.volume" name="volume" class="form-control" id="volume">
+    <label for="account">AccountId:</label>
+    <input type="text" [(ngModel)]="item.accountId" name="account" class="form-control" id="account">
+    <button class="btn btn-success" (click)="createItem()"></button>
+  </div>
+
+</form>

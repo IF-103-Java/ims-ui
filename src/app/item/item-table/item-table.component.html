@@ -1,0 +1,27 @@
+<table>
+  <thead>
+  <tr sortable [sortValue]="sortValue[0]" (sortEvent)="sort">Name</tr>
+  <tr sortable [sortValue]="sortValue[1]" (sortEvent)="sort">Unit</tr>
+  <tr sortable [sortValue]="sortValue[2]" (sortEvent)="sort">Description</tr>
+  <tr  sortable [sortValue]="sortValue[3]" (sortEvent)="sort">Volume</tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of items">
+    <td>{{item.name}}</td>
+    <td>{{item.unit}}</td>
+    <td>{{item.description}}</td>
+    <td>{{item.volume}}</td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <ul class="pagination" [(ngModel)]="page">
+    <li class="page-item"><a class="page-link" (click)="decrement()">Previous</a></li>
+    <li class="page-item"><a class="page-link"(click)="page=1">1</a></li>
+    <li class="page-item"><a class="page-link"(click)="page=2">2</a></li>
+    <li class="page-item"><a class="page-link" (click)="page=3">3</a></li>
+    <li class="page-item"><a class="page-link" (click)="page=4">4</a></li>
+    <li class="page-item"><a class="page-link" (click)="page=5">5</a></li>
+    <li class="page-item"><a class="page-link" (click)="increment()">Next</a></li>
+
+  </tfoot>
+</table>
