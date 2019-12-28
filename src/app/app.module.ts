@@ -25,7 +25,7 @@ import {ItemSortableDirective} from "./item/item-sortable.directive";
     HttpClientModule,
     FormsModule
   ],
-  providers: [ItemService ],
+  providers: [ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
