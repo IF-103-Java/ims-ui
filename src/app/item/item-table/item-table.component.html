@@ -1,9 +1,10 @@
-<table>
+<div>
+<table class="table table-striped table-bordered">
   <thead>
-  <tr sortable [sortValue]="sortValue[0]" (sortEvent)="sort">Name</tr>
-  <tr sortable [sortValue]="sortValue[1]" (sortEvent)="sort">Unit</tr>
-  <tr sortable [sortValue]="sortValue[2]" (sortEvent)="sort">Description</tr>
-  <tr  sortable [sortValue]="sortValue[3]" (sortEvent)="sort">Volume</tr>
+  <th sortable [sortValue]="sortValue[0]" (sortEvent)="sort">Name</th>
+  <th sortable [sortValue]="sortValue[1]" (sortEvent)="sort">Unit</th>
+  <th sortable [sortValue]="sortValue[2]" (sortEvent)="sort">Description</th>
+  <th  sortable [sortValue]="sortValue[3]" (sortEvent)="sort">Volume</th>>
   </thead>
   <tbody>
   <tr *ngFor="let item of items">
@@ -25,3 +26,4 @@
   </ul>
   </tfoot>
 </table>
+</div>
