@@ -1,0 +1,38 @@
+<form>
+  <h2 style="text-align:center">Create an Account!</h2>
+
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="First Name" name="firstName">
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Last Name" name="lastName">
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email" name="email">
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Password" name="psw">
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Account Name" name="accountName">
+  </div>
+
+
+  <button type="submit" class="btn" (click)="createUser()">Register Account </button>
+
+  <div style="text-align:center">
+    <a class="small" href="user-forgot-password.html">Forgot Password?</a>
+  </div>
+  <div style="text-align:center">
+    <a class="small" href="user-signin.component.html">Already have an account? Login!</a>
+  </div>
+</form>

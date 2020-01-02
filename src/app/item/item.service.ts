@@ -19,9 +19,9 @@ export class ItemService {
   public findSortedAndPaginatedItems(page: number, size: number, sort: string, direction: string) {
 
     return this.http.get<Item[]>('http://localhost:8080/items?page='+page+'&size='+size+'&sort='+sort+'&direction='+direction+'');
-  }
-  public addItem(item: Item){
-    this.http.post('http://localhost:8080/items', item);
+}
+public addItem(item: Item){
+  this.http.post('http://localhost:8080/items', item);
   }
   public  getSavedItemsByItemId(itemId: bigint){
     return this.http.get<SavedItem[]>('http://localhost:8080/savedItems/itemId/1'+itemId)
