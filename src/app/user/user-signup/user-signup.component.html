@@ -3,28 +3,29 @@
 
   <div class="input-container">
     <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="First Name" name="firstName">
+    <input class="input-field" type="text" [(ngModel)]="user.first_name" placeholder="First Name" name="firstName"required>
   </div>
 
   <div class="input-container">
     <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="Last Name" name="lastName">
+    <input class="input-field" type="text" [(ngModel)]="user.last_name" placeholder="Last Name" name="lastName" required>
   </div>
 
   <div class="input-container">
     <i class="fa fa-envelope icon"></i>
-    <input class="input-field" type="text" placeholder="Email" name="email">
+    <input class="input-field" type="text" [(ngModel)]="user.email" placeholder="Email" name="email" required>
   </div>
 
   <div class="input-container">
     <i class="fa fa-key icon"></i>
-    <input class="input-field" type="password" placeholder="Password" name="psw">
+    <input class="input-field" type="password" [(ngModel)]="user.password" placeholder="Password" name="psw" required>
   </div>
 
   <div class="input-container">
     <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" placeholder="Account Name" name="accountName">
+    <input class="input-field" type="text" [(ngModel)]="user.accountName" placeholder="Account Name" name="accountName" required>
   </div>
+
 
 
   <button type="submit" class="btn" (click)="createUser()">Register Account </button>
