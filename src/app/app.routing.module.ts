@@ -6,7 +6,7 @@ import {UserSignupComponent} from "./user/user-signup/user-signup.component";
 import {UserUpdateComponent} from "./user/user-update/user-update.component";
 import {UserResetPasswordComponent} from "./user/user-reset-password/user-reset-password.component";
 import {UserForgotPasswordComponent} from "./user/user-forgot-password/user-forgot-password.component";
-import {UserSigninComponent} from "./user/user-signin/user-signin.component";
+import {UserSigninComponent} from "./user/user-signin/user-signing.component";
 
 
 const routes: Routes = [

@@ -1,0 +1,22 @@
+<form>
+  <h2 style="text-align:center">Login!</h2>
+
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" [(ngModel)]="user.email" placeholder="Email" name="email" required>
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" [(ngModel)]="user.password" placeholder="Password" name="psw" required>
+  </div>
+
+  <button type="submit" class="btn" (click)="login()">Login</button>
+
+  <div style="text-align:center">
+    <a class="small" href="user-forgot-password.html">Forgot Password?</a>
+  </div>
+  <div style="text-align:center">
+    <a class="small" href="user-signup.component.html">Create an Account!</a>
+  </div>
+</form>
