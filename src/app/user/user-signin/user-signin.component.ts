@@ -4,8 +4,8 @@ import {LoginService} from "../services/login.service";
 
 @Component({
   selector: 'app-user-signin',
-  templateUrl: './user-signing.component.html',
-  styleUrls: ['./user-signing.component.css']
+  templateUrl: './user-signin.component.html',
+  styleUrls: ['./user-signin.component.css']
 })
 export class UserSigninComponent implements OnInit {
   public user: User = new User();
