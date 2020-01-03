@@ -17,6 +17,7 @@ export class UserSignupComponent implements OnInit {
   }
 
   createUser() {
-    this.registrationService.regUser(this.user);
+    this.registrationService.regUser(this.user)
+      .subscribe(response=>{console.log(response)}, error => {console.error(error)})
   }
 }

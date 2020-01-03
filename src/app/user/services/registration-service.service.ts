@@ -12,6 +12,8 @@ export class RegistrationService {
   }
 
   public regUser(user: User) {
-    this.http.post('http://localhost:8080/signup', user);
+    return this.http.post('http://localhost:8080/signup', user);
   }
+
+
 }
