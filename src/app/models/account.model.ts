@@ -1,6 +1,6 @@
-import {AccountType} from "./accountType.model";
+import {AccountType} from './accountType.model';
 
-export class Item {
+export class Account {
 
   id: bigint;
   name: string;

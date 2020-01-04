@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import {RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app.routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import {ItemService} from "./item/item.service";
-import {ItemCreateComponent} from "./item/item-create/item-create.component";
-import {ItemTableComponent} from "./item/item-table/item-table.component";
-import {ItemSortableDirective} from "./item/item-sortable.directive";
+import {ItemService} from './item/item.service';
+import {ItemCreateComponent} from './item/item-create/item-create.component';
+import {ItemTableComponent} from './item/item-table/item-table.component';
+import {ItemSortableDirective} from './item/item-sortable.directive';
+import {AccountViewComponent} from './account/account-view/account-view.component';
+import {AccountService} from './account/account.service';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import {ItemSortableDirective} from "./item/item-sortable.directive";
     AppComponent,
     ItemCreateComponent,
     ItemTableComponent,
-    ItemSortableDirective
+    ItemSortableDirective,
+    AccountViewComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import {ItemSortableDirective} from "./item/item-sortable.directive";
     HttpClientModule,
     FormsModule
   ],
-  providers: [ItemService],
+  providers: [ItemService,
+  AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
