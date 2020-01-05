@@ -1,39 +1,53 @@
-<form>
-  <h2 style="text-align:center">Create an Account!</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="image-block bg-register-image"></div>
 
-  <div class="input-container">
-    <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" [(ngModel)]="user.first_name" placeholder="First Name" name="firstName"required>
+      <form class="right-block">
+        <h1 class="text-gray-900 text-center">Create an Account!</h1>
+
+        <div class="row mr-2 mr-4">
+          <div class="input-container">
+            <i class="fa fa-user icon"></i>
+            <input class="input-field" type="text" [(ngModel)]="user.firstName" placeholder="First Name" name="firstName"required>
+          </div>
+
+          <div class="input-container">
+            <input class="input-field" type="text" [(ngModel)]="user.lastName" placeholder="Last Name" name="lastName" required>
+          </div>
+        </div>
+
+
+        <div class="input-container">
+          <i class="fa fa-envelope icon"></i>
+          <input class="input-field" type="text" [(ngModel)]="user.email" placeholder="Email" name="email" required>
+        </div>
+
+        <div class="input-container">
+          <i class="fa fa-key icon"></i>
+          <input class="input-field" type="password" [(ngModel)]="user.password" placeholder="Password" name="psw" required>
+        </div>
+
+        <div class="input-container">
+          <i class="fa fa-user icon"></i>
+          <input class="input-field" type="text" [(ngModel)]="user.accountName" placeholder="Account Name" name="accountName" required>
+        </div>
+        <button type="submit" class="btn" (click)="createUser()">Register Account </button>
+
+        <hr>
+        <a href="index.html" class="btn btn-google btn-user btn-block">
+          <i class="fa fa-google fa-fw"></i> Register with Google
+        </a>
+        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+          <i class="fa fa-facebook-f fa-fw"></i> Register with Facebook
+        </a>
+
+        <hr>
+        <div style="text-align:center">
+          <a class="small" href="user-forgot-password">Forgot Password?</a>
+        </div>
+        <div style="text-align:center">
+          <a class="small" href="user-signin">Already have an account? Login!</a>
+        </div>
+    </form>
   </div>
-
-  <div class="input-container">
-    <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" [(ngModel)]="user.last_name" placeholder="Last Name" name="lastName" required>
-  </div>
-
-  <div class="input-container">
-    <i class="fa fa-envelope icon"></i>
-    <input class="input-field" type="text" [(ngModel)]="user.email" placeholder="Email" name="email" required>
-  </div>
-
-  <div class="input-container">
-    <i class="fa fa-key icon"></i>
-    <input class="input-field" type="password" [(ngModel)]="user.password" placeholder="Password" name="psw" required>
-  </div>
-
-  <div class="input-container">
-    <i class="fa fa-user icon"></i>
-    <input class="input-field" type="text" [(ngModel)]="user.accountName" placeholder="Account Name" name="accountName" required>
-  </div>
-
-
-
-  <button type="submit" class="btn" (click)="createUser()">Register Account </button>
-
-  <div style="text-align:center">
-    <a class="small" href="user-forgot-password">Forgot Password?</a>
-  </div>
-  <div style="text-align:center">
-    <a class="small" href="user-signin">Already have an account? Login!</a>
-  </div>
-</form>
+</div>

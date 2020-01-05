@@ -1,22 +1,37 @@
-<form>
-  <h2 style="text-align:center">Login!</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="image-block bg-login-image"></div>
 
-  <div class="input-container">
-    <i class="fa fa-envelope icon"></i>
-    <input class="input-field" type="text" [(ngModel)]="user.email" placeholder="Email" name="email" required>
-  </div>
+    <form class="right-block">
+      <h1 class="text-gray-900 text-center">Login!</h1>
 
-  <div class="input-container">
-    <i class="fa fa-key icon"></i>
-    <input class="input-field" type="password" [(ngModel)]="user.password" placeholder="Password" name="psw" required>
-  </div>
+        <div class="input-container">
+          <i class="fa fa-envelope icon"></i>
+          <input class="input-field" type="text" [(ngModel)]="user.username" placeholder="Email" name="email" required>
+        </div>
 
-  <button type="submit" class="btn" (click)="login()">Login</button>
+        <div class="input-container">
+          <i class="fa fa-key icon"></i>
+          <input class="input-field" type="password" [(ngModel)]="user.password" placeholder="Password" name="psw" required>
+        </div>
 
-  <div style="text-align:center">
-    <a class="small" href="user-forgot-password">Forgot Password?</a>
+        <button type="submit" class="btn" (click)="login()">Login</button>
+
+        <hr>
+        <a href="index.html" class="btn btn-google btn-user btn-block">
+          <i class="fa fa-google fa-fw"></i> Login with Google
+        </a>
+        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+          <i class="fa fa-facebook-f fa-fw"></i> Login with Facebook
+        </a>
+
+        <hr>
+        <div style="text-align:center">
+          <a class="small" href="user-forgot-password">Forgot Password?</a>
+        </div>
+        <div style="text-align:center">
+          <a class="small" href="user-signup">Create an Account!</a>
+        </div>
+  </form>
   </div>
-  <div style="text-align:center">
-    <a class="small" href="user-signup">Create an Account!</a>
-  </div>
-</form>
+</div>

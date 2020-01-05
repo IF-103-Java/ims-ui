@@ -1,41 +1,20 @@
-* {box-sizing: border-box;}
-
-.input-container {
-  display: flex;
-  width: 100%;
-  margin-bottom: 15px;
+.container {
+  width: 900px !important;
+  height: 560px !important;
 }
 
-.icon {
-  padding: 10px;
-  background: dodgerblue;
-  color: white;
-  min-width: 50px;
-  text-align: center;
+.bg-login-image {
+  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  background-position: center;
+  background-size: cover;
 }
 
-.input-field {
-  border-radius: 25px;
-  width: 100%;
-  padding: 10px;
-  outline: none;
+.image-block {
+  height: 560px !important;
+  width: 450px !important;
 }
 
-.input-field:focus {
-  border: 2px solid dodgerblue;
-}
-
-.btn {
-  border-radius: 25px;
-  background-color: dodgerblue;
-  color: white;
-  padding: 15px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
-.btn:hover {
-  opacity: 1;
+.right-block{
+  margin: 50px 20px 0 20px ;
+  width: 450px !important;
 }
