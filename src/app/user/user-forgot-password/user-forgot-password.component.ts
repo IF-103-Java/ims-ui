@@ -9,13 +9,13 @@ import {ResetPasswordService} from "../services/reset-password.service";
               '../user-style.css']
 })
 export class UserForgotPasswordComponent implements OnInit {
-  await: boolean;
-  done: boolean;
-  emailForm: FormGroup;
+  private await: boolean;
+  private done: boolean;
+  private forgotPasswordForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private resetPasswordService: ResetPasswordService) {
-    this.emailForm = this.formBuilder.group({
+    this.forgotPasswordForm = this.formBuilder.group({
       email: ''
     });
   }
@@ -30,7 +30,6 @@ export class UserForgotPasswordComponent implements OnInit {
         this.await = false;
       }, error => {
         this.await = false;
-        //this.notificationService.showErrorWithTimeout('Something went wrong.', 'Unknown error', 4200);
       }
     );
   }
