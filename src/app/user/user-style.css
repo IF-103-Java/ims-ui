@@ -1,0 +1,126 @@
+
+.container {
+  width: 900px;
+  height: 50%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.row {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-gray-900 {
+  color: #3a3b45 !important;
+  font-size: 24px ;
+}
+
+.mb-2,
+.my-2 {
+  margin-bottom: 0.5rem !important;
+  margin-top: 5.0rem;
+}
+
+.mb-4,
+.my-4 {
+  margin-bottom: 1.5rem !important;
+  margin-top: 2.0rem ;
+  color: darkgray;
+  font-family: Bahnschrift;
+  margin-left: 70px;
+  margin-right: 70px;
+  line-height: 1.8;
+}
+
+* {box-sizing: border-box;}
+
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+.input-field {
+  border-radius: 25px;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 2px solid dodgerblue;
+}
+
+
+.btn {
+  margin-top: 5px;
+  border-radius: 25px;
+  background-color: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.93;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+/*for app-user-reset-password and login form*/
+.image-block {
+  display: block !important;
+  height: 450px;
+  width: 450px;
+  border-radius: 5px 0 0 5px;
+}
+
+.right-block {
+  display: block !important;
+  height: 450px;
+  width: 450px;
+  border-radius: 5px 0 0 5px;
+}
+
+.form-block{
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+i{
+  border-radius: 50%;
+}
+
+/*optional button*/
+.btn-google {
+  color: #fff;
+  background-color: #ea4335 !important;
+  border-color: #fff;
+}
+
+.btn-facebook {
+  color: #fff;
+  background-color: #3b5998 !important;
+  border-color: #fff;
+}
