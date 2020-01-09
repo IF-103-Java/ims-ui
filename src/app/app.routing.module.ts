@@ -2,11 +2,13 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ItemTableComponent} from "./item/item-table/item-table.component";
 import {ItemCreateComponent} from "./item/item-create/item-create.component";
+import {EventComponent} from './event/event.component';
 
 
 const routes: Routes = [
   {path: 'item-table', component: ItemTableComponent},
-  {path: 'item-create', component: ItemCreateComponent}
+  {path: 'item-create', component: ItemCreateComponent},
+  {path: 'events', component: EventComponent}
   ];
 
 
