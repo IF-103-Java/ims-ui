@@ -1,18 +1,32 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {User} from "../../models/user.model";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {LoginUser} from "../../models/loginUser.model";
-
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
+import {REST_API_URL} from "../../helpers/http-request-helper";
+import {throwError} from "rxjs";
+import AppError from "../../errors/app-error";
+import {catchError} from "rxjs/operators";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable()
 export class LoginService {
-  constructor(private http: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              private jwtHelper: JwtHelperService) {
   }
 
-  public login(user: LoginUser) {
-    return this.http.post('http://localhost:8080/signin', user);
+  login(user: LoginUser) {
+    return this.httpClient.post<any>(REST_API_URL + '/signin', user)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(new AppError(error));
+        })
+      );
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('jwt-token');
+  }
+
+  isLoggedIn(): boolean {
+    return !this.jwtHelper.isTokenExpired();
   }
 }
