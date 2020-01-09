@@ -1,0 +1,27 @@
+.container {
+  width: 1100px !important;
+  height: 600px !important;
+}
+.bg-register-image {
+  background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
+  background-position: center;
+  background-size: cover;
+}
+
+.image-block {
+  height: 600px !important;
+  width: 500px !important;
+}
+
+.right-block{
+  margin: 10px 50px 0 50px ;
+  width: 600px !important;
+}
+
+.mr-2{
+  margin-left: 1px;
+}
+.mr-4{
+  margin-right: 2px;
+}
+
