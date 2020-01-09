@@ -1,4 +1,4 @@
-table.eventTable {
+table {
   font-family: "Times New Roman", Times, serif;
   border: 1px solid #FFFFFF;
   width: 100%;
@@ -7,26 +7,26 @@ table.eventTable {
   border-collapse: collapse;
 }
 
-table.eventTable td, table.eventTable th {
+table td, table th {
   border: 2px solid #FFFFFF;
   padding: 3px 2px;
 }
 
-table.eventTable tbody td {
+table tbody td {
   background: #dcebf7;
   font-size: 15px;
 }
 
-table.eventTable tr:nth-child(even) {
-  background: #D0E4F5;
+table tbody td:nth-child(even) {
+  background: aliceblue;
 }
 
-table.eventTable thead {
+table thead {
   background: #0B6FA4;
   border-bottom: 5px solid #FFFFFF;
 }
 
-table.eventTable thead th {
+table thead th {
   font-size: 17px;
   font-weight: bold;
   color: #FFFFFF;
@@ -34,11 +34,7 @@ table.eventTable thead th {
   border-left: 2px solid #FFFFFF;
 }
 
-table.eventTable thead th:first-child {
-  border-left: none;
-}
-
-table.eventTable tfoot {
+table tfoot {
   font-size: 14px;
   font-weight: bold;
   color: #FFFFFF;
@@ -49,35 +45,23 @@ table.eventTable tfoot {
   border-top: 2px solid #444444;
 }
 
-table.eventTable tfoot td {
+table tfoot td {
   font-size: 14px;
 }
 
-table.eventTable tfoot td {
-  font-size: 14px;
-}
-
-table.eventTable tfoot .links {
+table tfoot .links {
   text-align: center;
 }
 
-table.eventTable tfoot .links button {
+table tfoot .links button {
   color: #0B6FA4;
 }
 
-table.eventTable tfoot .links span {
+table tfoot .links span {
   color: #0B6FA4;
 }
 
-table.eventTable tfoot .links a {
-  display: inline-block;
-  background: #0B6FA4;
-  color: #FFFFFF;
-  padding: 2px 8px;
-  border-radius: 5px;
-}
-
-table.eventTable tfoot .pageSize {
+table tfoot .pageSize {
   float: right;
 }
 

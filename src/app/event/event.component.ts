@@ -23,7 +23,7 @@ export class EventComponent implements OnInit {
     'Item came', 'Item shipped', 'Item moved', 'New supplier', 'New client', 'Supplier removed', 'Client removed',
     'Supplier info edited', 'Client info edited'];
   nameParam = new Param('name');
-  authorsList = new Set<number>();
+  authorsList = new Set<string>();
   authorParam = new Param('author');
   paramsList = new Set<Param>();
 
@@ -52,7 +52,7 @@ export class EventComponent implements OnInit {
 
   setAuthorsList() {
     this.page$.content.forEach((x: Event) => {
-      this.authorsList.add(x.authorId);
+      this.authorsList.add(x.author);
     });
   }
 
