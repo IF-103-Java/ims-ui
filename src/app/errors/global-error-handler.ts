@@ -21,21 +21,21 @@ export class GlobalErrorHandler implements ErrorHandler {
       case 401:
         this.errorInfo = <AppError>appError.error;
         alert(this.errorInfo.message);
-        this.ngZone.run(() => router.navigate(['home'])).then();
+        this.ngZone.run(() => router.navigate(['/'])).then();
         break;
       case 403:
         this.errorInfo = <AppError>appError.error;
         alert(this.errorInfo.message);
-        this.ngZone.run(() => router.navigate(['home'])).then();
+        this.ngZone.run(() => router.navigate(['/'])).then();
         break;
       case 404:
         this.errorInfo = <AppError>appError.error;
         alert(this.errorInfo.message);
-        this.ngZone.run(() => router.navigate(['home'])).then();
+        this.ngZone.run(() => router.navigate(['/'])).then();
         break;
       case 500:
         alert(appError.message);
-        this.ngZone.run(() => router.navigate(['home'])).then();
+        this.ngZone.run(() => router.navigate(['/'])).then();
         break;
       default:
         alert(appError.message);
