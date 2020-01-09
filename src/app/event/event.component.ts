@@ -10,6 +10,7 @@ import {Event} from '../models/event';
 })
 export class EventComponent implements OnInit {
   headElements = ['ID', 'Message', 'Author', 'Date', 'Name', 'Warehouse', 'Transaction'];
+  pageSizeOptions = [10, 15, 20];
   page$ = new Page<Event>();
   params = new Map<string, any>();
   beforeParam = new Param('before');

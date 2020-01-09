@@ -4,16 +4,16 @@
     <td colspan="2"></td>
     <td>
       Authors:
-      <input type="checkbox" (click) = "setAuthorsList()" [(ngModel)]="authorParam.isActive">
+      <input type="checkbox" (click)="setAuthorsList()" [(ngModel)]="authorParam.isActive">
       <select [(ngModel)]="authorParam.value" [disabled]="! authorParam.isActive">
         <option *ngFor="let author of authorsList" value="{{author}}">{{author}}</option>
       </select>
     </td>
     <td>
       <input type="checkbox" [(ngModel)]="afterParam.isActive">
-      from: <input type="date" [(ngModel)]="afterParam.value"  [disabled]="! afterParam.isActive">
+      from: <input type="date" [(ngModel)]="afterParam.value" [disabled]="! afterParam.isActive">
       <input type="checkbox" [(ngModel)]=" beforeParam.isActive">
-      to: <input type="date" id="before" [(ngModel)]=" beforeParam.value"  [disabled]="! beforeParam.isActive">
+      to: <input type="date" id="before" [(ngModel)]=" beforeParam.value" [disabled]="! beforeParam.isActive">
     </td>
     <td>
       Names:
@@ -24,7 +24,7 @@
     </td>
     <td>
       Warehouses:
-      <input type="checkbox" (click) = "setWarehousesList()" [(ngModel)]="warehouseParam.isActive">
+      <input type="checkbox" (click)="setWarehousesList()" [(ngModel)]="warehouseParam.isActive">
       <select [(ngModel)]="warehouseParam.value" [disabled]="! warehouseParam.isActive">
         <option *ngFor="let warehouseId of warehousesList" value="{{warehouseId}}">{{warehouseId}}</option>
       </select>
@@ -43,9 +43,15 @@
       <div class="links">
         <button (click)="setPage(-page$.number)" [disabled]="page$.first">&laquo;&laquo;</button>
         <button (click)="setPage(-1)" [disabled]="page$.first">&laquo;</button>
-        <span>{{page$.number+ 1}} of {{page$.totalPages}}</span>
+        <span>{{page$.number + 1}} of {{page$.totalPages}}</span>
         <button (click)="setPage(+1)" [disabled]="page$.last">&raquo;</button>
         <button (click)="setPage(page$.totalPages - page$.number - 1)" [disabled]="page$.last">&raquo;&raquo;</button>
+        <span id="pageSize">
+          Elements on page:
+          <select value="15" (change)="getEvents()" [(ngModel)]="page$.size">
+            <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
+          </select>
+        </span>
       </div>
     </td>
   </tr>

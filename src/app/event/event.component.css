@@ -6,20 +6,26 @@ table.eventTable {
   text-align: center;
   border-collapse: collapse;
 }
+
 table.eventTable td, table.eventTable th {
   border: 2px solid #FFFFFF;
   padding: 3px 2px;
 }
+
 table.eventTable tbody td {
+  background: #dcebf7;
   font-size: 15px;
 }
+
 table.eventTable tr:nth-child(even) {
   background: #D0E4F5;
 }
+
 table.eventTable thead {
   background: #0B6FA4;
   border-bottom: 5px solid #FFFFFF;
 }
+
 table.eventTable thead th {
   font-size: 17px;
   font-weight: bold;
@@ -27,39 +33,51 @@ table.eventTable thead th {
   text-align: center;
   border-left: 2px solid #FFFFFF;
 }
+
 table.eventTable thead th:first-child {
   border-left: none;
 }
+
 table.eventTable tfoot {
   font-size: 14px;
   font-weight: bold;
   color: #FFFFFF;
-  background: #D0E4F5;
+  background: #0B6FA4;
   background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
   background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
   background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
   border-top: 2px solid #444444;
 }
+
 table.eventTable tfoot td {
   font-size: 14px;
 }
+
 table.eventTable tfoot td {
   font-size: 14px;
 }
+
 table.eventTable tfoot .links {
   text-align: center;
 }
-table.eventTable tfoot .links button{
+
+table.eventTable tfoot .links button {
   color: #0B6FA4;
 }
-table.eventTable tfoot .links span{
+
+table.eventTable tfoot .links span {
   color: #0B6FA4;
 }
-table.eventTable tfoot .links a{
+
+table.eventTable tfoot .links a {
   display: inline-block;
-  background: #1C6EA4;
+  background: #0B6FA4;
   color: #FFFFFF;
   padding: 2px 8px;
   border-radius: 5px;
+}
+
+table.eventTable tfoot .pageSize {
+  float: right;
 }
 
