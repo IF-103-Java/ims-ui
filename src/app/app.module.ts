@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
@@ -19,7 +19,16 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {LoginService} from "./user/services/login.service";
 import {ResetPasswordService} from "./user/services/reset-password.service";
+import {JwtModule} from "@auth0/angular-jwt";
+import {GlobalErrorHandler} from "./errors/global-error-handler";
 
+export function tokenGetter() {
+  let jwtToken = '';
+  if (sessionStorage.getItem('jwt-token')) {
+    jwtToken = sessionStorage.getItem('jwt-token').substr(7);
+  }
+  return jwtToken;
+}
 
 @NgModule({
   declarations: [
@@ -40,9 +49,18 @@ import {ResetPasswordService} from "./user/services/reset-password.service";
     FormsModule,
     NgbModule,
     AngularFontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:8080'],
+        blacklistedRoutes: [''],
+        skipWhenExpired: true
+      }
+    })
   ],
   providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     ItemService,
     RegistrationService,
     LoginService,
