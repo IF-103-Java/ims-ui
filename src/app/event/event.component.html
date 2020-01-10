@@ -1,40 +1,60 @@
-<table>
+<table class="table table-striped table-responsive-md btn-table">
   <thead>
   <tr>
-    <td colspan="2"></td>
-    <td>
-      Authors:
-      <input type="checkbox" (click)="setAuthorsList()" [(ngModel)]="authorParam.isActive">
-      <select [(ngModel)]="authorParam.value" [disabled]="! authorParam.isActive">
-        <option *ngFor="let author of authorsList" value="{{author}}">{{author}}</option>
-      </select>
+    <td colspan="2">
     </td>
     <td>
-      <input type="checkbox" [(ngModel)]="afterParam.isActive">
-      from: <input type="date" [(ngModel)]="afterParam.value" [disabled]="! afterParam.isActive">
-      <input type="checkbox" [(ngModel)]=" beforeParam.isActive">
-      to: <input type="date" id="before" [(ngModel)]=" beforeParam.value" [disabled]="! beforeParam.isActive">
+      <ng-multiselect-dropdown
+        [placeholder]="'Author'"
+        [data]="authorsList"
+        [(ngModel)]="authorParam.selected"
+        [settings]="dropdownSettings"
+        (ngModelChange)="authorFilter()"
+
+      >
+      </ng-multiselect-dropdown>
     </td>
     <td>
-      Names:
-      <input type="checkbox" [(ngModel)]="nameParam.isActive">
-      <select [(ngModel)]="nameParam.value" [disabled]="! nameParam.isActive">
-        <option *ngFor="let name of namesList" value="{{name}}">{{name}}</option>
-      </select>
+      <input type="date" [(ngModel)]="afterParam.selected">
+      - from
+      <br>
+      <input type="date" id="before" [(ngModel)]=" beforeParam.selected">
+      - to
     </td>
     <td>
-      Warehouses:
-      <input type="checkbox" (click)="setWarehousesList()" [(ngModel)]="warehouseParam.isActive">
-      <select [(ngModel)]="warehouseParam.value" [disabled]="! warehouseParam.isActive">
-        <option *ngFor="let warehouseId of warehousesList" value="{{warehouseId}}">{{warehouseId}}</option>
-      </select>
+      <ng-multiselect-dropdown
+        [placeholder]="'Types'"
+        [data]="typeList"
+        [(ngModel)]="typeParam.selected"
+        [settings]="dropdownSettings"
+        (ngModelChange)="typeFilter()"
+      >
+      </ng-multiselect-dropdown>
+      <ng-multiselect-dropdown
+        [placeholder]="'Event\'s name'"
+        [data]="namesList"
+        [(ngModel)]="nameParam.selected"
+        [settings]="dropdownSettings"
+        (ngModelChange)="nameFilter()"
+
+      >
+      </ng-multiselect-dropdown>
     </td>
     <td>
-      <button (click)="filter()">Filter!</button>
+      <ng-multiselect-dropdown
+        [placeholder]="'Warehouses'"
+        [data]="warehouseList"
+        [(ngModel)]="warehouseParam.selected"
+        [settings]="dropdownSettings"
+        (ngModelChange)="warehouseFilter()"
+      >
+      </ng-multiselect-dropdown>
+    </td>
+    <td>
     </td>
   </tr>
   <tr>
-    <th *ngFor="let headElement of headElements">{{headElement}}</th>
+    <th scope="col" *ngFor="let headElement of headElements">{{headElement}}</th>
   </tr>
   </thead>
   <tfoot>

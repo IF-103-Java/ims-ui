@@ -1,67 +1,6 @@
-table {
-  font-family: "Times New Roman", Times, serif;
-  border: 1px solid #FFFFFF;
-  width: 100%;
-  height: 200px;
-  text-align: center;
-  border-collapse: collapse;
-}
-
-table td, table th {
-  border: 2px solid #FFFFFF;
-  padding: 3px 2px;
-}
-
-table tbody td {
-  background: #dcebf7;
-  font-size: 15px;
-}
-
-table tbody td:nth-child(even) {
+table thead {
   background: aliceblue;
 }
-
-table thead {
-  background: #0B6FA4;
-  border-bottom: 5px solid #FFFFFF;
-}
-
-table thead th {
-  font-size: 17px;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-align: center;
-  border-left: 2px solid #FFFFFF;
-}
-
 table tfoot {
-  font-size: 14px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background: #0B6FA4;
-  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-  border-top: 2px solid #444444;
+  background: aliceblue;
 }
-
-table tfoot td {
-  font-size: 14px;
-}
-
-table tfoot .links {
-  text-align: center;
-}
-
-table tfoot .links button {
-  color: #0B6FA4;
-}
-
-table tfoot .links span {
-  color: #0B6FA4;
-}
-
-table tfoot .pageSize {
-  float: right;
-}
-

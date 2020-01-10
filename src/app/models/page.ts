@@ -6,4 +6,5 @@ export class Page<T> {
   first: boolean;
   number: number;
   size: number;
+  sortBy: string;
 }

@@ -14,12 +14,28 @@ export class EventService {
   }
 
 
-  getPage(page: number, size: number, params: Map<string, any>): Observable<Page<Event>> {
+  getPage(page: number, size: number, sort: string, params: Map<string, any>): Observable<Page<Event>> {
     const body = {};
     params.forEach((val: string, key: string) => {
       body[key] = val;
     });
-    return this.http.post<Page<Event>>(this.URL + '/test?page=' + page + '&size=' + size + '&sort=id,DESC',
-      body);
+    return this.http.post<Page<Event>>(this.URL + '/test?page=' + page + '&size=' + size + '&sort=' + sort, body);
   }
+
+  getEventNames(): Observable<Map<string, string>> {
+    return this.http.get<Map<string, string>>(this.URL + '/names');
+  }
+
+  getEventTypes(): Observable<Map<string, string>> {
+    return this.http.get<Map<string, string>>(this.URL + '/types');
+  }
+
+  getUsernames(): Observable<Map<number, string>> {
+    return this.http.get<Map<number, string>>('http://localhost:8080/users/usernames');
+  }
+
+  getWarehouses(): Observable<Map<number, string>> {
+    return this.http.get<Map<number, string>>('http://localhost:8080/warehouses/warehousenames');
+  }
+
 }

@@ -21,6 +21,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {LoginService} from "./user/services/login.service";
 import {ResetPasswordService} from "./user/services/reset-password.service";
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {ResetPasswordService} from "./user/services/reset-password.service";
     FormsModule,
     NgbModule,
     AngularFontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     ItemService,
