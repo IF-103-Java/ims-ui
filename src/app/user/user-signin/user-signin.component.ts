@@ -1,10 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {LoginService} from "../services/login.service";
 import {LoginUser} from "../../models/loginUser.model";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
-import {HttpResponse} from "@angular/common/http";
-import {tokenSetter} from "../../helpers/http-request-helper";
 import AppError from "../../errors/app-error";
 import ValidationError from "../../models/validationError";
 
@@ -27,8 +25,13 @@ export class UserSigninComponent implements OnDestroy {
     const user = new LoginUser();
     user.username = data.username;
     user.password = data.password;
+
+    function tokenSetter(response: any) {
+      sessionStorage.setItem('jwt-token', response.token);
+    }
+
     this.loginSubscription = this.authService.login(user)
-      .subscribe((response: HttpResponse<any>) => {
+      .subscribe(response => {
         if (response) {
           tokenSetter(response);
           this.router.navigate(['/']);
