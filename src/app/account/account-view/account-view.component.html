@@ -8,12 +8,10 @@
     <input type="text" [(ngModel)]="account.type" name="type" class="form-control" id="type">
   </div>
 
-  <div style="text-align:center">
-    <a class="small" href="user-forgot-password">Forgot Password?</a>
+  <div align="center">
+
   </div>
-  <div style="text-align:center">
-    <a class="small" href="user-signup">Create an Account!</a>
-  </div>
+
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -46,23 +44,11 @@
       <!-- Main Content -->
       <div id="content">
 
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
 
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
               <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
             </div>
           </form>
 
@@ -100,14 +86,13 @@
 
           </ul>
 
-        </nav>
-        <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Workers</h1>
+          <a class="btn btn__add-product btn--margin-bottom" href="/invite">Invite new user</a>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -126,112 +111,34 @@
                   </tfoot>
                   <tbody>
                   <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
+                    <td>Corney</td>
+                    <td>Sambrook</td>
+                    <td>adminbasic@example.net</td>
+                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this item?')">Delete</a></td>
+                    <td><a class="btn btn__edit">Re-invite</a></td>
                   </tr>
                   <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
+                    <td>Lyric</td>
+                    <td>Feil</td>
+                    <td>workerbasic@example.net</td>
+                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this item?')">Delete</a></td>
                   </tr>
                   <tr>
-                    <td>Ashton Cox</td>
-                    <td>Junior Technical Author</td>
-                    <td>San Francisco</td>
+                    <td>Olha</td>
+                    <td>Slobodian</td>
+                    <td>slobodian.olha.work@gmail.com</td>
+                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this item?')">Delete</a></td>
                   </tr>
                   <tr>
-                    <td>Cedric Kelly</td>
-                    <td>Senior Javascript Developer</td>
-                    <td>Edinburgh</td>
-                  </tr>
-                  <tr>
-                    <td>Airi Satou</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                  </tr>
-                  <tr>
-                    <td>Brielle Williamson</td>
-                    <td>Integration Specialist</td>
-                    <td>New York</td>
-                  </tr>
-                  <tr>
-                    <td>Herrod Chandler</td>
-                    <td>Sales Assistant</td>
-                    <td>San Francisco</td>
-                  </tr>
-                  <tr>
-                    <td>Rhona Davidson</td>
-                    <td>Integration Specialist</td>
-                    <td>Tokyo</td>
-                  </tr>
-                  <tr>
-                    <td>Colleen Hurst</td>
-                    <td>Javascript Developer</td>
-                    <td>San Francisco</td>
-                  </tr>
-                  <tr>
-                    <td>Sonya Frost</td>
-                    <td>Software Engineer</td>
-                    <td>Edinburgh</td>
-                  </tr>
-                  <tr>
-                    <td>Jena Gaines</td>
-                    <td>Office Manager</td>
-                    <td>London</td>
-                  </tr>
-                  <tr>
-                    <td>Quinn Flynn</td>
-                    <td>Support Lead</td>
-                    <td>Edinburgh</td>
-                  </tr>
-                  <tr>
-                    <td>Charde Marshall</td>
-                    <td>Regional Director</td>
-                    <td>San Francisco</td>
-                  </tr>
-                  <tr>
-                    <td>Haley Kennedy</td>
-                    <td>Senior Marketing Designer</td>
-                    <td>London</td>
-                  </tr>
-                  <tr>
-                    <td>Tatyana Fitzpatrick</td>
-                    <td>Regional Director</td>
-                    <td>London</td>
-                  </tr>
-                  <tr>
-                    <td>Michael Silva</td>
-                    <td>Marketing Designer</td>
-                    <td>London</td>
-                  </tr>
-                  <tr>
-                    <td>Paul Byrd</td>
-                    <td>Chief Financial Officer (CFO)</td>
-                    <td>New York</td>
-                  </tr>
-                  <tr>
-                    <td>Gloria Little</td>
-                    <td>Systems Administrator</td>
-                    <td>New York</td>
-                  </tr>
-                  <tr>
-                    <td>Bradley Greer</td>
-                    <td>Software Engineer</td>
-                    <td>London</td>
-                  </tr>
-                  <tr>
-                    <td>Dai Rios</td>
-                    <td>Personnel Lead</td>
-                    <td>Edinburgh</td>
-                  </tr>
-                  <tr>
-                    <td>Jenette Caldwell</td>
-                    <td>Development Lead</td>
-                    <td>New York</td>
+                    <td>Ivan</td>
+                    <td>Huk</td>
+                    <td>ivan.huk@gmail.com</td>
+                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this item?')">Delete</a></td>
                   </tr>
                   </tbody>
                 </table>
+
+
               </div>
             </div>
           </div>
@@ -248,4 +155,5 @@
 
 
 </form>
+
 
