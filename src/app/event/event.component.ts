@@ -3,6 +3,7 @@ import {Page} from '../models/page';
 import {EventService} from './service/event.service';
 import {Event} from '../models/event';
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
+import {Transaction} from '../models/transaction.model';
 
 @Component({
   selector: 'app-event',
@@ -34,6 +35,8 @@ export class EventComponent implements OnInit {
   typeList = new Array<string>();
   typeParam = new Param('type');
 
+  transactions = new Map<number, Transaction>();
+
   sortBy = 'date';
   direction = 'DESC';
   dropdownSettings: IDropdownSettings = {
@@ -44,6 +47,14 @@ export class EventComponent implements OnInit {
     allowSearchFilter: true
   };
 
+
+  afterFilter() {
+    this.enableFilter(this.afterParam);
+  }
+
+  beforeFilter() {
+    this.enableFilter(this.beforeParam);
+  }
 
   nameFilter() {
     if (this.nameParam.selected.length > 0) {
@@ -74,11 +85,11 @@ export class EventComponent implements OnInit {
     } else {
       this.params.delete(param.label);
     }
-    console.log(this.params);
     this.getEvents();
   }
 
   setPage(incremental: number) {
+    this.transactions.clear();
     this.page$.number += incremental;
     this.ngOnInit();
   }
@@ -125,6 +136,37 @@ export class EventComponent implements OnInit {
           this.warehousesMap.set(key[1], key[0]);
         });
       });
+  }
+
+  getTransactionInfo(id: number) {
+    if (this.transactions.has(id)) {
+      return this.generateTransactionInfo(this.transactions.get(id));
+    } else {
+      this.eventsService.getTransaction(id)
+        .subscribe(data => {
+          this.transactions.set(data.id, data);
+          return this.getTransactionInfo(id);
+        });
+    }
+  }
+
+  generateTransactionInfo(transaction: Transaction) {
+    switch (transaction.type) {
+      case 'IN':
+        return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity + ' came to ' +
+          transaction.movedTo.name + ' (id=' + transaction.movedTo.id + ')';
+      case 'OUT':
+        return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity + ' ware shipped from ' +
+          transaction.movedFrom.name + ' (id=' + transaction.movedFrom.id + ')';
+      case 'MOVE':
+        return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity +
+          '(ware moved FROM ' +
+          transaction.movedFrom.name + ' (id=' + transaction.movedFrom.id + ')' +
+          ' TO ' +
+          transaction.movedTo.name + ' (id=' + transaction.movedTo.id + ')';
+      default:
+        return 'wait';
+    }
   }
 }
 

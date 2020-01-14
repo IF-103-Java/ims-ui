@@ -9,16 +9,14 @@
         [data]="authorsList"
         [(ngModel)]="authorParam.selected"
         [settings]="dropdownSettings"
-        (ngModelChange)="authorFilter()"
-
-      >
+        (ngModelChange)="authorFilter()">
       </ng-multiselect-dropdown>
     </td>
     <td>
-      <input type="date" [(ngModel)]="afterParam.selected">
+      <input type="date" [(ngModel)]="afterParam.value" (ngModelChange)="afterFilter()">
       - from
       <br>
-      <input type="date" id="before" [(ngModel)]=" beforeParam.selected">
+      <input type="date" [(ngModel)]=" beforeParam.value" (ngModelChange)="beforeFilter()">
       - to
     </td>
     <td>
@@ -27,17 +25,14 @@
         [data]="typeList"
         [(ngModel)]="typeParam.selected"
         [settings]="dropdownSettings"
-        (ngModelChange)="typeFilter()"
-      >
+        (ngModelChange)="typeFilter()">
       </ng-multiselect-dropdown>
       <ng-multiselect-dropdown
         [placeholder]="'Event\'s name'"
         [data]="namesList"
         [(ngModel)]="nameParam.selected"
         [settings]="dropdownSettings"
-        (ngModelChange)="nameFilter()"
-
-      >
+        (ngModelChange)="nameFilter()">
       </ng-multiselect-dropdown>
     </td>
     <td>
@@ -46,8 +41,7 @@
         [data]="warehouseList"
         [(ngModel)]="warehouseParam.selected"
         [settings]="dropdownSettings"
-        (ngModelChange)="warehouseFilter()"
-      >
+        (ngModelChange)="warehouseFilter()">
       </ng-multiselect-dropdown>
     </td>
     <td>
@@ -68,7 +62,7 @@
         <button (click)="setPage(page$.totalPages - page$.number - 1)" [disabled]="page$.last">&raquo;&raquo;</button>
         <span id="pageSize">
           Elements on page:
-          <select value="15" (change)="getEvents()" [(ngModel)]="page$.size">
+          <select (change)="getEvents()" [(ngModel)]="page$.size">
             <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
           </select>
         </span>
@@ -84,8 +78,15 @@
     <td>{{event.date}}</td>
     <td>{{event.name}}</td>
     <td>{{event.warehouse}}</td>
-    <td>{{event.transactionId}}</td>
+    <td>
+      <ngb-accordion *ngIf="event.transactionId != null" #acc="ngbAccordion">
+        <ngb-panel title="info">
+          <ng-template ngbPanelContent>
+            {{getTransactionInfo(event.transactionId)}}
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </td>
   </tr>
   </tbody>
-
 </table>
