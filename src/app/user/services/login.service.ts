@@ -1,21 +1,20 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {LoginUser} from "../../models/loginUser.model";
-import {REST_API_URL} from "../../helpers/http-request-helper";
-import {Observable, throwError} from "rxjs";
-import AppError from "../../errors/app-error";
-import {catchError} from "rxjs/operators";
-import {JwtHelperService} from "@auth0/angular-jwt";
+import {Inject, Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {LoginUser} from '../../models/loginUser.model';
+import {Observable, throwError} from 'rxjs';
+import AppError from '../../errors/app-error';
+import {catchError} from 'rxjs/operators';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable()
 export class LoginService {
-  constructor(private http: HttpClient,
+  constructor(@Inject('BASE_API_URL') private baseUrl: string,
+              private http: HttpClient,
               private jwtHelper: JwtHelperService) {
   }
 
   login(user: LoginUser): Observable<any> {
-    return this.http.post<any>(
-      REST_API_URL + '/signin', user
+    return this.http.post<any>(this.baseUrl + '/signin', user
     ).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(new AppError(error));
