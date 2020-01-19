@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Page} from '../../models/page';
 import {Event} from '../../models/event';
+import {Transaction} from '../../models/transaction.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class EventService {
     params.forEach((val: string, key: string) => {
       body[key] = val;
     });
-    return this.http.post<Page<Event>>(this.URL + '/test?page=' + page + '&size=' + size + '&sort=' + sort, body);
+    return this.http.post<Page<Event>>(this.URL + '?page=' + page + '&size=' + size + '&sort=' + sort, body);
   }
 
   getEventNames(): Observable<Map<string, string>> {
@@ -36,6 +37,10 @@ export class EventService {
 
   getWarehouses(): Observable<Map<number, string>> {
     return this.http.get<Map<number, string>>('http://localhost:8080/warehouses/warehousenames');
+  }
+
+  getTransaction(id: number): Observable<Transaction> {
+    return this.http.get<Transaction>('http://localhost:8080/transactions/' + id);
   }
 
 }
