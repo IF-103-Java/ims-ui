@@ -62,7 +62,7 @@
         <button (click)="setPage(page$.totalPages - page$.number - 1)" [disabled]="page$.last">&raquo;&raquo;</button>
         <span id="pageSize">
           Elements on page:
-          <select (change)="getEvents()" [(ngModel)]="page$.size">
+          <select (change)="getEvents()" [(ngModel)]="page$.size" (ngModelChange)="setPage(-page$.number)">
             <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
           </select>
         </span>
@@ -75,7 +75,7 @@
     <td>{{event.id}}</td>
     <td>{{event.message}}</td>
     <td>{{event.author}}</td>
-    <td>{{event.date}}</td>
+    <td>{{event.date |  date:'hh:mm:ss, dd/MM/yyyy'}}</td>
     <td>{{event.name}}</td>
     <td>{{event.warehouse}}</td>
     <td>

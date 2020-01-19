@@ -85,13 +85,13 @@ export class EventComponent implements OnInit {
     } else {
       this.params.delete(param.label);
     }
-    this.getEvents();
+    this.setPage(-this.page$.number)
   }
 
   setPage(incremental: number) {
     this.transactions.clear();
     this.page$.number += incremental;
-    this.ngOnInit();
+    this.getEvents();
   }
 
   constructor(private eventsService: EventService) {
