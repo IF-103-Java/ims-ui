@@ -62,7 +62,7 @@
         <button (click)="setPage(page$.totalPages - page$.number - 1)" [disabled]="page$.last">&raquo;&raquo;</button>
         <span id="pageSize">
           Elements on page:
-          <select (change)="getEvents()" [(ngModel)]="page$.size" (ngModelChange)="setPage(-page$.number)">
+          <select (change)="getEvents()" [(ngModel)]="page$.size" (ngModelChange)="getEvents()">
             <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
           </select>
         </span>
