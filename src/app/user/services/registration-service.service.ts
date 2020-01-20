@@ -6,7 +6,9 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RegistrationService {
   constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
   }
