@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {User} from "../../models/user.model";
+import {Inject, Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {User} from '../../models/user.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -8,12 +8,11 @@ const httpOptions = {
 
 @Injectable()
 export class RegistrationService {
-  constructor(private http: HttpClient) {
+  constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
   }
 
   public regUser(user: User) {
-    return this.http.post('http://localhost:8080/signup', user);
+    return this.http.post(this.baseUrl + '/signup', user);
   }
-
 
 }
