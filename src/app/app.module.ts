@@ -23,7 +23,7 @@ export function getToken() {
 @NgModule({
   declarations: [
     AppComponent,
-    routerComponents
+    routerComponents,
   ],
   imports: [
     BrowserModule,
