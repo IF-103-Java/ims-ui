@@ -8,6 +8,8 @@ import {UserUpdateComponent} from "./user/user-update/user-update.component";
 import {UserResetPasswordComponent} from "./user/user-reset-password/user-reset-password.component";
 import {UserForgotPasswordComponent} from "./user/user-forgot-password/user-forgot-password.component";
 import {UserSigninComponent} from "./user/user-signin/user-signin.component";
+import {AssociateComponent} from "./associate/associate.component";
+import {AddAssociateComponent} from "./associate/add-associate/add-associate.component";
 
 
 const routes: Routes = [
@@ -18,7 +20,9 @@ const routes: Routes = [
   {path: 'user-signin', component: UserSigninComponent},
   {path: 'user-update', component: UserUpdateComponent},
   {path: 'user-reset-password', component: UserResetPasswordComponent},
-  {path: 'user-forgot-password', component: UserForgotPasswordComponent}
+  {path: 'user-forgot-password', component: UserForgotPasswordComponent},
+  {path: 'associates', component: AssociateComponent},
+  {path: 'add-associate', component: AddAssociateComponent}
   ];
 
 

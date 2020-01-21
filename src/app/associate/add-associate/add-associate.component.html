@@ -1,0 +1,51 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #associateForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="associate.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter associates name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" [(ngModel)]="associate.email"
+               class="form-control"
+               id="email"
+               name="email"
+               placeholder="Enter your email address">
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" [(ngModel)]="associate.phone"
+               class="form-control"
+               id="phone"
+               name="phone"
+               placeholder="Enter associates phone"
+               required #email="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="additionalInfo">Additional Info</label>
+        <input type="text" [(ngModel)]="associate.additionalInfo"
+               class="form-control"
+               id="additionalInfo"
+               name="additionalInfo"
+               placeholder="Enter your email address">
+      </div>
+
+      <select [(ngModel)]="associate.type">
+        <option value="SUPPLIER">SUPPLIER</option>
+        <option value="CLIENT">CLIENT</option>
+      </select>
+
+
+
+      <button type="submit"
+              class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
