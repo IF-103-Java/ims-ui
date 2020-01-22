@@ -11,7 +11,7 @@ import {Transaction} from '../models/transaction.model';
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-  headElements = ['ID', 'Message', 'Author', 'Date', 'Name', 'Warehouse', 'Transaction'];
+  headElements = ['Message', 'Author', 'Time', 'Name', 'Warehouse', 'Transaction'];
   pageSizeOptions = [10, 15, 20];
   page$ = new Page<Event>();
   params = new Map<string, any>();
@@ -37,13 +37,15 @@ export class EventComponent implements OnInit {
 
   transactions = new Map<number, Transaction>();
 
-  sortBy = 'date';
-  direction = 'DESC';
+  sortCases = new Map<string, string>();
+  sortCasesText = ['From new to old', 'From old to new'];
+  sort = 'From new to old';
+
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     selectAllText: 'Select All',
     unSelectAllText: 'UnSelect All',
-    itemsShowLimit: 3,
+    itemsShowLimit: 1,
     allowSearchFilter: true
   };
 
@@ -97,12 +99,13 @@ export class EventComponent implements OnInit {
   constructor(private eventsService: EventService) {
     this.page$.size = 15;
     this.page$.number = 0;
-    this.page$.sortBy = 'date,DESC';
+    this.sortCases.set('From new to old', 'date,DESC');
+    this.sortCases.set('From old to new', 'date,ASC')
   }
 
   getEvents() {
     this.eventsService.getPage(this.page$.number, this.page$.size,
-      this.sortBy.concat(',', this.direction), this.params)
+      this.sortCases.get(this.sort), this.params)
       .subscribe(data => this.page$ = data);
   }
 
