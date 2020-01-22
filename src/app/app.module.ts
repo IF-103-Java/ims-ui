@@ -11,6 +11,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {JwtModule} from '@auth0/angular-jwt';
 import {GlobalErrorHandler} from './errors/global-error-handler';
 import {environment} from '../environments/environment';
+import {MainScreenComponent} from './main-screen/main-screen.component';
 
 export function getToken() {
   let jwtToken = '';
@@ -23,6 +24,7 @@ export function getToken() {
 @NgModule({
   declarations: [
     AppComponent,
+    MainScreenComponent,
     routerComponents,
   ],
   imports: [
