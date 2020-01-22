@@ -26,6 +26,7 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {GlobalErrorHandler} from './errors/global-error-handler';
 import {AccountViewComponent} from './account/account-view/account-view.component';
 import {AccountService} from './account/account.service';
+import {environment} from '../environments/environment';
 
 export function tokenGetter() {
   let jwtToken = '';
@@ -42,7 +43,6 @@ export function tokenGetter() {
     ItemTableComponent,
     ItemSortableDirective,
     AccountViewComponent,
-    ItemSortableDirective,
     EventComponent,
     UserSigninComponent,
     UserSignupComponent,
@@ -62,13 +62,14 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:8080'],
+        whitelistedDomains: environment.whitelistedDomains,
         blacklistedRoutes: [''],
         skipWhenExpired: true
       }
     })
   ],
   providers: [
+    {provide: 'BASE_API_URL', useValue: environment.apiUrl},
     {provide: ErrorHandler, useClass: GlobalErrorHandler},
     ItemService,
     AccountService,
