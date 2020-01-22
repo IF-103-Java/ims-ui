@@ -3,7 +3,7 @@
 
   <div class="form-group">
     <label>Name:</label>
-    <label>name_of_account</label>
+    <td>{{account.name}}</td>
     <td><a class="btn btn__edit">Edit</a></td>
     <br><label>Type:</label>
     <label>type_of_account</label>
@@ -57,34 +57,14 @@
                     <th>Email</th>
                   </tr>
                   </thead>
-                  <tfoot>
 
-                  </tfoot>
                   <tbody>
-                  <tr>
-                    <td>Corney</td>
-                    <td>Sambrook</td>
-                    <td>adminbasic@example.net</td>
+                  <tr *ngFor="let user of users">
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.email}}</td>
                     <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this item?')">Delete</a></td>
                     <td><a class="btn btn__edit">Re-invite</a></td>
-                  </tr>
-                  <tr>
-                    <td>Lyric</td>
-                    <td>Feil</td>
-                    <td>workerbasic@example.net</td>
-                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this item?')">Delete</a></td>
-                  </tr>
-                  <tr>
-                    <td>Olha</td>
-                    <td>Slobodian</td>
-                    <td>slobodian.olha.work@gmail.com</td>
-                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this item?')">Delete</a></td>
-                  </tr>
-                  <tr>
-                    <td>Ivan</td>
-                    <td>Huk</td>
-                    <td>ivan.huk@gmail.com</td>
-                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this item?')">Delete</a></td>
                   </tr>
                   </tbody>
                 </table>

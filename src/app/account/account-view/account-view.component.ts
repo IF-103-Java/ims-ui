@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Account} from '../../models/account.model';
 import {AccountType} from '../../models/accountType.model';
 import {AccountService} from '../account.service';
+import {User} from '../../models/user.model';
 
 @Component({
   selector: 'app-account-view',
@@ -11,13 +12,15 @@ import {AccountService} from '../account.service';
 export class AccountViewComponent implements OnInit {
   public account: Account = new Account();
 
+  users: User[];
+
   constructor(private accountService: AccountService) {
   }
 
   ngOnInit() {
-  }
-
-  view() {
     this.accountService.view();
-  }
+    this.accountService.getUsers().subscribe(data => {
+      this.users = data;
+  });
+}
 }
