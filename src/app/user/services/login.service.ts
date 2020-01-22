@@ -6,7 +6,9 @@ import AppError from '../../errors/app-error';
 import {catchError} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LoginService {
   constructor(@Inject('BASE_API_URL') private baseUrl: string,
               private http: HttpClient,
