@@ -10,15 +10,20 @@ import {User} from '../../models/user.model';
   styleUrls: ['./account-view.component.css']
 })
 export class AccountViewComponent implements OnInit {
-  public account: Account = new Account();
+  public account: Account;
 
-  users: User[];
+  public users: User[];
+
+  public type: AccountType;
 
   constructor(private accountService: AccountService) {
   }
 
   ngOnInit() {
-    this.accountService.view();
+    this.accountService.view().subscribe(data => {
+      this.account = data;
+      console.log(data);
+    });
     this.accountService.getUsers().subscribe(data => {
       this.users = data;
   });

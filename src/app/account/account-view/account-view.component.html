@@ -1,16 +1,14 @@
 <form>
   <h2 style="text-align:left">Account info</h2>
 
-  <div class="form-group">
+  <div *ngIf="account" class="form-group">
     <label>Name:</label>
-    <td>{{account.name}}</td>
+    <div>{{account.name}}</div>
     <td><a class="btn btn__edit">Edit</a></td>
-    <br><label>Type:</label>
+
     <label>type_of_account</label>
     <td><a class="btn btn__edit">Upgrade</a></td>
   </div>
-
-
 
   <div align="center">
 
@@ -18,19 +16,12 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
-
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
       <div id="content">
-
-
-
-
-
-        <!-- Begin Page Content -->
+     <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
@@ -63,13 +54,11 @@
                     <td>{{user.firstName}}</td>
                     <td>{{user.lastName}}</td>
                     <td>{{user.email}}</td>
-                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this item?')">Delete</a></td>
+                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this user?')">Delete</a></td>
                     <td><a class="btn btn__edit">Re-invite</a></td>
                   </tr>
                   </tbody>
                 </table>
-
-
               </div>
             </div>
           </div>
@@ -83,8 +72,6 @@
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
-
-
 </form>
 
 
