@@ -25,6 +25,8 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {JwtModule} from '@auth0/angular-jwt';
 import {GlobalErrorHandler} from './errors/global-error-handler';
 import {environment} from '../environments/environment';
+import {WarehouseComponent} from "./warehouse/warehouse.component";
+import {WarehouseService} from "./warehouse/service/warehouse.service";
 
 export function tokenGetter() {
   let jwtToken = '';
@@ -45,7 +47,8 @@ export function tokenGetter() {
     UserSignupComponent,
     UserUpdateComponent,
     UserForgotPasswordComponent,
-    UserResetPasswordComponent
+    UserResetPasswordComponent,
+    WarehouseComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ export function tokenGetter() {
     RegistrationService,
     LoginService,
     ResetPasswordService,
-    EventService
+    EventService,
+    WarehouseService
   ],
   bootstrap: [AppComponent]
 })
