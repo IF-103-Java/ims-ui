@@ -66,16 +66,14 @@
   </thead>
   <tfoot>
   <tr>
-    <td colspan="7">
-      <div class="links">
-        <button (click)="setPage(-page$.number)" [disabled]="page$.first">&laquo;&laquo;</button>
-        <button (click)="setPage(-1)" [disabled]="page$.first">&laquo;</button>
-        <span>{{page$.number + 1}} of {{page$.totalPages}}</span>
-        <button (click)="setPage(+1)" [disabled]="page$.last">&raquo;</button>
-        <button (click)="setPage(page$.totalPages - page$.number - 1)" [disabled]="page$.last">&raquo;&raquo;</button>
-        <span id="pageSize">
-        </span>
-      </div>
+    <td colspan="6">
+      <ngb-pagination
+        [collectionSize]="page$.totalElements" [(page)]="page" [pageSize]="page$.size" [maxSize]="4"
+        [rotate]="true" [boundaryLinks]="false"
+        (pageChange)="getEvents()">
+        <ng-template ngbPaginationPrevious>Prev</ng-template>
+        <ng-template ngbPaginationNext>Next</ng-template>
+      </ngb-pagination>
     </td>
   </tr>
   </tfoot>

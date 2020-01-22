@@ -41,6 +41,8 @@ export class EventComponent implements OnInit {
   sortCasesText = ['From new to old', 'From old to new'];
   sort = 'From new to old';
 
+  page = 1;
+
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     selectAllText: 'Select All',
@@ -48,7 +50,6 @@ export class EventComponent implements OnInit {
     itemsShowLimit: 1,
     allowSearchFilter: true
   };
-
 
   afterFilter() {
     this.enableFilter(this.afterParam);
@@ -104,7 +105,7 @@ export class EventComponent implements OnInit {
   }
 
   getEvents() {
-    this.eventsService.getPage(this.page$.number, this.page$.size,
+    this.eventsService.getPage(this.page - 1, this.page$.size,
       this.sortCases.get(this.sort), this.params)
       .subscribe(data => this.page$ = data);
   }
