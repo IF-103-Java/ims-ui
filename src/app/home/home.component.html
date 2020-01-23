@@ -64,7 +64,7 @@
     <div class="sidebar-heading">Item management</div>
     <!-- Nav Item - Items -->
     <li class="nav-item">
-      <a routerLink="/item-table" routerLinkActive="active" class="nav-link active">
+      <a [routerLink]="[{ outlets: { nav: ['item-table'] } }]" routerLinkActive="active" class="nav-link active">
         <i class="fas fa-fw fa-table"></i>
         <span>Items</span></a>
     </li>
@@ -73,7 +73,7 @@
     <div class="sidebar-heading">Event management</div>
     <!-- Nav Item - Events -->
     <li class="nav-item">
-      <a routerLink="/events" routerLinkActive="active" class="nav-link active">
+      <a [routerLink]="[{ outlets: { nav: ['events'] } }]" routerLinkActive="active" class="nav-link active">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Events</span></a>
     </li>
@@ -181,7 +181,7 @@
       <!-- End of Topbar -->
 
       <!-- Begin Page Content -->
-      <router-outlet></router-outlet>
+      <router-outlet name="nav"></router-outlet>
       <!-- End Page Content -->
     </div>
 
