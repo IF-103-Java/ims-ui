@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div *ngIf="state == WarehouseAdviceComponentState.ITEMS_SEARCH">
+  <div>
     <div id="searchArea" class="m-auto mw-100">
       <form class="form-row">
         <div class="input-group">
@@ -15,7 +15,7 @@
       </form>
     </div>
 
-    <div id="itemsArea" class="my-3" *ngIf="items">
+    <div id="items-area" class="my-3" *ngIf="items" [hidden]="hideSubComponent('items-area')">
       <!-- Content Row -->
       <div class="row">
         <div *ngFor="let item of items" class="col-xl-3 col-md-6 mb-4">
@@ -37,10 +37,17 @@
     </div>
   </div>
 
-  <div id="warehouseAdviceArea" *ngIf="state == WarehouseAdviceComponentState.WAREHOUSE_ADVICE">
+  <div id="warehouse-advice-area" class="my-3" [hidden]="hideSubComponent('warehouse-advice-area')">
+    ADVICE HERE
   </div>
 
-  <div id="preloader-text" class="w-100 h-100" *ngIf="state == WarehouseAdviceComponentState.LOADING">
+  <div id="no-items-found" class="w-100 h-100 m-2" [hidden]="hideSubComponent('no-items-found')">
+    <div class="text-center font-weight-bold">
+      No items found
+    </div>
+  </div>
+
+  <div id="loading-text" class="w-100 h-100 m-2" [hidden]="!isLoading()">
     <div class="text-center font-weight-bold">
       Loading...
     </div>

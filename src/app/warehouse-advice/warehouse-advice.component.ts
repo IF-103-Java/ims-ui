@@ -21,20 +21,32 @@ export class WarehouseAdviceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.state = WarehouseAdviceComponentState.ITEMS_SEARCH;
+    this.state = WarehouseAdviceComponentState.ITEMS_NOT_FOUND;
   }
 
-  showItemsSearch() {
-
+  hideSubComponent(sub: string): boolean {
+    if (this.isLoading()) {
+      return true;
+    }
+    switch (sub) {
+      case 'items-area':
+        return this.state !== WarehouseAdviceComponentState.FILTERED_ITEMS;
+      case 'warehouse-advice-area':
+        return this.state !== WarehouseAdviceComponentState.WAREHOUSE_ADVICE;
+      case 'no-items-found':
+        return this.state !== WarehouseAdviceComponentState.ITEMS_NOT_FOUND;
+    }
+    return false;
   }
 
-  showWarehouseAdvice() {
-
+  isLoading(): boolean {
+    return this.state === WarehouseAdviceComponentState.LOADING;
   }
 }
 
 enum WarehouseAdviceComponentState {
   LOADING,
-  ITEMS_SEARCH,
-  WAREHOUSE_ADVICE
+  FILTERED_ITEMS,
+  WAREHOUSE_ADVICE,
+  ITEMS_NOT_FOUND,
 }
