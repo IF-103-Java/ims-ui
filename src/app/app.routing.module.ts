@@ -34,6 +34,8 @@ export const routerComponents = [
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: 'sign-in', component: UserSigninComponent},
       {path: 'sign-up', component: UserSignupComponent},
+      {path: 'forgot-password', component: UserForgotPasswordComponent},
+      {path: 'reset-password', component: UserResetPasswordComponent},
       {
         path: 'home', component: HomeComponent, children: [
           {path: 'events', component: EventComponent, outlet: 'nav'},
