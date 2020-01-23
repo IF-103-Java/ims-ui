@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import AppError from "../../errors/app-error";
 import ValidationError from "../../models/validationError";
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-user-signin',
@@ -18,10 +19,11 @@ export class UserSigninComponent implements OnDestroy {
   hidePassword = true;
   loginSubscription: Subscription;
 
-  constructor(private loginService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService,
+              private router: Router) {
   }
 
-  signIn(data: any): void {
+  signIn(data: LoginUser): void {
     const user = new LoginUser();
     user.username = data.username;
     user.password = data.password;
@@ -34,7 +36,7 @@ export class UserSigninComponent implements OnDestroy {
       .subscribe(response => {
         if (response) {
           tokenSetter(response);
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }
       }, (appError: AppError) => {
         if (appError.status === 422) {
