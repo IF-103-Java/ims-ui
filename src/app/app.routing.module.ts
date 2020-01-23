@@ -11,9 +11,10 @@ import {UserForgotPasswordComponent} from './user/user-forgot-password/user-forg
 import {UserSigninComponent} from './user/user-signin/user-signin.component';
 import {ItemSortableDirective} from './item/item-sortable.directive';
 import {HomeComponent} from './home/home.component';
-import {AuthGuardService as AuthGuard} from "./user/services/auth-guard.service";
+import {AuthGuardService as AuthGuard} from './user/services/auth-guard.service';
 import {AccountUpgradeComponent} from './account/account-upgrade/account-upgrade.component';
 import {UserInviteComponent} from './account/account-invite/account-invite.component';
+import {WarehouseAdviceComponent} from './warehouse-advice/warehouse-advice.component';
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -32,7 +33,8 @@ export const routerComponents = [
   UserResetPasswordComponent,
   AccountViewComponent,
   AccountUpgradeComponent,
-  UserInviteComponent
+  UserInviteComponent,
+  WarehouseAdviceComponent,
 ];
 
 @NgModule({
@@ -53,6 +55,7 @@ export const routerComponents = [
           {path: 'account', component: AccountViewComponent, outlet: 'nav'},
           {path: 'upgrade', component: AccountUpgradeComponent, outlet: 'nav'},
           {path: 'invite', component: UserInviteComponent, outlet: 'nav'},
+          {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
         ]
       },
     ])
