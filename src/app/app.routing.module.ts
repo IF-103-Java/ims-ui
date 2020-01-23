@@ -36,6 +36,7 @@ export const routerComponents = [
       {path: 'sign-up', component: UserSignupComponent},
       {path: 'forgot-password', component: UserForgotPasswordComponent},
       {path: 'reset-password', component: UserResetPasswordComponent},
+      {path: 'logout', component: UserSigninComponent},
       {
         path: 'home', component: HomeComponent, children: [
           {path: 'events', component: EventComponent, outlet: 'nav'},

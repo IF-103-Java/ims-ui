@@ -18,7 +18,7 @@ export class UserSigninComponent implements OnDestroy {
   hidePassword = true;
   loginSubscription: Subscription;
 
-  constructor(private authService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService, private router: Router) {
   }
 
   signIn(data: any): void {
@@ -30,7 +30,7 @@ export class UserSigninComponent implements OnDestroy {
       sessionStorage.setItem('jwt-token', response.token);
     }
 
-    this.loginSubscription = this.authService.login(user)
+    this.loginSubscription = this.loginService.login(user)
       .subscribe(response => {
         if (response) {
           tokenSetter(response);
