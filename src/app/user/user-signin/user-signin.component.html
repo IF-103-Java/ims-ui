@@ -9,9 +9,9 @@
         <i class="fa fa-envelope icon"></i>
         <input class="input-field" type="text" ngModel name="username"
                [ngClass]="{'is-invalid': userErrors['username']}" id="username" placeholder="Email" required>
-        <div class="alert-danger">
-          {{userErrors['username']}}
-        </div>
+      </div>
+      <div class="alert-danger">
+        {{userErrors['username']}}
       </div>
 
       <div class="input-container">
@@ -21,20 +21,12 @@
           </span>
         <input ngModel name="password" class="input-field" [type]="hidePassword ? 'password' : 'text'"
                [ngClass]="{'is-invalid': userErrors['password']}" id="password" placeholder="Password" required>
-        <div class="alert-danger">
-          {{userErrors['password']}}
-        </div>
+      </div>
+      <div class="alert-danger">
+        {{userErrors['password']}}
       </div>
 
       <button type="submit" class="btn">Login</button>
-
-      <hr>
-      <a href="index.html" class="btn btn-google btn-user btn-block">
-        <i class="fa fa-google fa-fw"></i> Login with Google
-      </a>
-      <a href="index.html" class="btn btn-facebook btn-user btn-block">
-        <i class="fa fa-facebook-f fa-fw"></i> Login with Facebook
-      </a>
 
       <hr>
       <div style="text-align:center">

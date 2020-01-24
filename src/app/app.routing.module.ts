@@ -11,6 +11,7 @@ import {UserForgotPasswordComponent} from './user/user-forgot-password/user-forg
 import {UserSigninComponent} from './user/user-signin/user-signin.component';
 import {ItemSortableDirective} from './item/item-sortable.directive';
 import {HomeComponent} from './home/home.component';
+import {AuthGuardService as AuthGuard} from "./user/services/auth-guard.service";
 import {AccountUpgradeComponent} from './account/account-upgrade/account-upgrade.component';
 import {UserInviteComponent} from './account/account-invite/account-invite.component';
 
@@ -42,9 +43,11 @@ export const routerComponents = [
       {path: 'sign-up', component: UserSignupComponent},
       {path: 'forgot-password', component: UserForgotPasswordComponent},
       {path: 'reset-password', component: UserResetPasswordComponent},
-      {path: 'logout', component: UserSigninComponent},
       {
-        path: 'home', component: HomeComponent, children: [
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+        children: [
           {path: 'events', component: EventComponent, outlet: 'nav'},
           {path: 'item-table', component: ItemTableComponent, outlet: 'nav'},
           {path: 'account', component: AccountViewComponent, outlet: 'nav'},
