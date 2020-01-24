@@ -3,7 +3,8 @@ import {Item} from '../models/item.model';
 import {WarehouseAdvice} from '../models/warehouse-advice.model';
 import {ItemService} from '../item/item.service';
 import {WarehouseAdviceService} from './warehouse-advice.service';
-import {delay, finalize} from 'rxjs/operators';
+import {debounceTime, delay, distinctUntilChanged, filter, finalize} from 'rxjs/operators';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-warehouse-advice',
@@ -11,6 +12,8 @@ import {delay, finalize} from 'rxjs/operators';
   styleUrls: ['./warehouse-advice.component.css']
 })
 export class WarehouseAdviceComponent implements OnInit {
+  searchInput = new FormControl();
+
   state: WarehouseAdviceComponentState;
   items: Item[];
   warehouseAdvice: WarehouseAdvice;
@@ -20,7 +23,15 @@ export class WarehouseAdviceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchItems('wine');
+    this.searchInput.valueChanges
+      .pipe(
+        filter((x: string) => x.length > 2),
+        debounceTime(1000),
+        distinctUntilChanged(),
+      )
+      .subscribe(value => {
+        console.log(value);
+      });
   }
 
   searchItems(query: string) {
