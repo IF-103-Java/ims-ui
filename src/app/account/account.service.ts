@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../models/user.model';
 import {Account} from '../models/account.model';
@@ -13,23 +13,26 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AccountService {
-  constructor(private http: HttpClient) { }
+  constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
+  }
 
   public view(): Observable<Account> {
-    return this.http.get<Account>('http://localhost:8080/accounts/');
+    return this.http.get<Account>(this.baseUrl + '/accounts/');
   }
 
   public getUsers() {
-    return this.http.get<User[]>('http://localhost:8080/users/account/users');
+    return this.http.get<User[]>(this.baseUrl + '/users/account/users');
   }
 
    public getType() {
-     return this.http.get<AccountType>('http://localhost:8080/upgrade/');
+     return this.http.get<AccountType>(this.baseUrl + '/upgrade/');
    }
 
    public getPossibleTypes() {
-      return this.http.get<AccountType[]>('http://localhost:8080/upgrade/all-possible');
+      return this.http.get<AccountType[]>(this.baseUrl + '/upgrade/all-possible');
    }
+
+   public deleteWorker() {}
 }
 
 
