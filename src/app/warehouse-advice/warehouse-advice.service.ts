@@ -10,7 +10,7 @@ export class WarehouseAdviceService {
   constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
   }
 
-  getAdvice(id: number): Observable<WarehouseAdvice> {
+  getAdvice(id: bigint): Observable<WarehouseAdvice> {
     return this.http.get<WarehouseAdvice>(`${this.baseUrl}/warehouse-advice/${id}`);
   }
 }

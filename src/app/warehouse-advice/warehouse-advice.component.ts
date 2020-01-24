@@ -3,7 +3,7 @@ import {Item} from '../models/item.model';
 import {WarehouseAdvice} from '../models/warehouse-advice.model';
 import {ItemService} from '../item/item.service';
 import {WarehouseAdviceService} from './warehouse-advice.service';
-import {debounceTime, delay, distinctUntilChanged, filter, finalize} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 
 @Component({
@@ -38,6 +38,16 @@ export class WarehouseAdviceComponent implements OnInit {
       .subscribe(x => {
         this.items = x;
         this.state = this.items.length > 0 ? WarehouseAdviceComponentState.FILTERED_ITEMS : WarehouseAdviceComponentState.ITEMS_NOT_FOUND;
+      });
+  }
+
+  showWarehouseAdvice(itemId: bigint) {
+    this.state = WarehouseAdviceComponentState.LOADING;
+    this.warehouseAdviceService.getAdvice(itemId)
+      .subscribe(x => {
+        this.warehouseAdvice = x;
+        this.state = WarehouseAdviceComponentState.WAREHOUSE_ADVICE;
+        console.log(x);
       });
   }
 
