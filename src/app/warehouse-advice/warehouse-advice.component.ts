@@ -32,6 +32,13 @@ export class WarehouseAdviceComponent implements OnInit {
       .subscribe(query => this.searchItems(query));
   }
 
+  onSearchButtonClick() {
+    const query = this.searchInput.value;
+    if (query.length > 1) {
+      this.searchItems(query);
+    }
+  }
+
   searchItems(query: string) {
     this.state = WarehouseAdviceComponentState.LOADING;
     return this.itemService.searchItemsByNameQuery(query)
