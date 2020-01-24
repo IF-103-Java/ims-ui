@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {AccountUpgradeComponent} from './account-upgrade.component';
+import {UserInviteComponent} from './account-invite.component';
 
-describe('AccountUpgradeComponent', () => {
-  let component: AccountUpgradeComponent;
-  let fixture: ComponentFixture<AccountUpgradeComponent>;
+describe('UserInviteComponent', () => {
+  let component: UserInviteComponent;
+  let fixture: ComponentFixture<UserInviteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountUpgradeComponent ]
+      declarations: [ UserInviteComponent ]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccountUpgradeComponent);
+    fixture = TestBed.createComponent(UserInviteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

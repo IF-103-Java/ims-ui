@@ -1,5 +1,57 @@
 <form>
 
+  <h2 style="text-align:left">Current type:</h2>
+  <div class="row">
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-success shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{{currentType.name}} type</div>
+            <div class="small font-weight-bold">Price: {{currentType.price}}</div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-info shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Available</div>
+            <div class="small font-weight-bold">Max users: {{currentType.maxUsers}}</div>
+            <div class="small font-weight-bold">Max warehouses: {{currentType.maxWarehouses}}</div>
+            <div class="small font-weight-bold">Max warehouse depth: {{currentType.maxWarehouseDepth}}</div>
+            <div class="small font-weight-bold">Max clients: {{currentType.maxClients}}</div>
+            <div class="small font-weight-bold">Max suppliers: {{currentType.maxSuppliers}}</div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  <div class="card border-left-warning shadow h-100 py-2">
+    <div class="card-body">
+      <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+          <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Additional</div>
+          <div class="small font-weight-bold">Deep Warehouse Analytics: {{currentType.deepWarehouseAnalytics}}</div>
+          <div class="small font-weight-bold">Item Storage Advisor: {{currentType.itemStorageAdvisor}}</div>
+        </div>
+        <div class="col-auto">
+          <i class="fas fa-comments fa-2x text-gray-300"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
   <h2 style="text-align:left">Available for upgrade:</h2>
 
 
