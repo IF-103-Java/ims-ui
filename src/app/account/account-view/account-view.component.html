@@ -59,8 +59,10 @@
                     <td>{{user.firstName}}</td>
                     <td>{{user.lastName}}</td>
                     <td>{{user.email}}</td>
-                    <td><a class="btn btn__delete" onclick="return confirm('Are you sure delete this user?')">Delete</a></td>
                     <td><a class="btn btn__edit">Re-invite</a></td>
+                    <td><a href="#" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure delete this user?')">
+                      <i class="fas fa-trash"></i>
+                    </a></td>
                   </tr>
                   </tbody>
                 </table>

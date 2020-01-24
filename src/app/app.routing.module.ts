@@ -43,6 +43,7 @@ export const routerComponents = [
         path: 'home', component: HomeComponent, children: [
           {path: 'events', component: EventComponent, outlet: 'nav'},
           {path: 'item-table', component: ItemTableComponent, outlet: 'nav'},
+          {path: 'account', component: AccountViewComponent, outlet: 'nav'}
         ]
       },
     ])

@@ -9,7 +9,9 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AccountService {
   constructor(private http: HttpClient) { }
 
@@ -22,7 +24,7 @@ export class AccountService {
   }
 
    public getType() {
-     return this.http.get<AccountType>('http://localhost:8080/upgrade/');
+     return this. http.get<AccountType>('http://localhost:8080/upgrade/');
    }
 }
 
