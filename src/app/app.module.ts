@@ -15,7 +15,7 @@ import {environment} from '../environments/environment';
 export function getToken() {
   let jwtToken = '';
   if (sessionStorage.getItem('jwt-token')) {
-    jwtToken = sessionStorage.getItem('jwt-token').substr(7);
+    jwtToken = sessionStorage.getItem('jwt-token');
   }
   return jwtToken;
 }
