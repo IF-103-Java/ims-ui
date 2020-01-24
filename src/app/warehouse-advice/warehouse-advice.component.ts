@@ -25,23 +25,20 @@ export class WarehouseAdviceComponent implements OnInit {
   ngOnInit() {
     this.searchInput.valueChanges
       .pipe(
-        filter((x: string) => x.length > 2),
+        filter((x: string) => x.length > 1),
         debounceTime(1000),
         distinctUntilChanged(),
       )
-      .subscribe(value => {
-        console.log(value);
-      });
+      .subscribe(query => this.searchItems(query));
   }
 
   searchItems(query: string) {
     this.state = WarehouseAdviceComponentState.LOADING;
     return this.itemService.searchItemsByNameQuery(query)
-      .pipe(
-        delay(3000),
-        finalize(() => (this.state = WarehouseAdviceComponentState.FILTERED_ITEMS))
-      )
-      .subscribe(x => this.items = x);
+      .subscribe(x => {
+        this.items = x;
+        this.state = this.items.length > 0 ? WarehouseAdviceComponentState.FILTERED_ITEMS : WarehouseAdviceComponentState.ITEMS_NOT_FOUND;
+      });
   }
 
   hideSubComponent(sub: string): boolean {
