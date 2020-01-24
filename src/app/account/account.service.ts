@@ -24,7 +24,12 @@ export class AccountService {
   }
 
    public getType() {
-     return this. http.get<AccountType>('http://localhost:8080/upgrade/');
+     return this.http.get<AccountType>('http://localhost:8080/upgrade/');
+   }
+
+   public getPossibleTypes() {
+      return this.http.get<AccountType[]>('http://localhost:8080/upgrade/all-possible');
    }
 }
+
 
