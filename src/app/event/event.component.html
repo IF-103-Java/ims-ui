@@ -1,7 +1,20 @@
+<link href="./assets/css/sb-admin-2.min.css" rel="stylesheet">
 <table class="table table-striped table-responsive-md btn-table">
   <thead>
   <tr>
-    <td colspan="2">
+    <td>
+      Show
+      <select [(ngModel)]="page$.size" (ngModelChange)="getEvents()"
+              aria-controls="dataTable" class="custom-select sizeList custom-select-sm form-control form-control-sm">
+        <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
+      </select>
+      on page.
+      <br>
+      Sort:
+      <select [(ngModel)]="sort" (ngModelChange)="getEvents()"
+              aria-controls="dataTable" class="custom-select sortList custom-select-sm form-control form-control-sm">
+        <option *ngFor="let sortCase of sortCasesText" value="{{sortCase}}">{{sortCase}}</option>
+      </select>
     </td>
     <td>
       <ng-multiselect-dropdown
@@ -13,11 +26,11 @@
       </ng-multiselect-dropdown>
     </td>
     <td>
-      <input type="date" [(ngModel)]="afterParam.value" (ngModelChange)="afterFilter()">
-      - from
+      <input type="date" class="form-control datepicker" [(ngModel)]="afterParam.value" (ngModelChange)="afterFilter()">
+      - from / to -
       <br>
-      <input type="date" [(ngModel)]=" beforeParam.value" (ngModelChange)="beforeFilter()">
-      - to
+      <input type="date" class="form-control datepicker" [(ngModel)]=" beforeParam.value"
+             (ngModelChange)="beforeFilter()">
     </td>
     <td>
       <ng-multiselect-dropdown
@@ -28,7 +41,7 @@
         (ngModelChange)="typeFilter()">
       </ng-multiselect-dropdown>
       <ng-multiselect-dropdown
-        [placeholder]="'Event\'s name'"
+        [placeholder]="'Name'"
         [data]="namesList"
         [(ngModel)]="nameParam.selected"
         [settings]="dropdownSettings"
@@ -53,34 +66,27 @@
   </thead>
   <tfoot>
   <tr>
-    <td colspan="7">
-      <div class="links">
-        <button (click)="setPage(-page$.number)" [disabled]="page$.first">&laquo;&laquo;</button>
-        <button (click)="setPage(-1)" [disabled]="page$.first">&laquo;</button>
-        <span>{{page$.number + 1}} of {{page$.totalPages}}</span>
-        <button (click)="setPage(+1)" [disabled]="page$.last">&raquo;</button>
-        <button (click)="setPage(page$.totalPages - page$.number - 1)" [disabled]="page$.last">&raquo;&raquo;</button>
-        <span id="pageSize">
-          Elements on page:
-          <select (change)="getEvents()" [(ngModel)]="page$.size">
-            <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
-          </select>
-        </span>
-      </div>
+    <td colspan="6">
+      <ngb-pagination
+        [collectionSize]="page$.totalElements" [(page)]="page" [pageSize]="page$.size" [maxSize]="4"
+        [rotate]="true" [boundaryLinks]="false"
+        (pageChange)="getEvents()">
+        <ng-template ngbPaginationPrevious>Prev</ng-template>
+        <ng-template ngbPaginationNext>Next</ng-template>
+      </ngb-pagination>
     </td>
   </tr>
   </tfoot>
   <tbody *ngFor="let event of page$.content">
   <tr>
-    <td>{{event.id}}</td>
-    <td>{{event.message}}</td>
+    <td class="messageTd">{{event.message}}</td>
     <td>{{event.author}}</td>
-    <td>{{event.date}}</td>
+    <td>{{event.date |  date:'hh:mm:ss, dd/MM/yyyy'}}</td>
     <td>{{event.name}}</td>
     <td>{{event.warehouse}}</td>
-    <td>
-      <ngb-accordion *ngIf="event.transactionId != null" #acc="ngbAccordion">
-        <ngb-panel title="info">
+    <td class="transactionTd">
+      <ngb-accordion *ngIf="event.transactionId != null">
+        <ngb-panel title="Show transaction info">
           <ng-template ngbPanelContent>
             {{getTransactionInfo(event.transactionId)}}
           </ng-template>
