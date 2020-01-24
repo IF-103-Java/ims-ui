@@ -5,7 +5,6 @@ import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import AppError from "../../errors/app-error";
 import ValidationError from "../../models/validationError";
-import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-user-signin',
@@ -30,6 +29,7 @@ export class UserSigninComponent implements OnDestroy {
 
     function tokenSetter(response: any) {
       sessionStorage.setItem('jwt-token', response.token);
+      sessionStorage.setItem('username', response.username);
     }
 
     this.loginSubscription = this.loginService.login(user)

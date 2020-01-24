@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 import {ResetPasswordService} from "../services/reset-password.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-user-reset-password',
@@ -10,35 +11,48 @@ import {ActivatedRoute, Params} from "@angular/router";
     '../user-style.css']
 })
 export class UserResetPasswordComponent implements OnInit {
-  private await: boolean;
-  private done: boolean;
-  private token: string;
-  private resetPasswordForm: FormGroup;
+  await: boolean;
+  done: boolean;
+  token: string;
+  resetSubscription: Subscription;
+  userErrors: Map<string, string> = new Map<string, string>();
+
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private resetPasswordService: ResetPasswordService) {
-    this.resetPasswordForm = this.formBuilder.group({
-      newPassword: '',
-      repeatedPassword: ''
-    });
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
-      this.token = params['token'];
+      this.token = params['emailUUID'];
     });
   }
 
-  onSubmit(newPassword: string) {
-    this.await = true;
-    this.resetPasswordService.resetPassword(this.token, newPassword).subscribe(response => {
-        this.done = true;
-        this.await = false;
-      }, error => {
-        this.await = false;
-      }
-    );
+
+  resetPassword(data: any) {
+    console.log(data);
+    if (!this.isButtonDisable(data)) {
+      console.log("isButtonDisable");
+      this.resetSubscription = this.resetPasswordService.resetPassword(this.token, data.password).subscribe(
+        response => {
+          this.done = true;
+          this.await = false;
+        }, error => {
+          this.await = false;
+        }
+      )
+
+    }
+
+  }
+
+  isButtonDisable(data: any) {
+    console.log(data);
+    if (data.password !== data.repeatedPassword || !data.password) {
+      return true;
+    }
+    return false;
   }
 
 }

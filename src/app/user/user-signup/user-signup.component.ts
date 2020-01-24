@@ -33,7 +33,6 @@ export class UserSignupComponent implements OnInit, OnDestroy {
       user.password = data.password;
     } else {
       this.router.navigate(['sign-up']);
-     // this.userErrors['password'] = 'Password don\'t match';
       return;
     }
     user.firstName = data.firstName;

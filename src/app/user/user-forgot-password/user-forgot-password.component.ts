@@ -1,36 +1,39 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
 import {ResetPasswordService} from "../services/reset-password.service";
+import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import AppError from "../../errors/app-error";
 
 @Component({
   selector: 'app-user-forgot-password',
   templateUrl: './user-forgot-password.component.html',
   styleUrls: ['./user-forgot-password.component.css',
-              '../user-style.css']
+    '../user-style.css']
 })
 export class UserForgotPasswordComponent implements OnInit {
-  private await: boolean;
-  private done: boolean;
-  private forgotPasswordForm: FormGroup;
+  done: boolean;
+  forgotSubscription: Subscription;
+  userErrors: Map<string, string> = new Map<string, string>();
 
-  constructor(private formBuilder: FormBuilder,
-              private resetPasswordService: ResetPasswordService) {
-    this.forgotPasswordForm = this.formBuilder.group({
-      email: ''
-    });
+  constructor(private resetPasswordService: ResetPasswordService,
+              public router: Router) {
   }
 
   ngOnInit() {
   }
 
-  onSubmit(email: string) {
-    this.await = true;
-    this.resetPasswordService.sendResetPasswordToken(email).subscribe(response => {
-        this.done = true;
-        this.await = false;
-      }, error => {
-        this.await = false;
-      }
-    );
+  forgotPassword(data: any) {
+
+    this.forgotSubscription = this.resetPasswordService.sendResetPasswordToken(data.email)
+      .subscribe(response => {
+          this.done = true;
+      }, (appError: AppError) => {
+        if (appError.status === 401) {
+          this.userErrors['email'] = 'Incorrect email.';
+        } else {
+          throw appError;
+        }
+      });
   }
+
 }
