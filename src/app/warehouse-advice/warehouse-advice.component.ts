@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Item} from '../models/item.model';
+import {WarehouseAdvice} from '../models/warehouse-advice.model';
+import {ItemService} from '../item/item.service';
+import {WarehouseAdviceService} from './warehouse-advice.service';
+import {delay, finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-warehouse-advice',
@@ -7,21 +11,26 @@ import {Item} from '../models/item.model';
   styleUrls: ['./warehouse-advice.component.css']
 })
 export class WarehouseAdviceComponent implements OnInit {
-  WarehouseAdviceComponentState = WarehouseAdviceComponentState;
   state: WarehouseAdviceComponentState;
-  items: Item[] = [
-    {id: 1, unit: 'box', name: 'Item 1', accountId: 2, active: true, description: '', volume: 10},
-    {id: 2, unit: 'kg', name: 'Item 2', accountId: 2, active: true, description: '', volume: 10},
-    {id: 3, unit: 'box', name: 'Item 3', accountId: 2, active: true, description: '', volume: 10},
-    {id: 4, unit: 'ml', name: 'Item 4', accountId: 2, active: true, description: '', volume: 10},
-    {id: 5, unit: 'box', name: 'Item 5', accountId: 2, active: true, description: '', volume: 10},
-  ];
+  items: Item[];
+  warehouseAdvice: WarehouseAdvice;
 
-  constructor() {
+  constructor(private itemService: ItemService,
+              private warehouseAdviceService: WarehouseAdviceService) {
   }
 
   ngOnInit() {
-    this.state = WarehouseAdviceComponentState.ITEMS_NOT_FOUND;
+    this.searchItems('wine');
+  }
+
+  searchItems(query: string) {
+    this.state = WarehouseAdviceComponentState.LOADING;
+    return this.itemService.searchItemsByNameQuery(query)
+      .pipe(
+        delay(3000),
+        finalize(() => (this.state = WarehouseAdviceComponentState.FILTERED_ITEMS))
+      )
+      .subscribe(x => this.items = x);
   }
 
   hideSubComponent(sub: string): boolean {
