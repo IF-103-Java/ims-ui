@@ -14,6 +14,10 @@ export class AccountViewComponent implements OnInit {
 
   public users: User[];
 
+  public workers: User[];
+
+  public admin: User;
+
   public type: AccountType;
 
   constructor(private accountService: AccountService) {
@@ -28,6 +32,12 @@ export class AccountViewComponent implements OnInit {
     });
     this.accountService.getType().subscribe(data => {
       this.type = data;
+    });
+    this.accountService.getWorkers().subscribe(data => {
+      this.workers = data;
+    });
+    this.accountService.getAdmin().subscribe(data => {
+      this.admin = data;
     });
   }
 }

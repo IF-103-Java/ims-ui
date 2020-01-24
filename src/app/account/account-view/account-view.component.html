@@ -1,23 +1,46 @@
 <form>
-  <h2 style="text-align:left">Account info</h2>
+  <div>
+    <div *ngIf="account" >
+      <h2 style="text-align:center">{{account.name}}</h2>
 
-  <div *ngIf="account" class="form-group">
-    <label>Name:</label>
-    <div>{{account.name}}</div>
-    <td><a class="btn btn__edit">Edit</a></td>
-    <label>Account type info:</label>
-    <div>{{type.name}}</div>
-    <div>{{type.maxWarehouses}}</div>
-    <div>{{type.maxWarehouseDepth}}</div>
-    <div>{{type.maxUsers}}</div>
-    <div>{{type.maxSuppliers}}</div>
-    <div>{{type.maxClients}}</div>
-    <td><a class="btn btn__edit">Upgrade</a></td>
+    </div>
+    <div  class="col mr-2">
+      <a href="#" class="btn btn-warning btn-icon-split">
+        <span class="text">Edit name</span>
+      </a>
+    </div>
   </div>
 
-  <div align="center">
 
+
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-info shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Account type: {{type.name}}</div>
+            <div class="row no-gutters align-items-center">
+              <div class="col-auto">
+                <div class="small font-weight-bold">Max users: {{type.maxUsers}}</div>
+                <div class="small font-weight-bold">Max warehouses: {{type.maxWarehouses}}</div>
+                <div class="small font-weight-bold">Max warehouse depth: {{type.maxWarehouseDepth}}</div>
+                <div class="small font-weight-bold">Max clients: {{type.maxClients}}</div>
+                <div class="small font-weight-bold">Max suppliers: {{type.maxSuppliers}}</div>
+              </div>
+            </div>
+            <a href="/home/(nav:upgrade)" class="btn btn-info btn-icon-split">
+              <span class="text">Upgrade</span>
+            </a>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -28,6 +51,32 @@
       <div id="content">
      <!-- Begin Page Content -->
         <div class="container-fluid">
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Admin</h1>
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+                  <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <tr>
+                    <td>{{admin.firstName}}</td>
+                    <td>{{admin.lastName}}</td>
+                    <td>{{admin.email}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Workers</h1>
@@ -39,7 +88,11 @@
             </div>
           </form>
 
-          <a class="btn btn__add-product btn--margin-bottom" href="/invite">Invite new user</a>
+          <div>
+          <a href="/invite" class="btn btn-info btn-icon-split">
+            <span class="text">Invite new user</span>
+          </a>
+         </div>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -55,10 +108,10 @@
                   </thead>
 
                   <tbody>
-                  <tr *ngFor="let user of users">
-                    <td>{{user.firstName}}</td>
-                    <td>{{user.lastName}}</td>
-                    <td>{{user.email}}</td>
+                  <tr *ngFor="let worker of workers">
+                    <td>{{worker.firstName}}</td>
+                    <td>{{worker.lastName}}</td>
+                    <td>{{worker.email}}</td>
                     <td><a class="btn btn__edit">Re-invite</a></td>
                     <td><a href="#" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure delete this user?')">
                       <i class="fas fa-trash"></i>

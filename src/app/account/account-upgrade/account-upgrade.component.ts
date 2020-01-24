@@ -22,6 +22,6 @@ export class AccountUpgradeComponent implements OnInit {
     });
     this.accountService.getPossibleTypes().subscribe(data => {
       this.possibleToUpgradeTypes = data;
-    })
+    });
   }
 }

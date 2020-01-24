@@ -12,6 +12,7 @@ import {UserSigninComponent} from './user/user-signin/user-signin.component';
 import {ItemSortableDirective} from './item/item-sortable.directive';
 import {HomeComponent} from './home/home.component';
 import {AccountUpgradeComponent} from './account/account-upgrade/account-upgrade.component';
+import {UserInviteComponent} from './account/account-invite/account-invite.component';
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -29,7 +30,8 @@ export const routerComponents = [
   UserForgotPasswordComponent,
   UserResetPasswordComponent,
   AccountViewComponent,
-  AccountUpgradeComponent
+  AccountUpgradeComponent,
+  UserInviteComponent
 ];
 
 @NgModule({
@@ -47,6 +49,7 @@ export const routerComponents = [
           {path: 'item-table', component: ItemTableComponent, outlet: 'nav'},
           {path: 'account', component: AccountViewComponent, outlet: 'nav'},
           {path: 'upgrade', component: AccountUpgradeComponent, outlet: 'nav'},
+          {path: 'invite', component: UserInviteComponent, outlet: 'nav'},
         ]
       },
     ])

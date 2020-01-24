@@ -24,12 +24,24 @@ export class AccountService {
     return this.http.get<User[]>(this.baseUrl + '/users/account/users');
   }
 
+  public getWorkers() {
+    return this.http.get<User[]>(this.baseUrl + '/users/account/workers');
+  }
+
+  public getAdmin() {
+    return this.http.get<User>(this.baseUrl + '/users/account/admin');
+  }
+
    public getType() {
      return this.http.get<AccountType>(this.baseUrl + '/upgrade/');
    }
 
    public getPossibleTypes() {
       return this.http.get<AccountType[]>(this.baseUrl + '/upgrade/all-possible');
+   }
+
+   public inviteUser(user: User) {
+      return this.http.post(this.baseUrl + 'invite/', user);
    }
 
    public deleteWorker() {}
