@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Item} from '../models/item.model';
-import {WarehouseAdvice} from '../models/warehouse-advice.model';
+import {WarehouseStorageAdvice} from '../models/warehouse-advice.model';
 import {ItemService} from '../item/item.service';
 import {WarehouseAdviceService} from './warehouse-advice.service';
 import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
@@ -13,10 +13,10 @@ import {FormControl} from '@angular/forms';
 })
 export class WarehouseAdviceComponent implements OnInit {
   searchInput = new FormControl();
-
+  message: string;
   state: WarehouseAdviceComponentState;
   items: Item[];
-  warehouseAdvice: WarehouseAdvice;
+  warehouseStorageAdvice: WarehouseStorageAdvice;
 
   constructor(private itemService: ItemService,
               private warehouseAdviceService: WarehouseAdviceService) {
@@ -43,8 +43,13 @@ export class WarehouseAdviceComponent implements OnInit {
     this.state = WarehouseAdviceComponentState.LOADING;
     return this.itemService.searchItemsByNameQuery(query)
       .subscribe(x => {
-        this.items = x;
-        this.state = this.items.length > 0 ? WarehouseAdviceComponentState.FILTERED_ITEMS : WarehouseAdviceComponentState.ITEMS_NOT_FOUND;
+        if (x.length > 0) {
+          this.items = x;
+          this.state = WarehouseAdviceComponentState.FILTERED_ITEMS;
+        } else {
+          this.message = 'No items found';
+          this.state = WarehouseAdviceComponentState.MESSAGE;
+        }
       });
   }
 
@@ -52,29 +57,30 @@ export class WarehouseAdviceComponent implements OnInit {
     this.state = WarehouseAdviceComponentState.LOADING;
     this.warehouseAdviceService.getAdvice(itemId)
       .subscribe(x => {
-        this.warehouseAdvice = x;
-        this.state = WarehouseAdviceComponentState.WAREHOUSE_ADVICE;
+        if (x.message != null) {
+          this.message = x.message;
+          this.state = WarehouseAdviceComponentState.MESSAGE;
+        } else {
+          this.warehouseStorageAdvice = x;
+          this.searchInput.setValue(x.item.name, {emitEvent: false});
+          this.state = WarehouseAdviceComponentState.WAREHOUSE_ADVICE;
+        }
         console.log(x);
       });
   }
 
-  hideSubComponent(sub: string): boolean {
-    if (this.isLoading()) {
-      return true;
-    }
+  hideArea(sub: string): boolean {
     switch (sub) {
+      case 'loading-area':
+        return this.state !== WarehouseAdviceComponentState.LOADING;
       case 'items-area':
         return this.state !== WarehouseAdviceComponentState.FILTERED_ITEMS;
-      case 'warehouse-advice-area':
+      case 'warehouse-storage-advice-area':
         return this.state !== WarehouseAdviceComponentState.WAREHOUSE_ADVICE;
-      case 'no-items-found':
-        return this.state !== WarehouseAdviceComponentState.ITEMS_NOT_FOUND;
+      case 'message-area':
+        return this.state !== WarehouseAdviceComponentState.MESSAGE;
     }
     return false;
-  }
-
-  isLoading(): boolean {
-    return this.state === WarehouseAdviceComponentState.LOADING;
   }
 }
 
@@ -82,5 +88,5 @@ enum WarehouseAdviceComponentState {
   LOADING,
   FILTERED_ITEMS,
   WAREHOUSE_ADVICE,
-  ITEMS_NOT_FOUND,
+  MESSAGE,
 }
