@@ -65,7 +65,6 @@ export class WarehouseAdviceComponent implements OnInit {
           this.searchInput.setValue(x.item.name, {emitEvent: false});
           this.state = WarehouseAdviceComponentState.WAREHOUSE_ADVICE;
         }
-        console.log(x);
       });
   }
 
