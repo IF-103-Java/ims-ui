@@ -1,8 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-.ptest{
-  background-color: aqua;
-}
-
-.bg-gradient-primary {
-  background-color: #224abe;
+body{
+  background-color: #2e59d9;
 }
