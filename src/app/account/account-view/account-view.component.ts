@@ -22,10 +22,12 @@ export class AccountViewComponent implements OnInit {
   ngOnInit() {
     this.accountService.view().subscribe(data => {
       this.account = data;
-      console.log(data);
     });
     this.accountService.getUsers().subscribe(data => {
       this.users = data;
-  });
-}
+    });
+    this.accountService.getType().subscribe(data => {
+      this.type = data;
+    });
+  }
 }

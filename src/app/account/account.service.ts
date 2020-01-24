@@ -21,8 +21,8 @@ export class AccountService {
     return this.http.get<User[]>('http://localhost:8080/users/account/users');
   }
 
-  // public getType() {
-  //  return this.http.get<AccountType>('http://localhost:8080/upgrade');
-  // }
+   public getType() {
+     return this.http.get<AccountType>('http://localhost:8080/upgrade/');
+   }
 }
 
