@@ -7,33 +7,44 @@
 
       <div class="input-container">
         <i class="fa fa-envelope icon"></i>
-        <input class="input-field" type="text" ngModel name="username"
-               [ngClass]="{'is-invalid': userErrors['username']}" id="username" placeholder="Email" required>
+        <input ngModel class="input-field" type="email" name="username"
+               [ngClass]="{'is-invalid': userErrors['username']}"
+               placeholder="Email" required
+               pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
+               #username="ngModel">
+      </div>
+
+      <div *ngIf="username.touched && username.invalid" class="alert-danger">
+        Email must be a valid email address!
       </div>
       <div class="alert-danger">
         {{userErrors['username']}}
       </div>
 
       <div class="input-container">
-          <span id="password-icon">
-            <i class="fa fa-2x icon" aria-hidden="true" [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'"
-               (click)="hidePassword = !hidePassword"></i>
-          </span>
-        <input ngModel name="password" class="input-field" [type]="hidePassword ? 'password' : 'text'"
-               [ngClass]="{'is-invalid': userErrors['password']}" id="password" placeholder="Password" required>
+        <i class="fa fa-key icon"></i>
+        <input ngModel name="password" class="input-field"
+               [type]="hidePassword ? 'password' : 'text'"
+               [ngClass]="{'is-invalid': userErrors['password']}"
+               placeholder="Password" required #password="ngModel">
       </div>
+      <i class="fa field-icon" (click)="hidePassword = !hidePassword"
+         [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true "></i>
       <div class="alert-danger">
         {{userErrors['password']}}
       </div>
+      <div *ngIf="password.touched && password.invalid" class="alert-danger">
+        Enter your password!
+      </div>
 
-      <button type="submit" class="btn">Login</button>
+      <button type="submit" class="btn" [disabled]="!data.valid">Login</button>
 
       <hr>
       <div style="text-align:center">
-        <a class="small" href="forgot-password">Forgot Password?</a>
+        <a class="small" routerLink="/forgot-password">Forgot Password?</a>
       </div>
       <div style="text-align:center">
-        <a class="small" href="sign-up">Create an Account!</a>
+        <a class="small" routerLink="/sign-up">Create an Account!</a>
       </div>
     </form>
   </div>

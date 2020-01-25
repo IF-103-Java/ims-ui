@@ -26,10 +26,10 @@ export class UserForgotPasswordComponent implements OnInit {
 
     this.forgotSubscription = this.resetPasswordService.sendResetPasswordToken(data.email)
       .subscribe(response => {
-          this.done = true;
+        this.done = true;
       }, (appError: AppError) => {
-        if (appError.status === 401) {
-          this.userErrors['email'] = 'Incorrect email.';
+        if (appError.status === 404) {
+          this.userErrors['email'] = 'User with this email doesn\'t exist';
         } else {
           throw appError;
         }

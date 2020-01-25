@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../models/user.model";
-import {RegistrationService} from "../services/registration-service.service";
+import {RegistrationService} from "../services/registration.service";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {HttpResponse} from "@angular/common/http";
@@ -13,8 +13,7 @@ import ValidationError from "../../models/validationError";
   styleUrls: ['./user-signup.component.css',
     '../user-style.css']
 })
-export class UserSignupComponent implements OnInit, OnDestroy {
-  public user: User = new User();
+export class UserSignupComponent implements OnDestroy {
   userErrors: Map<string, string> = new Map<string, string>();
   hidePassword = true;
   regUserSubscription: Subscription;
@@ -23,41 +22,36 @@ export class UserSignupComponent implements OnInit, OnDestroy {
               public router: Router) {
   }
 
-  ngOnInit() {
-  }
-
   createUser(data: any): void {
-    const user = new User;
-    if (data.password === data.repeatedPassword) {
-      alert(data.password);
-      user.password = data.password;
-    } else {
-      this.router.navigate(['sign-up']);
-      return;
-    }
-    user.firstName = data.firstName;
-    user.lastName = data.lastName;
-    user.email = data.email;
-    user.accountName = data.accountName;
+      const user = new User;
+      if (data.password === data.repeatedPassword) {
+        user.password = data.password;
+      } else {
+        this.router.navigate(['sign-up']);
+        return;
+      }
+      user.firstName = data.firstName;
+      user.lastName = data.lastName;
+      user.email = data.email;
+      user.accountName = data.accountName;
 
-    this.regUserSubscription = this.registrationService.regUser(user)
-      .subscribe((response: HttpResponse<any>) => {
-        if (response) {
-          this.router.navigate(['sign-in']);
-        }
-      }, (appError: AppError) => {
-        if (appError.status === 422) {
-          this.userErrors = (<ValidationError>appError.error).validationErrors;
-        } else if (appError.status === 500) {
-          this.userErrors['email'] = 'User with these data already exists';
-        } else if (appError.status === 400) {
-          this.userErrors['form-structure'] = 'Fill the all fields in a right way';
-        } else {
-          throw appError;
-        }
-      });
+      this.regUserSubscription = this.registrationService.regUser(user)
+        .subscribe((response: HttpResponse<any>) => {
+          if (response) {
+            this.router.navigate(['sign-in']);
+          }
+        }, (appError: AppError) => {
+          if (appError.status === 500) {
+            this.userErrors['email'] = 'User with this email already exists';
+          } else {
+            throw appError;
+          }
+        });
   }
 
   ngOnDestroy(): void {
+    if (this.regUserSubscription) {
+      this.regUserSubscription.unsubscribe();
+    }
   }
 }
