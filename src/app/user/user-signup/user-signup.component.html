@@ -21,7 +21,7 @@
           <input ngModel class="input-field" type="email" placeholder="Email" name="email" required
                  pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*">
         </div>
-        <div class="alert-danger">
+        <div class="alert-danger center">
           {{userErrors['email']}}
         </div>
 
@@ -41,7 +41,7 @@
         <i class="fa field-icon" (click)="hidePassword = !hidePassword"
            [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
 
-        <div class="alert-danger">
+        <div class="alert-danger center">
           {{userErrors['password']}}
         </div>
 
@@ -50,7 +50,7 @@
           <input ngModel class="input-field" type="text" placeholder="Account Name"
                  name="accountName" required>
         </div>
-        <div class="alert-danger" *ngIf="!data.valid && data.touched">
+        <div class="alert-danger center" *ngIf="!data.valid && data.touched">
           Fill all the fields in a right way!
         </div>
 

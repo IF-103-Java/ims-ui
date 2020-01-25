@@ -14,10 +14,10 @@
                #username="ngModel">
       </div>
 
-      <div *ngIf="username.touched && username.invalid" class="alert-danger">
+      <div *ngIf="username.touched && username.invalid" class="alert-danger center">
         Email must be a valid email address!
       </div>
-      <div class="alert-danger">
+      <div class="alert-danger center">
         {{userErrors['username']}}
       </div>
 
@@ -30,10 +30,10 @@
       </div>
       <i class="fa field-icon" (click)="hidePassword = !hidePassword"
          [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true "></i>
-      <div class="alert-danger">
+      <div class="alert-danger center">
         {{userErrors['password']}}
       </div>
-      <div *ngIf="password.touched && password.invalid" class="alert-danger">
+      <div *ngIf="password.touched && password.invalid" class="alert-danger center">
         Enter your password!
       </div>
 
