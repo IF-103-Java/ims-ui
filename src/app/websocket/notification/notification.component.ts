@@ -13,6 +13,17 @@ export class NotificationComponent implements OnInit {
   ngOnInit() {
   }
 
+  showStandard() {
+    this.websocketService.show('I am a standard toast');
+  }
+
+  showSuccess() {
+    this.websocketService.show('I am a success toast', { classname: 'bg-success text-light', delay: 10000 });
+  }
+
+  showDanger(dangerTpl) {
+    this.websocketService.show(dangerTpl, { classname: 'bg-danger text-light', delay: 15000 });
+  }
   connect(){
     this.websocketService._connect();
   }
@@ -22,3 +33,4 @@ export class NotificationComponent implements OnInit {
   }
 
 }
+
