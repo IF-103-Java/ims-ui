@@ -18,23 +18,25 @@ export class UserSigninComponent implements OnDestroy {
   hidePassword = true;
   loginSubscription: Subscription;
 
-  constructor(private authService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService,
+              private router: Router) {
   }
 
-  signIn(data: any): void {
+  signIn(data: LoginUser): void {
     const user = new LoginUser();
     user.username = data.username;
     user.password = data.password;
 
     function tokenSetter(response: any) {
       sessionStorage.setItem('jwt-token', response.token);
+      sessionStorage.setItem('username', response.username);
     }
 
-    this.loginSubscription = this.authService.login(user)
+    this.loginSubscription = this.loginService.login(user)
       .subscribe(response => {
         if (response) {
           tokenSetter(response);
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }
       }, (appError: AppError) => {
         if (appError.status === 422) {

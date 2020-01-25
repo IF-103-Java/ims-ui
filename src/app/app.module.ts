@@ -11,12 +11,12 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {JwtModule} from '@auth0/angular-jwt';
 import {GlobalErrorHandler} from './errors/global-error-handler';
 import {environment} from '../environments/environment';
-import {MainScreenComponent} from './main-screen/main-screen.component';
+import {TruncatePipe} from './pipe/truncate.pipe';
 
 export function getToken() {
   let jwtToken = '';
   if (sessionStorage.getItem('jwt-token')) {
-    jwtToken = sessionStorage.getItem('jwt-token').substr(7);
+    jwtToken = sessionStorage.getItem('jwt-token');
   }
   return jwtToken;
 }
@@ -24,8 +24,8 @@ export function getToken() {
 @NgModule({
   declarations: [
     AppComponent,
-    MainScreenComponent,
     routerComponents,
+    TruncatePipe,
   ],
   imports: [
     BrowserModule,

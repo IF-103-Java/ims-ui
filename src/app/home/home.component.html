@@ -64,7 +64,7 @@
     <div class="sidebar-heading">Item management</div>
     <!-- Nav Item - Items -->
     <li class="nav-item">
-      <a routerLink="/item-table" routerLinkActive="active" class="nav-link active">
+      <a [routerLink]="[{ outlets: { nav: ['item-table'] } }]" routerLinkActive="active" class="nav-link active">
         <i class="fas fa-fw fa-table"></i>
         <span>Items</span></a>
     </li>
@@ -73,7 +73,7 @@
     <div class="sidebar-heading">Event management</div>
     <!-- Nav Item - Events -->
     <li class="nav-item">
-      <a routerLink="/events" routerLinkActive="active" class="nav-link active">
+      <a [routerLink]="[{ outlets: { nav: ['events'] } }]" routerLinkActive="active" class="nav-link active">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Events</span></a>
     </li>
@@ -85,6 +85,16 @@
       <a routerLink="/associates" routerLinkActive="active" class="nav-link active">
         <i class="fas fa-fw fa-arrow-circle-up"></i>
         <span>Associates</span></a>
+    </li>
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">Premium features</div>
+    <!-- Nav Item - Warehouse Advice -->
+    <li class="nav-item">
+      <a [routerLink]="[{ outlets: { nav: ['warehouse-advice'] } }]" routerLinkActive="active" class="nav-link active">
+        <i class="fas fa-fw fa-network-wired"></i>
+        <span>Warehouse Advice</span>
+      </a>
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -158,7 +168,7 @@
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Username</span>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{username}}</span>
               <img class="img-profile rounded-circle" src="../favicon.ico">
             </a>
             <!-- Dropdown - User Information -->
@@ -168,7 +178,7 @@
                 Profile
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+              <a class="dropdown-item" href="#" data-toggle="modal" (click)="openLogout(content)" >
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Logout
               </a>
@@ -181,7 +191,7 @@
       <!-- End of Topbar -->
 
       <!-- Begin Page Content -->
-      <router-outlet></router-outlet>
+      <router-outlet name="nav"></router-outlet>
       <!-- End Page Content -->
     </div>
 
@@ -208,21 +218,16 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
+<ng-template #content let-modal>
+  <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"  (click)="modalRef.close()">
           <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a routerLink="/logout" class="btn btn-primary">Logout</a>
+        <button class="btn btn-secondary" (click)="modalRef.close()" type="button" data-dismiss="modal">Cancel</button>
+        <a routerLink (click)="logout()" class="btn btn-primary">Logout</a>
       </div>
-    </div>
-  </div>
-</div>
+</ng-template>
