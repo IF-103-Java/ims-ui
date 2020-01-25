@@ -55,9 +55,14 @@
     <div class="sidebar-heading">Warehouse management</div>
     <!-- Nav Item - Warehouses -->
     <li class="nav-item">
-      <a routerLink="/item-table" routerLinkActive="active" class="nav-link active">
+      <a [routerLink]="[{outlets: {nav: ['warehouses']}}]" routerLinkActive="active" class="nav-link active">
         <i class="fas fa-fw fa-warehouse"></i>
         <span>Warehouses</span></a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="[{outlets: {nav: ['warehouse']}}]" routerLinkActive="active" class="nav-link active">
+        <i class="fas fa-fw fa-warehouse"></i>
+        <span>Warehouse create</span></a>
     </li>
     <hr class="sidebar-divider">
 

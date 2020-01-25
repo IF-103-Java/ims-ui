@@ -16,7 +16,7 @@ export class WarehouseCreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  addWarehouse() {
-    this.warehouseService.addWarehouse(this.warehouse)
+  createWarehouse() {
+    this.warehouseService.createWarehouse(this.warehouse)
   }
 }

@@ -9,8 +9,8 @@ import {WarehouseService} from "../service/warehouse.service";
 })
 export class WarehousesComponent implements OnInit {
   page: number =0;
-  size: number =10;
-  sortValue: string[]=['name', 'topWarehouseId', 'parentId', 'info', 'capacity']
+  size: number =5;
+  sortValue: string[]=['Id', 'name', 'info', 'capacity', 'parentId', 'isBottom', 'topWarehouseId', 'active']
   sort: {value: string, direction: string};
   warehouses: Warehouse[];
   constructor(private warehouseService: WarehouseService) { }
@@ -20,6 +20,7 @@ export class WarehousesComponent implements OnInit {
       this.warehouses = data;
     })
   }
+
   findAll(){
     this.warehouseService.findAllWarehouses(this.page,this.size, this.sort.value, this.sort.direction).subscribe(data=>{
       this.warehouses = data;
