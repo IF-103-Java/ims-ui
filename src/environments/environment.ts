@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080',
+  apiWsUrl: 'ws://localhost:8080/ims-websocket',
   whitelistedDomains: ['localhost:8080'],
 };
 

@@ -14,6 +14,7 @@ import {HomeComponent} from './home/home.component';
 import {AuthGuardService as AuthGuard} from "./user/services/auth-guard.service";
 import {AccountUpgradeComponent} from './account/account-upgrade/account-upgrade.component';
 import {UserInviteComponent} from './account/account-invite/account-invite.component';
+import {NotificationComponent} from "./websocket/notification/notification.component";
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -32,7 +33,8 @@ export const routerComponents = [
   UserResetPasswordComponent,
   AccountViewComponent,
   AccountUpgradeComponent,
-  UserInviteComponent
+  UserInviteComponent,
+  NotificationComponent
 ];
 
 @NgModule({
@@ -43,6 +45,7 @@ export const routerComponents = [
       {path: 'sign-up', component: UserSignupComponent},
       {path: 'forgot-password', component: UserForgotPasswordComponent},
       {path: 'reset-password', component: UserResetPasswordComponent},
+      {path: 'socket', component: NotificationComponent},
       {
         path: 'home',
         component: HomeComponent,
@@ -53,6 +56,7 @@ export const routerComponents = [
           {path: 'account', component: AccountViewComponent, outlet: 'nav'},
           {path: 'upgrade', component: AccountUpgradeComponent, outlet: 'nav'},
           {path: 'invite', component: UserInviteComponent, outlet: 'nav'},
+          {path: 'invite', component: NotificationComponent}
         ]
       },
     ])
