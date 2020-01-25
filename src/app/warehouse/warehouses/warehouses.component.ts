@@ -8,8 +8,8 @@ import {WarehouseService} from "../service/warehouse.service";
   styleUrls: ['./warehouses.component.css']
 })
 export class WarehousesComponent implements OnInit {
-  page: number =0;
-  size: number =5;
+  page: number = 0;
+  size: number = 5;
   sortValue: string[]=['Id', 'name', 'info', 'capacity', 'parentId', 'isBottom', 'topWarehouseId', 'active']
   sort: {value: string, direction: string};
   warehouses: Warehouse[];
