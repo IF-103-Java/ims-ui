@@ -10,6 +10,8 @@ import {UserForgotPasswordComponent} from './user/user-forgot-password/user-forg
 import {UserSigninComponent} from './user/user-signin/user-signin.component';
 import {ItemSortableDirective} from './item/item-sortable.directive';
 import {HomeComponent} from './home/home.component';
+import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-create.component";
+import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -27,7 +29,9 @@ export const routerComponents = [
   UserSignupComponent,
   UserUpdateComponent,
   UserForgotPasswordComponent,
-  UserResetPasswordComponent
+  UserResetPasswordComponent,
+  WarehouseCreateComponent,
+  WarehousesComponent
 ];
 
 @NgModule({
@@ -43,6 +47,8 @@ export const routerComponents = [
         path: 'home', component: HomeComponent, children: [
           {path: 'events', component: EventComponent, outlet: 'nav'},
           {path: 'item-table', component: ItemTableComponent, outlet: 'nav'},
+          {path: 'warehouse', component: WarehouseCreateComponent, outlet: 'nav'},
+          {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'}
         ]
       },
     ])

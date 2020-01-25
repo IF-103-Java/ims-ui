@@ -1,0 +1,29 @@
+<h1>All Warehouses</h1>
+<div>
+  <table class="table table-striped table-bordered">
+    <thead>
+    <th sortable [sortValue]="sortValue[0]" (sortEvent)="sort">Name</th>
+    <th sortable [sortValue]="sortValue[1]" (sortEvent)="sort">TopwarehouseId</th>
+    <th sortable [sortValue]="sortValue[2]" (sortEvent)="sort">ParentID</th>
+    <th  sortable [sortValue]="sortValue[3]" (sortEvent)="sort">Capacity</th>>
+    </thead >
+    <tbody >
+    <tr *ngFor="let warehouse of warehouses">
+      <td>{{warehouse.}</td>
+      <td>{{warehouse.name}}</td>
+      <td>{{warehouse.topWarehouseID}}</td>
+      <td>{{warehouse.parentId}}</td>
+      <td>{{warehouse.capacity}}</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <ul class="pagination" [(ngModel)]="page">
+      <li class="page-warehouse"><a class="page-link" (click)="decrement()">Previous</a></li>
+      <li class="page-warehouse"><a class="page-link"(click)="page=1">1</a></li>
+      <li class="page-warehouse"><a class="page-link"(click)="page=2">2</a></li>
+      <li class="page-warehouse"><a class="page-link" (click)="page=3">3</a></li>
+      <li class="page-warehouse"><a class="page-link" (click)="increment()">Next</a></li>
+    </ul>
+    </tfoot>
+  </table>
+</div>

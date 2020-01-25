@@ -1,0 +1,37 @@
+<p>Create warehouse</p>
+
+<form>
+  <div class="form-group">
+    <label for="name">name:</label>
+    <input type="text" [(ngModel)]="warehouse.name" name="name" class="form-control" id="name">
+
+    <label for="info">info:</label>
+    <input type="text" [(ngModel)]="warehouse.info" name="info" class="form-control" id="info">
+
+    <label for="capacity">capacity:</label>
+    <input type="text" [(ngModel)]="warehouse.capacity" name="capacity" class="form-control" id="capacity">
+
+    <label for="isBottom">isBottom:</label>
+    <input type="isBottom" [(ngModel)]="warehouse.isBottom" name="isBottom" class="form-control" id="isBottom">
+
+    <label for="parentId">parentId:</label>
+    <input type="parentId" [(ngModel)]="warehouse.parentId" name="parentId" class="form-control" id="parentId">
+
+    <label for="accountId">accountId:</label>
+    <input type="accountId" [(ngModel)]="warehouse.accountId" name="accountId" class="form-control" id="accountId">
+
+    <label for="topWarehouseID">topWarehouseID:</label>
+    <input type="topWarehouseID" [(ngModel)]="warehouse.topWarehouseID"
+           name="topWarehouseID" class="form-control" id="topWarehouseID">
+
+    <label for="active">active:</label>
+    <input type="active" [(ngModel)]="warehouse.accountId" name="active" class="form-control" id="active">
+
+  </div>
+
+  <button class="btn btn-success btn-circle" icon = fac (click)="addWarehouse()">Add Warehouse</button>
+
+</form>
+
+
+
