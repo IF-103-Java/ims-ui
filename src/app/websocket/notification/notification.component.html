@@ -1,33 +1,17 @@
+<script>
+  var global = window; // fix global is undefined in socketjs-client
+</script>
 <div id="main-content" class="container">
-
-  <div class="row">
-    <div class="col-md-12">
-      {{ greeting }}
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-md-6">
       <form class="form-inline">
         <div class="form-group">
           <label for="connect">WebSocket connection:</label>
-          <button (click)="connect()" class="btn btn-default" type="submit">Connect</button>
-          <button (click)="disconnect()" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+          <button (click)="connect()" id="connect" class="btn btn-default" type="submit">Connect</button>
+          <button (click)="disconnect()" class="btn btn-default" type="submit" >Disconnect
           </button>
         </div>
       </form>
     </div>
-    <div class="col-md-6">
-      <form class="form-inline">
-        <div class="form-group">
-          <label for="name">What is your name?</label>
-          <input type="text" [(ngModel)]="name" class="form-control" name="name"> <br>
-        </div>
-        <button (click)="sendMessage()" class="btn btn-default" type="submit">Send</button>
-      </form>
-    </div>
-
-    <p> {{ greeting }}</p>
   </div>
-
 </div>

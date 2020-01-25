@@ -8,11 +8,9 @@ import {WebsocketService} from "../websocket.service";
 })
 export class NotificationComponent implements OnInit {
 
-  websocketService: WebsocketService;
-  greeting: any;
-  name: string;
+  constructor(private websocketService: WebsocketService) {
+  }
   ngOnInit() {
-    this.websocketService = new WebsocketService(new NotificationComponent());
   }
 
   connect(){
@@ -21,14 +19,6 @@ export class NotificationComponent implements OnInit {
 
   disconnect(){
     this.websocketService._disconnect();
-  }
-
-  sendMessage(){
-    this.websocketService._send(this.name);
-  }
-
-  handleMessage(message){
-    this.greeting = message;
   }
 
 }
