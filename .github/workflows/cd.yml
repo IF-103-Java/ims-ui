@@ -2,10 +2,10 @@ name: Publish to Registry
 on:
   push:
     branches:
-      #      - master
-      - ci/github-actions
+      - master
+      - dev
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,5 +17,4 @@ jobs:
           name: if103java/ims-ui
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "latest"
           snapshot: true
