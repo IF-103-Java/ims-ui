@@ -1,0 +1,21 @@
+name: Publish to Registry
+on:
+  push:
+    branches:
+      #      - master
+      - ci/github-actions
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Build & Push docker image
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          registry: docker.io
+          name: if103java/ims-ui
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "latest"
+          snapshot: true
