@@ -1,0 +1,50 @@
+<h1>All Warehouses</h1>
+
+<div><input type="text" class="form-control bg-light border-0 small" aria-setsize="10" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"></div>
+<div>
+  <table class="table table-striped table-bordered btn-">
+    <thead>
+    <tr>
+
+    <th sortable [sortValue]="sortValue[0]" (sortEvent)="sort" >Id</th>
+    <th sortable [sortValue]="sortValue[1]" (sortEvent)="sort">Name</th>
+    <th sortable [sortValue]="sortValue[3]" (sortEvent)="sort">Information</th>
+    <th sortable [sortValue]="sortValue[4]" (sortEvent)="sort">Capacity</th>
+    <th sortable [sortValue]="sortValue[5]" (sortEvent)="sort">Bottom</th>
+    <th sortable [sortValue]="sortValue[6]" (sortEvent)="sort">Parent</th>
+    <th sortable [sortValue]="sortValue[7]" (sortEvent)="sort">Account</th>
+    <th sortable [sortValue]="sortValue[8]" (sortEvent)="sort">Top Warehouse</th>
+    <th sortable [sortValue]="sortValue[9]" (sortEvent)="sort">Active</th>
+    </tr>
+    </thead >
+    <tbody >
+    <tr *ngFor="let warehouse of warehouses">
+      <td>{{warehouse.id}}</td>
+      <td>{{warehouse.name}}</td>
+      <td>{{warehouse.info}}</td>
+      <td>{{warehouse.capacity}}</td>
+      <td>{{warehouse.isBottom}}</td>
+      <td>{{warehouse.parentId}}</td>
+      <td>{{warehouse.accountId}}</td>
+      <td>{{warehouse.topWarehouseID}}</td>
+      <td>{{warehouse.active}}</td>
+      <td><button (click)="deleteEmployee(warehouse.id)" class="btn btn-danger">Delete</button>
+        <button (click)="warehouseDetails(warehouse.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+
+      </td>
+
+    </tr>
+    </tbody>
+    <tfoot>
+    <ul class="pagination" [(ngModel)]="page">
+      <li class="page-item"><a class="page-link" (click)="decrement()">Previous</a></li>
+      <li class="page-item"><a class="page-link" (click)="page=1">1</a></li>
+      <li class="page-item"><a class="page-link" (click)="page=2">2</a></li>
+      <li class="page-item"><a class="page-link" (click)="page=3">3</a></li>
+      <li class="page-item"><a class="page-link" (click)="increment()">Next</a></li>
+    </ul>
+    </tfoot>
+  </table>
+</div>
+
+
