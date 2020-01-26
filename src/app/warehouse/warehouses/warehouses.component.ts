@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Warehouse} from "../../models/warehouse.model";
 import {WarehouseService} from "../service/warehouse.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-warehouses',
@@ -10,10 +11,11 @@ import {WarehouseService} from "../service/warehouse.service";
 export class WarehousesComponent implements OnInit {
   page: number = 0;
   size: number = 5;
-  sortValue: string[]=['Id', 'name', 'info', 'capacity', 'parentId', 'isBottom', 'topWarehouseId', 'active']
+  sortValue: string[]=['id', 'name', 'info', 'capacity', 'parentId', 'isBottom', 'topWarehouseId', 'active']
   sort: {value: string, direction: string};
   warehouses: Warehouse[];
-  constructor(private warehouseService: WarehouseService) { }
+
+  constructor(private warehouseService: WarehouseService, private router: Router) { }
 
   ngOnInit() {
     this.warehouseService.findAllWarehouses(this.page,this.size, this.sortValue[0], 'asc').subscribe(data=>{
@@ -34,5 +36,25 @@ export class WarehousesComponent implements OnInit {
     return  this.page -= 1;
   }
 
+  reloadData() {
+    this.findAll();
+  }
 
+  deleteEmployee(id: bigint) {
+    this.warehouseService.deleteWarehouse(id)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.reloadData();
+        },
+        error => console.log(error));
+  }
+
+  warehouseDetails(id: bigint){
+    this.router.navigate(['/home/(nav:warehouses/details', id]);
+  }
+
+  warehouseUpdate(id: bigint){
+    this.router.navigate(['/home/(nav:warehouses/update', id]);
+  }
 }
