@@ -15,6 +15,9 @@ import {AuthGuardService as AuthGuard} from './user/services/auth-guard.service'
 import {AccountUpgradeComponent} from './account/account-upgrade/account-upgrade.component';
 import {UserInviteComponent} from './account/account-invite/account-invite.component';
 import {WarehouseAdviceComponent} from './warehouse-advice/warehouse-advice.component';
+import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-create.component";
+import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
+import {WarehouseUpdateComponent} from "./warehouse/warehouse-update/warehouse-update.component";
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -35,6 +38,9 @@ export const routerComponents = [
   AccountUpgradeComponent,
   UserInviteComponent,
   WarehouseAdviceComponent,
+  WarehouseCreateComponent,
+  WarehousesComponent,
+  WarehouseUpdateComponent,
 ];
 
 @NgModule({
@@ -56,6 +62,9 @@ export const routerComponents = [
           {path: 'upgrade', component: AccountUpgradeComponent, outlet: 'nav'},
           {path: 'invite', component: UserInviteComponent, outlet: 'nav'},
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
+          {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
+          {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
+          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'}
         ]
       },
     ])
