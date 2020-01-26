@@ -11,7 +11,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {JwtModule} from '@auth0/angular-jwt';
 import {GlobalErrorHandler} from './errors/global-error-handler';
 import {environment} from '../environments/environment';
-import {ToastsContainer} from "./websocket/notification/ToastsContainer";
+import {ToastsContainerComponent} from "./websocket/notification/toasts-container.component";
 
 export function getToken() {
   let jwtToken = '';
@@ -24,7 +24,7 @@ export function getToken() {
 @NgModule({
   declarations: [
     AppComponent,
-    ToastsContainer,
+    ToastsContainerComponent,
     routerComponents
   ],
   imports: [

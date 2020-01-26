@@ -1,8 +1,9 @@
-import {Injectable, TemplateRef} from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as SockJS from 'sockjs-client'
 import {CompatClient, Stomp} from "@stomp/stompjs";
 import {environment} from "../../environments/environment";
 import {Event} from "../models/event";
+import {ToastService} from "./notification/toast.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,10 @@ import {Event} from "../models/event";
 export class WebsocketService {
   topic = "/topic/notification";
   stompClient: CompatClient;
-  toasts: any = [];
-  constructor() {
+
+  constructor(private toastService: ToastService) {
   }
+
   _connect() {
     console.log("Initialize WebSocket Connection");
     let _this = this;
@@ -20,7 +22,7 @@ export class WebsocketService {
     _this.stompClient = Stomp.over(socket);
     _this.stompClient.connect({}, function (frame) {
       console.log('Websocket has been connected -> ' + frame);
-      _this.stompClient.subscribe(_this.topic,  message => {
+      _this.stompClient.subscribe(_this.topic, message => {
         _this.onMessageReceived(message);
       });
       _this.stompClient.reconnect_delay = 2000;
@@ -38,17 +40,10 @@ export class WebsocketService {
   onMessageReceived(event) {
     event = new Event(JSON.parse(event.body));
     console.log("Message Received from Server :: " + event.message);
-    this.show(event.message,  { classname: 'bg-success text-light', delay: 10000 });
-  }
-
-  show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
-    this.toasts.push({ textOrTpl, ...options });
-  }
-
-  remove(toast) {
-    this.toasts = this.toasts.filter(t => t !== toast);
+    this.toastService.show(event.message, {classname: 'bg-success text-light', delay: 10000});
   }
 }
+
 export class Message {
   content: string;
   style: string;

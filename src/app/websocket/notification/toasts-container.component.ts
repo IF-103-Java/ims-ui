@@ -1,17 +1,17 @@
 import {Component, TemplateRef} from '@angular/core';
 
-import {WebsocketService} from "../websocket.service";
+import {ToastService} from './toast.service';
 
 
 @Component({
   selector: 'app-toasts',
   template: `
     <ngb-toast
-      *ngFor="let toast of websocketService.toasts"
-      [class]="toast.style"
+      *ngFor="let toast of toastService.toasts"
+      [class]="toast.classname"
       [autohide]="true"
       [delay]="toast.delay || 5000"
-      (hide)="websocketService.remove(toast)"
+      (hide)="toastService.remove(toast)"
     >
       <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
         <ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
@@ -22,9 +22,11 @@ import {WebsocketService} from "../websocket.service";
   `,
   host: {'[class.ngb-toasts]': 'true'}
 })
+export class ToastsContainerComponent {
+  constructor(public toastService: ToastService) {
+  }
 
-export class ToastsContainer {
-  constructor(public websocketService: WebsocketService) {}
-
-  isTemplate(toast) { return toast.textOrTpl instanceof TemplateRef; }
+  isTemplate(toast) {
+    return toast.textOrTpl instanceof TemplateRef;
+  }
 }

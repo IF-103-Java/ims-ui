@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WebsocketService} from "../websocket.service";
+import {ToastService} from "./toast.service";
 
 @Component({
   selector: 'app-notification',
@@ -8,27 +9,29 @@ import {WebsocketService} from "../websocket.service";
 })
 export class NotificationComponent implements OnInit {
 
-  constructor(private websocketService: WebsocketService) {
+  constructor(private websocketService: WebsocketService, private toastService: ToastService) {
   }
+
   ngOnInit() {
   }
 
   showStandard() {
-    this.websocketService.show('I am a standard toast');
+    this.toastService.show('I am a standard toast');
   }
 
   showSuccess() {
-    this.websocketService.show('I am a success toast', { classname: 'bg-success text-light', delay: 10000 });
+    this.toastService.show('I am a success toast', {classname: 'bg-success text-light', delay: 10000});
   }
 
   showDanger(dangerTpl) {
-    this.websocketService.show(dangerTpl, { classname: 'bg-danger text-light', delay: 15000 });
+    this.toastService.show(dangerTpl, {classname: 'bg-danger text-light', delay: 15000});
   }
-  connect(){
+
+  connect() {
     this.websocketService._connect();
   }
 
-  disconnect(){
+  disconnect() {
     this.websocketService._disconnect();
   }
 
