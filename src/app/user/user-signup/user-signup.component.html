@@ -3,55 +3,66 @@
     <div class="image-block bg-register-image"></div>
 
     <div class="right-block">
-      <form>
+      <form #data="ngForm">
         <h1 class="text-gray-900 text-center">Create an Account!</h1>
 
         <div class="row2 ">
           <div class="input-container">
             <i class="fa fa-user icon"></i>
-            <input class="input-field" type="text" [(ngModel)]="user.firstName" placeholder="First Name"
-                   name="firstName" required>
+            <input ngModel class="input-field" type="text" placeholder="First Name" name="firstName" required>
           </div>
-
           <div class="input-container">
-            <input class="input-field" type="text" [(ngModel)]="user.lastName" placeholder="Last Name" name="lastName"
-                   required>
+            <input ngModel class="input-field" type="text" placeholder="Last Name" name="lastName" required>
           </div>
         </div>
-
 
         <div class="input-container">
           <i class="fa fa-envelope icon"></i>
-          <input class="input-field" type="text" [(ngModel)]="user.email" placeholder="Email" name="email" required>
+          <input ngModel class="input-field" type="email" placeholder="Email" name="email" required
+                 pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*">
+        </div>
+        <div class="alert-danger center">
+          {{userErrors['email']}}
+        </div>
+
+        <div class="row2">
+          <div class="form-group">
+            <i class="fa fa-key icon"></i>
+            <input ngModel class="input-field" placeholder="Password" name="password"
+                   [type]="hidePassword ? 'password' : 'text'"
+                   #password required>
+          </div>
+          <div class="form-group">
+            <input ngModel class="input-field" placeholder="Repeated Password" name="repeatedPassword"
+                   [type]="hidePassword ? 'password' : 'text'"
+                   required pattern="{{password.value}}" #repeatedPassword>
+          </div>
+        </div>
+        <i class="fa field-icon" (click)="hidePassword = !hidePassword"
+           [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
+
+        <div class="alert-danger center">
+          {{userErrors['password']}}
         </div>
 
         <div class="input-container">
-          <i class="fa fa-key icon"></i>
-          <input class="input-field" type="password" [(ngModel)]="user.password" placeholder="Password" name="psw"
-                 required>
-        </div>
-
-        <div class="input-container">
-          <i class="fa fa-user icon"></i>
-          <input class="input-field" type="text" [(ngModel)]="user.accountName" placeholder="Account Name"
+          <i class="fa fa-home icon"></i>
+          <input ngModel class="input-field" type="text" placeholder="Account Name"
                  name="accountName" required>
         </div>
-        <a type="submit" class="btn" (click)="createUser()" href="user-signin">Register Account </a>
+        <div class="alert-danger center" *ngIf="!data.valid && data.touched">
+          Fill all the fields in a right way!
+        </div>
 
-        <hr>
-        <a href="index.html" class="btn btn-google btn-user btn-block">
-          <i class="fa fa-google fa-fw"></i> Register with Google
-        </a>
-        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-          <i class="fa fa-facebook-f fa-fw"></i> Register with Facebook
-        </a>
-
+        <div *ngIf="repeatedPassword.validity.patternMismatch" class="alert-danger">Passwords don't match.</div>
+        <button type="submit" class="btn" [disabled]="!data.valid" (click)="createUser(data.value)">Register Account
+        </button>
         <hr>
         <div style="text-align:center">
-          <a class="small" href="forgot-password">Forgot Password?</a>
+          <a class="small" routerLink="/forgot-password">Forgot Password?</a>
         </div>
         <div style="text-align:center">
-          <a class="small" href="sign-in">Already have an account? Login!</a>
+          <a class="small" routerLink="/sign-in">Already have an account? Login!</a>
         </div>
       </form>
     </div>
