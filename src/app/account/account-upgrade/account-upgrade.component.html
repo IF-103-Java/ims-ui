@@ -52,6 +52,11 @@
     </div>
   </div>
   </div>
+
+  <div class="alert-danger center">
+    {{upgradeErrors['invite']}}
+  </div>
+
   <h2 style="text-align:left">Available for upgrade:</h2>
 
 
@@ -107,7 +112,7 @@
       </div>
     </div>
     <div>
-    <a (click)="(upgradeAccount(type.id))" href="/home/(nav:account)" class="btn btn-success btn-icon-split">
+    <a (click)="(upgradeAccount(type.id))" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-check"></i>
                     </span>

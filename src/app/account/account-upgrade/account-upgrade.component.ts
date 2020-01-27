@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountType} from '../../models/accountType.model';
 import {AccountService} from '../account.service';
+import {Router} from '@angular/router';
+import {HttpResponse} from '@angular/common/http';
+import AppError from '../../errors/app-error';
 
 @Component({
   selector: 'app-account-upgrade',
@@ -8,12 +11,13 @@ import {AccountService} from '../account.service';
   styleUrls: ['./account-upgrade.component.css']
 })
 export class AccountUpgradeComponent implements OnInit {
+  upgradeErrors: Map<string, string> = new Map<string, string>();
 
    public currentType: AccountType;
 
    public possibleToUpgradeTypes: AccountType[];
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, public router: Router) {
   }
 
   ngOnInit() {
@@ -26,6 +30,16 @@ export class AccountUpgradeComponent implements OnInit {
   }
 
   upgradeAccount(newTypeId: bigint) {
-    this.accountService.upgradeAccount(newTypeId);
+    this.accountService.upgradeAccount(newTypeId).subscribe((response: HttpResponse<any>) => {
+      if (response) {
+        this.router.navigate(['account']);
+      }
+    }, (appError: AppError) => {
+      if (appError.status === 500) {
+        this.upgradeErrors['upgrade'] = 'Upgrade is not successful';
+      } else {
+        throw appError;
+      }
+    });
   }
 }
