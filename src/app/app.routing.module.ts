@@ -18,8 +18,8 @@ import {WarehouseAdviceComponent} from './warehouse-advice/warehouse-advice.comp
 import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-create.component";
 import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
 import {WarehouseUpdateComponent} from "./warehouse/warehouse-update/warehouse-update.component";
-import {AssociateComponent} from "./associate/associate.component";
-import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
+import {AccountSettingsComponent} from './account/account-settings/account-settings.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -43,8 +43,8 @@ export const routerComponents = [
   WarehouseCreateComponent,
   WarehousesComponent,
   WarehouseUpdateComponent,
-  AssociateComponent,
-  FormAssociateComponent
+  AccountSettingsComponent,
+  DashboardComponent
 ];
 
 @NgModule({
@@ -65,14 +65,12 @@ export const routerComponents = [
           {path: 'account', component: AccountViewComponent, outlet: 'nav'},
           {path: 'upgrade', component: AccountUpgradeComponent, outlet: 'nav'},
           {path: 'invite', component: UserInviteComponent, outlet: 'nav'},
+          {path: 'account-settings', component: AccountSettingsComponent, outlet: 'nav'},
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
           {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
-          {path: 'associates', component: AssociateComponent, outlet: 'nav'},
-          {path: 'add-associate', component: FormAssociateComponent, outlet: 'nav'},
-          {path: 'edit-associate/:id', component: FormAssociateComponent, outlet: 'nav'}
-
+          {path: 'dashboard', component: DashboardComponent, outlet: 'nav'}
         ]
       },
     ])
