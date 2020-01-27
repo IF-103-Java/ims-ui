@@ -1,6 +1,7 @@
 export class Warehouse {
   id: bigint;
   name: string;
+  info: string;
   capacity: number;
   isBottom: boolean;
   parentId: bigint;

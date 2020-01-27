@@ -11,7 +11,7 @@ import {Transaction} from '../models/transaction.model';
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-  headElements = ['ID', 'Message', 'Author', 'Date', 'Name', 'Warehouse', 'Transaction'];
+  headElements = ['Message', 'Author', 'Time', 'Name', 'Warehouse', 'Transaction'];
   pageSizeOptions = [10, 15, 20];
   page$ = new Page<Event>();
   params = new Map<string, any>();
@@ -37,16 +37,19 @@ export class EventComponent implements OnInit {
 
   transactions = new Map<number, Transaction>();
 
-  sortBy = 'date';
-  direction = 'DESC';
+  sortCases = new Map<string, string>();
+  sortCasesText = ['From new to old', 'From old to new'];
+  sort = 'From new to old';
+
+  page = 1;
+
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     selectAllText: 'Select All',
     unSelectAllText: 'UnSelect All',
-    itemsShowLimit: 3,
+    itemsShowLimit: 1,
     allowSearchFilter: true
   };
-
 
   afterFilter() {
     this.enableFilter(this.afterParam);
@@ -85,24 +88,25 @@ export class EventComponent implements OnInit {
     } else {
       this.params.delete(param.label);
     }
-    this.getEvents();
+    this.setPage(-this.page$.number)
   }
 
   setPage(incremental: number) {
     this.transactions.clear();
     this.page$.number += incremental;
-    this.ngOnInit();
+    this.getEvents();
   }
 
   constructor(private eventsService: EventService) {
     this.page$.size = 15;
     this.page$.number = 0;
-    this.page$.sortBy = 'date,DESC';
+    this.sortCases.set('From new to old', 'date,DESC');
+    this.sortCases.set('From old to new', 'date,ASC')
   }
 
   getEvents() {
-    this.eventsService.getPage(this.page$.number, this.page$.size,
-      this.sortBy.concat(',', this.direction), this.params)
+    this.eventsService.getPage(this.page - 1, this.page$.size,
+      this.sortCases.get(this.sort), this.params)
       .subscribe(data => this.page$ = data);
   }
 
@@ -156,7 +160,7 @@ export class EventComponent implements OnInit {
         return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity + ' came to ' +
           transaction.movedTo.name + ' (id=' + transaction.movedTo.id + ')';
       case 'OUT':
-        return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity + ' ware shipped from ' +
+        return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity + ' were shipped from ' +
           transaction.movedFrom.name + ' (id=' + transaction.movedFrom.id + ')';
       case 'MOVE':
         return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity +

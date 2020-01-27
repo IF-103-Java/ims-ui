@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RegistrationService } from './registration-service.service';
+import { RegistrationService } from './registration.service';
 
 describe('RegistrationServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
