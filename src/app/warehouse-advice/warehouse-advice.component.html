@@ -1,0 +1,152 @@
+<div class="container-fluid">
+  <div>
+    <!-- Search Area -->
+    <div id="searchArea" class="m-auto mw-100">
+      <form class="form-row">
+        <div class="input-group">
+          <input type="text" class="form-control bg-white border-0 small" placeholder="Search for item..."
+                 aria-label="Search"
+                 aria-describedby="basic-addon2"
+                 [value]="searchInput.value"
+                 [formControl]="searchInput">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" (click)="onSearchButtonClick()">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Items Area -->
+    <div id="items-area" class="my-3" *ngIf="items" [hidden]="hideArea('items-area')">
+      <div class="row">
+        <div *ngFor="let item of items" class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-primary shadow h-100 py-2 card-tooltip"
+               title="Click to get storage advice"
+               (click)="showWarehouseAdvice(item.id)">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ item.unit }}</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">{{ item.name }}</div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-box fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Warehouse Storage Advice Area -->
+  <div id="warehouse-storage-advice-area" class="my-3" *ngIf="warehouseStorageAdvice"
+       [hidden]="hideArea('warehouse-storage-advice-area')">
+
+    <!-- Best Associates Area -->
+    <div id="best-associates-area" class="row">
+      <div class="col">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Top suppliers</h6>
+          </div>
+          <div *ngFor="let c of warehouseStorageAdvice.clients">
+            <div class="card border-left-primary shadow h-100 card-tooltip">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                      {{(c.addressDto.country + ' - ' + c.addressDto.city + '(' + c.addressDto.address + ')') | truncate:['55', '...'] }}
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ c.name }}</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-address-card fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Top clients</h6>
+          </div>
+          <div *ngFor="let s of warehouseStorageAdvice.suppliers">
+            <div class="card border-left-primary shadow h-100 card-tooltip">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                      {{s.addressDto.country}} - {{ s.addressDto.city }}({{ s.addressDto.address }})
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ s.name }}</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-address-card fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Warehouse Advice Area -->
+    <div id="warehouse-advice-area" class="row w-100 justify-content-center">
+      <div class="w-50">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Advice to store</h6>
+          </div>
+
+          <div class="" *ngFor="let w of warehouseStorageAdvice.warehouseAdvices">
+            <div class="card border-left-primary shadow h-100">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                      {{(w.warehouse.addressDto.country + ' - ' + w.warehouse.addressDto.city + '(' + w.warehouse.addressDto.address + ')') | truncate:['55', '...'] }}
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto">
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{w.warehouse.name}}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-warehouse fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="message-area" class="w-100 h-100 m-2" [hidden]="hideArea('message-area')">
+    <div class="text-center font-weight-bold">
+      {{ message }}
+    </div>
+  </div>
+
+  <div id="loading-text" class="w-100 h-100 m-2" [hidden]="hideArea('loading-area')">
+    <div class="text-center font-weight-bold">
+      Loading...
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.card-tooltip').tooltip();
+</script>
