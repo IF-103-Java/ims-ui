@@ -82,7 +82,7 @@
     <div class="sidebar-heading">Associate management</div>
     <!-- Nav Item - Associates -->
     <li class="nav-item">
-      <a routerLink="/associates" routerLinkActive="active" class="nav-link active">
+      <a [routerLink]="[{ outlets: { nav: ['associates'] } }]" routerLinkActive="active" class="nav-link active">
         <i class="fas fa-fw fa-arrow-circle-up"></i>
         <span>Associates</span></a>
     </li>

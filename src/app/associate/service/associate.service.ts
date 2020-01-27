@@ -16,7 +16,7 @@ export class AssociateService {
   }
 
   public addAssociate(associate: Associate) {
-    this.http.post(this.baseUrl + "/associates/", associate).subscribe(data => console.log(data));
+    this.http.post(this.baseUrl + "/associates/", associate).subscribe();
   }
 
   public deleteAssociate(id: number) {

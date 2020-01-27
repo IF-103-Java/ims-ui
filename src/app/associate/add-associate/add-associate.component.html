@@ -37,12 +37,63 @@
                placeholder="Enter your email address">
       </div>
 
-      <select [(ngModel)]="associate.type">
-        <option value="SUPPLIER">SUPPLIER</option>
-        <option value="CLIENT">CLIENT</option>
+    <div class="form-group">
+      <label for="type">Type</label><br>
+      <select [(ngModel)]="associate.type" id="type" name="type">
+        <option *ngFor="let type of associateType" [value] ="type">{{type}}</option>
       </select>
 
+    </div>
+      <span>Address: </span>
 
+      <div class="form-group">
+        <label for="country">country</label>
+        <input type="text" [(ngModel)]="associate.addressDto.country"
+               class="form-control"
+               id="country"
+               name="country"
+               placeholder="Enter your email address">
+      </div>
+      <div class="form-group">
+        <label for="city">city</label>
+        <input type="text" [(ngModel)]="associate.addressDto.city"
+               class="form-control"
+               id="city"
+               name="city"
+               placeholder="Enter your email address">
+      </div>
+      <div class="form-group">
+        <label for="address">address</label>
+        <input type="text" [(ngModel)]="associate.addressDto.address"
+               class="form-control"
+               id="address"
+               name="address"
+               placeholder="Enter your email address">
+      </div>
+      <div class="form-group">
+        <label for="zip">zip</label>
+        <input type="text" [(ngModel)]="associate.addressDto.zip"
+               class="form-control"
+               id="zip"
+               name="zip"
+               placeholder="Enter your email address">
+      </div>
+      <div class="form-group">
+        <label for="latitude">latitude</label>
+        <input type="text" [(ngModel)]="associate.addressDto.latitude"
+               class="form-control"
+               id="latitude"
+               name="latitude"
+               placeholder="Enter your email address">
+      </div>
+      <div class="form-group">
+        <label for="longitude">longitude</label>
+        <input type="text" [(ngModel)]="associate.addressDto.longitude"
+               class="form-control"
+               id="longitude"
+               name="longitude"
+               placeholder="Enter your email address">
+      </div>
 
       <button type="submit"
               class="btn btn-info">Submit</button>

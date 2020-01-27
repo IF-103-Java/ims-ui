@@ -18,6 +18,7 @@ export class AssociateComponent implements OnInit {
 
   direction = 'asc';
   sortBy = 'id';
+  page = 1;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -25,11 +26,15 @@ export class AssociateComponent implements OnInit {
     this.page$.size = 15;
     this.page$.number = 0;
     this.page$.sortBy = 'id,DESC';
+
   }
 
   ngOnInit() {
     this.associateService.getAssociatePage(this.page$.number, this.page$.size, this.sortBy)
-      .subscribe(data => { this.page$ = data });
+      .subscribe(data => {
+        this.page$ = data
+      });
+
   }
 
   setPage(incremental: number) {
@@ -38,7 +43,7 @@ export class AssociateComponent implements OnInit {
   }
 
   getAssociates() {
-    this.associateService.getAssociatePage(this.page$.number, this.page$.size, this.sortBy)
+    this.associateService.getAssociatePage(this.page - 1, this.page$.size, this.sortBy)
       .subscribe(data => this.page$ = data);
   }
 
