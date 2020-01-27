@@ -19,6 +19,7 @@ import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-c
 import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
 import {WarehouseUpdateComponent} from "./warehouse/warehouse-update/warehouse-update.component";
 import {AccountSettingsComponent} from './account/account-settings/account-settings.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -43,6 +44,7 @@ export const routerComponents = [
   WarehousesComponent,
   WarehouseUpdateComponent,
   AccountSettingsComponent,
+  DashboardComponent
 ];
 
 @NgModule({
@@ -67,7 +69,8 @@ export const routerComponents = [
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
-          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'}
+          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
+          {path: 'dashboard', component: DashboardComponent, outlet: 'nav'}
         ]
       },
     ])

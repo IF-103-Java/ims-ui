@@ -16,7 +16,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-      <a routerLink="/" routerLinkActive="active" class="nav-link active">
+      <a [routerLink]="[{ outlets: { nav: ['dashboard'] } }]" routerLinkActive="active" class="nav-link active">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
