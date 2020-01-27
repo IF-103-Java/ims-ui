@@ -4,6 +4,7 @@ import {AssociateService} from "./service/associate.service";
 import {Page} from "../models/page";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormAssociateComponent} from "./form-associate/form-associate.component";
+import {AssociateType} from "../models/associate-type.enum";
 
 @Component({
   selector: 'app-associate',
