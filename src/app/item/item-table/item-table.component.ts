@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import {ItemService} from "../item.service";
 import {Item} from "../../models/item.model";
+import {Page} from "../../models/page";
+import {SavedItem} from "../../models/savedItem.model";
+import {SavedItemCreateComponent} from "../saved-item-create/saved-item-create.component";
+
 
 
 @Component({
@@ -9,29 +13,40 @@ import {Item} from "../../models/item.model";
   styleUrls: ['./item-table.component.css']
 })
 export class ItemTableComponent implements OnInit {
+
+  sortValues: string[]=['name_item', 'unit', 'description', 'volume'];
   page: number =0;
   size: number =10;
-sortValue: string[]=['name_item', 'unit', 'description', 'volume']
-  sort: {value: string, direction: string};
-items: Item[];
+  sortValue: string = this.sortValues[0];
+  direction: string = 'asc';
+  items: Page<Item>;
+  savedItems: SavedItem[];
   constructor(private itemService: ItemService) { }
+sendItem(item: Item){
 
+}
   ngOnInit() {
-  this.itemService.findSortedAndPaginatedItems(this.page,this.size, this.sortValue[0], 'asc').subscribe(data=>{
-    this.items = data;
-  })
+    this.itemService.findSortedAndPaginatedItems(this.page,this.size, this.sortValue, this.direction).subscribe(data=>{
+      this.items = data;
+         })
+
   }
-  getSortedAndPaginatedItems(){
-    this.itemService.findSortedAndPaginatedItems(this.page,this.size, this.sort.value, this.sort.direction).subscribe(data=>{
+
+  sort(sort: {value: string, direction: string}){
+    this.sortValue = sort.value;
+    this.direction = sort.direction;
+    this.itemService.findSortedAndPaginatedItems(this.page-1,this.size, this.sortValue, this.direction).subscribe(data=>{
+          this.items = data;
+    })
+  }
+ onPaginate(){
+    this.itemService.findSortedAndPaginatedItems(this.page-1,this.size, this.sortValue, this.direction).subscribe(data=>{
       this.items = data;
     })
   }
-  increment(){
-    return  this.page += 1;
+  getSavedItemsByItemId(itemId: bigint){
+    this.itemService.getSavedItemsByItemId(itemId).subscribe(data=>{
+      this.savedItems = data;
+    })
   }
-
-  decrement(){
-    return  this.page -= 1;
-  }
-
 }

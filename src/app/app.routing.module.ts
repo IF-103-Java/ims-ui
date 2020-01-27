@@ -10,6 +10,8 @@ import {UserForgotPasswordComponent} from './user/user-forgot-password/user-forg
 import {UserSigninComponent} from './user/user-signin/user-signin.component';
 import {ItemSortableDirective} from './item/item-sortable.directive';
 import {HomeComponent} from './home/home.component';
+import {SavedItemCreateComponent} from "./item/saved-item-create/saved-item-create.component";
+
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -21,6 +23,7 @@ export const routerComponents = [
   // "/home/(nav:warehouses)"
   ItemCreateComponent,
   ItemTableComponent,
+  SavedItemCreateComponent,
   ItemSortableDirective,
   EventComponent,
   UserUpdateComponent,
@@ -41,6 +44,12 @@ export const routerComponents = [
         path: 'home', component: HomeComponent, children: [
           {path: 'events', component: EventComponent, outlet: 'nav'},
           {path: 'item-table', component: ItemTableComponent, outlet: 'nav'},
+          {path: 'create-item', component: ItemCreateComponent, outlet: 'nav'},
+          {
+            path: 'create-savedItem/:id/:name/:unit/:description/:volume/:accountId/:active',
+            component: SavedItemCreateComponent,
+            outlet: 'nav'
+          },
         ]
       },
     ])
