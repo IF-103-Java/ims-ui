@@ -24,4 +24,8 @@ export class AccountUpgradeComponent implements OnInit {
       this.possibleToUpgradeTypes = data;
     });
   }
+
+  upgradeAccount(newTypeId: bigint) {
+    this.accountService.upgradeAccount(newTypeId);
+  }
 }
