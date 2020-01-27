@@ -20,11 +20,15 @@ export class AssociateService {
   }
 
   public deleteAssociate(id: number) {
-    this.http.delete(this.baseUrl + "/associates/" + id).subscribe();
+    return this.http.delete(this.baseUrl + "/associates/" + id);
   }
 
   public updateAssociate(id:number, associate: Associate) {
-    this.http.put(this.baseUrl + "/associates/" + id, associate);
+    this.http.put(this.baseUrl + "/associates/" + id, associate).subscribe();
+  }
+
+  public getAssociate(id:number) : Observable<Associate> {
+    return this.http.get<Associate>(this.baseUrl + "/associates/" + id);
   }
 
 }

@@ -1,98 +1,104 @@
 <div class="card my-5">
+
+
   <div class="card-body">
+
+    <h4 *ngIf="isEditAction" class="m-0 font-weight-bold text-primary">Edit Associate</h4>
+    <h4 *ngIf="!isEditAction" class="m-0 font-weight-bold text-primary">Add New Associate</h4>
+
     <form (ngSubmit)="onSubmit()" #associateForm="ngForm">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">Name:</label>
         <input type="text" [(ngModel)]="associate.name"
                class="form-control"
                id="name"
                name="name"
-               placeholder="Enter associates name">
+               placeholder="Enter associate name">
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">Email:</label>
         <input type="text" [(ngModel)]="associate.email"
                class="form-control"
                id="email"
                name="email"
-               placeholder="Enter your email address">
+               placeholder="Enter associate email address">
       </div>
 
       <div class="form-group">
-        <label for="phone">Phone</label>
+        <label for="phone">Phone:</label>
         <input type="text" [(ngModel)]="associate.phone"
                class="form-control"
                id="phone"
                name="phone"
-               placeholder="Enter associates phone"
+               placeholder="Enter associate phone"
                required #email="ngModel">
       </div>
 
       <div class="form-group">
-        <label for="additionalInfo">Additional Info</label>
+        <label for="additionalInfo">Additional Info:</label>
         <input type="text" [(ngModel)]="associate.additionalInfo"
                class="form-control"
                id="additionalInfo"
                name="additionalInfo"
-               placeholder="Enter your email address">
+               placeholder="Enter associate additional info">
       </div>
 
     <div class="form-group">
-      <label for="type">Type</label><br>
+      <label for="type">Type:</label><br>
       <select [(ngModel)]="associate.type" id="type" name="type">
         <option *ngFor="let type of associateType" [value] ="type">{{type}}</option>
       </select>
 
     </div>
-      <span>Address: </span>
+      <h5 class="font-weight-bold">Address information: </h5>
 
       <div class="form-group">
-        <label for="country">country</label>
+        <label for="country">Country:</label>
         <input type="text" [(ngModel)]="associate.addressDto.country"
                class="form-control"
                id="country"
                name="country"
-               placeholder="Enter your email address">
+               placeholder="Enter associate country">
       </div>
       <div class="form-group">
-        <label for="city">city</label>
+        <label for="city">City:</label>
         <input type="text" [(ngModel)]="associate.addressDto.city"
                class="form-control"
                id="city"
                name="city"
-               placeholder="Enter your email address">
+               placeholder="Enter your associate city">
       </div>
       <div class="form-group">
-        <label for="address">address</label>
+        <label for="address">Address:</label>
         <input type="text" [(ngModel)]="associate.addressDto.address"
                class="form-control"
                id="address"
                name="address"
-               placeholder="Enter your email address">
+               placeholder="Enter associate address">
       </div>
       <div class="form-group">
-        <label for="zip">zip</label>
+        <label for="zip">Zip:</label>
         <input type="text" [(ngModel)]="associate.addressDto.zip"
                class="form-control"
                id="zip"
                name="zip"
-               placeholder="Enter your email address">
+               placeholder="Enter assoicate zip">
       </div>
       <div class="form-group">
-        <label for="latitude">latitude</label>
+        <label for="latitude">Latitude:</label>
         <input type="text" [(ngModel)]="associate.addressDto.latitude"
                class="form-control"
                id="latitude"
                name="latitude"
-               placeholder="Enter your email address">
+               placeholder="Enter associate latitude">
       </div>
       <div class="form-group">
-        <label for="longitude">longitude</label>
+        <label for="longitude">Longitude:</label>
         <input type="text" [(ngModel)]="associate.addressDto.longitude"
                class="form-control"
                id="longitude"
                name="longitude"
-               placeholder="Enter your email address">
+               placeholder="Enter associate longitude">
       </div>
 
       <button type="submit"

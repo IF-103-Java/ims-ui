@@ -7,13 +7,15 @@ import {Address} from "../../models/address";
 
 @Component({
   selector: 'app-add-associate',
-  templateUrl: './add-associate.component.html',
-  styleUrls: ['./add-associate.component.css']
+  templateUrl: './form-associate.component.html',
+  styleUrls: ['./form-associate.component.css']
 })
-export class AddAssociateComponent implements OnInit {
+export class FormAssociateComponent implements OnInit {
 
   associate: Associate = new Associate();
   associateType = [];
+
+  isEditAction: boolean;
 
 
   constructor(private route: ActivatedRoute,
@@ -22,18 +24,33 @@ export class AddAssociateComponent implements OnInit {
 
     this.associateType = Object.keys(AssociateType);
     this.associate.addressDto = new Address();
+
   }
 
-  ngOnInit() {
 
+  ngOnInit() {
+    if(this.route.snapshot.paramMap.get('id') == null) {
+      this.isEditAction = false;
+    } else {
+      this.isEditAction = true;
+      this.associateService.getAssociate(Number(this.route.snapshot.paramMap.get('id'))).subscribe(data => this.associate = data);
+    }
   }
 
   onSubmit() {
-    this.associateService.addAssociate(this.associate);
+    if(this.isEditAction) {
+      this.associateService.updateAssociate(this.associate.id, this.associate);
+    } else {
+      this.associateService.addAssociate(this.associate);
+    }
     this.gotoAssociatesList();
   }
 
   gotoAssociatesList() {
-    this.router.navigate(['/home/associates']);
+    this.router.navigate([
+      'home', {
+        outlets: { nav : ['associates']}
+      }
+    ]);
   }
 }

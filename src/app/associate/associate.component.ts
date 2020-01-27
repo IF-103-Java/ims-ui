@@ -3,6 +3,7 @@ import {Associate} from "../models/associate";
 import {AssociateService} from "./service/associate.service";
 import {Page} from "../models/page";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FormAssociateComponent} from "./form-associate/form-associate.component";
 
 @Component({
   selector: 'app-associate',
@@ -47,12 +48,18 @@ export class AssociateComponent implements OnInit {
       .subscribe(data => this.page$ = data);
   }
 
-  updateAssociate() {
-
+  updateAssociate(id: number) {
+    this.router.navigate([
+      'home', {
+        outlets: { nav : ['edit-associate', id]}
+      }
+    ]);
   }
 
   deleteAssociate(id: number) {
-    this.associateService.deleteAssociate(id);
+    this.associateService.deleteAssociate(id).subscribe(data => {
+      this.getAssociates();
+    });
   }
 
 }
