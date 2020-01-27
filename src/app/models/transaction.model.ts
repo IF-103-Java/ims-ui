@@ -8,7 +8,7 @@ export class Transaction {
   };
   quantity: number;
   movedFrom: {
-    id: 64;
+    id: number;
     name: string;
   };
   movedTo: {

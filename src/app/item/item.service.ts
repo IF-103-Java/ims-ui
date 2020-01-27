@@ -32,4 +32,8 @@ export class ItemService {
   public getSavedItemsByItemId(itemId: bigint) {
     return this.http.get<SavedItem[]>(this.baseUrl + '/savedItems/itemId/' + itemId);
   }
+
+  public searchItemsByNameQuery(query: string) {
+    return this.http.get<Item[]>(this.baseUrl + '/items/name?q=' + query);
+  }
 }

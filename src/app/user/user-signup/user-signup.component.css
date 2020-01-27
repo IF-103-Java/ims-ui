@@ -26,3 +26,24 @@
 .mr-4{
   margin-right: 2px;
 }
+
+.text-center {
+  margin-top: 50px;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948;
+}
+
+.ng-invalid .ng-untouched{
+  border: 2px solid dodgerblue;
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid firebrick;
+  border-right:5px solid firebrick;
+}
+
+.field-icon{
+  margin-top: -47px !important;
+}
