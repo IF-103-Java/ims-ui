@@ -96,4 +96,10 @@ export class DashboardComponent implements OnInit {
       this.premiumLoad$ = data;
     });
   }
+  isZero(num: bigint) {
+    return num.toString() === '0';
+  }
+  toNum(num: string) {
+    return Number(num);
+  }
 }
