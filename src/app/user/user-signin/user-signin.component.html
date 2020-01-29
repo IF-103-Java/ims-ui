@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row2 justify-content-center">
+    <div class="image-block bg-login-image"></div>
+
+    <form class="right-block" #data="ngForm" (ngSubmit)="signIn(data.value)">
+      <h1 class="text-gray-900 text-center">Login!</h1>
+
+      <div class="input-container">
+        <i class="fa fa-envelope icon"></i>
+        <input ngModel class="input-field" type="email" name="username"
+               [ngClass]="{'is-invalid': userErrors['username']}"
+               placeholder="Email" required
+               pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
+               #username="ngModel">
+      </div>
+
+      <div *ngIf="username.touched && username.invalid" class="alert-danger center">
+        Email must be a valid email address!
+      </div>
+      <div class="alert-danger center">
+        {{userErrors['username']}}
+      </div>
+
+      <div class="input-container">
+        <i class="fa fa-key icon"></i>
+        <input ngModel name="password" class="input-field"
+               [type]="hidePassword ? 'password' : 'text'"
+               [ngClass]="{'is-invalid': userErrors['password']}"
+               placeholder="Password" required #password="ngModel">
+      </div>
+      <i class="fa field-icon" (click)="hidePassword = !hidePassword"
+         [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true "></i>
+      <div class="alert-danger center">
+        {{userErrors['password']}}
+      </div>
+      <div *ngIf="password.touched && password.invalid" class="alert-danger center">
+        Enter your password!
+      </div>
+
+      <button type="submit" class="btn" [disabled]="!data.valid">Login</button>
+
+      <hr>
+      <div style="text-align:center">
+        <a class="small" routerLink="/forgot-password">Forgot Password?</a>
+      </div>
+      <div style="text-align:center">
+        <a class="small" routerLink="/sign-up">Create an Account!</a>
+      </div>
+    </form>
+  </div>
+</div>

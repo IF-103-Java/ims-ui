@@ -1,0 +1,28 @@
+.container {
+  width: 900px !important;
+  height: 540px !important;
+}
+
+.bg-login-image {
+  background: url("https://director.by/images/2019/NEWS_online/09/%D1%86%D0%B8%D1%84%D1%80%D0%BE%D0%B2%D0%B0%D1%8F_%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8F.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.image-block {
+  height: 540px !important;
+  width: 470px !important;
+}
+
+.right-block{
+  margin: 50px 20px 0 20px ;
+  width: 450px !important;
+}
+
+.text-center {
+  margin-top: 50px;
+}
+
+.field-icon{
+  margin-top: -47px !important;
+}

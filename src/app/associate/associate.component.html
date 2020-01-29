@@ -1,0 +1,96 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h3 class="m-0 font-weight-bold text-primary">Associate management</h3>
+
+    <a href="home/(nav:add-associate)" class="btn btn-primary btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-flag"></i>
+                    </span>
+      <span class="text">Add new Associate</span>
+    </a>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="dataTables_length" id="dataTable_length">
+              <label>Show <select (change)="getAssociates()" [(ngModel)]="page$.size"
+                                  name="dataTable_length"
+                                  aria-controls="dataTable"
+                                  class="custom-select custom-select-sm form-control form-control-sm">
+                <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
+              </select> entries</label></div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"
+                   aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+              <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Name: activate to sort column descending" style="width: 80px;" aria-sort="ascending">
+                  #
+                </th>
+                <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Name: activate to sort column descending" style="width: 80px;" aria-sort="ascending">
+                  Name
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Position: activate to sort column ascending" style="width: 120px;">Email
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Office: activate to sort column ascending" style="width: 58px;">Phone
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Age: activate to sort column ascending" style="width: 31px;">Additional Info
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Start date: activate to sort column ascending" style="width: 69px;">Type
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Salary: activate to sort column ascending" style="width: 67px;">Address
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Salary: activate to sort column ascending" style="width: 67px;">Actions
+                </th>
+              </tr>
+              </thead>
+
+
+              <tbody *ngFor="let associate of page$.content; index as i">
+              <tr>
+                <td>{{i + 1 + page$.number * page$.size}}</td>
+                <td>{{associate.name}}</td>
+                <td>{{associate.email}}</td>
+                <td>{{associate.phone}}</td>
+                <td>{{associate.additionalInfo}}</td>
+                <td>{{associate.type}}</td>
+                <td>{{associate.addressDto.city}}, {{associate.addressDto.address}}</td>
+                <td>
+                  <button (click)="updateAssociate(associate.id)" class='btn btn-info'
+                          data-toggle="modal" data-target="#myModal">Update
+                  </button>
+                  <button (click)="deleteAssociate(associate.id)" class='btn btn-danger'>Delete</button>
+                </td>
+              </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <ngb-pagination
+            [collectionSize]="page$.totalElements" [(page)]="page" [pageSize]="page$.size" [maxSize]="4"
+            [rotate]="true" [boundaryLinks]="false"
+            (pageChange)="getAssociates()">
+            <ng-template ngbPaginationPrevious>Prev</ng-template>
+            <ng-template ngbPaginationNext>Next</ng-template>
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

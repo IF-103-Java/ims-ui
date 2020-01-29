@@ -1,0 +1,291 @@
+<div id="content">
+  <div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4" style="max-height: 405px">
+
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Warehouses load</h6>
+          </div>
+
+          <div class="card-body" style="overflow: auto;">
+            <div *ngFor="let load of warehouseLoad$">
+
+                <h6 style="margin-bottom: 10px; float: left; width: 50%;">
+                  <a (click)="premiumId=load.id; getPremiumLoad(premiumId)" style="cursor: pointer;"
+                     [style.background]="premiumId==load.id ? 'LightCyan' : ''">
+                    {{load.name}}
+                  </a>
+                </h6>
+                <h6 style="margin-bottom: 10px; float: left; width: 50%;text-align: right;"> {{load.charge}}/{{load.capacity}}</h6>
+              <div style="clear: left"></div>
+              <ngb-progressbar [type] = "(load.charge/load.capacity*100).toFixed() < '25' ? 'success':
+                                         (load.charge/load.capacity*100).toFixed() < '50' ? 'info':
+                                         (load.charge/load.capacity*100).toFixed() < '75' ? 'warning': 'danger'"
+                               [value] ="isZero(load.capacity) ? 0 : toNum((load.charge/load.capacity*100).toFixed())">
+                <span style="font-size: 20px; margin-top: 18px">
+                  {{(load.charge/load.capacity*100).toFixed()}}%
+                </span>>
+              </ngb-progressbar>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4" style="max-height: 405px">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Advanced load</h6>
+          </div>
+
+          <div class="card-body" style="overflow: auto;">
+
+            <div *ngIf="premiumLoad$!=null; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <ng-template #nodeTemplateRef let-node>
+                <div class="node">
+                  <div style=" color: blue; cursor: pointer;">
+                    {{ node.name }}
+                  </div>
+                  <div style="width:100px; margin-block: 0; padding-block: 0">
+                    <ngb-progressbar height="15px"
+                                     [showValue]="true"
+                                     [type] = "(node.charge/node.capacity*100).toFixed() < '25' ? 'success':
+                                               (node.charge/node.capacity*100).toFixed() < '50' ? 'info':
+                                               (node.charge/node.capacity*100).toFixed() < '75' ? 'warning': 'danger'"
+                                     [value]= "isZero(node.capacity) ? 0 : node.charge/node.capacity*100">
+                    </ngb-progressbar>
+                   </div>
+                   <div *ngIf="node.childs.length"  style="border-left: 3px solid dodgerblue;
+                                                          margin: 5px 0 5px 30px ;
+                                                          padding-left: 10px ;">
+                     <ng-template
+                        ngFor
+                       [ngForOf]="node.childs"
+                       [ngForTemplate]="nodeTemplateRef">
+                      </ng-template>
+                   </div>
+                 </div>
+                </ng-template>
+              <ng-template
+                [ngTemplateOutlet]="nodeTemplateRef"
+                [ngTemplateOutletContext]="{ $implicit: premiumLoad$ }">
+              </ng-template>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div style="text-align: center"> <-- Choose warehouse!</div>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Shortage of items</h6>
+        </div>
+        <div class="card-body" style="padding-bottom: 5px">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_length">
+                <label>Show
+                  <select name="dataTable_length"
+                          aria-controls="dataTable"
+                          [(ngModel)]="endingState.pageSize"
+                          (change)="getEndingItems()">
+                    <option [ngValue]="2">2</option>
+                    <option [ngValue]="4">4</option>
+                    <option [ngValue]="6">6</option>
+                  </select> entries
+                </label>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_filter">
+                <span class="float-right"> Minimal quantity:
+                  <input type="number"
+                         style="border: 0; width: 40px;
+                         background-color: white"
+                         [(ngModel)]="minQuantity" (change)="getEndingItems()">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <table class="table table-bordered dataTable"
+                     role="grid"
+                     aria-describedby="dataTable_info"
+                     style="width: 100%;">
+                <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Warehouse</th>
+                  <th scope="col">Quantity</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of endingItems$">
+                  <td>{{item.itemName}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.quantity}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <ngb-pagination class="d-flex justify-content-end"
+                          [collectionSize]="endingState.collectionSize"
+                          [(page)]="endingState.page"
+                          [pageSize]="endingState.pageSize"
+                          [maxSize]="5"
+                          [rotate]="true"
+                          [boundaryLinks]="true"
+                          [ellipses]="false"
+                          (pageChange)="getEndingItems()">
+          </ngb-pagination>
+        </div>
+      </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+                    <select class="m-0 font-weight-bold text-primary"
+                            style="border: 0; background-color: #f8f9fc; "
+                            (change)="getPopularItems()"
+                            [(ngModel)]="popularRequest.popType">
+                      <option selected value="TOP">Popular items</option>
+                      <option value="BOT">Unpopular items</option>
+                    </select>
+        </div>
+        <div class="card-body" style="padding-bottom: 5px">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_length">
+                <table>
+
+                </table>
+                <label>Show
+                  <select name="dataTable_length"
+                          aria-controls="dataTable"
+                          [(ngModel)]="popularState.pageSize"
+                          (change)="getPopularItems()">
+                    <option [ngValue]="2">2</option>
+                    <option [ngValue]="4">4</option>
+                    <option [ngValue]="6">6</option>
+                  </select> entries
+                </label>
+                <span class="float-right">Filter by date: </span>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6" style="padding-left: 0" (change)="getPopularItems()">
+              <div class="dataTables_filter">
+                <select class="float-left" [(ngModel)]="popularRequest.dateType">
+                  <option selected value="ALL">For all time</option>
+                  <option value="YEAR">For year</option>
+                  <option value="MONTH">For month</option>
+                </select>
+
+                <span class="float-right"> Quantity of items:
+                  <input type="number"
+                         style="border: 0; width: 40px;
+                         background-color: white"
+                         [(ngModel)]="popularRequest.quantity" (change)="getPopularItems()">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dataTables_filter">
+                <div *ngIf="popularRequest.dateType=='YEAR'" (change)="getPopularItems()">
+                  <span class="float-right">Choose year: </span>
+                </div>
+                <div *ngIf="popularRequest.dateType=='MONTH'" (change)="getPopularItems()">
+                  <span class="float-right">Choose month and year: </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6" style="padding-left: 0">
+              <div class="dataTables_filter" (change)="getPopularItems()">
+                <div *ngIf="popularRequest.dateType=='YEAR'" (change)="setDate()">
+                  <select [(ngModel)]="year">
+                    <option value="2016" selected>2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                  </select>
+                </div>
+                <div *ngIf="popularRequest.dateType=='MONTH'" (change)="setDate()">
+                  <select [(ngModel)]="month">-->
+                    <option selected value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                  <select [(ngModel)]="year" >
+                    <option selected>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <table class="table table-bordered dataTable"
+                   role="grid"
+                   aria-describedby="dataTable_info">
+              <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of popularItems$">
+                <td>{{item.name}}</td>
+                <td>{{item.quantity}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <ngb-pagination class="d-flex justify-content-end"
+                        [collectionSize]="popularState.collectionSize"
+                        [(page)]="popularState.page"
+                        [pageSize]="popularState.pageSize"
+                        [maxSize]="5"
+                        [rotate]="true"
+                        [boundaryLinks]="true"
+                        [ellipses]="false"
+                        (pageChange)="getPopularItems()">
+        </ngb-pagination>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

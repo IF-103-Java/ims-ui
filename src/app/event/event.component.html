@@ -1,0 +1,97 @@
+<table class="table table-striped table-responsive-md btn-table">
+  <thead>
+  <tr>
+    <td>
+      Show
+      <select [(ngModel)]="page$.size" (ngModelChange)="getEvents()"
+              aria-controls="dataTable" class="custom-select sizeList custom-select-sm form-control form-control-sm">
+        <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
+      </select>
+      on page.
+      <br>
+      Sort:
+      <select [(ngModel)]="sort" (ngModelChange)="getEvents()"
+              aria-controls="dataTable" class="custom-select sortList custom-select-sm form-control form-control-sm">
+        <option *ngFor="let sortCase of sortCasesText" value="{{sortCase}}">{{sortCase}}</option>
+      </select>
+    </td>
+    <td>
+      <ng-multiselect-dropdown
+        [placeholder]="'Author'"
+        [data]="authorsList"
+        [(ngModel)]="authorParam.selected"
+        [settings]="dropdownSettings"
+        (ngModelChange)="authorFilter()">
+      </ng-multiselect-dropdown>
+    </td>
+    <td>
+      <input type="date" class="form-control datepicker" [(ngModel)]="afterParam.value" (ngModelChange)="afterFilter()">
+      - from / to -
+      <br>
+      <input type="date" class="form-control datepicker" [(ngModel)]=" beforeParam.value"
+             (ngModelChange)="beforeFilter()">
+    </td>
+    <td>
+      <ng-multiselect-dropdown
+        [placeholder]="'Types'"
+        [data]="typeList"
+        [(ngModel)]="typeParam.selected"
+        [settings]="dropdownSettings"
+        (ngModelChange)="typeFilter()">
+      </ng-multiselect-dropdown>
+      <ng-multiselect-dropdown
+        [placeholder]="'Name'"
+        [data]="namesList"
+        [(ngModel)]="nameParam.selected"
+        [settings]="dropdownSettings"
+        (ngModelChange)="nameFilter()">
+      </ng-multiselect-dropdown>
+    </td>
+    <td>
+      <ng-multiselect-dropdown
+        [placeholder]="'Warehouses'"
+        [data]="warehouseList"
+        [(ngModel)]="warehouseParam.selected"
+        [settings]="dropdownSettings"
+        (ngModelChange)="warehouseFilter()">
+      </ng-multiselect-dropdown>
+    </td>
+    <td>
+    </td>
+  </tr>
+  <tr>
+    <th scope="col" *ngFor="let headElement of headElements">{{headElement}}</th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr>
+    <td colspan="6">
+      <ngb-pagination
+        [collectionSize]="page$.totalElements" [(page)]="page" [pageSize]="page$.size" [maxSize]="4"
+        [rotate]="true" [boundaryLinks]="false"
+        (pageChange)="getEvents()">
+        <ng-template ngbPaginationPrevious>Prev</ng-template>
+        <ng-template ngbPaginationNext>Next</ng-template>
+      </ngb-pagination>
+    </td>
+  </tr>
+  </tfoot>
+  <tbody *ngFor="let event of page$.content">
+  <tr>
+    <td class="messageTd">{{event.message}}</td>
+    <td>{{event.author}}</td>
+    <td>{{event.date |  date:'hh:mm:ss, dd/MM/yyyy'}}</td>
+    <td>{{event.name}}</td>
+    <td>{{event.warehouse}}</td>
+    <td class="transactionTd">
+      <ngb-accordion *ngIf="event.transactionId != null">
+        <ngb-panel title="Show transaction info">
+          <ng-template ngbPanelContent>
+            {{getTransactionInfo(event.transactionId)}}
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </td>
+  </tr>
+  </tbody>
+</table>

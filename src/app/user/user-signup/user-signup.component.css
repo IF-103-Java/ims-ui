@@ -1,0 +1,49 @@
+.container {
+  width: 1100px !important;
+  height: 600px !important;
+  margin-top: 70px !important;
+}
+.bg-register-image {
+  background: url("https://images.unsplash.com/photo-1565966245341-5a3f55bbf545?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+  background-position: center;
+  background-size: cover;
+}
+
+.image-block {
+  height: 600px !important;
+  width: 600px !important;
+}
+
+.right-block{
+  margin: 10px 50px 0 50px ;
+  width: 550px !important;
+}
+
+.mr-2{
+  margin-left: 1px;
+}
+
+.mr-4{
+  margin-right: 2px;
+}
+
+.text-center {
+  margin-top: 50px;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948;
+}
+
+.ng-invalid .ng-untouched{
+  border: 2px solid dodgerblue;
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid firebrick;
+  border-right:5px solid firebrick;
+}
+
+.field-icon{
+  margin-top: -47px !important;
+}
