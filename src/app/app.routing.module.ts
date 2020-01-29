@@ -20,6 +20,8 @@ import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
 import {WarehouseUpdateComponent} from "./warehouse/warehouse-update/warehouse-update.component";
 import {AccountSettingsComponent} from './account/account-settings/account-settings.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {AssociateComponent} from "./associate/associate.component";
+import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -44,7 +46,9 @@ export const routerComponents = [
   WarehousesComponent,
   WarehouseUpdateComponent,
   AccountSettingsComponent,
-  DashboardComponent
+  DashboardComponent,
+  AssociateComponent,
+  FormAssociateComponent
 ];
 
 @NgModule({
@@ -70,7 +74,10 @@ export const routerComponents = [
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
           {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
-          {path: 'dashboard', component: DashboardComponent, outlet: 'nav'}
+          {path: 'dashboard', component: DashboardComponent, outlet: 'nav'},
+          {path: 'associates', component: AssociateComponent, outlet: 'nav'},
+          {path: 'add-associate', component: FormAssociateComponent, outlet: 'nav'},
+          {path: 'edit-associate/:id', component: FormAssociateComponent, outlet: 'nav'}
         ]
       },
     ])

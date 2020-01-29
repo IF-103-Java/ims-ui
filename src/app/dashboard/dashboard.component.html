@@ -22,10 +22,10 @@
                 </h6>
                 <h6 style="margin-bottom: 10px; float: left; width: 50%;text-align: right;"> {{load.charge}}/{{load.capacity}}</h6>
               <div style="clear: left"></div>
-              <ngb-progressbar [type] = "(load.charge/load.capacity*100).toFixed() < 25 ? 'success':
-                                         (load.charge/load.capacity*100).toFixed() < 50 ? 'info':
-                                         (load.charge/load.capacity*100).toFixed() < 75 ? 'warning': 'danger'"
-                               [value] ="load.capacity == 0 ? 0 : (load.charge/load.capacity*100).toFixed()">
+              <ngb-progressbar [type] = "(load.charge/load.capacity*100).toFixed() < '25' ? 'success':
+                                         (load.charge/load.capacity*100).toFixed() < '50' ? 'info':
+                                         (load.charge/load.capacity*100).toFixed() < '75' ? 'warning': 'danger'"
+                               [value] ="isZero(load.capacity) ? 0 : toNum((load.charge/load.capacity*100).toFixed())">
                 <span style="font-size: 20px; margin-top: 18px">
                   {{(load.charge/load.capacity*100).toFixed()}}%
                 </span>>
@@ -51,17 +51,17 @@
                   <div style=" color: blue; cursor: pointer;">
                     {{ node.name }}
                   </div>
-                  <div style="width:100px; margin-block: 0px; padding-block: 0px">
+                  <div style="width:100px; margin-block: 0; padding-block: 0">
                     <ngb-progressbar height="15px"
                                      [showValue]="true"
-                                     [type] = "(node.charge/node.capacity*100).toFixed() < 25 ? 'success':
-                                               (node.charge/node.capacity*100).toFixed() < 50 ? 'info':
-                                               (node.charge/node.capacity*100).toFixed() < 75 ? 'warning': 'danger'"
-                                     [value]= "node.capacity == 0 ? 0 : (node.charge/node.capacity*100).toFixed()">
+                                     [type] = "(node.charge/node.capacity*100).toFixed() < '25' ? 'success':
+                                               (node.charge/node.capacity*100).toFixed() < '50' ? 'info':
+                                               (node.charge/node.capacity*100).toFixed() < '75' ? 'warning': 'danger'"
+                                     [value]= "isZero(node.capacity) ? 0 : node.charge/node.capacity*100">
                     </ngb-progressbar>
                    </div>
                    <div *ngIf="node.childs.length"  style="border-left: 3px solid dodgerblue;
-                                                          margin: 5px 0px 5px 30px ;
+                                                          margin: 5px 0 5px 30px ;
                                                           padding-left: 10px ;">
                      <ng-template
                         ngFor
@@ -112,7 +112,7 @@
               <div class="dataTables_filter">
                 <span class="float-right"> Minimal quantity:
                   <input type="number"
-                         style="border: 0px; width: 40px;
+                         style="border: 0; width: 40px;
                          background-color: white"
                          [(ngModel)]="minQuantity" (change)="getEndingItems()">
                 </span>
@@ -122,8 +122,6 @@
           <div class="row">
             <div class="col-sm-12">
               <table class="table table-bordered dataTable"
-                     width="100%"
-                     cellspacing="0"
                      role="grid"
                      aria-describedby="dataTable_info"
                      style="width: 100%;">
@@ -162,7 +160,7 @@
       <div class="card shadow mb-4">
         <div class="card-header py-3">
                     <select class="m-0 font-weight-bold text-primary"
-                            style="border: 0px; background-color: #f8f9fc; "
+                            style="border: 0; background-color: #f8f9fc; "
                             (change)="getPopularItems()"
                             [(ngModel)]="popularRequest.popType">
                       <option selected value="TOP">Popular items</option>
@@ -190,7 +188,7 @@
               </div>
             </div>
 
-            <div class="col-sm-12 col-md-6" style="padding-left: 0px" (change)="getPopularItems()">
+            <div class="col-sm-12 col-md-6" style="padding-left: 0" (change)="getPopularItems()">
               <div class="dataTables_filter">
                 <select class="float-left" [(ngModel)]="popularRequest.dateType">
                   <option selected value="ALL">For all time</option>
@@ -200,7 +198,7 @@
 
                 <span class="float-right"> Quantity of items:
                   <input type="number"
-                         style="border: 0px; width: 40px;
+                         style="border: 0; width: 40px;
                          background-color: white"
                          [(ngModel)]="popularRequest.quantity" (change)="getPopularItems()">
                 </span>
@@ -218,7 +216,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-12 col-md-6" style="padding-left: 0px">
+            <div class="col-sm-12 col-md-6" style="padding-left: 0">
               <div class="dataTables_filter" (change)="getPopularItems()">
                 <div *ngIf="popularRequest.dateType=='YEAR'" (change)="setDate()">
                   <select [(ngModel)]="year">
@@ -258,8 +256,6 @@
         <div class="row">
           <div class="col-sm-12">
             <table class="table table-bordered dataTable"
-                   width="100%"
-                   cellspacing="0"
                    role="grid"
                    aria-describedby="dataTable_info">
               <thead>
