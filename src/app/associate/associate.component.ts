@@ -17,7 +17,7 @@ export class AssociateComponent implements OnInit {
 
   page$ = new Page<Associate>();
 
-  direction = 'desc';
+  direction = 'asc';
   sortBy = 'id';
   page = 1;
 
