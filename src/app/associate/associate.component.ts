@@ -21,8 +21,6 @@ export class AssociateComponent implements OnInit {
   sortBy = 'id';
   page = 1;
 
-  params = new Map<string, any>();
-
   associateTypes = [];
 
   constructor(private route: ActivatedRoute,
