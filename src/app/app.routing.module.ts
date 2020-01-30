@@ -73,7 +73,7 @@ export const routerComponents = [
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
-          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
+          {path: 'warehouse-update/:id', component: WarehouseUpdateComponent, outlet: 'nav'},
           {path: 'dashboard', component: DashboardComponent, outlet: 'nav'},
           {path: 'associates', component: AssociateComponent, outlet: 'nav'},
           {path: 'add-associate', component: FormAssociateComponent, outlet: 'nav'},

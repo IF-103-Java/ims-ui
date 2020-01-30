@@ -9,11 +9,11 @@ import {Warehouse} from "../../models/warehouse.model";
   styleUrls: ['./warehouse-update.component.css']
 })
 export class WarehouseUpdateComponent implements OnInit {
-  id: bigint;
+  id: number;
   warehouse: Warehouse;
   submitted = false;
 
-  constructor(private route: ActivatedRoute,private router: Router,
+  constructor(private route: ActivatedRoute, private router: Router,
               private warehouseService: WarehouseService,
               @Inject('BASE_API_URL') private baseUrl: string) { }
 
@@ -28,17 +28,6 @@ export class WarehouseUpdateComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  updateWarehouse() {
-    this.warehouseService.updateWarehouse(this.id, this.warehouse)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.warehouse = new Warehouse();
-    this.gotoList();
-  }
-
-  onSubmit() {
-    this.updateWarehouse();
-    this.submitted = true;
-  }
 
   gotoList() {
     this.router.navigate(['/home/(nav:warehouses']);

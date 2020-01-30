@@ -1,11 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Warehouse} from "../../models/warehouse.model";
-import {Observable} from "rxjs";
-
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
+import {HttpClient} from '@angular/common/http';
+import {Warehouse} from '../../models/warehouse.model';
+import {Observable} from 'rxjs';
+import {Page} from '../../models/page';
 
 @Injectable({
   providedIn: 'root'
@@ -15,25 +12,26 @@ export class WarehouseService {
   constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
   }
 
-  public createWarehouse(warehouse: Object): Observable<Object> {
-    return this.http.post(this.baseUrl + '/warehouses/add', warehouse);
+  public createWarehouse(warehouse: Warehouse) {
+    this.http.post(this.baseUrl + '/warehouses/add', warehouse);
   }
 
-  public getWarehouse(warehouseId: bigint):Observable<any> {
-    return this.http.get<Warehouse[]>(`${this.baseUrl}/warehouses/${warehouseId}`);}
-
-
-  public findAllWarehouses(page: number, size: number, sort: string, direction: string) {
-    return this.http.get<Warehouse[]>(this.baseUrl + '/warehouses?page=' + page + '&size='
-      + size + '&sort=' + sort + '&direction=' + direction + '');
+  public getWarehouse(warehouseId: number): Observable<Warehouse> {
+    return this.http.get<Warehouse>(this.baseUrl + `/warehouses/` + warehouseId);
   }
 
-  public updateWarehouse(warehouseId: bigint, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/warehouses/update/${warehouseId}`, value);
+
+  public getWarehousesPage(page: number, size: number, sort: string) {
+    return this.http.get<Page<Warehouse>>(this.baseUrl + '/warehouses?page=' + page + '&size='
+      + size + '&sort=' + sort);
   }
 
-  public deleteWarehouse(warehouseId: bigint): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/warehouses/delete/${warehouseId}`, { responseType: 'text' });
+  public updateWarehouse(warehouseId: number, warehouse: Warehouse) {
+    this.http.put( this.baseUrl + `/warehouses/update/` + warehouseId, warehouse);
+  }
+
+  public deleteWarehouse(warehouseId: number) {
+    return this.http.delete(this.baseUrl + `/warehouses/` + warehouseId);
 
   }
 }

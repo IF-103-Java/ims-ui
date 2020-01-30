@@ -1,6 +1,6 @@
 <h3>Update Warehouse  Id = {{warehouse.id}}</h3>
 <div [hidden]="submitted" style="width: 400px;">
-  <form (ngSubmit)="onSubmit()">
+  <ng-form (ngSubmit)="submitted">
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" required [(ngModel)]="warehouse.name" name="name">
@@ -34,5 +34,5 @@
       <input type="text" class="form-control" id="active" required [(ngModel)]="warehouse.active" name="active">
     </div>
     <button type="submit" class="btn btn-success">Submit</button>
-  </form>
+  </ng-form>
 </div>
