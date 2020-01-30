@@ -4,12 +4,27 @@ on:
     branches:
       - master
       - dev
+      - nginx
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: ENV -> dev
+        if: endsWith(github.ref, '/dev')
+        run: |
+          echo "::set-env name=ENV::dev"
+      - name: Set env to production
+        if: endsWith(github.ref, '/master')
+        run: |
+          echo "::set-env name=ENV::prod"
+      - name: ENV -> prod
+        if: endsWith(github.ref, '/nginx')
+        run: |
+          echo "::set-env name=ENV::nginx"
       - name: Checkout
         uses: actions/checkout@master
+      - name: Show ENV variable
+        run: echo $ENV
       - name: Build & Push docker image
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
