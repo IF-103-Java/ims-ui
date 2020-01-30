@@ -60,8 +60,6 @@ export class AssociateComponent implements OnInit {
       .subscribe(data => {
         this.page$ = data
       });
-
-    console.log(this.page$)
   }
 
 
