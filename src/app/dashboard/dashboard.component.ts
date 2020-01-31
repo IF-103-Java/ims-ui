@@ -6,6 +6,7 @@ import {NgbProgressbarConfig} from '@ng-bootstrap/ng-bootstrap';
 import {EndingItems} from '../models/endingItems';
 import {PopularItems} from '../models/popularItems';
 import {WarehousePremiumList} from '../models/warehousePremiumList';
+import {AccountService} from '../account/account.service';
 
 interface State {
   page: number;
@@ -19,6 +20,11 @@ interface State {
   providers: [DashboardService, NgbProgressbarConfig]
 })
 export class DashboardComponent implements OnInit {
+  load1: boolean;
+  load2: boolean;
+  load3: boolean;
+  load4: boolean;
+  loadPremium: boolean;
   warehouseLoad$: WarehouseLoad[];
 
   endingState: State = {
@@ -43,26 +49,42 @@ export class DashboardComponent implements OnInit {
   // @ts-ignore
   premiumId: bigint;
 
+  isPremium: boolean;
   constructor(private dashboardService: DashboardService,
+              private accountService: AccountService,
               config: NgbProgressbarConfig) {
     config.height = '25px';
     config.striped = true;
     config.showValue = false;
-    config.type = 'value > 25 ? su';
 
     this.popularRequest.dateType = 'ALL';
     this.popularRequest.popType = 'TOP';
     this.popularRequest.quantity = 5;
     this.popularRequest.date = new Date(this.year + '-' + this.month + '-' + '01');
+
+    this.load1 = false;
+    this.load2 = false;
+    this.load3 = false;
+    this.load4 = false;
+    this.loadPremium = true;
   }
 
   ngOnInit() {
-    this.dashboardService.getWarehouseLoad()
-      .subscribe(data => this.warehouseLoad$ = data);
+    this.getWarehouseLoad();
 
     this.getEndingItems();
 
     this.getPopularItems();
+
+    this.getType();
+  }
+
+  getWarehouseLoad() {
+    this.dashboardService.getWarehouseLoad()
+      .subscribe(data => {
+        this.warehouseLoad$ = data;
+        this.load1 = true;
+      });
   }
 
   getEndingItems() {
@@ -71,6 +93,7 @@ export class DashboardComponent implements OnInit {
         this.endingState.collectionSize = data.length;
         this.endingItems$ = data.slice( (this.endingState.page - 1) * (this.endingState.pageSize),
           (this.endingState.page - 1) * (this.endingState.pageSize) + this.endingState.pageSize);
+        this.load2 = true;
       });
   }
 
@@ -85,15 +108,24 @@ export class DashboardComponent implements OnInit {
           this.popularItems$ = data.slice( (this.popularState.page - 1) * (this.popularState.pageSize),
             (this.popularState.page - 1) * (this.popularState.pageSize) + this.popularState.pageSize);
         }
+        this.load3 = true;
       });
+  }
+  getType() {
+    this.accountService.getType().subscribe(data => {
+      this.isPremium = data.deepWarehouseAnalytics;
+      this.load4 = true;
+    });
   }
   setDate() {
     this.popularRequest.date = new Date(this.year + '-' + this.month + '-' + '01');
   }
 
   getPremiumLoad(premiumId) {
+    this.loadPremium = false;
     return this.dashboardService.getWarehousePremiumList(premiumId).subscribe(data => {
       this.premiumLoad$ = data;
+      this.loadPremium = true;
     });
   }
   isZero(num: bigint) {
@@ -101,5 +133,14 @@ export class DashboardComponent implements OnInit {
   }
   toNum(num: string) {
     return Number(num);
+  }
+  lessThan25(num: number | bigint) {
+    return num <= 25;
+  }
+  lessThan50(num: number | bigint) {
+    return num <= 50;
+  }
+  lessThan75(num: number | bigint) {
+    return num <= 75;
   }
 }
