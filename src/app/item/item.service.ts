@@ -26,7 +26,6 @@ export class ItemService {
    return this.http.post<Item>(this.baseUrl + '/items', item);
   }
   public addSavedItem(itemTransactionRequest: ItemTransactionRequest): Observable<SavedItem> {
-    console.log(itemTransactionRequest.item.name)
     return this.http.post<SavedItem>(this.baseUrl + '/savedItems', itemTransactionRequest);
   }
   public getSavedItemsByItemId(itemId: bigint) {

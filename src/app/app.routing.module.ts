@@ -18,7 +18,7 @@ import {WarehouseAdviceComponent} from './warehouse-advice/warehouse-advice.comp
 import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-create.component";
 import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
 import {WarehouseUpdateComponent} from "./warehouse/warehouse-update/warehouse-update.component";
-import {SavedItemCreateComponent} from "./item/saved-item-create/saved-item-create.component";
+import {SavedItemCreateComponent} from './item/saved-item-create/saved-item-create.component';
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -68,13 +68,8 @@ export const routerComponents = [
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
           {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
           {path: 'item-table', component: ItemTableComponent, outlet: 'nav'},
-
           {path: 'create-item', component: ItemCreateComponent, outlet: 'nav'},
-          {
-            path: 'create-savedItem/:id/:name/:unit/:description/:volume/:accountId/:active',
-            component: SavedItemCreateComponent,
-            outlet: 'nav'
-          },
+          { path: 'create-savedItem', component: SavedItemCreateComponent, outlet: 'nav'},
         ]
       },
     ])
