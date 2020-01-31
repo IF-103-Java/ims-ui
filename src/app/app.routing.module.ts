@@ -69,7 +69,8 @@ export const routerComponents = [
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
-          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'}
+          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
+          {path: 'create-savedItem', component: SavedItemCreateComponent, outlet: 'nav'}
         ]
       },
     ])
