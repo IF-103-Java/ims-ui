@@ -18,6 +18,10 @@ import {WarehouseAdviceComponent} from './warehouse-advice/warehouse-advice.comp
 import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-create.component";
 import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
 import {WarehouseUpdateComponent} from "./warehouse/warehouse-update/warehouse-update.component";
+import {AccountSettingsComponent} from './account/account-settings/account-settings.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {AssociateComponent} from "./associate/associate.component";
+import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
 import {SavedItemCreateComponent} from './item/saved-item-create/saved-item-create.component';
 
 export const routerComponents = [
@@ -42,7 +46,6 @@ export const routerComponents = [
   WarehouseCreateComponent,
   WarehousesComponent,
   WarehouseUpdateComponent,
-  SavedItemCreateComponent
 ];
 
 @NgModule({
@@ -66,10 +69,7 @@ export const routerComponents = [
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
-          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
-          {path: 'item-table', component: ItemTableComponent, outlet: 'nav'},
-          {path: 'create-item', component: ItemCreateComponent, outlet: 'nav'},
-          { path: 'create-savedItem', component: SavedItemCreateComponent, outlet: 'nav'},
+          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'}
         ]
       },
     ])

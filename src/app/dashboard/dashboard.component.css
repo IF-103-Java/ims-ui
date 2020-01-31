@@ -1,0 +1,13 @@
+:host {
+  display: block ;
+  font-size: 18px ;
+}
+.node__label {
+  color: blue ;
+  cursor: pointer ;
+}
+.node__children {
+  border-left: 3px solid dodgerblue;
+  margin: 5px 0px 5px 30px ;
+  padding-left: 10px ;
+}
