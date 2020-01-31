@@ -30,7 +30,7 @@ export class WebsocketService {
   };
 
   _disconnect() {
-    this.toastService.removeTosts();
+    this.toastService.removeAllToasts();
     let _this = this;
     if (_this.stompClient !== null) {
       _this.stompClient.disconnect();
@@ -40,18 +40,7 @@ export class WebsocketService {
 
   onMessageReceived(event) {
     event = new Event(JSON.parse(event.body));
-    console.log("Message Received from Server :: " + event.message);
     this.toastService.addNotification(event);
   }
 }
 
-export class Message {
-  content: string;
-  style: string;
-
-  constructor(content, style?) {
-    this.content = content
-    this.style = style || 'info'
-  }
-
-}
