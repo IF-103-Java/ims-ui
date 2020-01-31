@@ -9,6 +9,7 @@ import {ToastService} from "./notification/toast.service";
   providedIn: 'root'
 })
 export class WebsocketService {
+  wsEndPoint = '/ims-websocket'
   topic = "/topic/events/";
   stompClient: CompatClient;
 
@@ -18,10 +19,10 @@ export class WebsocketService {
   _connect() {
     console.log("Initialize WebSocket Connection");
     let _this = this;
-    let socket = new SockJS(environment.wsEndPoint);
+    let socket = new SockJS(environment.apiUrl + _this.wsEndPoint);
     _this.stompClient = Stomp.over(socket);
     _this.stompClient.connect({}, function (frame) {
-      console.log('Websocket has been connected -> ' + frame);
+      console.log('Websocket has been connected');
       _this.stompClient.subscribe(_this.topic + sessionStorage.getItem('account_id'), message => {
         _this.onMessageReceived(message);
       });
