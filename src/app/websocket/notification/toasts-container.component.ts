@@ -10,7 +10,7 @@ import {ToastService} from './toast.service';
       *ngFor="let toast of toastService.toasts"
       [class]="toast.classname"
       [autohide]="true"
-      [delay]="toast.delay || 5000"
+      [delay]="toast.delay || 3000"
       (hide)="toastService.remove(toast)"
     >
       <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">

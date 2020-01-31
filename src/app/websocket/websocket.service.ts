@@ -9,7 +9,7 @@ import {ToastService} from "./notification/toast.service";
   providedIn: 'root'
 })
 export class WebsocketService {
-  topic = "/topic/notification";
+  topic = "/topic/events/";
   stompClient: CompatClient;
 
   constructor(private toastService: ToastService) {
