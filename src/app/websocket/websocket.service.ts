@@ -22,7 +22,7 @@ export class WebsocketService {
     _this.stompClient = Stomp.over(socket);
     _this.stompClient.connect({}, function (frame) {
       console.log('Websocket has been connected -> ' + frame);
-      _this.stompClient.subscribe(_this.topic, message => {
+      _this.stompClient.subscribe(_this.topic + sessionStorage.getItem('account_id'), message => {
         _this.onMessageReceived(message);
       });
       _this.stompClient.reconnect_delay = 2000;
@@ -30,6 +30,7 @@ export class WebsocketService {
   };
 
   _disconnect() {
+    this.toastService.removeTosts();
     let _this = this;
     if (_this.stompClient !== null) {
       _this.stompClient.disconnect();
@@ -40,7 +41,7 @@ export class WebsocketService {
   onMessageReceived(event) {
     event = new Event(JSON.parse(event.body));
     console.log("Message Received from Server :: " + event.message);
-    this.toastService.show(event.message, {classname: 'bg-success text-light', delay: 10000});
+    this.toastService.addNotification(event);
   }
 }
 

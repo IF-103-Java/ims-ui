@@ -41,7 +41,11 @@ export class AccountService {
    }
 
    public inviteUser(user: User) {
-      return this.http.post(this.baseUrl + 'invite/', user);
+      return this.http.post(this.baseUrl + '/invite/', user);
+   }
+
+   public upgradeAccount(typeId: bigint): Observable<any> {
+     return this.http.put(this.baseUrl + '/upgrade/' + typeId, typeId);
    }
 
    public deleteWorker() {}

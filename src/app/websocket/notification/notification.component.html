@@ -1,19 +1,4 @@
 <script>
   var global = window; // fix global is undefined in socketjs-client
 </script>
-<div id="main-content" class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <form class="form-inline">
-        <div class="form-group">
-          <label for="connect">WebSocket connection:</label>
-          <button (click)="connect()" id="connect" class="btn btn-default" type="submit">Connect</button>
-          <button (click)="disconnect()" class="btn btn-default" type="submit" >Disconnect
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+<app-toasts aria-live="polite" aria-atomic="true" class="position-fixed bottom"></app-toasts>

@@ -11,10 +11,18 @@ import {UserForgotPasswordComponent} from './user/user-forgot-password/user-forg
 import {UserSigninComponent} from './user/user-signin/user-signin.component';
 import {ItemSortableDirective} from './item/item-sortable.directive';
 import {HomeComponent} from './home/home.component';
-import {AuthGuardService as AuthGuard} from "./user/services/auth-guard.service";
+import {AuthGuardService as AuthGuard} from './user/services/auth-guard.service';
 import {AccountUpgradeComponent} from './account/account-upgrade/account-upgrade.component';
 import {UserInviteComponent} from './account/account-invite/account-invite.component';
 import {NotificationComponent} from "./websocket/notification/notification.component";
+import {WarehouseAdviceComponent} from './warehouse-advice/warehouse-advice.component';
+import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-create.component";
+import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
+import {WarehouseUpdateComponent} from "./warehouse/warehouse-update/warehouse-update.component";
+import {AccountSettingsComponent} from './account/account-settings/account-settings.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {AssociateComponent} from "./associate/associate.component";
+import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -34,7 +42,15 @@ export const routerComponents = [
   AccountViewComponent,
   AccountUpgradeComponent,
   UserInviteComponent,
-  NotificationComponent
+  NotificationComponent,
+  WarehouseAdviceComponent,
+  WarehouseCreateComponent,
+  WarehousesComponent,
+  WarehouseUpdateComponent,
+  AccountSettingsComponent,
+  DashboardComponent,
+  AssociateComponent,
+  FormAssociateComponent
 ];
 
 @NgModule({
@@ -45,7 +61,6 @@ export const routerComponents = [
       {path: 'sign-up', component: UserSignupComponent},
       {path: 'forgot-password', component: UserForgotPasswordComponent},
       {path: 'reset-password', component: UserResetPasswordComponent},
-      {path: 'socket', component: NotificationComponent},
       {
         path: 'home',
         component: HomeComponent,
@@ -56,7 +71,16 @@ export const routerComponents = [
           {path: 'account', component: AccountViewComponent, outlet: 'nav'},
           {path: 'upgrade', component: AccountUpgradeComponent, outlet: 'nav'},
           {path: 'invite', component: UserInviteComponent, outlet: 'nav'},
-          {path: 'invite', component: NotificationComponent}
+          {path: 'socket', component: NotificationComponent},
+          {path: 'account-settings', component: AccountSettingsComponent, outlet: 'nav'},
+          {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
+          {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
+          {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
+          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
+          {path: 'dashboard', component: DashboardComponent, outlet: 'nav'},
+          {path: 'associates', component: AssociateComponent, outlet: 'nav'},
+          {path: 'add-associate', component: FormAssociateComponent, outlet: 'nav'},
+          {path: 'edit-associate/:id', component: FormAssociateComponent, outlet: 'nav'}
         ]
       },
     ])

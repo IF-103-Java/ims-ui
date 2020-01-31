@@ -22,3 +22,7 @@
 .text-center {
   margin-top: 50px;
 }
+
+.field-icon{
+  margin-top: -47px !important;
+}

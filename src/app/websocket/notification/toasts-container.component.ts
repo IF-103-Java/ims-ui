@@ -11,6 +11,7 @@ import {ToastService} from './toast.service';
       [class]="toast.classname"
       [autohide]="true"
       [delay]="toast.delay || 3000"
+      (click)="toastService.remove(toast)"
       (hide)="toastService.remove(toast)"
     >
       <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
@@ -29,4 +30,5 @@ export class ToastsContainerComponent {
   isTemplate(toast) {
     return toast.textOrTpl instanceof TemplateRef;
   }
+
 }

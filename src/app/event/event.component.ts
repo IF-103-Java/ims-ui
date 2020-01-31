@@ -160,7 +160,7 @@ export class EventComponent implements OnInit {
         return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity + ' came to ' +
           transaction.movedTo.name + ' (id=' + transaction.movedTo.id + ')';
       case 'OUT':
-        return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity + ' ware shipped from ' +
+        return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity + ' were shipped from ' +
           transaction.movedFrom.name + ' (id=' + transaction.movedFrom.id + ')';
       case 'MOVE':
         return transaction.item.name + ' (id=' + transaction.item.id + ') quantity ' + transaction.quantity +

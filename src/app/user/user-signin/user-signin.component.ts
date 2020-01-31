@@ -30,6 +30,7 @@ export class UserSigninComponent implements OnDestroy {
     function tokenSetter(response: any) {
       sessionStorage.setItem('jwt-token', response.token);
       sessionStorage.setItem('username', response.username);
+      sessionStorage.setItem('account_id', response.accountId);
     }
 
     this.loginSubscription = this.loginService.login(user)
@@ -39,9 +40,7 @@ export class UserSigninComponent implements OnDestroy {
           this.router.navigate(['/home']);
         }
       }, (appError: AppError) => {
-        if (appError.status === 422) {
-          this.userErrors = (<ValidationError>appError.error).validationErrors;
-        } else if (appError.status === 401) {
+        if (appError.status === 401) {
           this.userErrors['username'] = 'User with these data not found.';
           this.userErrors['password'] = 'User with these data not found.';
         } else {

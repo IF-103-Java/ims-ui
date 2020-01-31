@@ -1,23 +1,26 @@
-<form>
+<form #data="ngForm">
 
   <h2 style="text-align:center">Invite new user</h2>
   <div class="col mr-2">
     <div class="form-group">
       <label for="first-name">First name:</label>
-      <input type="text" [(ngModel)]="newUser.firstName" name="name" class="form-control" id="first-name">
+      <input type="text" ngModel name="firstName" class="form-control" id="first-name">
       <label for="second-name">Last name:</label>
-      <input type="text" [(ngModel)]="newUser.lastName" name="type" class="form-control" id="second-name">
+      <input type="text" ngModel name="lastName" class="form-control" id="second-name">
       <label for="email">Email:</label>
-      <input type="text" [(ngModel)]="newUser.email" name="type" class="form-control" id="email">
+      <input type="text" ngModel name="email" class="form-control" id="email">
     </div>
   </div>
 
   <div class="col mr-2">
-    <a (click)="inviteUser()" href="/home/(nav:account)" class="btn btn-success btn-icon-split">
+    <a (click)="inviteUser(data.value)" href="/home/(nav:account)" class="btn btn-success btn-icon-split">
                       <span class="icon text-white-50">
                         <i class="fas fa-check"></i>
                       </span>
       <span class="text">Invite user</span>
     </a>
   </div>
+  <div class="alert-danger center">
+  {{inviteErrors['invite']}}
+</div>
 </form>
