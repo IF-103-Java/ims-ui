@@ -14,6 +14,7 @@ import {HomeComponent} from './home/home.component';
 import {AuthGuardService as AuthGuard} from './user/services/auth-guard.service';
 import {AccountUpgradeComponent} from './account/account-upgrade/account-upgrade.component';
 import {UserInviteComponent} from './account/account-invite/account-invite.component';
+import {NotificationComponent} from "./websocket/notification/notification.component";
 import {WarehouseAdviceComponent} from './warehouse-advice/warehouse-advice.component';
 import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-create.component";
 import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
@@ -41,6 +42,7 @@ export const routerComponents = [
   AccountViewComponent,
   AccountUpgradeComponent,
   UserInviteComponent,
+  NotificationComponent,
   WarehouseAdviceComponent,
   WarehouseCreateComponent,
   WarehousesComponent,
@@ -69,6 +71,7 @@ export const routerComponents = [
           {path: 'account', component: AccountViewComponent, outlet: 'nav'},
           {path: 'upgrade', component: AccountUpgradeComponent, outlet: 'nav'},
           {path: 'invite', component: UserInviteComponent, outlet: 'nav'},
+          {path: 'socket', component: NotificationComponent},
           {path: 'account-settings', component: AccountSettingsComponent, outlet: 'nav'},
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
