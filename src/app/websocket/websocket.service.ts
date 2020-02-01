@@ -1,7 +1,6 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import * as SockJS from 'sockjs-client'
 import {CompatClient, Stomp} from "@stomp/stompjs";
-import {environment} from "../../environments/environment";
 import {Event} from "../models/event";
 import {ToastService} from "./notification/toast.service";
 
@@ -13,13 +12,13 @@ export class WebsocketService {
   topic = "/topic/events/";
   stompClient: CompatClient;
 
-  constructor(private toastService: ToastService) {
+  constructor(@Inject('BASE_API_URL') private baseUrl: string, private toastService: ToastService) {
   }
 
   _connect() {
     console.log("Initialize WebSocket Connection");
     let _this = this;
-    let socket = new SockJS(environment.apiUrl + _this.wsEndPoint);
+    let socket = new SockJS(_this.baseUrl + _this.wsEndPoint);
     _this.stompClient = Stomp.over(socket);
     _this.stompClient.connect({}, function (frame) {
       console.log('Websocket has been connected');
