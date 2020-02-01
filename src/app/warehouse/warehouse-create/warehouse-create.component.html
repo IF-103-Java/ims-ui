@@ -1,9 +1,10 @@
 <h3>Create Warehouse</h3>
-<div [hidden]="submitted" style="width: 400px;">
+<div [hidden]="isEditAction" style="width: 400px;">
   <form (ngSubmit)="onSubmit()">
+
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="warehouse.name" name="name">
+      <label>Name</label>
+      <input class="form-control" name="name" [(ngModel)]="warehouse.name" #name="ngModel" required />
     </div>
     <div class="form-group">
       <label for="info">Info</label>
@@ -15,7 +16,13 @@
     </div>
     <div class="form-group">
       <label for="isBottom">isBottom</label>
-      <input type="text" class="form-control" id="isBottom" required [(ngModel)]="warehouse.isBottom" name="isBottom">
+      <input type="checkbox" class="form-control"  style="align-self: flex-start" id="isBottom" required [(ngModel)]="warehouse.isBottom" name="isBottom">
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" value=ng>Option 1
+      </label>
     </div>
     <div class="form-group">
       <label for="parentId">parentId</label>
@@ -34,10 +41,31 @@
       <input type="text" class="form-control" id="active" required [(ngModel)]="warehouse.active" name="active">
     </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
+    <label >Address</label>
+
+    <div class="form-group">
+
+      <label for="country">Country</label>
+      <input type="text" class="form-control" id="country" required [(ngModel)]="warehouse.addressDto.country" name="country">
+    </div>
+    <div class="form-group">
+    <label for="city">City</label>
+    <input type="text" class="form-control" id="city" required [(ngModel)]="warehouse.addressDto.city" name="city">
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" class="form-control" id="address" required [(ngModel)]="warehouse.addressDto.address" name="address">
+    </div>
+    <div class="form-group">
+      <label for="zip">ZIP</label>
+      <input type="text" class="form-control" id="zip" required [(ngModel)]="warehouse.addressDto.zip" name="zip">
+    </div>
+
+    <button (click)="onSubmit()" type="submit" class="btn btn-success">Submit</button>
+
   </form>
 </div>
 
-<div [hidden]="!submitted">
+<div [hidden]="!isEditAction">
   <h4>You submitted successfully!</h4>
 </div>

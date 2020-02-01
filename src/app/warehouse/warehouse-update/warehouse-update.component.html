@@ -1,38 +1,60 @@
 <h3>Update Warehouse  Id = {{warehouse.id}}</h3>
-<div [hidden]="submitted" style="width: 400px;">
+<div [hidden]="" style="width: 400px;">
   <ng-form (ngSubmit)="submitted">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="warehouse.name" name="name">
-    </div>
-    <div class="form-group">
-      <label for="info">Info</label>
-      <input type="text" class="form-control" id="info" required [(ngModel)]="warehouse.info" name="info">
-    </div>
-    <div class="form-group">
-      <label for="capacity">Capacity</label>
-      <input type="text" class="form-control" id="capacity" required [(ngModel)]="warehouse.capacity" name="capacity">
-    </div>
-    <div class="form-group">
-      <label for="isBottom">isBottom</label>
-      <input type="text" class="form-control" id="isBottom" required [(ngModel)]="warehouse.isBottom" name="isBottom">
-    </div>
-    <div class="form-group">
-      <label for="parentId">parentId</label>
-      <input type="text" class="form-control" id="parentId" required [(ngModel)]="warehouse.parentId" name="parentId">
-    </div>
-    <div class="form-group">
-      <label for="accountId">accountId</label>
-      <input type="text" class="form-control" id="accountId" required [(ngModel)]="warehouse.accountId" name="accountId">
-    </div>
-    <div class="form-group">
-      <label for="topWarehouseID">topWarehouseID</label>
-      <input type="text" class="form-control" id="topWarehouseID" required [(ngModel)]="warehouse.topWarehouseID" name="topWarehouseID">
-    </div>
-    <div class="form-group">
-      <label for="active">active</label>
-      <input type="text" class="form-control" id="active" required [(ngModel)]="warehouse.active" name="active">
-    </div>
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" required [(ngModel)]="warehouse.name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="info">Info</label>
+          <input type="text" class="form-control" id="info" required [(ngModel)]="warehouse.info" name="info">
+        </div>
+        <div class="form-group">
+          <label for="capacity">Capacity</label>
+          <input type="text" class="form-control" id="capacity" required [(ngModel)]="warehouse.capacity" name="capacity">
+        </div>
+        <div class="form-group">
+          <label for="isBottom">isBottom</label>
+          <input type="text" class="form-control" id="isBottom" required [(ngModel)]="warehouse.isBottom" name="isBottom">
+        </div>
+        <div class="form-group">
+          <label for="parentId">parentId</label>
+          <input type="text" class="form-control" id="parentId" required [(ngModel)]="warehouse.parentId" name="parentId">
+        </div>
+        <div class="form-group">
+          <label for="accountId">accountId</label>
+          <input type="text" class="form-control" id="accountId" required [(ngModel)]="warehouse.accountId" name="accountId">
+        </div>
+        <div class="form-group">
+          <label for="topWarehouseID">topWarehouseID</label>
+          <input type="text" class="form-control" id="topWarehouseID" required [(ngModel)]="warehouse.topWarehouseID" name="topWarehouseID">
+        </div>
+        <div class="form-group">
+          <label for="active">active</label>
+          <input type="text" class="form-control" id="active" required [(ngModel)]="warehouse.active" name="active">
+        </div>
+
+        <label >Address</label>
+
+        <div class="form-group">
+
+          <label for="country">Country</label>
+          <input type="text" class="form-control" id="country" required [(ngModel)]="warehouse.addressDto.country" name="address">
+        </div>
+        <div class="form-group">
+          <label for="active">City</label>
+          <input type="text" class="form-control" id="city" required [(ngModel)]="warehouse.addressDto.city" name="city">
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" required [(ngModel)]="warehouse.addressDto.address" name="address">
+        </div>
+        <div class="form-group">
+          <label for="zip">ZIP</label>
+          <input type="text" class="form-control" id="zip" required [(ngModel)]="warehouse.addressDto.zip" name="zip">
+        </div>
+
     <button type="submit" class="btn btn-success">Submit</button>
   </ng-form>
 </div>

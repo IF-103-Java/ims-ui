@@ -16,7 +16,7 @@ export class WarehouseCreateComponent implements OnInit {
   constructor(private warehouseService: WarehouseService,
               private router: Router,
               private route: ActivatedRoute
-              )  {
+  ) {
     this.warehouse.addressDto = new Address();
 
   }
@@ -37,13 +37,14 @@ export class WarehouseCreateComponent implements OnInit {
     } else {
       this.warehouseService.createWarehouse(this.warehouse);
     }
+
     this.gotoList();
   }
 
   gotoList() {
     this.router.navigate([
       'home', {
-        outlets: { nav : ['warehouses']}
+        outlets: {nav: ['warehouses']}
       }
     ]);
   }
