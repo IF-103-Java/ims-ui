@@ -1,4 +1,6 @@
 # ImsUi
+![Verify code building](https://github.com/IF-103-Java/ims-ui/workflows/Verify%20code%20building/badge.svg) 
+![Publish to Registry](https://github.com/IF-103-Java/ims-ui/workflows/Publish%20to%20Registry/badge.svg)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
 

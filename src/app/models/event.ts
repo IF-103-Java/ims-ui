@@ -9,4 +9,8 @@ export class Event {
   author: string;
   name: string;
   transactionId: number;
+
+  constructor(obj) {
+    obj && Object.assign(this, obj);
+  }
 }
