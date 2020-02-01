@@ -22,39 +22,29 @@
                 <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
               </select> entries</label></div>
           </div>
-          
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"
-                   aria-describedby="dataTable_info" style="width: 100%;">
+            <table class="table table-bordered dataTable" id="dataTable" style="width: 100%;" cellspacing="0">
               <thead>
               <tr role="row">
-                <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                    aria-label="Name: activate to sort column descending" style="width: 80px;" aria-sort="ascending">
+                <th style="width: 3%;">
                   #
                 </th>
-                <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                    aria-label="Name: activate to sort column descending" style="width: 80px;" aria-sort="ascending">
+                <th sortable="name" (sort)="onSort($event)" style="width: 10%;">
                   Name
                 </th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                    aria-label="Position: activate to sort column ascending" style="width: 120px;">Email
+                <th sortable="email" (sort)="onSort($event)" style="width: 15%;">Email
                 </th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                    aria-label="Office: activate to sort column ascending" style="width: 58px;">Phone
+                <th style="width: 15%">Phone
                 </th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                    aria-label="Age: activate to sort column ascending" style="width: 31px;">Additional Info
+                <th style="width: 15%">Additional Info
                 </th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                    aria-label="Start date: activate to sort column ascending" style="width: 69px;">Type
+                <th sortable="type" (sort)="onSort($event)" style="width: 10%">Type
                 </th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                    aria-label="Salary: activate to sort column ascending" style="width: 67px;">Address
+                <th style="width: 15%">Address
                 </th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                    aria-label="Salary: activate to sort column ascending" style="width: 67px;">Actions
+                <th style="width: 15%">Actions
                 </th>
               </tr>
               </thead>
@@ -82,10 +72,10 @@
           </div>
         </div>
         <div class="row">
-          <ngb-pagination
-            [collectionSize]="page$.totalElements" [(page)]="page" [pageSize]="page$.size" [maxSize]="4"
-            [rotate]="true" [boundaryLinks]="false"
-            (pageChange)="getAssociates()">
+          <ngb-pagination style="margin-left: 15px"
+                          [collectionSize]="page$.totalElements" [(page)]="page" [pageSize]="page$.size" [maxSize]="4"
+                          [rotate]="true" [boundaryLinks]="false"
+                          (pageChange)="getAssociates()">
             <ng-template ngbPaginationPrevious>Prev</ng-template>
             <ng-template ngbPaginationNext>Next</ng-template>
           </ngb-pagination>
@@ -93,4 +83,5 @@
       </div>
     </div>
   </div>
+
 </div>
