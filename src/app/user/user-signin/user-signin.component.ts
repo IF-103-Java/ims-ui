@@ -4,7 +4,6 @@ import {LoginUser} from "../../models/loginUser.model";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import AppError from "../../errors/app-error";
-import ValidationError from "../../models/validationError";
 
 @Component({
   selector: 'app-user-signin',
