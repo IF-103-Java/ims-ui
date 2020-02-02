@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
               private router: Router,
               private modalService: NgbModal,
               private websocketService: WebsocketService,
-              private toastService: ToastService) {
+              public toastService: ToastService) {
   }
 
   openLogout(content) {
