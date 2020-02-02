@@ -29,6 +29,7 @@ export class UserSigninComponent implements OnDestroy {
     function tokenSetter(response: any) {
       sessionStorage.setItem('jwt-token', response.token);
       sessionStorage.setItem('username', response.username);
+      sessionStorage.setItem('account_id', response.accountId);
     }
 
     this.loginSubscription = this.loginService.login(user)
