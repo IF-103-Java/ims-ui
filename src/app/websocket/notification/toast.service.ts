@@ -7,13 +7,20 @@ import {Event} from "../../models/event";
 export class ToastService {
   toasts: any[] = [];
   notifications: Event[] = [];
+  unreadCount: number = 0;
 
   show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
     this.toasts.push({textOrTpl, ...options});
   }
 
+  openCenter() {
+    this.unreadCount = 0;
+  }
+
+
   addNotification(event: Event) {
     this.notifications.unshift(event);
+    this.unreadCount++;
     this.show(event.message, {classname: 'bg-info text-light', delay: 10000})
   }
 
