@@ -53,13 +53,13 @@
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Top suppliers</h6>
           </div>
-          <div *ngFor="let c of warehouseStorageAdvice.clients">
+          <div *ngFor="let c of warehouseStorageAdvice.bestAssociates.clients">
             <div class="card border-left-primary shadow h-100 card-tooltip">
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                      {{(c.addressDto.country + ' - ' + c.addressDto.city + '(' + c.addressDto.address + ')') | truncate:['55', '...'] }}
+                      {{(c.address.country + ' - ' + c.address.city + '(' + c.address.street + ')') | truncate:['55', '...'] }}
                     </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ c.name }}</div>
                   </div>
@@ -78,17 +78,17 @@
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Top clients</h6>
           </div>
-          <div *ngFor="let s of warehouseStorageAdvice.suppliers">
+          <div *ngFor="let s of warehouseStorageAdvice.bestAssociates.suppliers">
             <div class="card border-left-primary shadow h-100 card-tooltip">
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
+                    <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                      {{s.addressDto.country}} - {{ s.addressDto.city }}({{ s.addressDto.address }})
+                      {{s.address.country}} - {{ s.address.city }}({{ s.address.street }})
                     </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ s.name }}</div>
                   </div>
-                  <div class="col-auto">
+                    <div class="col-auto">
                     <i class="fas fa-address-card fa-2x text-gray-300"></i>
                   </div>
                 </div>
@@ -113,7 +113,7 @@
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                      {{(w.warehouse.addressDto.country + ' - ' + w.warehouse.addressDto.city + '(' + w.warehouse.addressDto.address + ')') | truncate:['55', '...'] }}
+                      {{(w.warehouse.address.country + ' - ' + w.warehouse.address.city + '(' + w.warehouse.address.street + ')') | truncate:['55', '...'] }}
                     </div>
                     <div class="row no-gutters align-items-center">
                       <div class="col-auto">
@@ -146,6 +146,12 @@
     </div>
   </div>
 </div>
+
+<ng-template #noInfo>
+   <div class="text-center font-weight-bold">
+      No info
+    </div>
+</ng-template>
 
 <script>
   $('.card-tooltip').tooltip();
