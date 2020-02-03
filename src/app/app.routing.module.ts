@@ -23,6 +23,10 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {AssociateComponent} from "./associate/associate.component";
 import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
 import {SavedItemCreateComponent} from './item/saved-item-create/saved-item-create.component';
+import {ItemUpdateComponent} from "./item/item-update/item-update.component";
+import {SavedItemMoveComponent} from "./item/saved-item-move/saved-item-move.component";
+import {SavedItemOutComponent} from "./item/saved-item-out/saved-item-out.component";
+
 
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
@@ -46,6 +50,10 @@ export const routerComponents = [
   WarehouseCreateComponent,
   WarehousesComponent,
   WarehouseUpdateComponent,
+  SavedItemCreateComponent,
+  ItemUpdateComponent,
+  SavedItemMoveComponent,
+  SavedItemOutComponent
 ];
 
 @NgModule({
@@ -70,7 +78,10 @@ export const routerComponents = [
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
           {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
-          {path: 'create-savedItem', component: SavedItemCreateComponent, outlet: 'nav'}
+          {path: 'update-item/:id', component: ItemUpdateComponent, outlet: 'nav'},
+          {path: 'create-savedItem/:id', component: SavedItemCreateComponent, outlet: 'nav'},
+          {path: 'move-savedItem/:id', component: SavedItemMoveComponent, outlet: 'nav'},
+          {path: 'out-savedItem/:id', component: SavedItemOutComponent, outlet: 'nav'}
         ]
       },
     ])

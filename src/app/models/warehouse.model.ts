@@ -8,4 +8,5 @@ export class Warehouse {
   accountId: bigint;
   topWarehouseID: bigint;
   active: boolean;
+  path: Array<string>;
 }

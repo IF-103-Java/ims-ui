@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Associate} from "../../models/associate";
 import {Page} from "../../models/page";
+import {UsefulWarehouseModel} from "../../models/usefulWarehouse.model";
+import {SavedItemAssociateModel} from "../../models/savedItemAssociate.model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +32,6 @@ export class AssociateService {
   public getAssociate(id:number) : Observable<Associate> {
     return this.http.get<Associate>(this.baseUrl + "/associates/" + id);
   }
+
 
 }

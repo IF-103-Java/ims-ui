@@ -8,10 +8,10 @@
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
   <thead>
-  <th><i sortable [sortValue]="sortValues[0]" (sortEvent)="sort($event)">Name</i></th>
-  <th><i sortable [sortValue]="sortValues[1]" (sortEvent)="sort($event)">Unit</i></th>
-  <th><i sortable [sortValue]="sortValues[2]" (sortEvent)="sort($event)">Description</i></th>
-  <th><i sortable [sortValue]="sortValues[3]" (sortEvent)="sort($event)">Volume</i></th>
+  <th><i sortable [sortValue]="sortValues[0]" (sortEvent)="onSort($event)">Name</i></th>
+  <th><i sortable [sortValue]="sortValues[1]" (sortEvent)="onSort($event)">Unit</i></th>
+  <th><i sortable [sortValue]="sortValues[2]" (sortEvent)="onSort($event)">Description</i></th>
+  <th><i sortable [sortValue]="sortValues[3]" (sortEvent)="onSort($event)">Volume</i></th>
   </thead>
   <tbody>
   <tr *ngFor="let item of items.content">
@@ -19,9 +19,8 @@
     <td>{{item.unit}}</td>
     <td>{{item.description}}</td>
     <td>{{item.volume}}</td>
-    <td><a (click)="goToAddSavedItem(item)"  class="nav-link active"><i class="fas fa-plus"></i></a>
-    </td>
-    <td><a href="/home/(nav:create-item)" routerLinkActive="active" class="nav-link active"><i class="fas fa-minus"></i></a></td>
+    <td><button (click)="goToUpdateItem(item.id)" class="btn btn-info" style="margin-left: 10px">Update</button>
+    <button (click)="delete(item.id)" class="btn btn-danger">Delete</button></td>
   </tr>
   </tbody>
   <tfoot>
@@ -30,7 +29,7 @@
       [collectionSize]="items.totalElements" [(page)]="page" [pageSize]="items.size" (pageChange)="onPaginate()">
     </ngb-pagination>
 
-    <select class="custom-select" style="width: auto" name="pageSize"  [(ngModel)]="size" (click)="onPaginate()">
+    <select class="custom-select" style="width: auto"  [(ngModel)]="size" (click)="onPaginate()">
       <option *ngFor="let item of [].constructor(items.totalElements); let i = index" [ngValue]="i+1">{{i+1}} items on page</option>
     </select>
   </div>

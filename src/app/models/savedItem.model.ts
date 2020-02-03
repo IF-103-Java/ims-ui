@@ -2,8 +2,8 @@ import {Item} from './item.model';
 import {Warehouse} from './warehouse.model';
 
 export class SavedItem {
-  id: bigint;
-  itemId: bigint;
+  id: number;
+  itemId: number;
   item: Item;
   quantity: number;
   warehouseId: bigint;

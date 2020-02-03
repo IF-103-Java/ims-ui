@@ -19,8 +19,8 @@ export class WarehouseService {
     return this.http.post(this.baseUrl + '/warehouses/add', warehouse);
   }
 
-  public getWarehouse(warehouseId: bigint):Observable<any> {
-    return this.http.get<Warehouse[]>(`${this.baseUrl}/warehouses/${warehouseId}`);}
+  public getWarehouse(warehouseId: bigint): Observable<Warehouse> {
+    return this.http.get<Warehouse>(`${this.baseUrl}/warehouses/${warehouseId}`);}
 
 
   public findAllWarehouses(page: number, size: number, sort: string, direction: string) {

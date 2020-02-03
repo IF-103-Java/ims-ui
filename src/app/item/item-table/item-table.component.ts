@@ -25,12 +25,14 @@ export class ItemTableComponent implements OnInit {
   constructor(private itemService: ItemService, private router: Router, private route: ActivatedRoute) {
   }
 
-  goToAddSavedItem(item: Item) {
-this.router.navigate([{outlets: { nav: ['create-savedItem']}}], {relativeTo: this.route.parent, queryParams:
-    {  id: item.id, name: item.name, unit: item.unit, description: item.description, volume:
-      item.volume, accountId: item.accountId, active: item.active}});
+  goToUpdateItem(itemId: number) {
+this.router.navigate(['home', { outlets: { nav: ['update-item', itemId]}}]);
   }
-
+delete(itemId: number) {
+  let del = false;
+  this.itemService.deleteItem(itemId).subscribe(data => del = data);
+  this.sort();
+}
   ngOnInit() {
     this.itemService.findSortedAndPaginatedItems(this.page, this.size, this.sortValue, this.direction).subscribe(data => {
       this.items = data;
@@ -38,23 +40,21 @@ this.router.navigate([{outlets: { nav: ['create-savedItem']}}], {relativeTo: thi
 
   }
 
-  sort(sort: { value: string, direction: string }) {
+  onSort(sort: { value: string, direction: string }) {
     this.sortValue = sort.value;
     this.direction = sort.direction;
-    this.itemService.findSortedAndPaginatedItems(this.page - 1, this.size, this.sortValue, this.direction).subscribe(data => {
-      this.items = data;
-    })
+    this.sort();
   }
 
-  onPaginate() {
-    this.itemService.findSortedAndPaginatedItems(this.page - 1, this.size, this.sortValue, this.direction).subscribe(data => {
-      this.items = data;
-    })
-  }
-
-  getSavedItemsByItemId(itemId: bigint) {
-    this.itemService.getSavedItemsByItemId(itemId).subscribe(data => {
-      this.savedItems = data;
-    })
-  }
+  onPaginate() { this.sort(); }
+sort() {
+  this.itemService.findSortedAndPaginatedItems(this.page - 1, this.size, this.sortValue, this.direction).subscribe(data => {
+    this.items = data;
+  });
+}
+  // getSavedItemsByItemId(itemId: m) {
+  //   this.itemService.getSavedItemsByItemId(itemId).subscribe(data => {
+  //     this.savedItems = data;
+  //   })
+  // }
 }

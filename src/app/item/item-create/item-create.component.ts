@@ -17,7 +17,7 @@ export class ItemCreateComponent implements OnInit {
   ngOnInit() {
   }
 createItem(){
-   this.itemService.addItem(this.item).subscribe(data=>{
+   this.itemService.addItem(this.item).subscribe(data => {
     this.itemResult = data;
    })
 }
