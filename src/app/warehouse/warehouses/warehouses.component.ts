@@ -48,4 +48,6 @@ export class WarehousesComponent implements OnInit {
         this.getWarehouses();
       });
   }
+
+
 }

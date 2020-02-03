@@ -34,4 +34,9 @@ export class WarehouseService {
     return this.http.delete(this.baseUrl + `/warehouses/` + warehouseId);
 
   }
+
+  public getChildren(warehouseId: number): Observable<Array<Warehouse>> {
+      return this.http.get<Array<Warehouse>>(this.baseUrl + `/warehouses/children/` + warehouseId);
+  }
+
 }
