@@ -12,10 +12,6 @@ import {User} from '../../models/user.model';
 export class AccountSettingsComponent implements OnInit {
   public account: Account;
 
-  public users: User[];
-
-  public workers: User[];
-
   public admin: User;
 
   public type: AccountType;
@@ -27,14 +23,8 @@ export class AccountSettingsComponent implements OnInit {
     this.accountService.view().subscribe(data => {
       this.account = data;
     });
-    this.accountService.getUsers().subscribe(data => {
-      this.users = data;
-    });
     this.accountService.getType().subscribe(data => {
       this.type = data;
-    });
-    this.accountService.getWorkers().subscribe(data => {
-      this.workers = data;
     });
     this.accountService.getAdmin().subscribe(data => {
       this.admin = data;

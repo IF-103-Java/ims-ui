@@ -4,6 +4,8 @@ import {User} from '../models/user.model';
 import {Account} from '../models/account.model';
 import {Observable} from 'rxjs';
 import {AccountType} from '../models/accountType.model';
+import {Page} from "../models/page";
+import {Event} from "../models/event";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,12 +22,8 @@ export class AccountService {
     return this.http.get<Account>(this.baseUrl + '/accounts/');
   }
 
-  public getUsers() {
-    return this.http.get<User[]>(this.baseUrl + '/users/account/users');
-  }
-
-  public getWorkers() {
-    return this.http.get<User[]>(this.baseUrl + '/users/account/workers');
+  getUsers(page: number, size: number, sort: string): Observable<Page<User>> {
+    return this.http.get<Page<User>>(this.baseUrl + '/users/account/users?page=' + page + '&size=' + size + '&sort=' + sort);
   }
 
   public getAdmin() {
