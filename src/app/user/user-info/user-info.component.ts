@@ -30,6 +30,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   editForm = false;
   userErrors: Map<string, string> = new Map<string, string>();
 
+  userForm: User = new User();
+  firstName: string;
+
+
 
   constructor(private userService: UserService,
               private loginService: LoginService,
@@ -43,7 +47,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       .subscribe((response: HttpResponse<any>) => {
         if (response) {
           this.user = response.body;
-          this.user.role = response.body.role.substr(5);
+          this.user.role = response.body.role. substr(5);
+          this.userForm.firstName = this.user.firstName;
+          this.userForm.lastName = this.user.lastName;
         }
       }, (appError: AppError) => {
         throw appError;
@@ -72,6 +78,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   clickCancelBtn() {
+    this.userForm.firstName = this.user.firstName;
     this.editForm = false;
   }
 
