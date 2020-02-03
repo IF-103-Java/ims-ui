@@ -16,8 +16,9 @@ import {Associate} from "../../models/associate";
   styleUrls: ['./saved-item-create.component.css']
 })
 export class SavedItemCreateComponent implements OnInit {
+  done = false;
   warehouses: UsefulWarehouseModel[];
-  associate: Associate = new Associate();
+  associates: SavedItemAssociateModel[];
   itemTransactionRequest: ItemTransactionRequest  = new ItemTransactionRequest();
   savedItem: SavedItem = new SavedItem();
   constructor(private activatedRoute: ActivatedRoute, private itemService: ItemService,  private associateService: AssociateService) {}
@@ -25,7 +26,7 @@ export class SavedItemCreateComponent implements OnInit {
   findUsefulWarehouses() {
     console.log('this.warehouses[0].name');
     const volume = this.itemTransactionRequest.quantity *
-      this.itemTransactionRequest.item.volume;
+      this.itemTransactionRequest.itemDto.volume;
     console.log(volume);
     this.itemService.findUsefulWarehouses(volume).subscribe(data => {
       this.warehouses = data;
@@ -33,36 +34,26 @@ export class SavedItemCreateComponent implements OnInit {
     });
     console.log(this.warehouses[0].name.toString());
   }
-//   findUsefulWarehouses() {
-//    let warehouses: UsefulWarehouseModel[];
-//    const volume = this.itemTransactionRequest.quantity *
-//         this.itemTransactionRequest.item.volume;
-//    this.itemService.findUsefulWarehouses(volume).subscribe(data => {
-//   warehouses = data;
-// });
-//    return warehouses;
-//   }
+
 addSavedItem() {
   console.log('si');
-  console.log(this.associate.name)
-  this.findSuppliers().subscribe(data => {
-    this.itemTransactionRequest.associateId = data.id;
-    console.log(data.email);
-  });
   console.log('this.itemTransactionRequest.associateId');
   console.log(this.itemTransactionRequest.associateId);
+  this.done = false;
   this.itemService.addSavedItem(this.itemTransactionRequest).subscribe(data => {
       this.savedItem = data;
-
+      this.done = true;
     });
 }
-findSuppliers(): Observable<SavedItemAssociateModel> {
- return this.itemService.findSuppliersByName(this.associate.name)[0];
-}
+  findSupplier() {
+    this.itemService.findSuppliersByName().subscribe(data => this.associates = data);
+    console.log(this.associates[0].name);
+  }
   ngOnInit() {
-    console.log('home')
+    console.log('home');
     this.itemService.getItemById(Number(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe(data => {
-      this.itemTransactionRequest.item = data;
+      this.itemTransactionRequest.itemDto = data;
     });
+    this.findSupplier();
   }
 }

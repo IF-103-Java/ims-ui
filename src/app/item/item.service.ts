@@ -36,6 +36,11 @@ export class ItemService {
     console.log(itemId)
     return this.http.get<Array<SavedItem>>(this.baseUrl + '/savedItems/itemId/' + itemId);
   }
+  public getSavedItemsById(itemId: number) {
+    console.log('/savedItems/Id/')
+    console.log(itemId)
+    return this.http.get<SavedItem>(this.baseUrl + '/savedItems/' + itemId);
+  }
    public getItemById(itemId: number): Observable<Item> {
      return this.http.get<Item>(this.baseUrl + '/items/' + itemId);
    }
@@ -46,12 +51,23 @@ export class ItemService {
     console.log(item.name);
     return this.http.put<Item>(this.baseUrl + '/items', item);
   }
+  public moveSavedItem(item: ItemTransactionRequest): Observable<SavedItem> {
+    console.log(item.itemDto.name);
+    return this.http.put<SavedItem>(this.baseUrl + '/savedItems/move', item);
+  }
+  public outSavedItem(item: ItemTransactionRequest): Observable<SavedItem> {
+    console.log(item.itemDto.name);
+    return this.http.put<SavedItem>(this.baseUrl + '/savedItems/outcome', item);
+  }
   public searchItemsByNameQuery(query: string) {
     return this.http.get<Item[]>(this.baseUrl + '/items/name?q=' + query);
   }
-  public findSuppliersByName(name: string): Observable<SavedItemAssociateModel[]> {
+  public findClientByName(): Observable<SavedItemAssociateModel[]> {
+    return this.http.get<SavedItemAssociateModel[]>(this.baseUrl + '/associates?type=CLIENT');
+  }
+  public findSuppliersByName(): Observable<SavedItemAssociateModel[]> {
     console.log(name);
-    return this.http.get<SavedItemAssociateModel[]>(this.baseUrl + '/associates?name=' + name + '&type=SUPPLIER');
+    return this.http.get<SavedItemAssociateModel[]>(this.baseUrl + '/associates?type=SUPPLIER');
   }
   public findUsefulWarehouses(capacity: number) {
     console.log('/savedItems/usefulWarehouses/');

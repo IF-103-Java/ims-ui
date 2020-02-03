@@ -16,7 +16,7 @@ export class ItemTableComponent implements OnInit {
 
   sortValues: string[] = ['name_item', 'unit', 'description', 'volume'];
   page: number = 0;
-  size: number = 10;
+  size: number = 15;
   sortValue: string = this.sortValues[0];
   direction: string = 'asc';
   items: Page<Item>;

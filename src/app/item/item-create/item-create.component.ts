@@ -9,16 +9,19 @@ import {Item} from "../../models/item.model";
   styleUrls: ['./item-create.component.css']
 })
 export class ItemCreateComponent implements OnInit {
-  public item: Item= new Item();
+  done = false;
+  public item: Item = new Item();
   public itemResult: Item;
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit() {
   }
-createItem(){
-   this.itemService.addItem(this.item).subscribe(data => {
-    this.itemResult = data;
-   })
+createItem() {
+  this.done = false;
+  this.itemService.addItem(this.item).subscribe(data => {
+  this.itemResult = data;
+  this.done = true;
+   });
 }
 }

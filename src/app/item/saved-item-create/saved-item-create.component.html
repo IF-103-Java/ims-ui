@@ -7,15 +7,17 @@
     <div class="col-sm-6">
       <form>
         <div class="form-group">
-          <label for="name">Supplier: {{associate.name}}</label>
-          <input type="text" [(ngModel)]="associate.name" name="name"  class="form-control" id="name">
+            <label for="quantity">Suppliers:</label>
+          <p><select class="custom-select" style="width: auto" name="pageSize"  [(ngModel)]="itemTransactionRequest.associateId">
+            <option *ngFor="let a of associates" [ngValue]="a.id">{{a.name}}</option>
+          </select></p>
           <label for="quantity">Quantity: {{itemTransactionRequest.quantity}}</label>
           <input type="text" [(ngModel)]="itemTransactionRequest.quantity" name="quantity" class="form-control" id="quantity">
           <p>
             <select class="custom-select" style="width: auto" name="pageSize"  [(ngModel)]="itemTransactionRequest.destinationWarehouseId">
               <option *ngFor="let warehouseModel of warehouses" [ngValue]="warehouseModel.id">{{warehouseModel.name}}</option>
             </select>
-            <button (click)="findUsefulWarehouses()" class="btn btn-info" style="margin-left: 10px">Update</button>
+            <button (click)="findUsefulWarehouses()" class="btn btn-info" style="margin-left: 10px">UsefulWarehouses</button>
           </p>
           <button (click)="addSavedItem()" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
@@ -23,7 +25,8 @@
                     </span>
             <span class="text text-white-50">Add SavedItem</span>
           </button>
-          <p *ngIf="savedItem !== null" class="bg-success">Add SavedItem- Done</p>
+          <h2 *ngIf="done" class="bg-success">Add SavedItem- Done</h2>
+
         </div>
       </form>
     </div>

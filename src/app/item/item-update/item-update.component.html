@@ -7,7 +7,7 @@
     <div class="col-sm-6">
   <form>
     <div class="form-group">
-      <label for="name">Name: {{item.name}}</label>
+      <label for="name">Name:</label>
       <input type="text" [(ngModel)]="item.name" name="name" class="form-control" id="name">
       <label for="unit">Unit:</label>
       <input type="text" [(ngModel)]="item.unit" name="unit" class="form-control" id="unit">
@@ -21,10 +21,14 @@
                     </span>
         <span class="text text-white-50">Update Item</span>
       </button>
+      <h2 *ngIf="done" class="bg-success">Update SavedItem- Done</h2>
     </div>
   </form>
   <button (click)="goToCreateSavedItem(item.id)" class="btn btn-info" style="margin-left: 10px">Add SavedItem</button>
+
+      <button (click)="getSavedItems()" class="btn btn-info" style="margin-left: 10px">Show SavedItems</button>
   </div>
+
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -36,17 +40,18 @@
         <th>Warehouse</th>
         </thead>
         <tbody>
-        {{getSavedItems()}}
-        <tr *ngFor="let savedItem of savedItems">
+           <tr *ngFor="let savedItem of savedItems; let i= index " >
           <td>{{item.name}}</td>
           <td>{{item.unit}}</td>
           <td>{{item.description}}</td>
           <td>{{item.volume}}</td>
           <td>{{savedItem.quantity}}</td>
-          <td>{{getWarehouse(savedItem.warehouseId)}} {{warehouse.name}}</td>
+             <td><ul *ngFor="let w of warehouses[i].path">
+               <p>{{w}}</p>
+             </ul></td>
 
-          <td><button  class="btn btn-info" style="margin-left: 10px" (click)="goToMoveSavedItem(savedItem.id)">Move</button>
-            <button class="btn btn-danger" (click)="goToOutSavedItem(savedItem.id)">Out</button></td>
+          <td><button  class="btn btn-info" style="margin-left: 10px" (click)="goToMoveSavedItem(item.id, savedItem.id)">Move</button>
+            <button class="btn btn-danger" (click)="goToOutSavedItem(item.id, savedItem.id)">Out</button></td>
         </tr>
         </tbody>
       </table>

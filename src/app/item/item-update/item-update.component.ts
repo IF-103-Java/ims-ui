@@ -12,16 +12,17 @@ import {Warehouse} from "../../models/warehouse.model";
   styleUrls: ['./item-update.component.css']
 })
 export class ItemUpdateComponent implements OnInit {
-  warehouse: Warehouse;
-  savedItems: Array<SavedItem> =   new Array<SavedItem>();
+  done = false;
+  warehouses: Array<Warehouse> = new Array<Warehouse>();
+  savedItems: SavedItem[];
   item: Item = new Item();
   path: Array<string>;
 
- constructor(private warehouseService: WarehouseService, private itemService: ItemService, private activatedRoute: ActivatedRoute, private router: Router ) { }
+ constructor(private warehouseService: WarehouseService, private itemService: ItemService,
+             private activatedRoute: ActivatedRoute, private router: Router ) { }
 
   ngOnInit() {
     this.getItem();
-
      }
      getItem() {
        this.itemService.getItemById(Number(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe(data => {
@@ -33,33 +34,39 @@ getSavedItems() {
   this.itemService.getSavedItemsByItemId(this.item.id).subscribe(data => {
     console.log(this.item.name.toString());
     this.savedItems = data;
-  });
+    this.savedItems.forEach( x => {
+      this.getWarehouse(x.warehouseId);
+    });
+    this.warehouses = this.warehouses.reverse();
+  })
+
   console.log(this.savedItems[0].quantity);
 
 }
-getWarehouse(id: bigint): string {
-   this.warehouseService.getWarehouse(id).subscribe(data => {
+getWarehouse(id: number) {
+  this.warehouseService.getWarehouse(id).subscribe(data => {
     console.log(data.name);
-    this.warehouse = data;
+    this.warehouses.push(data);
   });
 
-   return this.warehouse.name;
 }
   updateItem() {
+   this.done = false;
     console.log(this.item.name.toString());
     console.log(this.item.name);
     this.itemService.updateItem(this.item).subscribe(data => {
   console.log(this.item.name.toString());
   this.item = data;
+  this.done = true;
 });
   }
   goToCreateSavedItem(itemId: number) {
     this.router.navigate(['home', { outlets: { nav: ['create-savedItem', itemId]}}]);
   }
-  goToMoveSavedItem(itemId: number) {
-    this.router.navigate(['home', { outlets: { nav: ['move-savedItem', itemId]}}]);
+  goToMoveSavedItem(itemId: number, savedItemId: number) {
+    this.router.navigate(['home', { outlets: { nav: ['move-savedItem', itemId, savedItemId]}}]);
   }
-  goToOutSavedItem(itemId: number) {
-    this.router.navigate(['home', { outlets: { nav: ['out-savedItem', itemId]}}]);
+  goToOutSavedItem(itemId: number, savedItemId: number) {
+    this.router.navigate(['home', { outlets: { nav: ['out-savedItem', itemId, savedItemId]}}]);
   }
 }

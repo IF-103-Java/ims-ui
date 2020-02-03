@@ -80,8 +80,8 @@ export const routerComponents = [
           {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
           {path: 'update-item/:id', component: ItemUpdateComponent, outlet: 'nav'},
           {path: 'create-savedItem/:id', component: SavedItemCreateComponent, outlet: 'nav'},
-          {path: 'move-savedItem/:id', component: SavedItemMoveComponent, outlet: 'nav'},
-          {path: 'out-savedItem/:id', component: SavedItemOutComponent, outlet: 'nav'}
+          {path: 'move-savedItem/:id/:savedItemId', component: SavedItemMoveComponent, outlet: 'nav'},
+          {path: 'out-savedItem/:id/:savedItemId', component: SavedItemOutComponent, outlet: 'nav'}
         ]
       },
     ])
