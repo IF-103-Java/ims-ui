@@ -4,6 +4,7 @@ import {Associate} from "../../models/associate";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AssociateType} from "../../models/associate-type.enum";
 import {Address} from "../../models/address";
+import {ToastService} from "../../websocket/notification/toast.service";
 
 @Component({
   selector: 'app-add-associate',
@@ -15,12 +16,16 @@ export class FormAssociateComponent implements OnInit {
   associate: Associate = new Associate();
   associateType = [];
 
+  isLimitReached:boolean = false;
+  errorMessage : string;
+
   isEditAction: boolean;
 
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private associateService: AssociateService) {
+              private associateService: AssociateService,
+              private  toastService: ToastService) {
 
     this.associateType = Object.keys(AssociateType);
     this.associate.addressDto = new Address();
@@ -41,7 +46,16 @@ export class FormAssociateComponent implements OnInit {
     if(this.isEditAction) {
       this.associateService.updateAssociate(this.associate.id, this.associate);
     } else {
-      this.associateService.addAssociate(this.associate);
+      this.associateService.addAssociate(this.associate).subscribe(data => {
+        if (data.message != null) {
+
+          this.errorMessage = data.message;
+          console.log(this.errorMessage);
+
+          this.toastService.show(this.errorMessage, { classname: 'bg-danger text-light', delay: 5000 })
+        }
+       });
+
     }
     this.gotoAssociatesList();
   }
