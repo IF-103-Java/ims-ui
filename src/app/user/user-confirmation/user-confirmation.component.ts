@@ -28,7 +28,7 @@ export class UserConfirmationComponent implements OnInit {
     this.activateUserSubscription = this.userService.activateUser(this.token).subscribe(
       response => {
         if (response) {
-          this.messages['data'] = 'Your account has been successfully activated! Follow login to start work!';
+          this.messages['data'] = 'Your account has been successfully activated! Follow the login page to start work!';
         } else {
           this.messages['data'] = 'Something went wrong! Your account hasn\'t been activated!';
         }
