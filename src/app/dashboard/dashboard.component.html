@@ -94,8 +94,16 @@
             </ng-template>
 
             <ng-template #elseBlock4>
-              <div style="height: 100px"></div>
-              <h3 style="text-align: center"> Loading...</h3>
+              <div id="floatingBarsG">
+                <div class="blockG" id="rotateG_01"></div>
+                <div class="blockG" id="rotateG_02"></div>
+                <div class="blockG" id="rotateG_03"></div>
+                <div class="blockG" id="rotateG_04"></div>
+                <div class="blockG" id="rotateG_05"></div>
+                <div class="blockG" id="rotateG_06"></div>
+                <div class="blockG" id="rotateG_07"></div>
+                <div class="blockG" id="rotateG_08"></div>
+              </div>
             </ng-template>
 
             <ng-template #elseBlock3>
@@ -117,17 +125,16 @@
           <h6 class="m-0 font-weight-bold text-primary" style="height: 24px; vertical-align: center">Shortage of items</h6>
         </div>
         <div class="card-body" style="padding-bottom: 5px">
-          <div class="row">
+          <div class="row" style="padding-bottom: 10px">
             <div class="col-sm-12 col-md-6">
               <div class="dataTables_length">
                 <label>Show
                   <select name="dataTable_length"
+                          class="plain"
                           aria-controls="dataTable"
-                          [(ngModel)]="endingState.pageSize"
-                          (change)="getEndingItems()">
-                    <option [ngValue]="2">2</option>
-                    <option [ngValue]="4">4</option>
-                    <option [ngValue]="6">6</option>
+                          [(ngModel)]="page$.size"
+                          (change)="getEndingItemsPage()">
+                    <option *ngFor="let size of pageSizeOptions" value="{{size}}">{{size}}</option>
                   </select> entries
                 </label>
               </div>
@@ -139,7 +146,7 @@
                   <input type="number"
                          style="border: 0; width: 40px;
                          background-color: white"
-                         [(ngModel)]="minQuantity" (change)="getEndingItems()">
+                         [(ngModel)]="minQuantity" (change)="getEndingItemsPage()">
                 </span>
               </div>
             </div>
@@ -154,11 +161,12 @@
                 <tr>
                   <th scope="col">Name</th>
                   <th scope="col">Warehouse</th>
-                  <th scope="col">Quantity</th>
+                  <th scope="col" style="cursor: pointer;"
+                      (click)="change();getEndingItemsPage()"> Quantity{{arrow}} </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let item of endingItems$">
+                <tr *ngFor="let item of page$.content">
                   <td>{{item.itemName}}</td>
                   <td>{{item.name}}</td>
                   <td>{{item.quantity}}</td>
@@ -168,14 +176,14 @@
             </div>
           </div>
           <ngb-pagination class="d-flex justify-content-end"
-                          [collectionSize]="endingState.collectionSize"
-                          [(page)]="endingState.page"
-                          [pageSize]="endingState.pageSize"
+                          [collectionSize]="page$.totalElements"
+                          [(page)]="page"
+                          [pageSize]="page$.size"
                           [maxSize]="5"
                           [rotate]="true"
                           [boundaryLinks]="true"
                           [ellipses]="false"
-                          (pageChange)="getEndingItems()">
+                          (pageChange)="getEndingItemsPage()">
           </ngb-pagination>
         </div>
       </div>
@@ -185,97 +193,114 @@
       <div class="card shadow mb-4">
         <div class="card-header py-3">
                     <select class="m-0 font-weight-bold text-primary"
-                            style="border: 0; background-color: #f8f9fc; "
+                            style="border: 0; background-color: #f8f9fc; font-size: 16px"
                             (change)="getPopularItems()"
                             [(ngModel)]="popularRequest.popType">
                       <option selected value="TOP">Popular items</option>
                       <option value="BOT">Unpopular items</option>
                     </select>
         </div>
-        <div class="card-body" style="padding-bottom: 5px">
+        <div class="card-body" style="padding-bottom: 5px" (change)="getPopularItems()">
           <div class="row">
-            <div class="col-sm-12 col-md-6">
-              <div class="dataTables_length">
-                <table>
+            <div class="col-sm-12">
+              <table border="0px" width="100%" style="margin-bottom: 5px"
+                     role="grid"
+                     aria-describedby="dataTable_info">
+                <tbody>
+                <tr>
+                  <td>
+                    <label>Show
+                      <select name="dataTable_length"
+                              aria-controls="dataTable"
+                              class="plain"
+                              [(ngModel)]="popularState.pageSize"
+                              (change)="getPopularItems()">
+                        <option [ngValue]="2">2</option>
+                        <option [ngValue]="4">4</option>
+                        <option [ngValue]="6">6</option>
+                      </select> entries
+                    </label>
+                  </td>
+                  <td>
+                    <label>
+                      Filter by date:
+                      <select [(ngModel)]="popularRequest.dateType">
+                        <option selected value="ALL">For all time</option>
+                        <option value="YEAR">For year</option>
+                        <option value="MONTH">For month</option>
+                      </select>
+                    </label>
+                  </td>
+                  <td>
+                      <label>
+                        Quantity of items:
+                        <input type="number"
+                               style="border: 0; width: 40px;
+                               background-color: white"
+                               [(ngModel)]="popularRequest.quantity" (change)="getPopularItems()">
+                      </label>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
 
-                </table>
-                <label>Show
-                  <select name="dataTable_length"
-                          aria-controls="dataTable"
-                          [(ngModel)]="popularState.pageSize"
-                          (change)="getPopularItems()">
-                    <option [ngValue]="2">2</option>
-                    <option [ngValue]="4">4</option>
-                    <option [ngValue]="6">6</option>
-                  </select> entries
-                </label>
-                <span class="float-right">Filter by date: </span>
-              </div>
-            </div>
+              <table border="0px" width="100%" style="margin-bottom: 5px"
+                     role="grid"
+                     aria-describedby="dataTable_info">
+                <tbody>
+                <tr>
+                  <td  width="50%">
+                          <label *ngIf="popularRequest.dateType=='YEAR'"
+                                 style="padding-left: 65%; padding-right: 0px"
+                                 (change)="getPopularItems()">
+                            <span class="float-right">Choose year: </span>
+                          </label>
+                          <label *ngIf="popularRequest.dateType=='MONTH'"
+                                 style="padding-left: 40%; padding-right: 0px"
+                                 (change)="getPopularItems()">
+                            <span class="float-right">Choose month and year: </span>
+                          </label>
+                  </td>
 
-            <div class="col-sm-12 col-md-6" style="padding-left: 0" (change)="getPopularItems()">
-              <div class="dataTables_filter">
-                <select class="float-left" [(ngModel)]="popularRequest.dateType">
-                  <option selected value="ALL">For all time</option>
-                  <option value="YEAR">For year</option>
-                  <option value="MONTH">For month</option>
-                </select>
-
-                <span class="float-right"> Quantity of items:
-                  <input type="number"
-                         style="border: 0; width: 40px;
-                         background-color: white"
-                         [(ngModel)]="popularRequest.quantity" (change)="getPopularItems()">
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
-              <div class="dataTables_filter">
-                <div *ngIf="popularRequest.dateType=='YEAR'" (change)="getPopularItems()">
-                  <span class="float-right">Choose year: </span>
-                </div>
-                <div *ngIf="popularRequest.dateType=='MONTH'" (change)="getPopularItems()">
-                  <span class="float-right">Choose month and year: </span>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6" style="padding-left: 0">
-              <div class="dataTables_filter" (change)="getPopularItems()">
-                <div *ngIf="popularRequest.dateType=='YEAR'" (change)="setDate()">
-                  <select [(ngModel)]="year">
-                    <option value="2016" selected>2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                  </select>
-                </div>
-                <div *ngIf="popularRequest.dateType=='MONTH'" (change)="setDate()">
-                  <select [(ngModel)]="month">-->
-                    <option selected value="01">January</option>
-                    <option value="02">February</option>
-                    <option value="03">March</option>
-                    <option value="04">April</option>
-                    <option value="05">May</option>
-                    <option value="06">June</option>
-                    <option value="07">July</option>
-                    <option value="08">August</option>
-                    <option value="09">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                  </select>
-                  <select [(ngModel)]="year" >
-                    <option selected>2016</option>
-                    <option>2017</option>
-                    <option>2018</option>
-                    <option>2019</option>
-                    <option>2020</option>
-                  </select>
-                </div>
-              </div>
+                  <td width="50%" (change)="getPopularItems()">
+                          <label *ngIf="popularRequest.dateType=='YEAR'" (change)="setDate()"
+                                 style="padding-left: 0px">
+                            <select [(ngModel)]="year">
+                              <option value="2016" selected>2016</option>
+                              <option value="2017">2017</option>
+                              <option value="2018">2018</option>
+                              <option value="2019">2019</option>
+                              <option value="2020">2020</option>
+                            </select>
+                          </label>
+                          <label *ngIf="popularRequest.dateType=='MONTH'" (change)="setDate()"
+                                 style="padding-left: 0px">
+                            <select [(ngModel)]="month">-->
+                              <option selected value="01">January</option>
+                              <option value="02">February</option>
+                              <option value="03">March</option>
+                              <option value="04">April</option>
+                              <option value="05">May</option>
+                              <option value="06">June</option>
+                              <option value="07">July</option>
+                              <option value="08">August</option>
+                              <option value="09">September</option>
+                              <option value="10">October</option>
+                              <option value="11">November</option>
+                              <option value="12">December</option>
+                            </select>
+                            <select [(ngModel)]="year" >
+                              <option selected>2016</option>
+                              <option>2017</option>
+                              <option>2018</option>
+                              <option>2019</option>
+                              <option>2020</option>
+                            </select>
+                          </label>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         <div class="row">
@@ -316,8 +341,12 @@
 </div>
 </ng-template>
 <ng-template #elseBlock1>
-  <div style="vertical-align: center; height: 300px;"></div>
-  <h1 style="text-align: center; color: black">Loading...</h1>
+
+  <div class="cssload-loader">
+    <div class="cssload-inner cssload-one"></div>
+    <div class="cssload-inner cssload-two"></div>
+    <div class="cssload-inner cssload-three"></div>
+  </div>
   <div style="vertical-align: center; height: 300px"></div>
 
 </ng-template>
