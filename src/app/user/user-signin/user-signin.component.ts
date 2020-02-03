@@ -4,7 +4,6 @@ import {LoginUser} from "../../models/loginUser.model";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import AppError from "../../errors/app-error";
-import ValidationError from "../../models/validationError";
 
 @Component({
   selector: 'app-user-signin',
@@ -30,13 +29,14 @@ export class UserSigninComponent implements OnDestroy {
     function tokenSetter(response: any) {
       sessionStorage.setItem('jwt-token', response.token);
       sessionStorage.setItem('username', response.username);
+      sessionStorage.setItem('account_id', response.accountId);
     }
 
     this.loginSubscription = this.loginService.login(user)
       .subscribe(response => {
         if (response) {
           tokenSetter(response);
-          this.router.navigate(['/home']);
+          this.router.navigate(['home', {outlets: {nav: ['dashboard']}}]);
         }
       }, (appError: AppError) => {
         if (appError.status === 401) {
