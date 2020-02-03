@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {WarehouseService} from '../service/warehouse.service';
 import {Warehouse} from '../../models/warehouse.model';
 import {ToastService} from '../../websocket/notification/toast.service';
+import {WarehousesComponent} from '../warehouses/warehouses.component';
 
 @Component({
   selector: 'app-warehouse-update',
@@ -14,7 +15,7 @@ export class WarehouseUpdateComponent implements OnInit {
   warehouse: Warehouse;
   warehouses: Warehouse[];
   submitted = false;
-  message: string = "";
+  message: string;
 
   constructor(private route: ActivatedRoute, private router: Router,
               private warehouseService: WarehouseService,
@@ -49,21 +50,21 @@ export class WarehouseUpdateComponent implements OnInit {
   }
 
   gotoEditPage(id: number) {
-    console.log(id);
     this.router.navigate([
       'home', {
-        outlets: {nav: ['warehouses']}
-
+        outlets: {nav: ['warehouse-update', id]}
       }
     ]);
+    this.ngOnInit();
   }
 
   updateWarehouse(warehouseId: number, warehouse: Warehouse) {
-    this.toastService.show('warehpuse updated',  { classname: 'bg-success text-light', delay: 10000 });
-
-    this.warehouseService.updateWarehouse(warehouseId, warehouse);
+    this.warehouseService.updateWarehouse(warehouseId, warehouse).subscribe(data => {
+      this.toastService.show(data.name, {classname: 'bg-success text-light', delay: 10000});
+    });
 
   }
+
   getChildren(id: number) {
     this.warehouseService.getChildren(id)
       .subscribe(data => this.warehouses = data);

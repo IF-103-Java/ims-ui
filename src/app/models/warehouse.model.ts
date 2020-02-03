@@ -11,4 +11,5 @@ export class Warehouse {
   topWarehouseID: number;
   active: boolean;
   addressDto: Address;
+  path: string[];
 }

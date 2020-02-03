@@ -28,9 +28,8 @@ export class WarehouseService {
       + size + '&sort=' + sort);
   }
 
-  public updateWarehouse(warehouseId: number, warehouse: Warehouse) {
-    console.log(warehouse.name);
-    return this.http.put( this.baseUrl + `/warehouses/update/` + warehouseId, warehouse);
+  public updateWarehouse(warehouseId: number, warehouse: Warehouse): Observable<Warehouse>{
+    return this.http.put<Warehouse>( this.baseUrl + `/warehouses/update/` + warehouseId, warehouse);
   }
 
   public deleteWarehouse(warehouseId: number) {
