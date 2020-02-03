@@ -21,6 +21,7 @@
         <span>Dashboard</span></a>
     </li>
 
+    <div *ngIf="role == 'ROLE_ADMIN'">
     <hr class="sidebar-divider">
     <div class="sidebar-heading">Account management</div>
     <!-- Nav Item - Organization -->
@@ -29,6 +30,7 @@
         <i class="fas fa-fw fa-accessible-icon"></i>
         <span>Account</span></a>
     </li>
+</div>
 
     <hr class="sidebar-divider">
 
