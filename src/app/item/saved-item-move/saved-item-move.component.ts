@@ -30,15 +30,11 @@ export class SavedItemMoveComponent implements OnInit {
     });
   }
   findUsefulWarehouses() {
-    console.log('this.warehouses[0].name');
     const volume = this.itemTransactionRequest.quantity *
       this.itemTransactionRequest.itemDto.volume;
-    console.log(volume);
     this.itemService.findUsefulWarehouses(volume).subscribe(data => {
       this.warehouses = data;
-
     });
-    console.log(this.warehouses[0].name.toString());
   }
   getItemTransactionRequest() {
     this.itemService.getSavedItemsById(Number(this.activatedRoute.snapshot.paramMap.get('savedItemId'))).subscribe(data => {

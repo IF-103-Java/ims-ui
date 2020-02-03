@@ -27,16 +27,9 @@ export class SavedItemOutComponent implements OnInit {
   }
   findClient() {
     this.itemService.findClientByName().subscribe(data => this.associates = data);
-    console.log(this.associates[0].name);
   }
   outSavedItem() {
     this.done = false;
-    console.log('outSavedItem');
-    console.log(this.itemTransactionRequest.itemDto.name);
-    console.log(this.itemTransactionRequest.itemDto.id);
-    console.log(this.itemTransactionRequest.associateId);
-    console.log(this.itemTransactionRequest.savedItemId);
-    console.log(this.itemTransactionRequest.sourceWarehouseId);
     this.itemService.outSavedItem(this.itemTransactionRequest).subscribe(data => {
       this.savedItem = data;
       this.done = true;

@@ -15,7 +15,7 @@ export class ItemCreateComponent implements OnInit {
 
   constructor(private itemService: ItemService) { }
 
-  ngOnInit() {
+  ngOnInit()  {
   }
 createItem() {
   this.done = false;

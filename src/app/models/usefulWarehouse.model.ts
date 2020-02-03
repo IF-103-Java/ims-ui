@@ -1,4 +1,4 @@
-export class UsefulWarehouseModel {
+export class UsefulWarehouseModel  {
   id: number;
   name: string;
 }

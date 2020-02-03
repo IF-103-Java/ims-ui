@@ -32,13 +32,9 @@ export class ItemService {
     return this.http.post<SavedItem>(this.baseUrl + '/savedItems', itemTransactionRequest);
   }
   public getSavedItemsByItemId(itemId: number) {
-    console.log('/savedItems/itemId/')
-    console.log(itemId)
     return this.http.get<Array<SavedItem>>(this.baseUrl + '/savedItems/itemId/' + itemId);
   }
   public getSavedItemsById(itemId: number) {
-    console.log('/savedItems/Id/')
-    console.log(itemId)
     return this.http.get<SavedItem>(this.baseUrl + '/savedItems/' + itemId);
   }
    public getItemById(itemId: number): Observable<Item> {
@@ -48,15 +44,12 @@ export class ItemService {
     return this.http.delete<boolean>(this.baseUrl + '/items/' + itemId);
   }
   public updateItem(item: Item): Observable<Item> {
-    console.log(item.name);
     return this.http.put<Item>(this.baseUrl + '/items', item);
   }
   public moveSavedItem(item: ItemTransactionRequest): Observable<SavedItem> {
-    console.log(item.itemDto.name);
     return this.http.put<SavedItem>(this.baseUrl + '/savedItems/move', item);
   }
   public outSavedItem(item: ItemTransactionRequest): Observable<SavedItem> {
-    console.log(item.itemDto.name);
     return this.http.put<SavedItem>(this.baseUrl + '/savedItems/outcome', item);
   }
   public searchItemsByNameQuery(query: string) {
@@ -66,12 +59,9 @@ export class ItemService {
     return this.http.get<SavedItemAssociateModel[]>(this.baseUrl + '/associates?type=CLIENT');
   }
   public findSuppliersByName(): Observable<SavedItemAssociateModel[]> {
-    console.log(name);
     return this.http.get<SavedItemAssociateModel[]>(this.baseUrl + '/associates?type=SUPPLIER');
   }
   public findUsefulWarehouses(capacity: number) {
-    console.log('/savedItems/usefulWarehouses/');
-    console.log(capacity);
     return this.http.get<UsefulWarehouseModel[]>(this.baseUrl + '/savedItems/usefulWarehouses/' + capacity);
   }
 }

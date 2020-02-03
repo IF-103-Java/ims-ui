@@ -24,10 +24,8 @@ export class SavedItemCreateComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private itemService: ItemService,  private associateService: AssociateService) {}
 
   findUsefulWarehouses() {
-    console.log('this.warehouses[0].name');
     const volume = this.itemTransactionRequest.quantity *
       this.itemTransactionRequest.itemDto.volume;
-    console.log(volume);
     this.itemService.findUsefulWarehouses(volume).subscribe(data => {
       this.warehouses = data;
 
@@ -36,9 +34,6 @@ export class SavedItemCreateComponent implements OnInit {
   }
 
 addSavedItem() {
-  console.log('si');
-  console.log('this.itemTransactionRequest.associateId');
-  console.log(this.itemTransactionRequest.associateId);
   this.done = false;
   this.itemService.addSavedItem(this.itemTransactionRequest).subscribe(data => {
       this.savedItem = data;
@@ -47,10 +42,8 @@ addSavedItem() {
 }
   findSupplier() {
     this.itemService.findSuppliersByName().subscribe(data => this.associates = data);
-    console.log(this.associates[0].name);
   }
   ngOnInit() {
-    console.log('home');
     this.itemService.getItemById(Number(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe(data => {
       this.itemTransactionRequest.itemDto = data;
     });

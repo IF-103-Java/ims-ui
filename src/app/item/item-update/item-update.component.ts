@@ -52,10 +52,8 @@ getWarehouse(id: number) {
 }
   updateItem() {
    this.done = false;
-    console.log(this.item.name.toString());
-    console.log(this.item.name);
+
     this.itemService.updateItem(this.item).subscribe(data => {
-  console.log(this.item.name.toString());
   this.item = data;
   this.done = true;
 });

@@ -2,9 +2,10 @@
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">Items Table</h6>
   </div>
-  <a href="/home/(nav:create-item)" routerLinkActive="active" class="nav-link active">
-    <span>Add Item</span></a>
+
+    <span>Add Item</span>
   <div class="card-body">
+    <button (click)="goToAddItem()" class="btn btn-info" style="margin-left: 10px">Create Item</button>
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
   <thead>
@@ -28,7 +29,6 @@
     <ngb-pagination
       [collectionSize]="items.totalElements" [(page)]="page" [pageSize]="items.size" (pageChange)="onPaginate()">
     </ngb-pagination>
-
     <select class="custom-select" style="width: auto"  [(ngModel)]="size" (click)="onPaginate()">
       <option *ngFor="let item of [].constructor(items.totalElements); let i = index" [ngValue]="i+1">{{i+1}} items on page</option>
     </select>

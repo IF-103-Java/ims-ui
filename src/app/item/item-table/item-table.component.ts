@@ -24,7 +24,9 @@ export class ItemTableComponent implements OnInit {
 
   constructor(private itemService: ItemService, private router: Router, private route: ActivatedRoute) {
   }
-
+  goToAddItem() {
+    this.router.navigate(['home', { outlets: { nav: ['create-item']}}]);
+  }
   goToUpdateItem(itemId: number) {
 this.router.navigate(['home', { outlets: { nav: ['update-item', itemId]}}]);
   }
@@ -52,9 +54,5 @@ sort() {
     this.items = data;
   });
 }
-  // getSavedItemsByItemId(itemId: m) {
-  //   this.itemService.getSavedItemsByItemId(itemId).subscribe(data => {
-  //     this.savedItems = data;
-  //   })
-  // }
+
 }
