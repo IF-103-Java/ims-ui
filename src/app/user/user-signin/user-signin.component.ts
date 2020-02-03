@@ -4,7 +4,6 @@ import {LoginUser} from "../../models/loginUser.model";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import AppError from "../../errors/app-error";
-import ValidationError from "../../models/validationError";
 
 @Component({
   selector: 'app-user-signin',
@@ -37,7 +36,7 @@ export class UserSigninComponent implements OnDestroy {
       .subscribe(response => {
         if (response) {
           tokenSetter(response);
-          this.router.navigate(['/home']);
+          this.router.navigate(['home', {outlets: {nav: ['dashboard']}}]);
         }
       }, (appError: AppError) => {
         if (appError.status === 401) {

@@ -1,0 +1,55 @@
+.nav {
+  margin-top: 10px;
+}
+
+.header {
+  font-size: 23px;
+}
+
+.button-left {
+  margin-left: 550px;
+}
+
+.border-none {
+  border: none;
+  padding-left: 0px !important;
+  background-color: #f8f9fc !important;
+}
+
+.border {
+  border: 1px;
+  background-color: white !important;
+}
+
+.icon-pencil {
+  margin-left: 535px;
+  color: blue;
+}
+
+.icon-eye {
+  margin-left: 535px;
+  color: blue;
+  float: right;
+  margin-left: -25px;
+  margin-top: -26px;
+  margin-right: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.btn-password {
+  margin-top: 10px;
+  margin-left: 215px;
+}
+
+.btn-delete {
+  margin-left: 220px;
+}
+
+.update-block {
+  margin-left: 420px;
+}
+
+.btn-edit {
+  margin-left: 500px;
+}
