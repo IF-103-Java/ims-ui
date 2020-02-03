@@ -1,15 +1,19 @@
-<form>
+<form (ngSubmit)="onSubmit()" #data="ngForm">
   <div>
-    <div *ngIf="account" >
-      <h2 style="text-align:center">{{account.name}}</h2>
-
+    <div class="col mr-2">
+    <label for="name">Account name:</label>
+    </div>
+    <div *ngIf="account" class="col mr-2">
+      <input type="text" [(ngModel)]="account.name"
+             class="form-control"
+             id="name"
+             name="name"
+             placeholder="Enter account name">
     </div>
   </div>
-
-  <div  class="col mr-2">
-    <a href="#" class="btn btn-warning btn-icon-split">
-      <span class="text">Edit name</span>
-    </a>
+  <div class="col mr-2">
+    <button type="submit"
+               class="btn btn-info">Submit</button>
   </div>
 
   <div class="col-xl-3 col-md-6 mb-4">
@@ -90,6 +94,11 @@
             </div>
           </form>
 
+          <div>
+            <a href="/home/(nav:invite)" class="btn btn-info btn-icon-split">
+              <span class="text">Invite new user</span>
+            </a>
+          </div>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -109,8 +118,7 @@
                     <td>{{worker.firstName}}</td>
                     <td>{{worker.lastName}}</td>
                     <td>{{worker.email}}</td>
-                    <td><a class="btn btn__edit">Re-invite</a></td>
-                    <td><a href="#" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure delete this user?')">
+                    <td><a (click)="(deleteWorker(worker.id))" href="/home/(nav:account)" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure delete this user?')">
                       <i class="fas fa-trash"></i>
                     </a></td>
                   </tr>
