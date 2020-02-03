@@ -36,7 +36,7 @@ export class UserSigninComponent implements OnDestroy {
       .subscribe(response => {
         if (response) {
           tokenSetter(response);
-          this.router.navigate(['/home']);
+          this.router.navigate(['home', {outlets: {nav: ['dashboard']}}]);
         }
       }, (appError: AppError) => {
         if (appError.status === 401) {

@@ -19,13 +19,16 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   getCurrentUserSubscription: Subscription;
   deleteUserSubscription: Subscription;
   updateUserSubscription: Subscription;
+  changePasswordSubscription: Subscription;
   modalRef: NgbModalRef;
 
   dateFormatter = changeDateFormat;
   timeFormatter = changeTimeFormat;
   user: User = new User();
-
+  hidePassword = true;
+  done: true;
   editForm = false;
+  userErrors: Map<string, string> = new Map<string, string>();
 
 
   constructor(private userService: UserService,
@@ -53,8 +56,11 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       resp => {
         this.loginService.logout();
         this.router.navigate(['/sign-up']);
-      }
-    );
+      },
+      (appError: AppError) => {
+        console.log(appError);
+        throw appError;
+      });
   }
 
   openDeleteModal(content) {
@@ -93,6 +99,19 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     return true;
   }
 
+  changePassword(data: any) {
+    this.changePasswordSubscription = this.userService.updatePassword(data.password)
+      .subscribe(
+        response => {
+          this.done = true;
+        }, (appError: AppError) => {
+          throw appError;
+        }
+      )
+
+
+  }
+
   ngOnDestroy(): void {
     if (this.getCurrentUserSubscription) {
       this.getCurrentUserSubscription.unsubscribe()
@@ -102,6 +121,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     }
     if (this.updateUserSubscription) {
       this.updateUserSubscription.unsubscribe()
+    }
+    if (this.changePasswordSubscription) {
+      this.changePasswordSubscription.unsubscribe()
     }
   }
 }

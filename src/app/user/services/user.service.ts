@@ -13,32 +13,8 @@ export class UserService {
   constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
   }
 
-
-  getUserById(id: number): Observable<any> {
-    return this.http.get<User>(
-      this.baseUrl + '/users/' + id,
-      {observe: 'response'}
-    ).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return throwError(new AppError(error));
-      })
-    );
-  }
-
-  getUserByEmail(email: string): Observable<any> {
-    return this.http.get<User>(
-      this.baseUrl + '/users?email=' + email,
-      {observe: 'response'}
-    ).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return throwError(new AppError(error));
-      })
-    );
-  }
-
-  getUsersByAccountId(id: number): Observable<any> {
-    return this.http.get<User[]>(
-      this.baseUrl + '/users/account/users?accountId' + id,
+  update(user: User): Observable<any> {
+    return this.http.put<User>(this.baseUrl + '/users/me', user,
       {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
@@ -47,8 +23,8 @@ export class UserService {
       );
   }
 
-  update(user: User): Observable<any> {
-    return this.http.put<any>(this.baseUrl + '/users/me', user,
+  updatePassword(password: string): Observable<any> {
+    return this.http.post<User>(this.baseUrl + '/users/update-password', password,
       {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
@@ -68,7 +44,7 @@ export class UserService {
 
   getAllUsers(): Observable<any> {
     return this.http.get<User[]>(
-      this.baseUrl + '/users',
+      this.baseUrl + '/users/account/users',
       {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
