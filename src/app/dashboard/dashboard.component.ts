@@ -7,6 +7,8 @@ import {EndingItems} from '../models/endingItems';
 import {PopularItems} from '../models/popularItems';
 import {WarehousePremiumList} from '../models/warehousePremiumList';
 import {AccountService} from '../account/account.service';
+import {Page} from '../models/page';
+
 
 interface State {
   page: number;
@@ -17,9 +19,11 @@ interface State {
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css'],
   providers: [DashboardService, NgbProgressbarConfig]
 })
 export class DashboardComponent implements OnInit {
+  pageSizeOptions = [2, 4, 6];
   load1: boolean;
   load2: boolean;
   load3: boolean;
@@ -27,13 +31,12 @@ export class DashboardComponent implements OnInit {
   loadPremium: boolean;
   warehouseLoad$: WarehouseLoad[];
 
-  endingState: State = {
-    page: 1,
-    pageSize: 4,
-    collectionSize: 10
-  };
+  page$ = new Page<EndingItems>();
   minQuantity = 5;
-  endingItems$: EndingItems[];
+  direction = 'asc';
+  sortBy = 'quantity,DESC';
+  page = 1;
+  arrow = '↑';
 
   popularState: State = {
     page: 1,
@@ -57,6 +60,9 @@ export class DashboardComponent implements OnInit {
     config.striped = true;
     config.showValue = false;
 
+    this.page$.size = 4;
+    this.page$.number = 0;
+
     this.popularRequest.dateType = 'ALL';
     this.popularRequest.popType = 'TOP';
     this.popularRequest.quantity = 5;
@@ -72,7 +78,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getWarehouseLoad();
 
-    this.getEndingItems();
+    this.getEndingItemsPage();
 
     this.getPopularItems();
 
@@ -87,12 +93,10 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  getEndingItems() {
-    this.dashboardService.getEndingItems(this.minQuantity)
+  getEndingItemsPage() {
+    this.dashboardService.getEndingItemsPage(this.page - 1, this.page$.size, this.sortBy, this.minQuantity)
       .subscribe(data => {
-        this.endingState.collectionSize = data.length;
-        this.endingItems$ = data.slice( (this.endingState.page - 1) * (this.endingState.pageSize),
-          (this.endingState.page - 1) * (this.endingState.pageSize) + this.endingState.pageSize);
+        this.page$ = data;
         this.load2 = true;
       });
   }
@@ -142,5 +146,14 @@ export class DashboardComponent implements OnInit {
   }
   lessThan75(num: number | bigint) {
     return num <= 75;
+  }
+  change() {
+    if (this.sortBy === 'quantity,DESC') {
+      this.sortBy = 'quantity,ASC';
+      this.arrow = '↓';
+    } else {
+      this.sortBy = 'quantity,DESC';
+      this.arrow = '↑';
+    }
   }
 }

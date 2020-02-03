@@ -5,7 +5,6 @@ import {ItemCreateComponent} from './item/item-create/item-create.component';
 import {AccountViewComponent} from './account/account-view/account-view.component';
 import {EventComponent} from './event/event.component';
 import {UserSignupComponent} from './user/user-signup/user-signup.component';
-import {UserUpdateComponent} from './user/user-update/user-update.component';
 import {UserResetPasswordComponent} from './user/user-reset-password/user-reset-password.component';
 import {UserForgotPasswordComponent} from './user/user-forgot-password/user-forgot-password.component';
 import {UserSigninComponent} from './user/user-signin/user-signin.component';
@@ -19,10 +18,11 @@ import {WarehouseAdviceComponent} from './warehouse-advice/warehouse-advice.comp
 import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-create.component";
 import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
 import {WarehouseUpdateComponent} from "./warehouse/warehouse-update/warehouse-update.component";
-import {AccountSettingsComponent} from './account/account-settings/account-settings.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {AssociateComponent} from "./associate/associate.component";
 import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
+import {UserInfoComponent} from "./user/user-info/user-info.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 export const routerComponents = [
@@ -37,7 +37,6 @@ export const routerComponents = [
   ItemTableComponent,
   ItemSortableDirective,
   EventComponent,
-  UserUpdateComponent,
   UserForgotPasswordComponent,
   UserResetPasswordComponent,
   AccountViewComponent,
@@ -48,14 +47,15 @@ export const routerComponents = [
   WarehouseCreateComponent,
   WarehousesComponent,
   WarehouseUpdateComponent,
-  AccountSettingsComponent,
   DashboardComponent,
   AssociateComponent,
-  FormAssociateComponent
+  FormAssociateComponent,
+  UserInfoComponent
 ];
 
 @NgModule({
   imports: [
+    NgbModule,
     RouterModule.forRoot([
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: 'sign-in', component: UserSigninComponent},
@@ -73,7 +73,6 @@ export const routerComponents = [
           {path: 'upgrade', component: AccountUpgradeComponent, outlet: 'nav'},
           {path: 'invite', component: UserInviteComponent, outlet: 'nav'},
           {path: 'socket', component: NotificationComponent},
-          {path: 'account-settings', component: AccountSettingsComponent, outlet: 'nav'},
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
@@ -81,7 +80,8 @@ export const routerComponents = [
           {path: 'dashboard', component: DashboardComponent, outlet: 'nav'},
           {path: 'associates', component: AssociateComponent, outlet: 'nav'},
           {path: 'add-associate', component: FormAssociateComponent, outlet: 'nav'},
-          {path: 'edit-associate/:id', component: FormAssociateComponent, outlet: 'nav'}
+          {path: 'edit-associate/:id', component: FormAssociateComponent, outlet: 'nav'},
+          {path: 'profile-info', component: UserInfoComponent, outlet: 'nav'},
         ]
       },
     ])
