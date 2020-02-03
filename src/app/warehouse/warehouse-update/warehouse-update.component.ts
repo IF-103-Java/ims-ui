@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WarehouseService} from '../service/warehouse.service';
 import {Warehouse} from '../../models/warehouse.model';
+import {ToastService} from '../../websocket/notification/toast.service';
 
 @Component({
   selector: 'app-warehouse-update',
@@ -13,9 +14,11 @@ export class WarehouseUpdateComponent implements OnInit {
   warehouse: Warehouse;
   warehouses: Warehouse[];
   submitted = false;
+  message: string = "";
 
   constructor(private route: ActivatedRoute, private router: Router,
               private warehouseService: WarehouseService,
+              private toastService: ToastService,
               @Inject('BASE_API_URL') private baseUrl: string) {
   }
 
@@ -38,9 +41,29 @@ export class WarehouseUpdateComponent implements OnInit {
   }
 
   gotoList() {
-    this.router.navigate(['/home/(nav:warehouses']);
+    this.router.navigate([
+      'home', {
+        outlets: {nav: ['warehouses']}
+      }
+    ]);
   }
 
+  gotoEditPage(id: number) {
+    console.log(id);
+    this.router.navigate([
+      'home', {
+        outlets: {nav: ['warehouses']}
+
+      }
+    ]);
+  }
+
+  updateWarehouse(warehouseId: number, warehouse: Warehouse) {
+    this.toastService.show('warehpuse updated',  { classname: 'bg-success text-light', delay: 10000 });
+
+    this.warehouseService.updateWarehouse(warehouseId, warehouse);
+
+  }
   getChildren(id: number) {
     this.warehouseService.getChildren(id)
       .subscribe(data => this.warehouses = data);

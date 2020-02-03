@@ -13,7 +13,9 @@ export class WarehouseService {
   }
 
   public createWarehouse(warehouse: Warehouse) {
+    console.log(warehouse.name);
     this.http.post(this.baseUrl + '/warehouses/add', warehouse);
+
   }
 
   public getWarehouse(warehouseId: number): Observable<Warehouse> {
@@ -27,7 +29,8 @@ export class WarehouseService {
   }
 
   public updateWarehouse(warehouseId: number, warehouse: Warehouse) {
-    this.http.put( this.baseUrl + `/warehouses/update/` + warehouseId, warehouse);
+    console.log(warehouse.name);
+    return this.http.put( this.baseUrl + `/warehouses/update/` + warehouseId, warehouse);
   }
 
   public deleteWarehouse(warehouseId: number) {

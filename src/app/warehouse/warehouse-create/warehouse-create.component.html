@@ -4,15 +4,16 @@
 
     <div class="form-group">
       <label>Name</label>
-      <input class="form-control" name="name" [(ngModel)]="warehouse.name" #name="ngModel" required />
+      <input class="form-control" name="name" [(ngModel)]="warehouse.name" #name="ngModel" required placeholder="Enter warehouse name"/>
     </div>
     <div class="form-group">
       <label for="info">Info</label>
-      <input type="text" class="form-control" id="info" required [(ngModel)]="warehouse.info" name="info">
+      <input type="text" class="form-control" id="info" required [(ngModel)]="warehouse.info" name="info" placeholder="Enter additional informatio">
     </div>
     <div class="form-group">
       <label for="capacity">Capacity</label>
-      <input type="text" class="form-control" id="capacity" required [(ngModel)]="warehouse.capacity" name="capacity">
+      <input type="text" class="form-control" id="capacity" required [(ngModel)]="warehouse.capacity" name="capacity"
+             placeholder="Enter capacity" pattern="[0-9]*">
     </div>
     <div class="form-group">
       <label for="isBottom">isBottom</label>

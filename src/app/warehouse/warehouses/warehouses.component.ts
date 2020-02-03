@@ -13,7 +13,7 @@ export class WarehousesComponent implements OnInit {
   pageSizeValue = [3, 5, 7, 10];
   page: 0;
   page$ = new Page<Warehouse>();
-  sortBy: 'id';
+  sortBy: 'name';
   direction: 'asc';
 
   constructor(private route: ActivatedRoute,
@@ -21,7 +21,7 @@ export class WarehousesComponent implements OnInit {
               private router: Router) {
     this.page$.size = 5;
     this.page$.number = 0;
-    this.page$.sortBy = 'id,ASC';
+    this.page$.sortBy = 'name,ASC';
   }
 
   ngOnInit() {

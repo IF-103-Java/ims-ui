@@ -24,6 +24,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {AssociateComponent} from "./associate/associate.component";
 import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
 
+
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
   HomeComponent,

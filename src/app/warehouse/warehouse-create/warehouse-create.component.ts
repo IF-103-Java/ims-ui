@@ -32,13 +32,7 @@ export class WarehouseCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.isEditAction) {
-      this.warehouseService.updateWarehouse(this.warehouse.id, this.warehouse);
-    } else {
       this.warehouseService.createWarehouse(this.warehouse);
-    }
-
-    this.gotoList();
   }
 
   gotoList() {
