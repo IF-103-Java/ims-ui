@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Associate} from "../../models/associate";
 import {Page} from "../../models/page";
@@ -17,7 +17,6 @@ export class AssociateService {
   }
 
   public addAssociate(associate: Associate): Observable<ResponseBody> {
-
     return this.http.post<ResponseBody>(this.baseUrl + "/associates/", associate);
   }
 
@@ -32,7 +31,6 @@ export class AssociateService {
   public getAssociate(id: number): Observable<Associate> {
     return this.http.get<Associate>(this.baseUrl + "/associates/" + id);
   }
-
 }
 
 export interface ResponseBody {
