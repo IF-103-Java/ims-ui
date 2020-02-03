@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AssociateService} from "../service/associate.service";
 import {Associate} from "../../models/associate";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -16,11 +16,7 @@ export class FormAssociateComponent implements OnInit {
   associate: Associate = new Associate();
   associateType = [];
 
-  isLimitReached:boolean = false;
-  errorMessage : string;
-
   isEditAction: boolean;
-
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -34,7 +30,7 @@ export class FormAssociateComponent implements OnInit {
 
 
   ngOnInit() {
-    if(this.route.snapshot.paramMap.get('id') == null) {
+    if (this.route.snapshot.paramMap.get('id') == null) {
       this.isEditAction = false;
     } else {
       this.isEditAction = true;
@@ -43,18 +39,14 @@ export class FormAssociateComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.isEditAction) {
+    if (this.isEditAction) {
       this.associateService.updateAssociate(this.associate.id, this.associate);
     } else {
       this.associateService.addAssociate(this.associate).subscribe(data => {
         if (data.message != null) {
-
-          this.errorMessage = data.message;
-          console.log(this.errorMessage);
-
-          this.toastService.show(this.errorMessage, { classname: 'bg-danger text-light', delay: 5000 })
+          this.toastService.show(data.message, {classname: 'bg-danger text-light', delay: 5000})
         }
-       });
+      });
 
     }
     this.gotoAssociatesList();
@@ -63,7 +55,7 @@ export class FormAssociateComponent implements OnInit {
   gotoAssociatesList() {
     this.router.navigate([
       'home', {
-        outlets: { nav : ['associates']}
+        outlets: {nav: ['associates']}
       }
     ]);
   }

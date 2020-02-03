@@ -52,7 +52,7 @@
 
       <div class="form-group">
       <label for="type">Type:</label><br>
-      <select required [(ngModel)]="associate.type" id="type" name="type"  >
+      <select [(ngModel)]="associate.type" id="type" name="type"  >
         <option *ngFor="let type of associateType" [value] ="type">{{type}}</option>
       </select>
 
