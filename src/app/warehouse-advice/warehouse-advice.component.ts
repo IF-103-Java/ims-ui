@@ -5,6 +5,7 @@ import {ItemService} from '../item/item.service';
 import {WarehouseAdviceService} from './warehouse-advice.service';
 import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-warehouse-advice',
@@ -66,6 +67,11 @@ export class WarehouseAdviceComponent implements OnInit {
           this.searchInput.setValue(item.name, {emitEvent: false});
           this.state = WarehouseAdviceComponentState.WAREHOUSE_ADVICE;
         }
+      }, (e) => {
+        this.catch403Error(e, () => {
+          this.message = 'Upgrade your account';
+          this.state = WarehouseAdviceComponentState.MESSAGE;
+        });
       });
   }
 
@@ -81,6 +87,14 @@ export class WarehouseAdviceComponent implements OnInit {
         return this.state !== WarehouseAdviceComponentState.MESSAGE;
     }
     return false;
+  }
+
+  catch403Error(error, func: () => void) {
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 403) {
+        func();
+      }
+    }
   }
 }
 
