@@ -18,7 +18,6 @@ import {WarehouseAdviceComponent} from './warehouse-advice/warehouse-advice.comp
 import {WarehouseCreateComponent} from "./warehouse/warehouse-create/warehouse-create.component";
 import {WarehousesComponent} from "./warehouse/warehouses/warehouses.component";
 import {WarehouseUpdateComponent} from "./warehouse/warehouse-update/warehouse-update.component";
-import {AccountSettingsComponent} from './account/account-settings/account-settings.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {AssociateComponent} from "./associate/associate.component";
 import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
@@ -48,7 +47,6 @@ export const routerComponents = [
   WarehouseCreateComponent,
   WarehousesComponent,
   WarehouseUpdateComponent,
-  AccountSettingsComponent,
   DashboardComponent,
   AssociateComponent,
   FormAssociateComponent,
@@ -77,7 +75,6 @@ export const routerComponents = [
           {path: 'upgrade', component: AccountUpgradeComponent, outlet: 'nav'},
           {path: 'invite', component: UserInviteComponent, outlet: 'nav'},
           {path: 'socket', component: NotificationComponent},
-          {path: 'account-settings', component: AccountSettingsComponent, outlet: 'nav'},
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},

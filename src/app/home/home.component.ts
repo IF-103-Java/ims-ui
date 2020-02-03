@@ -13,6 +13,7 @@ import {ToastService} from "../websocket/notification/toast.service";
 export class HomeComponent implements OnInit {
   modalRef: NgbModalRef;
   username: string;
+  role: string;
 
 
   constructor(private loginService: LoginService,
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.username = sessionStorage.getItem('username');
+    this.role = sessionStorage.getItem('role');
     this.websocketService._connect();
   }
 

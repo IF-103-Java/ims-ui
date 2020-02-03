@@ -33,7 +33,7 @@ export class UserService {
       );
   }
 
-  delete(id: number): Observable<any> {
+  delete(id: bigint): Observable<any> {
     return this.http.delete<User>(this.baseUrl + '/users/' + id)
       .pipe(
         catchError((error: HttpErrorResponse) => {

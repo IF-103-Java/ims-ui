@@ -47,7 +47,7 @@ export class EventComponent implements OnInit {
     singleSelection: false,
     selectAllText: 'Select All',
     unSelectAllText: 'UnSelect All',
-    itemsShowLimit: 1,
+    itemsShowLimit: 3,
     allowSearchFilter: true
   };
 
