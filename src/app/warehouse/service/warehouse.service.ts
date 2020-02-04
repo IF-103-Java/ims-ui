@@ -43,6 +43,14 @@ export class WarehouseService {
 
     return this.http.get<number>(this.baseUrl + `/warehouses/capacity/` + warehouseId);
   }
+
+  public getAllTopWarehouses() {
+    return this.http.get<Array<Warehouse>>(this.baseUrl + `/topwarehouses`);
+  }
+
+  public getSubwarehouses(id: number) {
+    return this.http.get<Array<Warehouse>>(this.baseUrl + `/topWarehouseId` + id);
+  }
 }
 
 export interface ResponseBody {
