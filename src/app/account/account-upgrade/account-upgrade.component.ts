@@ -31,15 +31,16 @@ export class AccountUpgradeComponent implements OnInit {
 
   upgradeAccount(newTypeId: bigint) {
     this.accountService.upgradeAccount(newTypeId).subscribe((response: HttpResponse<any>) => {
-      if (response) {
-        this.router.navigate(['account']);
-      }
-    }, (appError: AppError) => {
-      if (appError.status === 500) {
-        this.upgradeErrors['upgrade'] = 'Upgrade is not successful';
-      } else {
-        throw appError;
-      }
+      this.getData();
+    });
+  }
+
+  getData() {
+    this.accountService.getType().subscribe(data => {
+      this.currentType = data;
+    });
+    this.accountService.getPossibleTypes().subscribe(data => {
+      this.possibleToUpgradeTypes = data;
     });
   }
 }
