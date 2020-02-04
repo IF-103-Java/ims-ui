@@ -63,8 +63,7 @@ export class UserService {
   }
 
   getCurrentUser(): Observable<any> {
-    return this.http.get<User>(
-      this.baseUrl + '/users/me',
+    return this.http.get<User>(this.baseUrl + '/users/me',
       {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {

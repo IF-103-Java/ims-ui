@@ -17,11 +17,11 @@ export class HomeComponent implements OnInit {
   role: string;
 
 
-  constructor(private loginService: LoginService,
+  constructor(public toastService: ToastService,
+              private loginService: LoginService,
               private router: Router,
               private modalService: NgbModal,
               private websocketService: WebsocketService,
-              private toastService: ToastService,
               private userService: UserService) {
   }
 

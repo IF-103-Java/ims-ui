@@ -16,8 +16,7 @@ export class LoginService {
   }
 
   login(user: LoginUser): Observable<any> {
-    return this.http.post<any>(this.baseUrl + '/signin', user,
-      {observe: 'response'})
+    return this.http.post<any>(this.baseUrl + '/signin', user)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           return throwError(new AppError(error));
@@ -26,7 +25,7 @@ export class LoginService {
   }
 
   logout(): void {
-    sessionStorage.removeItem('jwt-token');
+    sessionStorage.clear();
   }
 
   isLoggedIn(): boolean {

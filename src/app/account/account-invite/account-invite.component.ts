@@ -15,7 +15,7 @@ export class UserInviteComponent implements OnInit {
 
   constructor(private accountService: AccountService,
               private router: Router,
-              private toastService: ToastService) {
+              public toastService: ToastService) {
   }
 
   ngOnInit() {
