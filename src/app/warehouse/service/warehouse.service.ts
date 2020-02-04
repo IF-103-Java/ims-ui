@@ -27,6 +27,10 @@ export class WarehouseService {
       + size + '&sort=' + sort);
   }
 
+  public getSubWarehouses(topWarehouseId) {
+    return this.http.get<Array<Warehouse>>(this.baseUrl + '/warehouses/topWarehouseId/' + topWarehouseId);
+  }
+
   public updateWarehouse(warehouseId: number, warehouse: Warehouse): Observable<Warehouse> {
     return this.http.put<Warehouse>(this.baseUrl + `/warehouses/update/` + warehouseId, warehouse);
   }

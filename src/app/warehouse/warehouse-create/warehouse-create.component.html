@@ -22,18 +22,27 @@
         <input [(ngModel)]="warehouse.isBottom" type="checkbox" data-toggle="toggle">Bottom
       </label>
     </div>
-
-    <div class="form-group">
-      <label for="parentId">parentId</label>
-      <input type="text" class="form-control" id="parentId" required [(ngModel)]="warehouse.parentId"
-             name="parentId" placeholder="Enter parentId">
+    <div class="col" >
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select top warehouses</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button *ngFor="let warehouse of topList" (click)="setTopWarehouse(warehouse)" ngbDropdownItem>{{warehouse}}</button>
+        </div>
+      </div>
+      <br>
+      Top warehouse - <span *ngIf="warehouse.topWarehouseID != null">{{selectedTopWarehouse}}</span>
     </div>
-    <div class="form-group">
-      <label for="topWarehouseID">topWarehouseID</label>
-      <input type="text" class="form-control" id="topWarehouseID" required [(ngModel)]="warehouse.topWarehouseID"
-             name="topWarehouseID">
+    <div class="col" *ngIf="warehouse.topWarehouseID != null">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select parent warehouse</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button *ngFor="let warehouse of childrenList" (click)="setParentWarehouse(warehouse)" ngbDropdownItem>{{warehouse}}</button>
+        </div>
+      </div>
+      <br>
+      Parent - <span *ngIf="warehouse.parentID != null">{{selectedParentWarehouse}}</span>
     </div>
-
+    <br>
     <label>Address</label>
 
     <div class="form-group">
