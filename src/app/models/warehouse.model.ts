@@ -1,12 +1,15 @@
+import {Address} from './address';
+
 export class Warehouse {
-  id: bigint;
+  id: number;
   name: string;
   info: string;
   capacity: number;
   isBottom: boolean;
-  parentId: bigint;
-  accountId: bigint;
-  topWarehouseID: bigint;
+  parentId: number;
+  accountId: number;
+  topWarehouseID: number;
   active: boolean;
-  path: Array<string>;
+  addressDto: Address;
+  path: string[];
 }

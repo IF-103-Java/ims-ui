@@ -28,6 +28,7 @@ import {ItemUpdateComponent} from "./item/item-update/item-update.component";
 import {SavedItemMoveComponent} from "./item/saved-item-move/saved-item-move.component";
 import {SavedItemOutComponent} from "./item/saved-item-out/saved-item-out.component";
 
+
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
   HomeComponent,
@@ -83,7 +84,7 @@ export const routerComponents = [
           {path: 'warehouse-advice', component: WarehouseAdviceComponent, outlet: 'nav'},
           {path: 'warehouse-create', component: WarehouseCreateComponent, outlet: 'nav'},
           {path: 'warehouses', component: WarehousesComponent, outlet: 'nav'},
-          {path: 'warehouse-update', component: WarehouseUpdateComponent, outlet: 'nav'},
+          {path: 'warehouse-update/:id', component: WarehouseUpdateComponent, outlet: 'nav'},
           {path: 'dashboard', component: DashboardComponent, outlet: 'nav'},
           {path: 'associates', component: AssociateComponent, outlet: 'nav'},
           {path: 'add-associate', component: FormAssociateComponent, outlet: 'nav'},
