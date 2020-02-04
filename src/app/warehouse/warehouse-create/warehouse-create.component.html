@@ -28,6 +28,11 @@
       <input type="text" class="form-control" id="parentId" required [(ngModel)]="warehouse.parentId"
              name="parentId" placeholder="Enter parentId">
     </div>
+      <ng-multiselect-dropdown style="max-width: 400px"
+        [placeholder]="'TopWarehouse'"
+        [data]="topList"
+        [settings]="dropdownSettings">
+      </ng-multiselect-dropdown>
     <div class="form-group">
       <label for="topWarehouseID">topWarehouseID</label>
       <input type="text" class="form-control" id="topWarehouseID" required [(ngModel)]="warehouse.topWarehouseID"
