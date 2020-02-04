@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {WarehouseService} from '../service/warehouse.service';
 import {Warehouse} from '../../models/warehouse.model';
 import {ToastService} from '../../websocket/notification/toast.service';
-import {WarehousesComponent} from '../warehouses/warehouses.component';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-warehouse-update',
@@ -20,6 +20,7 @@ export class WarehouseUpdateComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router,
               private warehouseService: WarehouseService,
               private toastService: ToastService,
+              private location: Location,
               @Inject('BASE_API_URL') private baseUrl: string) {
   }
 
@@ -72,6 +73,10 @@ export class WarehouseUpdateComponent implements OnInit {
 
   deleteWarehouse(warehouseId: number) {
     this.warehouseService.deleteWarehouse(warehouseId);
+  }
+
+  back() {
+    this.location.back();
   }
 
 }
