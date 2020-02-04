@@ -7,6 +7,7 @@ import {HttpResponse} from '@angular/common/http';
 import AppError from '../../errors/app-error';
 import {Router} from '@angular/router';
 import {Page} from '../../models/page';
+import {ToastService} from '../../websocket/notification/toast.service';
 
 @Component({
   selector: 'app-account-view',
@@ -29,7 +30,7 @@ export class AccountViewComponent implements OnInit {
 
   public type: AccountType;
 
-  constructor(private accountService: AccountService, public router: Router) {
+  constructor(private accountService: AccountService, public router: Router, private toastService: ToastService) {
     this.page.size = 10;
   }
 
@@ -50,12 +51,12 @@ export class AccountViewComponent implements OnInit {
     this.accountService.deleteWorker(userId);
   }
 
-  updateAccountName(name: string) {
-    this.accountService.updateAccountName(name);
-  }
-
   onSubmit() {
-    this.accountService.updateAccountName(this.account.name);
+    this.accountService.updateAccountName(this.account.name).subscribe(data => {
+      if (data.name != null) {
+          this.toastService.show('Account name was successfully changed.',{classname: 'bg-success text-light', delay: 5000});
+      }
+    });
   }
 
   getWorkers() {

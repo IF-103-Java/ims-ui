@@ -50,7 +50,7 @@ export class AccountService {
    }
 
    public updateAccountName(name: string) {
-      return this.http.put(this.baseUrl + '/accounts/', name).subscribe();
+      return this.http.put<Account>(this.baseUrl + '/accounts/', name);
    }
 }
 

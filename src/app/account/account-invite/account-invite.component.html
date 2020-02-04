@@ -4,21 +4,24 @@
   <div class="col mr-2">
     <div class="form-group">
       <label for="first-name">First name:</label>
-      <input type="text" ngModel name="firstName" class="form-control" id="first-name">
+      <input type="text" ngModel name="firstName" class="form-control" id="first-name" required>
       <label for="second-name">Last name:</label>
-      <input type="text" ngModel name="lastName" class="form-control" id="second-name">
+      <input type="text" ngModel name="lastName" class="form-control" id="second-name" required>
       <label for="email">Email:</label>
-      <input type="text" ngModel name="email" class="form-control" id="email">
+      <input type="text" ngModel name="email" class="form-control" pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" id="email" required>
+    </div>
+    <div class="alert-danger center" *ngIf="!data.valid && data.touched">
+      Fill all the fields in a right way!
     </div>
   </div>
 
   <div class="col mr-2">
-    <a (click)="inviteUser(data.value)" class="btn btn-success btn-icon-split">
+    <button (click)="inviteUser(data.value)" [disabled]="!data.valid" class="btn btn-success btn-icon-split">
                       <span class="icon text-white-50">
                         <i class="fas fa-check"></i>
                       </span>
       <span class="text">Invite user</span>
-    </a>
+    </button>
   </div>
   <div class="alert-danger center">
   {{inviteErrors['invite']}}
