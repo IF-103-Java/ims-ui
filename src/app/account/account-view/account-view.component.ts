@@ -8,6 +8,7 @@ import AppError from '../../errors/app-error';
 import {Router} from '@angular/router';
 import {Page} from '../../models/page';
 import {ToastService} from '../../websocket/notification/toast.service';
+import {UserService} from '../../user/services/user.service';
 
 @Component({
   selector: 'app-account-view',
@@ -30,7 +31,7 @@ export class AccountViewComponent implements OnInit {
 
   public type: AccountType;
 
-  constructor(private accountService: AccountService, public router: Router, private toastService: ToastService) {
+  constructor(private accountService: AccountService, public router: Router, private toastService: ToastService, private userService: UserService) {
     this.page.size = 10;
   }
 
@@ -48,7 +49,11 @@ export class AccountViewComponent implements OnInit {
   }
 
   deleteWorker(userId: bigint) {
-    this.accountService.deleteWorker(userId);
+    this.userService.delete(userId).subscribe(response => {
+      console.log(response);
+      this.toastService.show('User was deleted.',{classname: 'bg-success text-light', delay: 5000});
+      this.getWorkers();
+    });
   }
 
   onSubmit() {

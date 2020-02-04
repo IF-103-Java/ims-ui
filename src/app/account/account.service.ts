@@ -45,10 +45,6 @@ export class AccountService {
      return this.http.put(this.baseUrl + '/upgrade/' + typeId, typeId);
    }
 
-   public deleteWorker(userId: bigint) {
-       return this.http.delete(this.baseUrl + '/users/' + userId).subscribe();
-   }
-
    public updateAccountName(name: string) {
       return this.http.put<Account>(this.baseUrl + '/accounts/', name);
    }
