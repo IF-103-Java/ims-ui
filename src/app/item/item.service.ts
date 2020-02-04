@@ -41,7 +41,7 @@ export class ItemService {
      return this.http.get<Item>(this.baseUrl + '/items/' + itemId);
    }
   public deleteItem(itemId: number): Observable<boolean> {
-    return this.http.delete<boolean>(this.baseUrl + '/items/' + itemId);
+     return this.http.delete<boolean>(this.baseUrl + '/items/' + itemId);
   }
   public updateItem(item: Item): Observable<Item> {
     return this.http.put<Item>(this.baseUrl + '/items', item);

@@ -17,7 +17,7 @@
             <select class="custom-select" style="width: auto" name="pageSize"  [(ngModel)]="itemTransactionRequest.destinationWarehouseId">
               <option *ngFor="let warehouseModel of warehouses" [ngValue]="warehouseModel.id">{{warehouseModel.name}}</option>
             </select>
-            <button (click)="findUsefulWarehouses()" class="btn btn-info" style="margin-left: 10px">UsefulWarehouses</button>
+            <button (click)="findUsefulWarehouses()" class="btn btn-info" style="margin-left: 10px">Find Useful Warehouses</button>
           </p>
           <button (click)="addSavedItem()" class="btn btn-success btn-icon-split">
                      <span class="icon text-white-50">

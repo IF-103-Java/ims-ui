@@ -31,9 +31,7 @@ export class ItemTableComponent implements OnInit {
 this.router.navigate(['home', { outlets: { nav: ['update-item', itemId]}}]);
   }
 delete(itemId: number) {
-  let del = false;
-  this.itemService.deleteItem(itemId).subscribe(data => del = data);
-  this.sort();
+  this.itemService.deleteItem(itemId);
 }
   ngOnInit() {
     this.itemService.findSortedAndPaginatedItems(this.page, this.size, this.sortValue, this.direction).subscribe(data => {
