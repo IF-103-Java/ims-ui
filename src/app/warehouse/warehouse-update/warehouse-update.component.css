@@ -1,7 +1,16 @@
 .form-group{
-  padding-left: 10px;
+  padding-left: 20px;
 }
 
 .clickable {
   cursor: pointer;
 }
+
+input.ng-touched.ng-invalid {border:solid red 2px;}
+input.ng-touched.ng-valid {border:solid green 2px;}
+
+.btn btn-success {
+  color: #1cc88a;
+  padding: 5px
+}
+

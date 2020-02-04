@@ -1,2 +1,7 @@
 input.ng-touched.ng-invalid {border:solid red 2px;}
 input.ng-touched.ng-valid {border:solid green 2px;}
+
+.form-group{
+  padding-left: 20px;
+  width: 250px;
+}

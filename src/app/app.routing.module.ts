@@ -23,6 +23,8 @@ import {AssociateComponent} from "./associate/associate.component";
 import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
 import {UserInfoComponent} from "./user/user-info/user-info.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {UserConfirmationComponent} from "./user/user-confirmation/user-confirmation.component";
+import {LoginPageGuardService} from "./user/services/login-page-guard.service";
 import {SavedItemCreateComponent} from './item/saved-item-create/saved-item-create.component';
 import {ItemUpdateComponent} from "./item/item-update/item-update.component";
 import {SavedItemMoveComponent} from "./item/saved-item-move/saved-item-move.component";
@@ -55,6 +57,7 @@ export const routerComponents = [
   AssociateComponent,
   FormAssociateComponent,
   UserInfoComponent,
+  UserConfirmationComponent,
   SavedItemCreateComponent,
   ItemUpdateComponent,
   SavedItemMoveComponent,
@@ -66,10 +69,11 @@ export const routerComponents = [
     NgbModule,
     RouterModule.forRoot([
       {path: '', redirectTo: 'home', pathMatch: 'full'},
-      {path: 'sign-in', component: UserSigninComponent},
-      {path: 'sign-up', component: UserSignupComponent},
-      {path: 'forgot-password', component: UserForgotPasswordComponent},
-      {path: 'reset-password', component: UserResetPasswordComponent},
+      {path: 'sign-in', canActivate: [LoginPageGuardService], component: UserSigninComponent},
+      {path: 'sign-up', canActivate: [LoginPageGuardService], component: UserSignupComponent},
+      {path: 'forgot-password', canActivate: [LoginPageGuardService], component: UserForgotPasswordComponent},
+      {path: 'reset-password', canActivate: [LoginPageGuardService], component: UserResetPasswordComponent},
+      {path: 'users/confirmation', canActivate: [LoginPageGuardService], component: UserConfirmationComponent},
       {
         path: 'home',
         component: HomeComponent,
@@ -106,3 +110,4 @@ export const routerComponents = [
 })
 export class AppRoutingModule {
 }
+

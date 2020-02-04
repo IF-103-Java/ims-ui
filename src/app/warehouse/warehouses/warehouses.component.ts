@@ -15,6 +15,7 @@ export class WarehousesComponent implements OnInit {
   page$ = new Page<Warehouse>();
   sortBy: 'name';
   direction: 'asc';
+  capacity;
 
   constructor(private route: ActivatedRoute,
               private warehouseService: WarehouseService,
@@ -47,6 +48,11 @@ export class WarehousesComponent implements OnInit {
       .subscribe(data => {
         this.getWarehouses();
       });
+  }
+
+  getCapacity(id: number) {
+    this.warehouseService.getTotalCapacity(id).subscribe(data => this.capacity = data.valueOf());
+    console.log(this.capacity);
   }
 
 

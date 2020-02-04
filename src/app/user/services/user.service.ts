@@ -64,4 +64,13 @@ export class UserService {
       );
   }
 
+  public activateUser(token: string): Observable<any>  {
+    return this.http.post(this.baseUrl + '/users/confirmation?emailUUID=' + token,
+      {observe: 'response'})
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(new AppError(error));
+        })
+      )
+  }
 }

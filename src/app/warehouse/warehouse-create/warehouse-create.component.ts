@@ -3,6 +3,7 @@ import {Warehouse} from '../../models/warehouse.model';
 import {WarehouseService} from '../service/warehouse.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Address} from '../../models/address';
+import {ToastService} from '../../websocket/notification/toast.service';
 
 @Component({
   selector: 'app-warehouse',
@@ -11,35 +12,26 @@ import {Address} from '../../models/address';
 })
 export class WarehouseCreateComponent implements OnInit {
   warehouse: Warehouse = new Warehouse();
-  private isEditAction;
 
   constructor(private warehouseService: WarehouseService,
               private router: Router,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private toastService: ToastService
+
   ) {
     this.warehouse.addressDto = new Address();
-
   }
 
   ngOnInit() {
-    if (this.route.snapshot.paramMap.get('id') == null) {
-      this.isEditAction = false;
-    } else {
-      this.isEditAction = true;
-      this.warehouseService.getWarehouse(Number(this.route.snapshot.paramMap.get('id')))
-        .subscribe(data => this.warehouse = data);
-    }
   }
 
   onSubmit() {
-      this.warehouseService.createWarehouse(this.warehouse);
+    this.warehouseService.createWarehouse(this.warehouse).subscribe(data => {
+      console.log(data.message);
+      if (data.message != null) {
+        this.toastService.show(data.message, {classname: 'bg-danger text-light', delay: 5000});
+      }
+    });
   }
 
-  gotoList() {
-    this.router.navigate([
-      'home', {
-        outlets: {nav: ['warehouses']}
-      }
-    ]);
-  }
 }
