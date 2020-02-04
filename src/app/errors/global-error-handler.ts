@@ -15,7 +15,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     const router = this.injector.get(Router);
     switch (appError.status) {
       case 0: {
-        this.toastService.show('No Network access or Server not work', {classname: 'bg-success text-light', delay: 3000});
+        this.toastService.show('No Network access or Server not work', {classname: 'bg-danger text-light', delay: 3000});
         break;
       }
       case 500: {
