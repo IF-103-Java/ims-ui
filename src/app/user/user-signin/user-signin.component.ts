@@ -31,6 +31,7 @@ export class UserSigninComponent implements OnDestroy {
       sessionStorage.setItem('username', response.username);
       sessionStorage.setItem('account_id', response.accountId);
       sessionStorage.setItem('account_type', response.accountType);
+      sessionStorage.setItem('role', response.role)
     }
 
     this.loginSubscription = this.loginService.login(user)
