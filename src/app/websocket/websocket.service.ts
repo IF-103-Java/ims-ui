@@ -3,7 +3,6 @@ import * as SockJS from 'sockjs-client'
 import {CompatClient, Stomp} from "@stomp/stompjs";
 import {Event} from "../models/event";
 import {ToastService} from "./notification/toast.service";
-import {debug} from "util";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ export class WebsocketService {
     let _this = this;
     let socket = new SockJS(_this.baseUrl + _this.wsEndPoint);
     _this.stompClient = Stomp.over(socket);
-    _this.stompClient.debug = function(message){
+    _this.stompClient.debug = function (message) {
     }
     _this.stompClient.connect({}, function (frame) {
       _this.stompClient.subscribe(_this.topic + sessionStorage.getItem('account_id'), message => {
