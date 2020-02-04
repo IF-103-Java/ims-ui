@@ -25,7 +25,7 @@ export class LoginService {
   }
 
   logout(): void {
-    sessionStorage.removeItem('jwt-token');
+    sessionStorage.clear();
   }
 
   isLoggedIn(): boolean {

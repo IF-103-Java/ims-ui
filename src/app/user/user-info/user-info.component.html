@@ -19,7 +19,7 @@
                     <a class="nav-link" id="change-password-tab" data-toggle="tab" href="#password" role="tab"
                        aria-controls="password" aria-selected="false">Change password</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" *ngIf="user.role=='ROLE_ADMIN'">
                     <a class="nav-link" id="delete-profile-tab" data-toggle="tab" href="#delete" role="tab"
                        aria-controls="delete" aria-selected="false">Delete profile</a>
                   </li>
