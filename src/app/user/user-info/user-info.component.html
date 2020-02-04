@@ -37,7 +37,7 @@
                         <th class="align-middle" scope="row">First Name:</th>
                         <td>
                           <input type="text" name="firstName" class="form-control border-none"
-                                 [ngModel]="user.firstName" id="firstName"
+                                 [ngModel]="userForm.firstName" id="firstName"
                                  placeholder="First name" required [readOnly]="isFormDisable()"
                                  [ngClass]="{'border' : !isFormDisable()}">
 
@@ -48,7 +48,7 @@
                         <th class="align-middle" scope="row">Last Name:</th>
                         <td>
                           <input type="text" name="lastName" class="form-control border-none"
-                                 [ngModel]="user.lastName"
+                                 [ngModel]="userForm.lastName"
                                  placeholder="Last name" required [readOnly]="isFormDisable()"
                                  [ngClass]="{'border' : !isFormDisable()}">
                         </td>
@@ -79,20 +79,18 @@
                     <hr class="mt-0">
 
                     <div *ngIf="isFormDisable(); then showEdit else showUpdate"></div>
+
                     <ng-template #showEdit>
                       <button class="btn btn-primary btn-edit " (click)="clickEditBtn()">Edit</button>
                     </ng-template>
+
                     <ng-template #showUpdate>
                       <div class="row2 update-block">
-                        <button type="submit" class="btn btn-danger btn-primary " (click)="clickCancelBtn()">
-                          Cancel
-                        </button>
-                        <button type="submit" class="btn btn-primary " [disabled]="!data.valid"
-                                (click)="update(data.value)">
-                          Save
-                        </button>
+                        <button type="submit" class="btn btn-danger btn-primary " (click)="clickCancelBtn()">Cancel</button>
+                        <button type="submit" class="btn btn-primary " [disabled]="!data.valid" (click)="update(data.value)">Save</button>
                       </div>
                     </ng-template>
+
                   </form>
                 </div>
 
@@ -149,8 +147,8 @@
                 <!--Step 3:  Delete profile-->
 
                 <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="delete-profile-tab">
-                  <p class=" mb-2 text-center">If you really want to delete profile, you should know than you lose all
-                    your data forever! Thanks for cooperation!</p>
+                  <p class=" mb-2 text-center">If you really want to delete profile, you should know you'll lose
+                    all your data forever! Thanks for cooperation!</p>
                   <button class="btn btn-danger btn-delete" (click)="openDeleteModal(content)">Delete</button>
                 </div>
               </div>
