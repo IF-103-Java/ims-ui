@@ -6,7 +6,7 @@ export class SavedItem {
   itemId: number;
   item: Item;
   quantity: number;
-  warehouseId: bigint;
+  warehouseId: number;
   warehouse: Warehouse;
 
 }
