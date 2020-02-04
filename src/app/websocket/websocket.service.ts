@@ -16,12 +16,12 @@ export class WebsocketService {
   }
 
   _connect() {
-    console.log("Initialize WebSocket Connection");
     let _this = this;
     let socket = new SockJS(_this.baseUrl + _this.wsEndPoint);
     _this.stompClient = Stomp.over(socket);
+    _this.stompClient.debug = function (message) {
+    }
     _this.stompClient.connect({}, function (frame) {
-      console.log('Websocket has been connected');
       _this.stompClient.subscribe(_this.topic + sessionStorage.getItem('account_id'), message => {
         _this.onMessageReceived(message);
       });
@@ -35,7 +35,6 @@ export class WebsocketService {
     if (_this.stompClient !== null) {
       _this.stompClient.disconnect();
     }
-    console.log("Websocket has been disconnected");
   }
 
   onMessageReceived(event) {
