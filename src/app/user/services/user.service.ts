@@ -42,7 +42,8 @@ export class UserService {
   }
 
   delete(id: bigint): Observable<any> {
-    return this.http.delete<User>(this.baseUrl + '/users/' + id)
+    return this.http.delete<User>(this.baseUrl + '/users/' + id,
+      {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
           return throwError(new AppError(error));
@@ -72,7 +73,7 @@ export class UserService {
       );
   }
 
-  public activateUser(token: string): Observable<any>  {
+  public activateUser(token: string): Observable<any> {
     return this.http.post(this.baseUrl + '/users/confirmation?emailUUID=' + token,
       {observe: 'response'})
       .pipe(

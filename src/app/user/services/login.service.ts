@@ -16,7 +16,8 @@ export class LoginService {
   }
 
   login(user: LoginUser): Observable<any> {
-    return this.http.post<any>(this.baseUrl + '/signin', user)
+    return this.http.post<any>(this.baseUrl + '/signin', user,
+      {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
           return throwError(new AppError(error));
