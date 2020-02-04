@@ -16,16 +16,16 @@ export class LoginService {
   }
 
   login(user: LoginUser): Observable<any> {
-    return this.http.post<any>(this.baseUrl + '/signin', user
-    ).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return throwError(new AppError(error));
-      })
-    );
+    return this.http.post<any>(this.baseUrl + '/signin', user)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(new AppError(error));
+        })
+      );
   }
 
   logout(): void {
-    sessionStorage.removeItem('jwt-token');
+    sessionStorage.clear();
   }
 
   isLoggedIn(): boolean {

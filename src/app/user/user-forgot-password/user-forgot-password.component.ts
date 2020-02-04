@@ -14,6 +14,7 @@ export class UserForgotPasswordComponent implements OnInit {
   done: boolean;
   forgotSubscription: Subscription;
   userErrors: Map<string, string> = new Map<string, string>();
+  load = false;
 
   constructor(private resetPasswordService: ResetPasswordService,
               public router: Router) {
@@ -23,6 +24,7 @@ export class UserForgotPasswordComponent implements OnInit {
   }
 
   forgotPassword(data: any) {
+    this.load = true;
 
     this.forgotSubscription = this.resetPasswordService.sendResetPasswordToken(data.email)
       .subscribe(response => {
@@ -33,6 +35,7 @@ export class UserForgotPasswordComponent implements OnInit {
         } else {
           throw appError;
         }
+        this.load = false;
       });
   }
 

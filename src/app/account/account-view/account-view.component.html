@@ -1,12 +1,20 @@
-<form>
+<form (ngSubmit)="onSubmit()" #data="ngForm">
   <div>
-    <div *ngIf="account" >
-      <h2 style="text-align:center">{{account.name}}</h2>
-
+    <div class="col mr-2">
+    <label for="name">Account name:</label>
+    </div>
+    <div *ngIf="account" class="col mr-2" style="width: 25%">
+      <input type="text" [(ngModel)]="account.name"
+             class="form-control"
+             id="name"
+             name="name"
+             placeholder="Enter account name">
     </div>
   </div>
-
-
+  <div style="padding-top: 10px; padding-bottom: 10px" class="col mr-2">
+    <button type="submit"
+               class="btn btn-info">Submit</button>
+  </div>
 
   <div class="col-xl-3 col-md-6 mb-4">
     <div class="card border-left-info shadow h-100 py-2">
@@ -24,6 +32,11 @@
               </div>
             </div>
 
+            <div style="padding-top: 10px;">
+              <a href="/home/(nav:upgrade)" class="btn btn-info btn-icon-split">
+                <span class="text">Upgrade</span>
+              </a>
+            </div>
           </div>
           <div class="col-auto">
             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -72,15 +85,15 @@
           </div>
 
           <!-- Page Heading -->
+
+
           <h1 class="h3 mb-2 text-gray-800">Workers</h1>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-            </div>
-          </form>
-
+          <div style="padding-bottom: 10px">
+            <a href="/home/(nav:invite)" class="btn btn-info btn-icon-split">
+              <span class="text">Invite new user</span>
+            </a>
+          </div>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -96,16 +109,24 @@
                   </thead>
 
                   <tbody>
-                  <tr *ngFor="let worker of workers">
+                  <tr *ngFor="let worker of page.content">
                     <td>{{worker.firstName}}</td>
                     <td>{{worker.lastName}}</td>
                     <td>{{worker.email}}</td>
-                    <td><a class="btn btn__edit">Re-invite</a></td>
-                    <td><a href="#" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure delete this user?')">
+                    <td><a (click)="(deleteWorker(worker.id))" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure delete this user?')">
                       <i class="fas fa-trash"></i>
                     </a></td>
                   </tr>
                   </tbody>
+                  <tfoot>
+                  <ngb-pagination
+                    [collectionSize]="page.totalElements" [(page)]="pageNumber" [pageSize]="page.size" [maxSize]="4"
+                    [rotate]="true" [boundaryLinks]="false"
+                    (pageChange)="getWorkers()">
+                    <ng-template ngbPaginationPrevious>Prev</ng-template>
+                    <ng-template ngbPaginationNext>Next</ng-template>
+                  </ngb-pagination>
+                  </tfoot>
                 </table>
               </div>
             </div>

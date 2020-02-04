@@ -1,13 +1,9 @@
 import {Inject, Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {User} from '../../models/user.model';
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import AppError from "../../errors/app-error";
-
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
 
 @Injectable({
   providedIn: 'root'

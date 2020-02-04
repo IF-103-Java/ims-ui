@@ -4,10 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:dev": "ng build --configuration=dev",
+    "build:prod": "ng build --configuration=production"
   },
   "private": true,
   "dependencies": {
@@ -21,15 +23,21 @@
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "^3.0.1",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
+    "@stomp/ng2-stompjs": "^7.2.0",
     "angular-font-awesome": "^3.1.2",
     "font-awesome": "^4.7.0",
+    "net": "^1.0.2",
     "ng-multiselect-dropdown": "^0.2.10",
     "rxjs": "~6.4.0",
+    "rxjs-compat": "6.5.4",
+    "sockjs-client": "^1.4.0",
+    "stompjs": "^2.3.3",
     "tslib": "^1.10.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "ng-toast": "^2.0.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.22",
+    "@angular-devkit/build-angular": "^0.803.23",
     "@angular/cli": "~8.3.20",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",

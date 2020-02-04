@@ -11,7 +11,9 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {JwtModule} from '@auth0/angular-jwt';
 import {GlobalErrorHandler} from './errors/global-error-handler';
 import {environment} from '../environments/environment';
+import {ToastsContainerComponent} from "./websocket/notification/toasts-container.component";
 import {TruncatePipe} from './pipe/truncate.pipe';
+import {NgbdSortableHeader} from "./associate/ngbd-sortable-header.directive";
 
 export function getToken() {
   let jwtToken = '';
@@ -24,8 +26,10 @@ export function getToken() {
 @NgModule({
   declarations: [
     AppComponent,
+    ToastsContainerComponent,
     routerComponents,
     TruncatePipe,
+    NgbdSortableHeader
   ],
   imports: [
     BrowserModule,

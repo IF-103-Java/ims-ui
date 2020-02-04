@@ -1,11 +1,13 @@
-import {Item} from './item.model';
-
 export class WarehouseStorageAdvice {
-  item?: Item;
+  itemId?: bigint;
+  warehouseAdvices?: WarehouseAdvice[];
+  bestAssociates?: BestAssociates;
+  message?: string;
+}
+
+export class BestAssociates {
   clients?: Associate[];
   suppliers?: Associate[];
-  warehouseAdvices?: WarehouseAdvice[];
-  message?: string;
 }
 
 export enum AssociateType {
@@ -14,23 +16,31 @@ export enum AssociateType {
 }
 
 export class Address {
-  id: number;
   country: string;
   city: string;
-  address: string;
+  street: string;
+  geo: Geo;
+}
+
+export class Geo {
+  latitude: number;
+  longitude: number;
 }
 
 export class Associate {
   id: number;
   name: string;
-  addressDto: Address;
+  address: Address;
   type: AssociateType;
+  totalTransactionQuantity: number;
+  weight: number;
+  reverseWeight: number;
 }
 
 export class Warehouse {
   id: number;
   name: string;
-  addressDto: Address;
+  address: Address;
 }
 
 export class WarehouseAdvice {

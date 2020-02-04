@@ -8,6 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Set env to dev
+        if: endsWith(github.ref, '/dev')
+        run: |
+          echo "::set-env name=ENV::dev"
+      - name: Set env to prod
+        if: endsWith(github.ref, '/master')
+        run: |
+          echo "::set-env name=ENV::prod"
       - name: Checkout
         uses: actions/checkout@master
       - name: Build & Push docker image
@@ -18,3 +26,4 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           snapshot: true
+          buildargs: ENV

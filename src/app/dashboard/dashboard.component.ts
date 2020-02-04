@@ -6,6 +6,8 @@ import {NgbProgressbarConfig} from '@ng-bootstrap/ng-bootstrap';
 import {EndingItems} from '../models/endingItems';
 import {PopularItems} from '../models/popularItems';
 import {WarehousePremiumList} from '../models/warehousePremiumList';
+import {Page} from '../models/page';
+
 
 interface State {
   page: number;
@@ -16,18 +18,24 @@ interface State {
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css'],
   providers: [DashboardService, NgbProgressbarConfig]
 })
 export class DashboardComponent implements OnInit {
+  pageSizeOptions = [2, 4, 6];
+  load1: boolean;
+  load2: boolean;
+  load3: boolean;
+  load4: boolean;
+  loadPremium: boolean;
   warehouseLoad$: WarehouseLoad[];
 
-  endingState: State = {
-    page: 1,
-    pageSize: 4,
-    collectionSize: 10
-  };
+  page$ = new Page<EndingItems>();
   minQuantity = 5;
-  endingItems$: EndingItems[];
+  direction = 'asc';
+  sortBy = 'quantity,DESC';
+  page = 1;
+  arrow = '↑';
 
   popularState: State = {
     page: 1,
@@ -43,34 +51,51 @@ export class DashboardComponent implements OnInit {
   // @ts-ignore
   premiumId: bigint;
 
+  isPremium: boolean;
   constructor(private dashboardService: DashboardService,
               config: NgbProgressbarConfig) {
     config.height = '25px';
     config.striped = true;
     config.showValue = false;
-    config.type = 'value > 25 ? su';
+
+    this.page$.size = 4;
+    this.page$.number = 0;
 
     this.popularRequest.dateType = 'ALL';
     this.popularRequest.popType = 'TOP';
     this.popularRequest.quantity = 5;
     this.popularRequest.date = new Date(this.year + '-' + this.month + '-' + '01');
+
+    this.load1 = false;
+    this.load2 = false;
+    this.load3 = false;
+    this.load4 = false;
+    this.loadPremium = true;
   }
 
   ngOnInit() {
-    this.dashboardService.getWarehouseLoad()
-      .subscribe(data => this.warehouseLoad$ = data);
+    this.getWarehouseLoad();
 
-    this.getEndingItems();
+    this.getEndingItemsPage();
 
     this.getPopularItems();
+
+    this.getType();
   }
 
-  getEndingItems() {
-    this.dashboardService.getEndingItems(this.minQuantity)
+  getWarehouseLoad() {
+    this.dashboardService.getWarehouseLoad()
       .subscribe(data => {
-        this.endingState.collectionSize = data.length;
-        this.endingItems$ = data.slice( (this.endingState.page - 1) * (this.endingState.pageSize),
-          (this.endingState.page - 1) * (this.endingState.pageSize) + this.endingState.pageSize);
+        this.warehouseLoad$ = data;
+        this.load1 = true;
+      });
+  }
+
+  getEndingItemsPage() {
+    this.dashboardService.getEndingItemsPage(this.page - 1, this.page$.size, this.sortBy, this.minQuantity)
+      .subscribe(data => {
+        this.page$ = data;
+        this.load2 = true;
       });
   }
 
@@ -85,15 +110,22 @@ export class DashboardComponent implements OnInit {
           this.popularItems$ = data.slice( (this.popularState.page - 1) * (this.popularState.pageSize),
             (this.popularState.page - 1) * (this.popularState.pageSize) + this.popularState.pageSize);
         }
+        this.load3 = true;
       });
+  }
+  getType() {
+      this.isPremium = sessionStorage.getItem('account_type') === '2';
+      this.load4 = true;
   }
   setDate() {
     this.popularRequest.date = new Date(this.year + '-' + this.month + '-' + '01');
   }
 
   getPremiumLoad(premiumId) {
+    this.loadPremium = false;
     return this.dashboardService.getWarehousePremiumList(premiumId).subscribe(data => {
       this.premiumLoad$ = data;
+      this.loadPremium = true;
     });
   }
   isZero(num: bigint) {
@@ -101,5 +133,23 @@ export class DashboardComponent implements OnInit {
   }
   toNum(num: string) {
     return Number(num);
+  }
+  lessThan25(num: number | bigint) {
+    return num <= 25;
+  }
+  lessThan50(num: number | bigint) {
+    return num <= 50;
+  }
+  lessThan75(num: number | bigint) {
+    return num <= 75;
+  }
+  change() {
+    if (this.sortBy === 'quantity,DESC') {
+      this.sortBy = 'quantity,ASC';
+      this.arrow = '↓';
+    } else {
+      this.sortBy = 'quantity,DESC';
+      this.arrow = '↑';
+    }
   }
 }

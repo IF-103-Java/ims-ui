@@ -1,4 +1,4 @@
-<form>
+<form class="col mr-2">
 
   <h2 style="text-align:left">Current type:</h2>
   <div class="row">
@@ -28,6 +28,8 @@
             <div class="small font-weight-bold">Max warehouse depth: {{currentType.maxWarehouseDepth}}</div>
             <div class="small font-weight-bold">Max clients: {{currentType.maxClients}}</div>
             <div class="small font-weight-bold">Max suppliers: {{currentType.maxSuppliers}}</div>
+            <div *ngIf="currentType.deepWarehouseAnalytics"  class="small font-weight-bold">Deep Warehouse Analytics</div>
+            <div *ngIf="currentType.itemStorageAdvisor" class="small font-weight-bold">Item Storage Advisor</div>
           </div>
           <div class="col-auto">
             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -37,24 +39,13 @@
     </div>
 
     </div>
-  <div class="card border-left-warning shadow h-100 py-2">
-    <div class="card-body">
-      <div class="row no-gutters align-items-center">
-        <div class="col mr-2">
-          <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Additional</div>
-          <div class="small font-weight-bold">Deep Warehouse Analytics: {{currentType.deepWarehouseAnalytics}}</div>
-          <div class="small font-weight-bold">Item Storage Advisor: {{currentType.itemStorageAdvisor}}</div>
-        </div>
-        <div class="col-auto">
-          <i class="fas fa-comments fa-2x text-gray-300"></i>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
+
   </div>
 
   <div class="alert-danger center">
-    {{upgradeErrors['invite']}}
+    {{upgradeErrors['upgrade']}}
   </div>
 
   <h2 style="text-align:left">Available for upgrade:</h2>
@@ -88,6 +79,8 @@
                 <div class="small font-weight-bold">Max warehouse depth: {{type.maxWarehouseDepth}}</div>
                 <div class="small font-weight-bold">Max clients: {{type.maxClients}}</div>
                 <div class="small font-weight-bold">Max suppliers: {{type.maxSuppliers}}</div>
+                <div *ngIf="type.deepWarehouseAnalytics" class="small font-weight-bold">Deep Warehouse Analytics</div>
+                <div *ngIf="type.itemStorageAdvisor" class="small font-weight-bold">Item Storage Advisor</div>
               </div>
               <div class="col-auto">
                 <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -97,20 +90,9 @@
 
       </div>
   </div>
-    <div class="card border-left-warning shadow h-100 py-2">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Additional</div>
-            <div class="small font-weight-bold">Deep Warehouse Analytics: {{type.deepWarehouseAnalytics}}</div>
-            <div class="small font-weight-bold">Item Storage Advisor: {{type.itemStorageAdvisor}}</div>
-          </div>
-          <div class="col-auto">
-            <i class="fas fa-comments fa-2x text-gray-300"></i>
-          </div>
-        </div>
-      </div>
-    </div>
+
+
+
     <div>
     <a (click)="(upgradeAccount(type.id))" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">

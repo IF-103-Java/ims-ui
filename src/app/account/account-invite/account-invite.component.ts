@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../account.service';
 import {User} from '../../models/user.model';
-import {HttpResponse} from '@angular/common/http';
 import AppError from '../../errors/app-error';
 import {Router} from '@angular/router';
+import {ToastService} from '../../websocket/notification/toast.service';
 
 @Component({
   selector: 'app-account-invite',
@@ -13,7 +13,9 @@ import {Router} from '@angular/router';
 export class UserInviteComponent implements OnInit {
   inviteErrors: Map<string, string> = new Map<string, string>();
 
-  constructor(private accountService: AccountService, public router: Router) {
+  constructor(private accountService: AccountService,
+              private router: Router,
+              public toastService: ToastService) {
   }
 
   ngOnInit() {
@@ -25,9 +27,13 @@ export class UserInviteComponent implements OnInit {
     user.firstName = data.firstName;
     user.lastName = data.lastName;
     user.email = data.email;
-    this.accountService.inviteUser(user) .subscribe((response: HttpResponse<any>) => {
-      if (response) {
-        this.router.navigate(['account']);
+    this.accountService.inviteUser(user).subscribe((response) => {
+      if (response == null) {
+        this.toastService.show('User was successfully invited.', {classname: 'bg-success text-light', delay: 5000});
+
+      }
+      if (response.message != null) {
+        this.toastService.show('Users limit has been reached.', {classname: 'bg-danger text-light', delay: 5000});
       }
     }, (appError: AppError) => {
       if (appError.status === 500) {
