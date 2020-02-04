@@ -70,4 +70,8 @@ export class WarehouseUpdateComponent implements OnInit {
       .subscribe(data => this.warehouses = data);
   }
 
+  deleteWarehouse(warehouseId: number) {
+    this.warehouseService.deleteWarehouse(warehouseId);
+  }
+
 }

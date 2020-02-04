@@ -62,7 +62,7 @@
                   <div *ngIf="warehouse.isBottom; then thenBottom else elseBottom"></div>
 
                   <ng-template #thenBottom>
-                    <label>It's bootom level warehouse</label>
+                    <label>It's bottom level warehouse</label>
                   </ng-template>
                   <ng-template #elseBottom>
                     <label>
@@ -140,7 +140,7 @@
                   <button (click)="gotoEditPage(warehouse.id)" class='btn btn-info'
                           data-toggle="modal" data-target="#myModal"> Update
                   </button>
-                  <button (click)="warehouseService.deleteWarehouse(warehouse.id)" class='btn btn-danger'>Delete
+                  <button (click)="deleteWarehouse(warehouse.id)" class='btn btn-danger'>Delete
                   </button>
                 </td>
               </tr>
