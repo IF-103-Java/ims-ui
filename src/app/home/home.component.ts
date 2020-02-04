@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LoginService} from "../user/services/login.service";
 import {Router} from "@angular/router";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
@@ -40,3 +40,4 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/sign-in']);
   }
 }
+

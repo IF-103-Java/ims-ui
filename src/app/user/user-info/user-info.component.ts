@@ -30,6 +30,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   editForm = false;
   userErrors: Map<string, string> = new Map<string, string>();
 
+  userForm: User = new User();
+  firstName: String;
+  lastName: String;
+  role: string;
 
   constructor(private userService: UserService,
               private loginService: LoginService,
@@ -42,8 +46,12 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.getCurrentUserSubscription = this.userService.getCurrentUser()
       .subscribe((response: HttpResponse<any>) => {
         if (response) {
+          this.role = sessionStorage.getItem('role');
           this.user = response.body;
           this.user.role = response.body.role.substr(5);
+          this.firstName = new String(this.user.firstName);
+          this.lastName = new String(this.user.lastName);
+          this.userForm.lastName = this.user.lastName;
         }
       }, (appError: AppError) => {
         throw appError;
@@ -72,6 +80,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   clickCancelBtn() {
+    this.firstName = new String(this.user.firstName);
+    this.lastName = new String(this.user.lastName);
     this.editForm = false;
   }
 
@@ -83,6 +93,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       .subscribe((response: HttpResponse<any>) => {
           if (response) {
             this.user = response.body;
+            sessionStorage.setItem('username', this.user.firstName + ' ' + this.user.lastName);
             this.editForm = false;
           }
         }, (appError: AppError) => {
