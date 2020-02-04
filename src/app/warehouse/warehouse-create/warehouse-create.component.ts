@@ -11,35 +11,19 @@ import {Address} from '../../models/address';
 })
 export class WarehouseCreateComponent implements OnInit {
   warehouse: Warehouse = new Warehouse();
-  private isEditAction;
 
   constructor(private warehouseService: WarehouseService,
               private router: Router,
               private route: ActivatedRoute
   ) {
     this.warehouse.addressDto = new Address();
-
   }
 
   ngOnInit() {
-    if (this.route.snapshot.paramMap.get('id') == null) {
-      this.isEditAction = false;
-    } else {
-      this.isEditAction = true;
-      this.warehouseService.getWarehouse(Number(this.route.snapshot.paramMap.get('id')))
-        .subscribe(data => this.warehouse = data);
-    }
   }
 
   onSubmit() {
-      this.warehouseService.createWarehouse(this.warehouse);
+    this.warehouseService.createWarehouse(this.warehouse);
   }
 
-  gotoList() {
-    this.router.navigate([
-      'home', {
-        outlets: {nav: ['warehouses']}
-      }
-    ]);
-  }
 }

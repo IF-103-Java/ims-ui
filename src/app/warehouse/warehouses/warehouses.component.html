@@ -27,22 +27,22 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <table class="table table-striped table-bordered btn-">
+            <table class="table table-striped table-bordered">
               <thead>
               <tr>
                 <th >Name</th>
                 <th >Information</th>
                 <th >Capacity</th>
-                <th >Address</th>
+                <th style="width: 25%">Address</th>
+                <th>Action</th>
               </tr>
               </thead >
-              <tbody *ngFor="let warehouse of page$.content; index  as i">
-              <tr>
+              <tbody  *ngFor="let warehouse of page$.content; index  as i">
+              <tr >
                 <td>{{warehouse.name}}</td>
                 <td>{{warehouse.info}}</td>
                 <td>{{warehouse.capacity}}</td>
                 <td>{{warehouse.addressDto}}</td>
-
                 <td>
                   <button (click)="editWarehouse(warehouse.id)" class='btn btn-info'
                           data-toggle="modal" data-target="#myModal">Update
