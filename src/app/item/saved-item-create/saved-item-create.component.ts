@@ -30,7 +30,6 @@ export class SavedItemCreateComponent implements OnInit {
       this.warehouses = data;
 
     });
-    console.log(this.warehouses[0].name.toString());
   }
 
 addSavedItem() {

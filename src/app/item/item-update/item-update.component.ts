@@ -27,25 +27,20 @@ export class ItemUpdateComponent implements OnInit {
      getItem() {
        this.itemService.getItemById(Number(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe(data => {
          this.item = data;
-         console.log(this.item.name);
        });
      }
 getSavedItems() {
   this.itemService.getSavedItemsByItemId(this.item.id).subscribe(data => {
-    console.log(this.item.name.toString());
     this.savedItems = data;
     this.savedItems.forEach( x => {
       this.getWarehouse(x.warehouseId);
     });
     this.warehouses = this.warehouses.reverse();
-  })
-
-  console.log(this.savedItems[0].quantity);
+  });
 
 }
 getWarehouse(id: number) {
   this.warehouseService.getWarehouse(id).subscribe(data => {
-    console.log(data.name);
     this.warehouses.push(data);
   });
 
@@ -53,7 +48,7 @@ getWarehouse(id: number) {
   updateItem() {
    this.done = false;
 
-    this.itemService.updateItem(this.item).subscribe(data => {
+  this.itemService.updateItem(this.item).subscribe(data => {
   this.item = data;
   this.done = true;
 });
