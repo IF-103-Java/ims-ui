@@ -5,6 +5,7 @@ import {EndingItems} from '../../models/endingItems';
 import {PopularItemsRequestDto} from '../../models/popularItemRequest';
 import {PopularItems} from '../../models/popularItems';
 import {WarehousePremiumList} from '../../models/warehousePremiumList';
+import {Page} from '../../models/page';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,12 @@ export class DashboardService {
   getWarehouseLoad() {
     return this.http.get<WarehouseLoad[]>(this.baseUrl + '/dashboard/warehouseLoad');
   }
-  getEndingItems(minQuantity: number) {
+  getEndingItemsPage(page: number, size: number, sort: string, minQuantity: number) {
     if (minQuantity < 1) {
       return null;
     }
-    return this.http.get<EndingItems[]>(this.baseUrl + '/dashboard/endingItems?minQuantity=' + minQuantity);
+    return this.http.get<Page<EndingItems>>(this.baseUrl + '/dashboard/endingItems?page=' +
+      page + '&size=' + size + '&sort=' + sort + '&minQuantity=' + minQuantity);
   }
   getPopularItems(popularItemsRequestDto: PopularItemsRequestDto) {
     return this.http.post<PopularItems[]>(this.baseUrl + '/dashboard/popularityItems', popularItemsRequestDto, {

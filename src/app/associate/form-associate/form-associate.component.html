@@ -1,6 +1,4 @@
 <div class="card my-5">
-
-
   <div class="card-body">
 
     <h4 *ngIf="isEditAction" class="m-0 font-weight-bold text-primary">Edit Associate</h4>
@@ -13,7 +11,7 @@
                class="form-control"
                id="name"
                name="name"
-               placeholder="Enter associate name">
+        placeholder="Enter associate name">
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
@@ -21,7 +19,7 @@
                class="form-control"
                id="email"
                name="email"
-               placeholder="Enter associate email address">
+        placeholder="Enter associate email address">
       </div>
 
       <div class="form-group">
@@ -43,9 +41,9 @@
                placeholder="Enter associate additional info">
       </div>
 
-    <div class="form-group">
+      <div class="form-group">
       <label for="type">Type:</label><br>
-      <select [(ngModel)]="associate.type" id="type" name="type">
+      <select [(ngModel)]="associate.type" id="type" name="type"  >
         <option *ngFor="let type of associateType" [value] ="type">{{type}}</option>
       </select>
 
@@ -84,25 +82,11 @@
                name="zip"
                placeholder="Enter assoicate zip">
       </div>
-      <div class="form-group">
-        <label for="latitude">Latitude:</label>
-        <input type="text" [(ngModel)]="associate.addressDto.latitude"
-               class="form-control"
-               id="latitude"
-               name="latitude"
-               placeholder="Enter associate latitude">
-      </div>
-      <div class="form-group">
-        <label for="longitude">Longitude:</label>
-        <input type="text" [(ngModel)]="associate.addressDto.longitude"
-               class="form-control"
-               id="longitude"
-               name="longitude"
-               placeholder="Enter associate longitude">
-      </div>
 
-      <button type="submit"
-              class="btn btn-info">Submit</button>
+      <button type="submit" class="btn btn-info">Submit</button>
+      <a href="/home/(nav:associates)" class="btn btn-danger">Cancel</a>
+
     </form>
   </div>
 </div>
+
