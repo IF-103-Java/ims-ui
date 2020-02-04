@@ -14,7 +14,6 @@ import {SavedItemAssociateModel} from '../../models/savedItemAssociate.model';
   styleUrls: ['./saved-item-out.component.css']
 })
 export class SavedItemOutComponent implements OnInit {
-  done: boolean;
   warehouses: UsefulWarehouseModel[];
   itemTransactionRequest: ItemTransactionRequest  = new ItemTransactionRequest();
   associates: SavedItemAssociateModel[];
@@ -29,10 +28,8 @@ export class SavedItemOutComponent implements OnInit {
     this.itemService.findClientByName().subscribe(data => this.associates = data);
   }
   outSavedItem() {
-    this.done = false;
     this.itemService.outSavedItem(this.itemTransactionRequest).subscribe(data => {
       this.savedItem = data;
-      this.done = true;
     });
   }
 getItemTransactionRequest() {

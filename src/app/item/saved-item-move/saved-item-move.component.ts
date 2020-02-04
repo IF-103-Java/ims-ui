@@ -12,7 +12,6 @@ import {SavedItem} from "../../models/savedItem.model";
   styleUrls: ['./saved-item-move.component.css']
 })
 export class SavedItemMoveComponent implements OnInit {
-  done = false;
   warehouses: UsefulWarehouseModel[];
   itemTransactionRequest: ItemTransactionRequest  = new ItemTransactionRequest();
   savedItem: SavedItem = new SavedItem();
@@ -23,10 +22,8 @@ export class SavedItemMoveComponent implements OnInit {
     this.getItemTransactionRequest();
   }
   moveSavedItem() {
-    this.done = false;
     this.itemService.moveSavedItem(this.itemTransactionRequest).subscribe(data => {
       this.savedItem = data;
-      this.done = true;
     });
   }
   findUsefulWarehouses() {

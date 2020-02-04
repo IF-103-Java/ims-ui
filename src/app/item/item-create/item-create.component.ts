@@ -9,7 +9,6 @@ import {Item} from "../../models/item.model";
   styleUrls: ['./item-create.component.css']
 })
 export class ItemCreateComponent implements OnInit {
-  done = false;
   public item: Item = new Item();
   public itemResult: Item;
 
@@ -18,10 +17,8 @@ export class ItemCreateComponent implements OnInit {
   ngOnInit()  {
   }
 createItem() {
-  this.done = false;
   this.itemService.addItem(this.item).subscribe(data => {
   this.itemResult = data;
-  this.done = true;
    });
 }
 }

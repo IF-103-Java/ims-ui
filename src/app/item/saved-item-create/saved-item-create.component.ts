@@ -16,7 +16,6 @@ import {Associate} from "../../models/associate";
   styleUrls: ['./saved-item-create.component.css']
 })
 export class SavedItemCreateComponent implements OnInit {
-  done = false;
   warehouses: UsefulWarehouseModel[];
   associates: SavedItemAssociateModel[];
   itemTransactionRequest: ItemTransactionRequest  = new ItemTransactionRequest();
@@ -33,10 +32,8 @@ export class SavedItemCreateComponent implements OnInit {
   }
 
 addSavedItem() {
-  this.done = false;
   this.itemService.addSavedItem(this.itemTransactionRequest).subscribe(data => {
       this.savedItem = data;
-      this.done = true;
     });
 }
   findSupplier() {

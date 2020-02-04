@@ -12,7 +12,6 @@ import {Warehouse} from "../../models/warehouse.model";
   styleUrls: ['./item-update.component.css']
 })
 export class ItemUpdateComponent implements OnInit {
-  done = false;
   warehouses: Array<Warehouse> = new Array<Warehouse>();
   savedItems: SavedItem[];
   item: Item = new Item();
@@ -46,11 +45,8 @@ getWarehouse(id: number) {
 
 }
   updateItem() {
-   this.done = false;
-
   this.itemService.updateItem(this.item).subscribe(data => {
   this.item = data;
-  this.done = true;
 });
   }
   goToCreateSavedItem(itemId: number) {
