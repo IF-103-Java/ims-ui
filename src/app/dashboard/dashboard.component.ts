@@ -6,7 +6,6 @@ import {NgbProgressbarConfig} from '@ng-bootstrap/ng-bootstrap';
 import {EndingItems} from '../models/endingItems';
 import {PopularItems} from '../models/popularItems';
 import {WarehousePremiumList} from '../models/warehousePremiumList';
-import {AccountService} from '../account/account.service';
 import {Page} from '../models/page';
 
 
@@ -54,7 +53,6 @@ export class DashboardComponent implements OnInit {
 
   isPremium: boolean;
   constructor(private dashboardService: DashboardService,
-              private accountService: AccountService,
               config: NgbProgressbarConfig) {
     config.height = '25px';
     config.striped = true;
@@ -116,10 +114,8 @@ export class DashboardComponent implements OnInit {
       });
   }
   getType() {
-    this.accountService.getType().subscribe(data => {
-      this.isPremium = data.deepWarehouseAnalytics;
+      this.isPremium = sessionStorage.getItem('account_type') === '2';
       this.load4 = true;
-    });
   }
   setDate() {
     this.popularRequest.date = new Date(this.year + '-' + this.month + '-' + '01');
