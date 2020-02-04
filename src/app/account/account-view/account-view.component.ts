@@ -43,6 +43,7 @@ export class AccountViewComponent implements OnInit {
     this.accountService.getAdmin().subscribe(data => {
       this.admin = data;
     });
+    this.getWorkers();
   }
 
   deleteWorker(userId: bigint) {

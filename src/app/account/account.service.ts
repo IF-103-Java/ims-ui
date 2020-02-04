@@ -22,7 +22,7 @@ export class AccountService {
   }
 
   public getWorkers(page: number, size: number, sort: string): Observable<Page<User>> {
-    return this.http.get<Page<User>>(this.baseUrl + '/users/account/workers?page=' + page + '&size=' + size + '&sort=' + sort);
+    return this.http.get<Page<User>>(this.baseUrl + '/users/account/users?page=' + page + '&size=' + size + '&sort=' + sort);
   }
 
   public getAdmin() {
@@ -38,7 +38,7 @@ export class AccountService {
    }
 
    public inviteUser(user: User) {
-      return this.http.post(this.baseUrl + '/invite/', user);
+      return this.http.post<ResponseBody>(this.baseUrl + '/invite/', user);
    }
 
    public upgradeAccount(typeId: bigint): Observable<any> {
@@ -54,4 +54,6 @@ export class AccountService {
    }
 }
 
-
+export interface ResponseBody {
+  message: string;
+}
