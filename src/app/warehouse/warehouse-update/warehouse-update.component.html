@@ -13,11 +13,11 @@
             <ng-form (ngSubmit)="submitted">
 
               <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Name :</label>
                 <input type="text" class="form-control" id="name" required [(ngModel)]="warehouse.name" name="name">
               </div>
               <div class="form-group">
-                <label for="info">Information</label>
+                <label for="info">Information :</label>
                 <input type="text" class="form-control" id="info" required [(ngModel)]="warehouse.info" name="info">
               </div>
 
@@ -30,31 +30,31 @@
                 </div>
                 <label style="border-bottom: #2d2e33">Address</label>
                 <div class="form-group">
-                  <label for="country">Country</label>
+                  <label for="country">Country :</label>
                   <input type="text" class="form-control" id="country" required
                          [(ngModel)]="warehouse.addressDto.country"
                          name="address">
                 </div>
                 <div class="form-group">
-                  <label for="city">City</label>
+                  <label for="city">City :</label>
                   <input type="text" class="form-control" id="city" required [(ngModel)]="warehouse.addressDto.city"
                          name="city">
                 </div>
                 <div class="form-group">
-                  <label for="address">Address</label>
+                  <label for="address">     Address :</label>
                   <input type="text" class="form-control" id="address" required
                          [(ngModel)]="warehouse.addressDto.address"
                          name="address">
                 </div>
                 <div class="form-group">
-                  <label for="zip">ZIP</label>
+                  <label for="zip">ZIP :</label>
                   <input type="text" class="form-control" id="zip" required [(ngModel)]="warehouse.addressDto.zip"
                          name="zip">
                 </div>
               </ng-template>
               <ng-template #elseTop>
                 <div class="form-group">
-                <label for="capacityMiddle">Capacity ///check!!!!!!!!!!!!!!!!!!</label>
+                <label for="capacityMiddle">Capacity :</label>
                 <input type="text" class="form-control" id="capacityMiddle" required [(ngModel)]="warehouse.capacity"
                        name="capacityMiddle">
                   </div>
