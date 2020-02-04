@@ -28,7 +28,7 @@ export class WarehouseService {
   }
 
   public getSubWarehouses(topWarehouseId) {
-    return this.http.get<Array<Warehouse>>(this.baseUrl + '/topWarehouseId/' + topWarehouseId);
+    return this.http.get<Array<Warehouse>>(this.baseUrl + '/warehouses/topWarehouseId/' + topWarehouseId);
   }
 
   public updateWarehouse(warehouseId: number, warehouse: Warehouse): Observable<Warehouse> {

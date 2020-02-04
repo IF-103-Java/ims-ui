@@ -24,7 +24,10 @@ export class WarehouseCreateComponent implements OnInit {
 
   topMap = new Map<string, number>();
   topList = new Array<string>();
-  childrenList = new Map<string, number>();
+  selectedTopWarehouse: string;
+  childrenMap = new Map<string, number>();
+  childrenList = new Array<string>();
+  selectedParentWarehouse: string;
 
   constructor(private warehouseService: WarehouseService,
               private router: Router,
@@ -36,25 +39,44 @@ export class WarehouseCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getTopWarehouses();
+  }
+
+  getTopWarehouses() {
     this.warehouseService.getWarehousesPage(0, 100, 'id,Acs')
       .subscribe(data => {
         data.content.forEach((warehouse) => {
           this.topMap.set(warehouse.name, warehouse.id);
           this.topList.push(warehouse.name);
-          console.log(this.topList);
         });
       });
   }
 
-  getParentsList() {
-    this.topList = new Array<string>();
+  getChildrenWarehouses(topWarehouseId: number) {
+    this.childrenList = new Array<string>();
+    this.warehouseService.getSubWarehouses(topWarehouseId)
+      .subscribe(data => {
+        data.forEach((warehouse) => {
+          this.childrenMap.set(warehouse.name, warehouse.id);
+          this.childrenList.push(warehouse.name);
+        });
+      });
+  }
 
+  setTopWarehouse(warehouse: string) {
+    this.warehouse.topWarehouseID = this.topMap.get(warehouse);
+    this.selectedTopWarehouse = warehouse;
+    this.warehouse.parentID = null;
+    this.getChildrenWarehouses(this.warehouse.topWarehouseID);
+  }
 
+  setParentWarehouse(warehouse: string) {
+    this.warehouse.parentID = this.childrenMap.get(warehouse);
+    this.selectedParentWarehouse = warehouse;
   }
 
   onSubmit() {
     this.warehouseService.createWarehouse(this.warehouse).subscribe(data => {
-      console.log(data.message);
       if (data.message != null) {
         this.toastService.show(data.message, {classname: 'bg-danger text-light', delay: 5000});
       }

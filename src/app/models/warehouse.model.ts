@@ -6,7 +6,7 @@ export class Warehouse {
   info: string;
   capacity: number;
   isBottom: boolean;
-  parentId: number;
+  parentID: number;
   accountId: number;
   topWarehouseID: number;
   active: boolean;
