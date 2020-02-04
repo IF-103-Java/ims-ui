@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import AppError from "../../errors/app-error";
 import {HttpResponse} from "@angular/common/http";
 import {UserService} from "../services/user.service";
@@ -31,7 +31,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   userErrors: Map<string, string> = new Map<string, string>();
 
   userForm: User = new User();
-  firstName: string;
+  firstName: String;
+  lastName: String;
   role: string;
 
   constructor(private userService: UserService,
@@ -48,7 +49,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
           this.role = sessionStorage.getItem('role');
           this.user = response.body;
           this.user.role = response.body.role.substr(5);
-          this.userForm.firstName = this.user.firstName;
+          this.firstName = new String(this.user.firstName);
+          this.lastName = new String(this.user.lastName);
           this.userForm.lastName = this.user.lastName;
         }
       }, (appError: AppError) => {
@@ -78,7 +80,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   clickCancelBtn() {
-    this.userForm.firstName = this.user.firstName;
+    this.firstName = new String(this.user.firstName);
+    this.lastName = new String(this.user.lastName);
     this.editForm = false;
   }
 
