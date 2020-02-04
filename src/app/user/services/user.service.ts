@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {EventEmitter, Inject, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -9,6 +9,14 @@ import {User} from "../../models/user.model";
   providedIn: 'root'
 })
 export class UserService {
+
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
+
+  refreshUsername(user: User): void {
+    this.change.emit(user);
+    sessionStorage.setItem('username', user.firstName + ' ' + user.lastName);
+  }
 
   constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
   }

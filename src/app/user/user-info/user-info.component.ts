@@ -30,7 +30,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   editForm = false;
   userErrors: Map<string, string> = new Map<string, string>();
 
-  userForm: User = new User();
   firstName: String;
   lastName: String;
   role: string;
@@ -46,18 +45,20 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.getCurrentUserSubscription = this.userService.getCurrentUser()
       .subscribe((response: HttpResponse<any>) => {
         if (response) {
-          this.role = sessionStorage.getItem('role');
-          this.user = response.body;
-          this.user.role = response.body.role.substr(5);
-          this.firstName = new String(this.user.firstName);
-          this.lastName = new String(this.user.lastName);
-          this.userForm.lastName = this.user.lastName;
+         this.initUser(response);
         }
       }, (appError: AppError) => {
         throw appError;
       });
   }
 
+  initUser(response: HttpResponse<any>){
+    this.user = response.body;
+    this.user.role = response.body.role.substr(5);
+
+    this.firstName = new String(this.user.firstName);
+    this.lastName = new String(this.user.lastName);
+  }
 
   deleteUser() {
     this.deleteUserSubscription = this.userService.delete(this.user.id).subscribe(
@@ -93,7 +94,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       .subscribe((response: HttpResponse<any>) => {
           if (response) {
             this.user = response.body;
-            sessionStorage.setItem('username', this.user.firstName + ' ' + this.user.lastName);
+            this.userService.refreshUsername(this.user);
             this.editForm = false;
           }
         }, (appError: AppError) => {
