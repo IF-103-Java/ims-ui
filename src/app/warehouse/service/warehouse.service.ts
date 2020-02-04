@@ -43,7 +43,6 @@ export class WarehouseService {
 
     return this.http.get<number>(this.baseUrl + `/warehouses/capacity/` + warehouseId);
   }
-
 }
 
 export interface ResponseBody {
