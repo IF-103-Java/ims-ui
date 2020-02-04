@@ -67,11 +67,7 @@
                class="form-control"
                id="country"
                name="country"
-               placeholder="Enter associate country" #country="ngModel" required>
-        <span class="text-danger"
-              [hidden]="country.valid || country.untouched">
-                                Country is required
-        </span>
+               placeholder="Enter associate country">
       </div>
       <div class="form-group">
         <label for="city">City:</label>
@@ -79,11 +75,7 @@
                class="form-control"
                id="city"
                name="city"
-               placeholder="Enter your associate city" #city="ngModel" required>
-        <span class="text-danger"
-              [hidden]="city.valid || city.untouched">
-                                City is required
-        </span>
+               placeholder="Enter your associate city">
       </div>
       <div class="form-group">
         <label for="address">Address:</label>
@@ -91,11 +83,7 @@
                class="form-control"
                id="address"
                name="address"
-               placeholder="Enter associate address" #address="ngModel" required>
-        <span class="text-danger"
-              [hidden]="address.valid || address.untouched">
-                                Address is required
-        </span>
+               placeholder="Enter associate address">
       </div>
       <div class="form-group">
         <label for="zip">Zip:</label>
@@ -103,17 +91,11 @@
                class="form-control"
                id="zip"
                name="zip"
-               placeholder="Enter assoicate zip" #zip="ngModel" required>
-        <span class="text-danger"
-              [hidden]="zip.valid || zip.untouched">
-                                Zip is required
-        </span>
+               placeholder="Enter assoicate zip">
       </div>
 
 
-      <button [disabled]="name.invalid || type.invalid || country.invalid ||
-      city.invalid || address.invalid || zip.invalid" type="submit" class="btn btn-info">Submit
-      </button>
+      <button [disabled]="name.invalid || type.invalid" type="submit" class="btn btn-info">Submit</button>
       <a href="/home/(nav:associates)" class="btn btn-danger">Cancel</a>
 
     </form>
