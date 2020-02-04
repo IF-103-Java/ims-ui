@@ -37,7 +37,7 @@
                         <th class="align-middle" scope="row">First Name:</th>
                         <td>
                           <input type="text" name="firstName" class="form-control border-none"
-                                 [ngModel]="userForm.firstName" id="firstName"
+                                 [ngModel]="firstName" id="firstName"
                                  placeholder="First name" required [readOnly]="isFormDisable()"
                                  [ngClass]="{'border' : !isFormDisable()}">
 
@@ -48,7 +48,7 @@
                         <th class="align-middle" scope="row">Last Name:</th>
                         <td>
                           <input type="text" name="lastName" class="form-control border-none"
-                                 [ngModel]="userForm.lastName"
+                                 [ngModel]="lastName"
                                  placeholder="Last name" required [readOnly]="isFormDisable()"
                                  [ngClass]="{'border' : !isFormDisable()}">
                         </td>
