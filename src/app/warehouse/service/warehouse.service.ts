@@ -9,14 +9,13 @@ import {Page} from '../../models/page';
 })
 
 export class WarehouseService {
-  constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
+  constructor(@Inject('BASE_API_URL') private baseUrl: string,
+              private http: HttpClient) {
   }
 
-  createWarehouse(warehouse: Warehouse) {
+  createWarehouse(warehouse: Warehouse): Observable<ResponseBody> {
     warehouse.active = true;
-    console.log(data => warehouse);
-    return this.http.post<Warehouse>(this.baseUrl + '/warehouses/add', warehouse).subscribe();
-
+    return this.http.post<ResponseBody>(this.baseUrl + '/warehouses/add', warehouse);
   }
 
   public getWarehouse(warehouseId: number): Observable<Warehouse> {
@@ -41,7 +40,12 @@ export class WarehouseService {
   }
 
   public getTotalCapacity(warehouseId: number): Observable<number> {
+
     return this.http.get<number>(this.baseUrl + `/warehouses/capacity/` + warehouseId);
   }
 
+}
+
+export interface ResponseBody {
+  message: string;
 }

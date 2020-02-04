@@ -3,4 +3,5 @@ input.ng-touched.ng-valid {border:solid green 2px;}
 
 .form-group{
   padding-left: 20px;
+  width: 250px;
 }
