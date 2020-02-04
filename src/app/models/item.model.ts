@@ -1,11 +1,11 @@
 export class Item {
 
-  id: bigint;
+  id: number;
   name: string;
   unit: string;
   description: string;
   volume: number;
-  accountId: bigint;
+  accountId: number;
   active: boolean;
 
 }
