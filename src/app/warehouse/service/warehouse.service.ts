@@ -27,6 +27,10 @@ export class WarehouseService {
       + size + '&sort=' + sort);
   }
 
+  public getSubWarehouses(topWarehouseId) {
+    return this.http.get<Array<Warehouse>>(this.baseUrl + '/warehouses/topWarehouseId/' + topWarehouseId);
+  }
+
   public updateWarehouse(warehouseId: number, warehouse: Warehouse): Observable<Warehouse> {
     return this.http.put<Warehouse>(this.baseUrl + `/warehouses/update/` + warehouseId, warehouse);
   }
@@ -42,14 +46,6 @@ export class WarehouseService {
   public getTotalCapacity(warehouseId: number): Observable<number> {
 
     return this.http.get<number>(this.baseUrl + `/warehouses/capacity/` + warehouseId);
-  }
-
-  public getAllTopWarehouses() {
-    return this.http.get<Array<Warehouse>>(this.baseUrl + `/topwarehouses`);
-  }
-
-  public getSubwarehouses(id: number) {
-    return this.http.get<Array<Warehouse>>(this.baseUrl + `/topWarehouseId` + id);
   }
 }
 

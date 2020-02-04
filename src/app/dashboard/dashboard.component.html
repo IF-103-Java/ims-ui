@@ -48,7 +48,7 @@
 
             <div class="card-body" style="overflow: auto; height: 405px;">
 
-              <div *ngIf="premiumLoad$!=null && isPremium && loadPremium; then thenBlock2 else elseBlock2"></div>
+              <div *ngIf="premiumLoad$!=null && loadPremium; then thenBlock2 else elseBlock2"></div>
               <ng-template #thenBlock2>
                 <ng-template #nodeTemplateRef let-node>
                   <div class="node">
@@ -82,10 +82,6 @@
               </ng-template>
 
               <ng-template #elseBlock2>
-                <div *ngIf="isPremium; then thenBlock3 else elseBlock3"></div>
-              </ng-template>
-
-              <ng-template #thenBlock3>
                 <div *ngIf="loadPremium; then thenBlock4 else elseBlock4"></div>
               </ng-template>
 
@@ -105,13 +101,6 @@
                   <div class="blockG" id="rotateG_07"></div>
                   <div class="blockG" id="rotateG_08"></div>
                 </div>
-              </ng-template>
-
-              <ng-template #elseBlock3>
-                <div style="height: 100px"></div>
-                <h3 style="text-align: center; vertical-align: middle">
-                  <a href="http://localhost:4200/home/(nav:upgrade)"> Upgrade your account now</a>
-                </h3>
               </ng-template>
 
             </div>
@@ -250,7 +239,7 @@
                          aria-describedby="dataTable_info">
                     <tbody>
                     <tr>
-                      <td  width="50%">
+                      <td width="50%">
                         <label *ngIf="popularRequest.dateType=='YEAR'"
                                style="padding-left: 65%; padding-right: 0px"
                                (change)="getPopularItems()">

@@ -61,7 +61,7 @@ export class WarehouseUpdateComponent implements OnInit {
 
   updateWarehouse(warehouseId: number, warehouse: Warehouse) {
     this.warehouseService.updateWarehouse(warehouseId, warehouse).subscribe(data => {
-      this.toastService.show('Warehouse' +  data.name + ' was edited!', {classname: 'bg-success text-light', delay: 10000});
+      this.toastService.show(data.name, {classname: 'bg-success text-light', delay: 10000});
     });
 
   }

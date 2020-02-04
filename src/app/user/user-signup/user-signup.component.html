@@ -53,10 +53,10 @@
         <div class="alert-danger center" *ngIf="!data.valid && data.touched">
           Fill all the fields in a right way!
         </div>
+        <div *ngIf="repeatedPassword.validity.patternMismatch" class="alert-danger center">Passwords don't match.</div>
 
-        <div *ngIf="repeatedPassword.validity.patternMismatch" class="alert-danger">Passwords don't match.</div>
-        <button type="submit" class="btn" [disabled]="!data.valid" (click)="createUser(data.value)">Register Account
-        </button>
+        <button type="submit" class="btn" [disabled]="!data.valid" (click)="createUser(data.value)" *ngIf="!load">Register Account</button>
+        <div class="loader" *ngIf="load"></div>
         <hr>
         <div style="text-align:center">
           <a class="small" routerLink="/forgot-password">Forgot Password?</a>

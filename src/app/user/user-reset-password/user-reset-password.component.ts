@@ -11,11 +11,12 @@ import AppError from "../../errors/app-error";
     '../user-style.css']
 })
 export class UserResetPasswordComponent implements OnInit, OnDestroy {
-  done: boolean;
-  token: string;
   resetSubscription: Subscription;
   userErrors: Map<string, string> = new Map<string, string>();
   hidePassword: boolean;
+  done: boolean;
+  token: string;
+  load = false;
 
 
   constructor(private route: ActivatedRoute,
@@ -30,16 +31,18 @@ export class UserResetPasswordComponent implements OnInit, OnDestroy {
 
 
   resetPassword(data: any) {
+    this.load = true;
     if (!this.isButtonDisable(data)) {
       this.resetSubscription = this.resetPasswordService.resetPassword(this.token, data.password).subscribe(
         response => {
           this.done = true;
         }, (appError: AppError) => {
           if (appError.status === 404) {
-            this.userErrors['data'] = 'Incorrect data or token is expired. Try to send a password reset message again! ';
+            this.userErrors['data'] = 'Incorrect data or token is expired. Try to send a password reset message again!';
           } else {
             throw appError;
           }
+          this.load = false;
         }
       )
 

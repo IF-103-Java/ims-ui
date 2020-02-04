@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../user/services/login.service";
 import {Router} from "@angular/router";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {WebsocketService} from "../websocket/websocket.service";
 import {ToastService} from "../websocket/notification/toast.service";
+import {UserService} from "../user/services/user.service";
 
 @Component({
   selector: 'app-home',
@@ -16,11 +17,12 @@ export class HomeComponent implements OnInit {
   role: string;
 
 
-  constructor(private loginService: LoginService,
+  constructor(public toastService: ToastService,
+              private loginService: LoginService,
               private router: Router,
               private modalService: NgbModal,
               private websocketService: WebsocketService,
-              public toastService: ToastService) {
+              private userService: UserService) {
   }
 
   openLogout(content) {
@@ -31,9 +33,14 @@ export class HomeComponent implements OnInit {
     this.username = sessionStorage.getItem('username');
     this.role = sessionStorage.getItem('role');
     this.websocketService._connect();
+
+    // Change nav after update
+    this.userService.change.subscribe(user => {
+      this.username = user.firstName + ' ' + user.lastName;
+    });
   }
 
-  logout(){
+  logout() {
     this.websocketService._disconnect();
     this.modalRef.close();
     this.loginService.logout();
