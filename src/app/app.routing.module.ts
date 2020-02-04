@@ -23,6 +23,7 @@ import {AssociateComponent} from "./associate/associate.component";
 import {FormAssociateComponent} from "./associate/form-associate/form-associate.component";
 import {UserInfoComponent} from "./user/user-info/user-info.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {UserConfirmationComponent} from "./user/user-confirmation/user-confirmation.component";
 
 
 export const routerComponents = [
@@ -50,7 +51,8 @@ export const routerComponents = [
   DashboardComponent,
   AssociateComponent,
   FormAssociateComponent,
-  UserInfoComponent
+  UserInfoComponent,
+  UserConfirmationComponent
 ];
 
 @NgModule({
@@ -62,6 +64,7 @@ export const routerComponents = [
       {path: 'sign-up', component: UserSignupComponent},
       {path: 'forgot-password', component: UserForgotPasswordComponent},
       {path: 'reset-password', component: UserResetPasswordComponent},
+      {path: 'users/confirmation', component: UserConfirmationComponent},
       {
         path: 'home',
         component: HomeComponent,

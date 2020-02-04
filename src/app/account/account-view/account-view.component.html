@@ -114,7 +114,7 @@
                   </thead>
 
                   <tbody>
-                  <tr *ngFor="let worker of workers">
+                  <tr *ngFor="let worker of page.content">
                     <td>{{worker.firstName}}</td>
                     <td>{{worker.lastName}}</td>
                     <td>{{worker.email}}</td>
@@ -123,6 +123,15 @@
                     </a></td>
                   </tr>
                   </tbody>
+                  <tfoot>
+                  <ngb-pagination
+                    [collectionSize]="page.totalElements" [(page)]="pageNumber" [pageSize]="page.size" [maxSize]="4"
+                    [rotate]="true" [boundaryLinks]="false"
+                    (pageChange)="getWorkers()">
+                    <ng-template ngbPaginationPrevious>Prev</ng-template>
+                    <ng-template ngbPaginationNext>Next</ng-template>
+                  </ngb-pagination>
+                  </tfoot>
                 </table>
               </div>
             </div>

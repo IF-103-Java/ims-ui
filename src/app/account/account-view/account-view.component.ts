@@ -6,6 +6,7 @@ import {User} from '../../models/user.model';
 import {HttpResponse} from '@angular/common/http';
 import AppError from '../../errors/app-error';
 import {Router} from '@angular/router';
+import {Page} from '../../models/page';
 
 @Component({
   selector: 'app-account-view',
@@ -16,29 +17,28 @@ export class AccountViewComponent implements OnInit {
   deleteErrors: Map<string, string> = new Map<string, string>();
   public account: Account;
 
-  public users: User[];
+  page = new Page<User>();
 
-  public workers: User[];
+  pageSizeOptions = [10, 15, 20];
+
+  pageNumber = 1;
+
+  sort = 'first_name,Desc';
 
   public admin: User;
 
   public type: AccountType;
 
   constructor(private accountService: AccountService, public router: Router) {
+    this.page.size = 10;
   }
 
   ngOnInit() {
     this.accountService.view().subscribe(data => {
       this.account = data;
     });
-    this.accountService.getUsers().subscribe(data => {
-      this.users = data;
-    });
     this.accountService.getType().subscribe(data => {
       this.type = data;
-    });
-    this.accountService.getWorkers().subscribe(data => {
-      this.workers = data;
     });
     this.accountService.getAdmin().subscribe(data => {
       this.admin = data;
@@ -55,5 +55,11 @@ export class AccountViewComponent implements OnInit {
 
   onSubmit() {
     this.accountService.updateAccountName(this.account.name);
+  }
+
+  getWorkers() {
+    this.accountService.getWorkers(this.pageNumber - 1, this.page.size, this.sort).subscribe(data => {
+      this.page = data;
+    });
   }
 }
