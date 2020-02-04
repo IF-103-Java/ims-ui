@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Warehouse} from "../../models/warehouse.model";
-import {WarehouseService} from "../service/warehouse.service";
-import {Router} from "@angular/router";
+import {Warehouse} from '../../models/warehouse.model';
+import {WarehouseService} from '../service/warehouse.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Address} from '../../models/address';
+import {ToastService} from '../../websocket/notification/toast.service';
 
 @Component({
   selector: 'app-warehouse',
@@ -9,37 +11,27 @@ import {Router} from "@angular/router";
   styleUrls: ['./warehouse-create.component.css']
 })
 export class WarehouseCreateComponent implements OnInit {
-  public warehouse: Warehouse = new Warehouse();
-  submitted = false;
+  warehouse: Warehouse = new Warehouse();
 
   constructor(private warehouseService: WarehouseService,
-              private router: Router)  {
+              private router: Router,
+              private route: ActivatedRoute,
+              private toastService: ToastService
 
+  ) {
+    this.warehouse.addressDto = new Address();
   }
-
 
   ngOnInit() {
-    this.submitted = false;
-  }
-
-  newWarehouse(): void {
-    this.submitted = false;
-    this.warehouse = new Warehouse();
-  }
-
-  save() {
-    this.warehouseService.createWarehouse(this.warehouse)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.warehouse = new Warehouse();
-    this.gotoList();
   }
 
   onSubmit() {
-    this.submitted = true;
-    this.save();
+    this.warehouseService.createWarehouse(this.warehouse).subscribe(data => {
+      console.log(data.message);
+      if (data.message != null) {
+        this.toastService.show(data.message, {classname: 'bg-danger text-light', delay: 5000});
+      }
+    });
   }
 
-  gotoList() {
-    this.router.navigate(["/home/(nav:warehouses)"]);
-  }
 }

@@ -1,38 +1,166 @@
-<h3>Update Warehouse  Id = {{warehouse.id}}</h3>
-<div [hidden]="submitted" style="width: 400px;">
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="warehouse.name" name="name">
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Warehouse details</h6>
+
+        </div>
+        <div class="card-body" style="overflow: auto; height:800px ">
+
+          <div [hidden]="" style="width: 250px;">
+            <ng-form (ngSubmit)="submitted">
+
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required [(ngModel)]="warehouse.name" name="name">
+              </div>
+              <div class="form-group">
+                <label for="info">Information</label>
+                <input type="text" class="form-control" id="info" required [(ngModel)]="warehouse.info" name="info">
+              </div>
+
+              <div *ngIf="warehouse.topWarehouseID == warehouse.id; then thenTop else elseTop"></div>
+              <ng-template #thenTop>
+                <div class="form-group">
+                  <label for="capacity">Capacity ///check!!!!!!!!!!!!!!!!!!</label>
+                  <input type="text" class="form-control" id="capacity" required [(ngModel)]="warehouse.capacity"
+                         name="capacity">
+                </div>
+                <label style="border-bottom: #2d2e33">Address</label>
+                <div class="form-group">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" id="country" required
+                         [(ngModel)]="warehouse.addressDto.country"
+                         name="address">
+                </div>
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" id="city" required [(ngModel)]="warehouse.addressDto.city"
+                         name="city">
+                </div>
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <input type="text" class="form-control" id="address" required
+                         [(ngModel)]="warehouse.addressDto.address"
+                         name="address">
+                </div>
+                <div class="form-group">
+                  <label for="zip">ZIP</label>
+                  <input type="text" class="form-control" id="zip" required [(ngModel)]="warehouse.addressDto.zip"
+                         name="zip">
+                </div>
+              </ng-template>
+              <ng-template #elseTop>
+                <div class="form-group">
+                <label for="capacityMiddle">Capacity ///check!!!!!!!!!!!!!!!!!!</label>
+                <input type="text" class="form-control" id="capacityMiddle" required [(ngModel)]="warehouse.capacity"
+                       name="capacityMiddle">
+                  </div>
+
+                  <div *ngIf="warehouse.isBottom; then thenBottom else elseBottom"></div>
+
+                  <ng-template #thenBottom>
+                    <label>It's bottom level warehouse</label>
+                  </ng-template>
+                  <ng-template #elseBottom>
+                    <label>
+                      <input [(ngModel)]="warehouse.isBottom" type="checkbox" data-toggle="toggle">Bottom
+                    </label>
+                  </ng-template>
+              </ng-template>
+
+
+
+
+              <div>
+                <a (click)="updateWarehouse(warehouse.id, warehouse)" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-check"></i>
+                    </span>
+                  <span class="text">Edit</span>
+                </a>
+                <a (click)="gotoList()" class="btn btn-success btn-warning">
+                    <span class="icon text-yellow-50">
+                      <i class="fas fa-check"></i>
+                    </span>
+                  <span class="text">Back to List</span>
+                </a>
+                <a (click)=back() class="btn btn-dark">
+                    <span class="icon text-blue-50 ">
+                      <i class="fas fa-check"></i>
+                    </span>
+                  <span class="text">Back</span>
+                </a>
+              </div>
+              <div style="height: 5px"></div>
+              <div>
+
+              </div>
+            </ng-form>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="info">Info</label>
-      <input type="text" class="form-control" id="info" required [(ngModel)]="warehouse.info" name="info">
+
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow mb-4" style="max-height: 800px">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Sub Warehouses</h6>
+          <div style="height: 10px"></div>
+          <div>
+            <div><label>Path: {{warehouse.path.reverse()}}</label></div>
+          </div>
+
+          <a href="home/(nav:warehouse-create)" class="btn btn-primary btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-flag"></i>
+                    </span>
+            <span class="text">Add new Warehouse</span>
+          </a>
+        </div>
+
+        <div class="card-body" style="overflow: auto;">
+          <div *ngIf="!warehouse.isBottom; then thenBlock1 else elseBlock1"></div>
+          <ng-template #thenBlock1>
+            <table class="table table-striped table-bordered btn-">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Information</th>
+                <th>Capacity</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr *ngFor="let warehouse of warehouses; index  as i" class="clickable"
+                  (click)="gotoEditPage(warehouse.id)">
+                <td>{{warehouse.id}}</td>
+                <td>{{warehouse.name}}</td>
+                <td>{{warehouse.info}}</td>
+                <td>{{warehouse.capacity}}</td>
+
+                <td>
+                  <button (click)="gotoEditPage(warehouse.id)" class='btn btn-info'
+                          data-toggle="modal" data-target="#myModal"> Update
+                  </button>
+                  <button (click)="deleteWarehouse(warehouse.id)" class='btn btn-danger'>Delete
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+
+            </table>
+          </ng-template>
+          <ng-template #elseBlock1>
+            <h3>Warehouse is Bottom Level and can't have subwarehouses!</h3>
+          </ng-template>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="capacity">Capacity</label>
-      <input type="text" class="form-control" id="capacity" required [(ngModel)]="warehouse.capacity" name="capacity">
-    </div>
-    <div class="form-group">
-      <label for="isBottom">isBottom</label>
-      <input type="text" class="form-control" id="isBottom" required [(ngModel)]="warehouse.isBottom" name="isBottom">
-    </div>
-    <div class="form-group">
-      <label for="parentId">parentId</label>
-      <input type="text" class="form-control" id="parentId" required [(ngModel)]="warehouse.parentId" name="parentId">
-    </div>
-    <div class="form-group">
-      <label for="accountId">accountId</label>
-      <input type="text" class="form-control" id="accountId" required [(ngModel)]="warehouse.accountId" name="accountId">
-    </div>
-    <div class="form-group">
-      <label for="topWarehouseID">topWarehouseID</label>
-      <input type="text" class="form-control" id="topWarehouseID" required [(ngModel)]="warehouse.topWarehouseID" name="topWarehouseID">
-    </div>
-    <div class="form-group">
-      <label for="active">active</label>
-      <input type="text" class="form-control" id="active" required [(ngModel)]="warehouse.active" name="active">
-    </div>
-    <button type="submit" class="btn btn-success">Submit</button>
-  </form>
+  </div>
+
 </div>
