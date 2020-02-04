@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AssociateService} from "../service/associate.service";
 import {Associate} from "../../models/associate";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AssociateType} from "../../models/associate-type.enum";
 import {Address} from "../../models/address";
+import {ToastService} from "../../websocket/notification/toast.service";
 
 @Component({
   selector: 'app-add-associate',
@@ -17,10 +18,10 @@ export class FormAssociateComponent implements OnInit {
 
   isEditAction: boolean;
 
-
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private associateService: AssociateService) {
+              private associateService: AssociateService,
+              private  toastService: ToastService) {
 
     this.associateType = Object.keys(AssociateType);
     this.associate.addressDto = new Address();
@@ -29,7 +30,7 @@ export class FormAssociateComponent implements OnInit {
 
 
   ngOnInit() {
-    if(this.route.snapshot.paramMap.get('id') == null) {
+    if (this.route.snapshot.paramMap.get('id') == null) {
       this.isEditAction = false;
     } else {
       this.isEditAction = true;
@@ -38,10 +39,15 @@ export class FormAssociateComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.isEditAction) {
+    if (this.isEditAction) {
       this.associateService.updateAssociate(this.associate.id, this.associate);
     } else {
-      this.associateService.addAssociate(this.associate);
+      this.associateService.addAssociate(this.associate).subscribe(data => {
+        if (data.message != null) {
+          this.toastService.show(data.message, {classname: 'bg-danger text-light', delay: 5000})
+        }
+      });
+
     }
     this.gotoAssociatesList();
   }
@@ -49,7 +55,7 @@ export class FormAssociateComponent implements OnInit {
   gotoAssociatesList() {
     this.router.navigate([
       'home', {
-        outlets: { nav : ['associates']}
+        outlets: {nav: ['associates']}
       }
     ]);
   }
