@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Warehouse} from "../../models/warehouse.model";
-import {WarehouseService} from "../service/warehouse.service";
-import {Router} from "@angular/router";
+import {Warehouse} from '../../models/warehouse.model';
+import {WarehouseService} from '../service/warehouse.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Page} from '../../models/page';
 
 @Component({
   selector: 'app-warehouses',
@@ -9,52 +10,50 @@ import {Router} from "@angular/router";
   styleUrls: ['./warehouses.component.css']
 })
 export class WarehousesComponent implements OnInit {
-  page: number = 0;
-  size: number = 5;
-  sortValue: string[]=['id', 'name', 'info', 'capacity', 'parentId', 'isBottom', 'topWarehouseId', 'active']
-  sort: {value: string, direction: string};
-  warehouses: Warehouse[];
+  pageSizeValue = [3, 5, 7, 10];
+  page: 0;
+  page$ = new Page<Warehouse>();
+  sortBy: 'name';
+  direction: 'asc';
+  capacity;
 
-  constructor(private warehouseService: WarehouseService, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private warehouseService: WarehouseService,
+              private router: Router) {
+    this.page$.size = 5;
+    this.page$.number = 0;
+    this.page$.sortBy = 'name,ASC';
+  }
 
   ngOnInit() {
-    this.warehouseService.findAllWarehouses(this.page,this.size, this.sortValue[0], 'asc').subscribe(data=>{
-      this.warehouses = data;
-    })
+    this.warehouseService.getWarehousesPage(this.page$.number, this.page$.size, this.page$.sortBy)
+      .subscribe(data => this.page$ = data);
   }
 
-  findAll(){
-    this.warehouseService.findAllWarehouses(this.page,this.size, this.sort.value, this.sort.direction).subscribe(data=>{
-      this.warehouses = data;
-    })
-  }
-  increment(){
-    return  this.page += 1;
+  getWarehouses() {
+    this.warehouseService.getWarehousesPage(this.page - 1, this.page$.size, this.sortBy)
+      .subscribe(data => this.page$ = data);
   }
 
-  decrement(){
-    return  this.page -= 1;
+  editWarehouse(id: number) {
+    this.router.navigate([
+      'home', {
+        outlets: {nav: ['warehouse-update', id]}
+      }
+    ]);
   }
 
-  reloadData() {
-    this.findAll();
-  }
-
-  deleteEmployee(id: bigint) {
+  deleteWarehouse(id: number) {
     this.warehouseService.deleteWarehouse(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log(error));
+      .subscribe(data => {
+        this.getWarehouses();
+      });
   }
 
-  warehouseDetails(id: bigint){
-    this.router.navigate(['/home/(nav:warehouses/details', id]);
+  getCapacity(id: number) {
+    this.warehouseService.getTotalCapacity(id).subscribe(data => this.capacity = data.valueOf());
+    console.log(this.capacity);
   }
 
-  warehouseUpdate(id: bigint){
-    this.router.navigate(['/home/(nav:warehouses/update', id]);
-  }
+
 }
