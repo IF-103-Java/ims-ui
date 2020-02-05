@@ -33,7 +33,6 @@
                 <th >Name</th>
                 <th >Information</th>
                 <th >Capacity</th>
-                <th style="width: 25%">Address</th>
                 <th>Action</th>
               </tr>
               </thead >
@@ -42,7 +41,6 @@
                 <td>{{warehouse.name}}</td>
                 <td>{{warehouse.info}}</td>
                 <td>{{warehouse.capacity}}</td>
-                <td>{{warehouse.addressDto}}</td>
                 <td>
                   <button (click)="editWarehouse(warehouse.id)" class='btn btn-info'
                           data-toggle="modal" data-target="#myModal">Update
