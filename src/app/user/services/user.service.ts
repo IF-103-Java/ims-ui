@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {EventEmitter, Inject, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -9,6 +9,14 @@ import {User} from "../../models/user.model";
   providedIn: 'root'
 })
 export class UserService {
+
+  @Output()
+  change: EventEmitter<any> = new EventEmitter();
+
+  refreshUsername(user: User): void {
+    this.change.emit(user);
+    sessionStorage.setItem('username', user.firstName + ' ' + user.lastName);
+  }
 
   constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
   }
@@ -34,7 +42,8 @@ export class UserService {
   }
 
   delete(id: bigint): Observable<any> {
-    return this.http.delete<User>(this.baseUrl + '/users/' + id)
+    return this.http.delete<User>(this.baseUrl + '/users/' + id,
+      {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
           return throwError(new AppError(error));
@@ -54,8 +63,7 @@ export class UserService {
   }
 
   getCurrentUser(): Observable<any> {
-    return this.http.get<User>(
-      this.baseUrl + '/users/me',
+    return this.http.get<User>(this.baseUrl + '/users/me',
       {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
@@ -64,4 +72,13 @@ export class UserService {
       );
   }
 
+  public activateUser(token: string): Observable<any> {
+    return this.http.post(this.baseUrl + '/users/confirmation?emailUUID=' + token,
+      {observe: 'response'})
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(new AppError(error));
+        })
+      )
+  }
 }

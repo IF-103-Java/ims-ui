@@ -14,37 +14,42 @@ import AppError from "../../errors/app-error";
 
 export class UserSigninComponent implements OnDestroy {
   userErrors: Map<string, string> = new Map<string, string>();
-  hidePassword = true;
   loginSubscription: Subscription;
+  hidePassword = true;
+  load = false;
 
   constructor(private loginService: LoginService,
               private router: Router) {
   }
 
+  credentialSetter(response: any) {
+    sessionStorage.setItem('jwt-token', response.token);
+    sessionStorage.setItem('username', response.username);
+    sessionStorage.setItem('account_id', response.accountId);
+    sessionStorage.setItem('account_type', response.accountType);
+    sessionStorage.setItem('role', response.role)
+  }
+
   signIn(data: LoginUser): void {
+    this.load = true;
+
     const user = new LoginUser();
     user.username = data.username;
     user.password = data.password;
 
-    function tokenSetter(response: any) {
-      sessionStorage.setItem('jwt-token', response.token);
-      sessionStorage.setItem('username', response.username);
-      sessionStorage.setItem('account_id', response.accountId);
-    }
-
     this.loginSubscription = this.loginService.login(user)
       .subscribe(response => {
         if (response) {
-          tokenSetter(response);
+          this.credentialSetter(response);
           this.router.navigate(['home', {outlets: {nav: ['dashboard']}}]);
         }
       }, (appError: AppError) => {
         if (appError.status === 401) {
-          this.userErrors['username'] = 'User with these data not found.';
-          this.userErrors['password'] = 'User with these data not found.';
+          this.userErrors['data'] = 'User with these data not found.';
         } else {
           throw appError;
         }
+        this.load = false;
       });
   }
 

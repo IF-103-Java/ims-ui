@@ -3,7 +3,7 @@
     <div class="col mr-2">
     <label for="name">Account name:</label>
     </div>
-    <div *ngIf="account" class="col mr-2">
+    <div *ngIf="account" class="col mr-2" style="width: 25%">
       <input type="text" [(ngModel)]="account.name"
              class="form-control"
              id="name"
@@ -11,7 +11,7 @@
              placeholder="Enter account name">
     </div>
   </div>
-  <div class="col mr-2">
+  <div style="padding-top: 10px; padding-bottom: 10px" class="col mr-2">
     <button type="submit"
                class="btn btn-info">Submit</button>
   </div>
@@ -32,7 +32,7 @@
               </div>
             </div>
 
-            <div>
+            <div style="padding-top: 10px;">
               <a href="/home/(nav:upgrade)" class="btn btn-info btn-icon-split">
                 <span class="text">Upgrade</span>
               </a>
@@ -85,16 +85,11 @@
           </div>
 
           <!-- Page Heading -->
+
+
           <h1 class="h3 mb-2 text-gray-800">Workers</h1>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-            </div>
-          </form>
-
-          <div>
+          <div style="padding-bottom: 10px">
             <a href="/home/(nav:invite)" class="btn btn-info btn-icon-split">
               <span class="text">Invite new user</span>
             </a>
@@ -118,7 +113,7 @@
                     <td>{{worker.firstName}}</td>
                     <td>{{worker.lastName}}</td>
                     <td>{{worker.email}}</td>
-                    <td><a (click)="(deleteWorker(worker.id))" href="/home/(nav:account)" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure delete this user?')">
+                    <td><a (click)="(deleteWorker(worker.id))" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure delete this user?')">
                       <i class="fas fa-trash"></i>
                     </a></td>
                   </tr>

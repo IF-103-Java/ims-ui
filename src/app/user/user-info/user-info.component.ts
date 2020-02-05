@@ -8,6 +8,7 @@ import {changeDateFormat, changeTimeFormat} from "../../helpers/date-format-help
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {ToastService} from "../../websocket/notification/toast.service";
 
 @Component({
   selector: 'app-user-info',
@@ -30,26 +31,35 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   editForm = false;
   userErrors: Map<string, string> = new Map<string, string>();
 
+  firstName: String;
+  lastName: String;
+  role: string;
 
   constructor(private userService: UserService,
               private loginService: LoginService,
               private route: ActivatedRoute,
               private router: Router,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private toastService: ToastService) {
   }
 
   ngOnInit() {
     this.getCurrentUserSubscription = this.userService.getCurrentUser()
       .subscribe((response: HttpResponse<any>) => {
         if (response) {
-          this.user = response.body;
-          this.user.role = response.body.role.substr(5);
+          this.initUser(response);
         }
       }, (appError: AppError) => {
         throw appError;
       });
   }
 
+  initUser(response: HttpResponse<any>) {
+    this.user = response.body;
+
+    this.firstName = new String(this.user.firstName);
+    this.lastName = new String(this.user.lastName);
+  }
 
   deleteUser() {
     this.deleteUserSubscription = this.userService.delete(this.user.id).subscribe(
@@ -58,7 +68,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
         this.router.navigate(['/sign-up']);
       },
       (appError: AppError) => {
-        console.log(appError);
         throw appError;
       });
   }
@@ -72,6 +81,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   clickCancelBtn() {
+    this.firstName = new String(this.user.firstName);
+    this.lastName = new String(this.user.lastName);
     this.editForm = false;
   }
 
@@ -83,7 +94,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       .subscribe((response: HttpResponse<any>) => {
           if (response) {
             this.user = response.body;
+            this.userService.refreshUsername(this.user);
             this.editForm = false;
+            this.toastService.show('User was successfully updated.', {classname: 'bg-success text-light', delay: 3000});
           }
         }, (appError: AppError) => {
           throw appError;
@@ -113,6 +126,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.userService.change.unsubscribe();
+
     if (this.getCurrentUserSubscription) {
       this.getCurrentUserSubscription.unsubscribe()
     }

@@ -22,15 +22,16 @@
     </li>
 
     <div *ngIf="role == 'ROLE_ADMIN'">
-    <hr class="sidebar-divider">
-    <div class="sidebar-heading">Account management</div>
-    <!-- Nav Item - Organization -->
-    <li class="nav-item">
-      <a [routerLink]="[{outlets: {nav: ['account']}}]" routerLinkActive="active" class="nav-link active">
-        <i class="fas fa-fw fa-accessible-icon"></i>
-        <span>Account</span></a>
-    </li>
-</div>
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">Account management</div>
+      <!-- Nav Item - Organization -->
+      <li class="nav-item">
+        <a [routerLink]="[{outlets: {nav: ['account']}}]" routerLinkActive="active" class="nav-link active">
+<!--          <i class="fas fa-fw fa-"></i>-->
+          <i class="far fa-address-card"></i>
+          <span>Account</span></a>
+      </li>
+    </div>
 
     <hr class="sidebar-divider">
 
@@ -40,17 +41,7 @@
       <a [routerLink]="[{outlets: {nav: ['warehouses']}}]" routerLinkActive="active" class="nav-link active">
         <i class="fas fa-fw fa-warehouse"></i>
         <span>Warehouses</span></a>
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="[{outlets: {nav: ['warehouse-create']}}]" routerLinkActive="active" class="nav-link active">
-        <i class="fas fa-fw fa-warehouse"></i>
-        <span>Warehouse create</span></a>
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="[{outlets: {nav: ['warehouse-update']}}]" routerLinkActive="active" class="nav-link active">
-        <i class="fas fa-fw fa-warehouse"></i>
-        <span>Warehouse update</span></a>
-    </li>
+
     <hr class="sidebar-divider">
 
     <div class="sidebar-heading">Item management</div>
@@ -146,7 +137,7 @@
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-              <a [routerLink]="[{ outlets: { nav: ['profile-info'] } }]"  class="dropdown-item" >
+              <a [routerLink]="[{ outlets: { nav: ['profile-info'] } }]" class="dropdown-item">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Profile
               </a>
@@ -170,15 +161,6 @@
 
     <!-- Main Content -->
     <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-      <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Copyright © Your Website 2019</span>
-        </div>
-      </div>
-    </footer>
     <!-- End of Footer -->
   </div>
   <!-- End of Content Wrapper -->

@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import {ItemService} from "../item.service";
 import {Item} from "../../models/item.model";
+import {Page} from "../../models/page";
+import {SavedItem} from "../../models/savedItem.model";
+
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -9,29 +13,44 @@ import {Item} from "../../models/item.model";
   styleUrls: ['./item-table.component.css']
 })
 export class ItemTableComponent implements OnInit {
-  page: number =0;
-  size: number =10;
-sortValue: string[]=['name_item', 'unit', 'description', 'volume']
-  sort: {value: string, direction: string};
-items: Item[];
-  constructor(private itemService: ItemService) { }
 
+  sortValues: string[] = ['name_item', 'unit', 'description', 'volume'];
+  page: number = 0;
+  size: number = 15;
+  sortValue: string = this.sortValues[0];
+  direction: string = 'asc';
+  items: Page<Item>;
+  savedItems: SavedItem[];
+
+  constructor(private itemService: ItemService, private router: Router, private route: ActivatedRoute) {
+  }
+  goToAddItem() {
+    this.router.navigate(['home', { outlets: { nav: ['create-item']}}]);
+  }
+  goToUpdateItem(itemId: number) {
+this.router.navigate(['home', { outlets: { nav: ['update-item', itemId]}}]);
+  }
+delete(itemId: number) {
+  this.itemService.deleteItem(itemId);
+}
   ngOnInit() {
-  this.itemService.findSortedAndPaginatedItems(this.page,this.size, this.sortValue[0], 'asc').subscribe(data=>{
-    this.items = data;
-  })
-  }
-  getSortedAndPaginatedItems(){
-    this.itemService.findSortedAndPaginatedItems(this.page,this.size, this.sort.value, this.sort.direction).subscribe(data=>{
+    this.itemService.findSortedAndPaginatedItems(this.page, this.size, this.sortValue, this.direction).subscribe(data => {
       this.items = data;
-    })
-  }
-  increment(){
-    return  this.page += 1;
+    });
+
   }
 
-  decrement(){
-    return  this.page -= 1;
+  onSort(sort: { value: string, direction: string }) {
+    this.sortValue = sort.value;
+    this.direction = sort.direction;
+    this.sort();
   }
+
+  onPaginate() { this.sort(); }
+sort() {
+  this.itemService.findSortedAndPaginatedItems(this.page - 1, this.size, this.sortValue, this.direction).subscribe(data => {
+    this.items = data;
+  });
+}
 
 }
