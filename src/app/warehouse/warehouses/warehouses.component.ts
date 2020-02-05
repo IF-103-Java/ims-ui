@@ -51,7 +51,7 @@ export class WarehousesComponent implements OnInit {
   }
 
   getCapacity(id: number) {
-    this.warehouseService.getTotalCapacity(id).subscribe(data => this.capacity = data.valueOf());
+    this.warehouseService.getTotalCapacity(id).subscribe(data => this.capacity = data);
     console.log(this.capacity);
   }
 

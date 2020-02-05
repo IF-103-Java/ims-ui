@@ -24,7 +24,7 @@
               <div *ngIf="warehouse.topWarehouseID == warehouse.id; then thenTop else elseTop"></div>
               <ng-template #thenTop>
                 <div class="form-group">
-                  <label for="capacity">Capacity ///check!!!!!!!!!!!!!!!!!!</label>
+                  <label for="capacity">Capacity </label>
                   <input type="text" class="form-control" id="capacity" required [(ngModel)]="warehouse.capacity"
                          name="capacity">
                 </div>
@@ -54,7 +54,7 @@
               </ng-template>
               <ng-template #elseTop>
                 <div class="form-group">
-                <label for="capacityMiddle">Capacity ///check!!!!!!!!!!!!!!!!!!</label>
+                <label for="capacityMiddle">Capacity </label>
                 <input type="text" class="form-control" id="capacityMiddle" required [(ngModel)]="warehouse.capacity"
                        name="capacityMiddle">
                   </div>
@@ -71,25 +71,24 @@
                   </ng-template>
               </ng-template>
 
-
-
-
               <div>
-                <a (click)="updateWarehouse(warehouse.id, warehouse)" class="btn btn-success btn-icon-split">
+                <a (click)="updateWarehouse(warehouse.id, warehouse)" class="btn btn-success btn-icon-split" style="margin: 5px">
                     <span class="icon text-white-50">
                       <i class="fas fa-check"></i>
                     </span>
                   <span class="text">Edit</span>
                 </a>
-                <a (click)="gotoList()" class="btn btn-success btn-warning">
+
+                <a (click)="gotoList()" class="btn btn-success btn-warning" style="margin: 5px">
                     <span class="icon text-yellow-50">
-                      <i class="fas fa-check"></i>
+                      <i class="fas fa-backward"></i>
                     </span>
-                  <span class="text">Back to List</span>
+                  <span class="text">Back to top level List</span>
                 </a>
-                <a (click)=back() class="btn btn-dark">
+
+                <a (click)=back() class="btn btn-dark" style="margin: 5px">
                     <span class="icon text-blue-50 ">
-                      <i class="fas fa-check"></i>
+                      <i class="fas fa-backward"></i>
                     </span>
                   <span class="text">Back</span>
                 </a>
