@@ -5,6 +5,17 @@ th[sortable] {
   user-select: none;
   -webkit-user-select: none;
 }
+.fa-arrow-down:before {
+  content: ''!important;
+}
+
+.fa-arrow-up:before {
+  content: ''!important;
+}
+
+.fas {
+  display: table-cell!important;
+}
 
 th[sortable].desc:before, th[sortable].asc:before {
   content: '';
