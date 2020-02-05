@@ -54,7 +54,7 @@ export class WarehouseAdviceComponent implements OnInit {
       });
   }
 
-  showWarehouseAdvice(itemId: bigint) {
+  showWarehouseAdvice(itemId: number) {
     this.state = WarehouseAdviceComponentState.LOADING;
     this.warehouseAdviceService.getAdvice(itemId)
       .subscribe(x => {
