@@ -10,12 +10,15 @@ import {Item} from "../../models/item.model";
 })
 export class ItemCreateComponent implements OnInit {
   public item: Item = new Item();
+  public itemResult: Item;
 
   constructor(private itemService: ItemService) { }
 
-  ngOnInit() {
+  ngOnInit()  {
   }
-createItem(){
-    this.itemService.addItem(this.item);
+createItem() {
+  this.itemService.addItem(this.item).subscribe(data => {
+  this.itemResult = data;
+   });
 }
 }

@@ -25,6 +25,10 @@ import {UserInfoComponent} from "./user/user-info/user-info.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {UserConfirmationComponent} from "./user/user-confirmation/user-confirmation.component";
 import {LoginPageGuardService} from "./user/services/login-page-guard.service";
+import {SavedItemCreateComponent} from './item/saved-item-create/saved-item-create.component';
+import {ItemUpdateComponent} from "./item/item-update/item-update.component";
+import {SavedItemMoveComponent} from "./item/saved-item-move/saved-item-move.component";
+import {SavedItemOutComponent} from "./item/saved-item-out/saved-item-out.component";
 
 
 export const routerComponents = [
@@ -53,7 +57,11 @@ export const routerComponents = [
   AssociateComponent,
   FormAssociateComponent,
   UserInfoComponent,
-  UserConfirmationComponent
+  UserConfirmationComponent,
+  SavedItemCreateComponent,
+  ItemUpdateComponent,
+  SavedItemMoveComponent,
+  SavedItemOutComponent
 ];
 
 @NgModule({
@@ -86,6 +94,11 @@ export const routerComponents = [
           {path: 'add-associate', component: FormAssociateComponent, outlet: 'nav'},
           {path: 'edit-associate/:id', component: FormAssociateComponent, outlet: 'nav'},
           {path: 'profile-info', component: UserInfoComponent, outlet: 'nav'},
+          {path: 'update-item/:id', component: ItemUpdateComponent, outlet: 'nav'},
+          {path: 'create-savedItem/:id', component: SavedItemCreateComponent, outlet: 'nav'},
+          {path: 'move-savedItem/:id/:savedItemId', component: SavedItemMoveComponent, outlet: 'nav'},
+          {path: 'out-savedItem/:id/:savedItemId', component:  SavedItemOutComponent, outlet: 'nav'},
+          {path: 'create-item', component:  ItemCreateComponent, outlet: 'nav'}
         ]
       },
     ])
@@ -97,3 +110,4 @@ export const routerComponents = [
 })
 export class AppRoutingModule {
 }
+
