@@ -30,7 +30,6 @@ import {ItemUpdateComponent} from "./item/item-update/item-update.component";
 import {SavedItemMoveComponent} from "./item/saved-item-move/saved-item-move.component";
 import {SavedItemOutComponent} from "./item/saved-item-out/saved-item-out.component";
 
-
 export const routerComponents = [
   // main components("/home", "/sign-in", "/sign-up")
   HomeComponent,

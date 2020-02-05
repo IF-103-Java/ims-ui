@@ -4,7 +4,8 @@ import {WarehouseService} from '../service/warehouse.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Address} from '../../models/address';
 import {ToastService} from '../../websocket/notification/toast.service';
-import {IDropdownSettings} from "ng-multiselect-dropdown";
+import {Location} from '@angular/common';
+import {IDropdownSettings} from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-warehouse',
@@ -32,10 +33,11 @@ export class WarehouseCreateComponent implements OnInit {
   constructor(private warehouseService: WarehouseService,
               private router: Router,
               private route: ActivatedRoute,
-              private toastService: ToastService
+              private toastService: ToastService,
+              private location: Location) {
 
-  ) {
     this.warehouse.addressDto = new Address();
+
   }
 
   ngOnInit() {
@@ -81,6 +83,9 @@ export class WarehouseCreateComponent implements OnInit {
         this.toastService.show(data.message, {classname: 'bg-danger text-light', delay: 5000});
       }
     });
+  }
+  back() {
+    this.location.back();
   }
 
 }
