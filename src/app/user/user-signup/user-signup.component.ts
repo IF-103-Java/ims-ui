@@ -19,7 +19,7 @@ export class UserSignupComponent implements OnDestroy {
   load = false;
 
   constructor(private registrationService: RegistrationService,
-              public router: Router) {
+              private router: Router) {
   }
 
   createUser(data: any): void {

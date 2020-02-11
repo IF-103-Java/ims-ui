@@ -6,10 +6,6 @@
   font-size: 23px;
 }
 
-.button-left {
-  margin-left: 550px;
-}
-
 .border-none {
   border: none;
   padding-left: 0px !important;
@@ -39,17 +35,9 @@
 
 .btn-password {
   margin-top: 10px;
-  margin-left: 215px;
-}
-
-.btn-delete {
-  margin-left: 220px;
 }
 
 .update-block {
   margin-left: 420px;
 }
 
-.btn-edit {
-  margin-left: 500px;
-}
