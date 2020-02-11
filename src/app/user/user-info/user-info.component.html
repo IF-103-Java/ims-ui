@@ -6,7 +6,9 @@
           <div class="row">
             <div class="d-none d-md-block col-md-1 col-lg-2 col-xl-3"></div>
             <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
-              <h5 class="m-0 font-weight-bold text-primary align-content-center header">YOUR PROFILE</h5>
+              <h5 class="m-0 font-weight-bold text-primary align-content-center header">
+                {{user.firstName}}, you’re the boss of your account.
+              </h5>
 
               <!-- Nav -->
               <div class="nav">
@@ -81,11 +83,11 @@
                     <div *ngIf="isFormDisable(); then showEdit else showUpdate"></div>
 
                     <ng-template #showEdit>
-                      <button class="btn btn-primary btn-edit " (click)="clickEditBtn()">Edit</button>
+                      <button class="btn btn-primary" (click)="clickEditBtn()">Edit</button>
                     </ng-template>
 
                     <ng-template #showUpdate>
-                      <div class="row2 update-block">
+                      <div class="row2">
                         <button type="submit" class="btn btn-danger btn-primary " (click)="clickCancelBtn()">Cancel</button>
                         <button type="submit" class="btn btn-primary " [disabled]="!data.valid" (click)="update(data.value)">Save</button>
                       </div>
@@ -101,18 +103,41 @@
                   <div *ngIf="!this.done; then showFormInput else showSuccess"></div>
                   <ng-template #showFormInput>
                     <form class="form-block mb-4" #data="ngForm" (ngSubmit)="changePassword(data.value)">
+
+                      <div>
+                        <label for="currentPassword">
+                          <span style="color: red; font-weight: bold;">*</span>Your current password:</label>
+                        <input ngModel
+                               name="currentPassword"
+                               class="form-control"
+                               id="currentPassword"
+                               [type]="hidePassword ? 'password' : 'text'"
+                               required>
+                      </div>
+
                       <div>
                         <label for="newPassword">
                           <span style="color: red; font-weight: bold;">*</span>New password:</label>
-                        <input ngModel name="password" class="form-control" id="newPassword"
-                               required #newPassword [type]="hidePassword ? 'password' : 'text'">
+                        <input ngModel
+                               #newPassword
+                               name="newPassword"
+                               class="form-control"
+                               id="newPassword"
+                               [type]="hidePassword ? 'password' : 'text'"
+                               required>
                       </div>
+
                       <div>
                         <label for="repeatedPassword">
                           <span style="color: red; font-weight: bold;">*</span>Repeated password:</label>
-                        <input ngModel name="repeatedPassword" class="form-control" id="repeatedPassword"
-                               required pattern="{{newPassword.value}}" #repeatedPassword
-                               [type]="hidePassword ? 'password' : 'text'">
+                        <input ngModel
+                               #repeatedPassword
+                               name="repeatedPassword"
+                               class="form-control"
+                               id="repeatedPassword"
+                               pattern="{{newPassword.value}}"
+                               [type]="hidePassword ? 'password' : 'text'"
+                               required>
                         <i class="fa field-icon icon-eye" (click)="hidePassword = !hidePassword"
                            [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i>
                       </div>
@@ -126,9 +151,7 @@
                       </div>
 
                       <div>
-                        <button type="submit" class="btn btn-primary btn-password" [disabled]="!data.valid">
-                          Save password
-                        </button>
+                        <button type="submit" class="btn btn-primary btn-password" [disabled]="!data.valid">Save password</button>
                       </div>
                     </form>
                   </ng-template>
@@ -149,7 +172,7 @@
                 <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="delete-profile-tab">
                   <p class=" mb-2 text-center">If you really want to delete profile, you should know you'll lose
                     all your data forever! Thanks for cooperation!</p>
-                  <button class="btn btn-danger btn-delete" (click)="openDeleteModal(content)">Delete</button>
+                  <button class="btn btn-danger" (click)="openDeleteModal(content)">Delete</button>
                 </div>
               </div>
 
@@ -173,7 +196,7 @@
   <div class="modal-body">Select "DELETE" below if you are ready to end work with us.</div>
   <div class="modal-footer">
     <button class="btn btn-secondary" (click)="modalRef.close()" type="button" data-dismiss="modal">Cancel</button>
-    <a routerLink (click)="deleteUser()" class="btn btn-primary">Delete</a>
+    <button routerLink (click)="deleteUser()" class="btn btn-primary">Delete</button>
   </div>
 </ng-template>
 
