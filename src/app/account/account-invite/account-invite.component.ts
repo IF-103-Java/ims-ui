@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../account.service';
 import {User} from '../../models/user.model';
 import AppError from '../../errors/app-error';
-import {Router} from '@angular/router';
 import {ToastService} from '../../websocket/notification/toast.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class UserInviteComponent implements OnInit {
   inviteErrors: Map<string, string> = new Map<string, string>();
 
   constructor(private accountService: AccountService,
-              private router: Router,
               public toastService: ToastService) {
   }
 

@@ -44,8 +44,7 @@ export class WarehouseService {
     return this.http.get<Array<Warehouse>>(this.baseUrl + `/warehouses/children/` + warehouseId);
   }
 
-  public getTotalCapacity(warehouseId: number): Observable<number> {
-
+  public getTotalCapacity(warehouseId: number) {
     return this.http.get<number>(this.baseUrl + `/warehouses/capacity/` + warehouseId);
   }
 

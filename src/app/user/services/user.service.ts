@@ -4,6 +4,7 @@ import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import AppError from "../../errors/app-error";
 import {User} from "../../models/user.model";
+import {ResetPassword} from "../../models/resetPassword.model";
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ export class UserService {
       );
   }
 
-  updatePassword(password: string): Observable<any> {
-    return this.http.post<User>(this.baseUrl + '/users/update-password', password,
+  updatePassword(data: ResetPassword): Observable<any> {
+    return this.http.post<User>(this.baseUrl + '/users/update-password', data,
       {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
@@ -43,17 +44,6 @@ export class UserService {
 
   delete(id: bigint): Observable<any> {
     return this.http.delete<User>(this.baseUrl + '/users/' + id,
-      {observe: 'response'})
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          return throwError(new AppError(error));
-        })
-      );
-  }
-
-  getAllUsers(): Observable<any> {
-    return this.http.get<User[]>(
-      this.baseUrl + '/users/account/users',
       {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
