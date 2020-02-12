@@ -30,6 +30,7 @@ export class SavedItemOutComponent implements OnInit {
   outSavedItem() {
     this.itemService.outSavedItem(this.itemTransactionRequest).subscribe(data => {
       this.savedItem = data;
+      this.itemService.goToUpdateItem(this.savedItem.itemId);
     });
   }
 getItemTransactionRequest() {
@@ -39,7 +40,7 @@ getItemTransactionRequest() {
       this.itemTransactionRequest.quantity = data.quantity;
     });
     this.itemService.getItemById(Number(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe(data => {
-      this.itemTransactionRequest.itemDto = data;
+      this.itemTransactionRequest.itemId = data.id;
     });
 }
 }

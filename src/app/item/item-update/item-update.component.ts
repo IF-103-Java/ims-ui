@@ -22,10 +22,12 @@ export class ItemUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.getItem();
-     }
+
+ }
      getItem() {
        this.itemService.getItemById(Number(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe(data => {
          this.item = data;
+         this.getSavedItems();
        });
      }
 getSavedItems() {
@@ -49,13 +51,5 @@ getWarehouse(id: number) {
   this.item = data;
 });
   }
-  goToCreateSavedItem(itemId: number) {
-    this.router.navigate(['home', { outlets: { nav: ['create-savedItem', itemId]}}]);
-  }
-  goToMoveSavedItem(itemId: number, savedItemId: number) {
-    this.router.navigate(['home', { outlets: { nav: ['move-savedItem', itemId, savedItemId]}}]);
-  }
-  goToOutSavedItem(itemId: number, savedItemId: number) {
-    this.router.navigate(['home', { outlets: { nav: ['out-savedItem', itemId, savedItemId]}}]);
-  }
+
 }

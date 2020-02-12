@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Warehouse} from '../../models/warehouse.model';
 import {Observable} from 'rxjs';
 import {Page} from '../../models/page';
+import {UsefulWarehouseModel} from "../../models/usefulWarehouse.model";
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,10 @@ export class WarehouseService {
   public getTotalCapacity(warehouseId: number): Observable<number> {
 
     return this.http.get<number>(this.baseUrl + `/warehouses/capacity/` + warehouseId);
+  }
+
+  public findUsefulWarehouses(capacity: number) {
+    return this.http.get<UsefulWarehouseModel[]>(this.baseUrl + '/warehouses/usefulWarehouses/' + capacity);
   }
 }
 
