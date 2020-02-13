@@ -13,7 +13,7 @@
             <p>
               <select class="custom-select" style="width: auto" name="pageSize"  [(ngModel)]="itemTransactionRequest.destinationWarehouseId">
                 <option *ngFor="let usefulWarehouse of usefulWarehouses" [ngValue]="usefulWarehouse.id">
-                  <ul *ngFor="let w of usefulWarehouse.path; let i = index, let l =  length" style="list-style-type:none;">
+                  <ul *ngFor="let w of usefulWarehouse.path; let i = index" style="list-style-type:none;">
                     <span>{{w}}</span><span *ngIf="usefulWarehouse.path.length>i+1">--></span>
                   </ul>
                 </option>

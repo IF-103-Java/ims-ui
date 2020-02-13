@@ -43,10 +43,9 @@
             <td>{{item.description}}</td>
             <td>{{item.volume}}</td>
             <td>{{savedItem.quantity}}</td>
-            <td><ul *ngFor="let w of warehouses[i].path.reverse(); let i = index">
+            <td><ul *ngFor="let w of warehouses[i].path.values(); let i = index">
               <p>{{w}}</p>
             </ul></td>
-
             <td><button  class="btn btn-info" style="margin-left: 10px" (click)="itemService.goToMoveSavedItem(item.id, savedItem.id)">Move</button>
               <button class="btn btn-danger" (click)="itemService.goToOutSavedItem(item.id, savedItem.id)">Out</button></td>
           </tr>

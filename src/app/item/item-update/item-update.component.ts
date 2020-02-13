@@ -15,7 +15,7 @@ export class ItemUpdateComponent implements OnInit {
   warehouses: Array<Warehouse> = new Array<Warehouse>();
   savedItems: SavedItem[];
   item: Item = new Item();
-  path: Array<string>;
+
 
  constructor(private warehouseService: WarehouseService, private itemService: ItemService,
              private activatedRoute: ActivatedRoute, private router: Router ) { }
@@ -31,17 +31,19 @@ export class ItemUpdateComponent implements OnInit {
        });
      }
 getSavedItems() {
+  this.warehouses = [];
   this.itemService.getSavedItemsByItemId(this.item.id).subscribe(data => {
     this.savedItems = data;
     this.savedItems.forEach( x => {
       this.getWarehouse(x.warehouseId);
     });
-    this.warehouses = this.warehouses.reverse();
+
   });
 
 }
 getWarehouse(id: number) {
   this.warehouseService.getWarehouse(id).subscribe(data => {
+    data.path = data.path.reverse();
     this.warehouses.push(data);
   });
 
