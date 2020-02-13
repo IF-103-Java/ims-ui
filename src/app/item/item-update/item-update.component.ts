@@ -17,7 +17,7 @@ export class ItemUpdateComponent implements OnInit {
   item: Item = new Item();
 
 
- constructor(private warehouseService: WarehouseService, private itemService: ItemService,
+ constructor(private warehouseService: WarehouseService, public itemService: ItemService,
              private activatedRoute: ActivatedRoute, private router: Router ) { }
 
   ngOnInit() {
