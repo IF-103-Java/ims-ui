@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Item} from '../../models/item.model';
 import {SavedItem} from '../../models/savedItem.model';
 import {WarehouseService} from '../../warehouse/service/warehouse.service';
-import {Warehouse} from "../../models/warehouse.model";
+import {Warehouse} from '../../models/warehouse.model';
 
 @Component({
   selector: 'app-item-update',

@@ -22,7 +22,7 @@ export class ItemTableComponent implements OnInit {
   items: Page<Item>;
   savedItems: SavedItem[];
 
-  constructor(private itemService: ItemService, private router: Router, private route: ActivatedRoute) {
+  constructor(public itemService: ItemService, private router: Router, private route: ActivatedRoute) {
   }
 delete(itemId: number) {
   this.itemService.deleteItem(itemId).subscribe(data => {
