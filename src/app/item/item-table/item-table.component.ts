@@ -1,10 +1,10 @@
 import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
-import {ItemService} from "../item.service";
-import {Item} from "../../models/item.model";
-import {Page} from "../../models/page";
-import {SavedItem} from "../../models/savedItem.model";
+import {ItemService} from '../item.service';
+import {Item} from '../../models/item.model';
+import {Page} from '../../models/page';
+import {SavedItem} from '../../models/savedItem.model';
 
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -15,23 +15,19 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class ItemTableComponent implements OnInit {
 
   sortValues: string[] = ['name_item', 'unit', 'description', 'volume'];
-  page: number = 0;
-  size: number = 15;
+  page = 0;
+  size = 15;
   sortValue: string = this.sortValues[0];
-  direction: string = 'asc';
+  direction = 'asc';
   items: Page<Item>;
   savedItems: SavedItem[];
 
-  constructor(private itemService: ItemService, private router: Router, private route: ActivatedRoute) {
-  }
-  goToAddItem() {
-    this.router.navigate(['home', { outlets: { nav: ['create-item']}}]);
-  }
-  goToUpdateItem(itemId: number) {
-this.router.navigate(['home', { outlets: { nav: ['update-item', itemId]}}]);
+  constructor(public itemService: ItemService, private router: Router, private route: ActivatedRoute) {
   }
 delete(itemId: number) {
-  this.itemService.deleteItem(itemId);
+  this.itemService.deleteItem(itemId).subscribe(data => {
+    this.sort();
+  });
 }
   ngOnInit() {
     this.itemService.findSortedAndPaginatedItems(this.page, this.size, this.sortValue, this.direction).subscribe(data => {

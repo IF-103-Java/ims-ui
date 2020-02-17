@@ -3,56 +3,55 @@
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">Update Item</h6>
   </div>
-  <div class="row">
-    <div class="col-sm-6">
-  <form>
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" [(ngModel)]="item.name" name="name" class="form-control" id="name">
-      <label for="unit">Unit:</label>
-      <input type="text" [(ngModel)]="item.unit" name="unit" class="form-control" id="unit">
-      <label for="description">Description:</label>
-      <input type="text" [(ngModel)]="item.description" name="description" class="form-control" id="description">
-      <label for="volume">Volume:</label>
-      <input type="text" [(ngModel)]="item.volume" name="volume" class="form-control" id="volume">
-      <button (click)="updateItem()" class="btn btn-success btn-icon-split">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <form>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" [(ngModel)]="item.name" name="name" class="form-control" id="name">
+            <label for="unit">Unit:</label>
+            <input type="text" [(ngModel)]="item.unit" name="unit" class="form-control" id="unit">
+            <label for="description">Description:</label>
+            <input type="text" [(ngModel)]="item.description" name="description" class="form-control" id="description">
+            <label for="volume">Volume:</label>
+            <input type="text" [(ngModel)]="item.volume" name="volume" class="form-control" id="volume">
+            <button (click)="updateItem()" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-check"></i>
                     </span>
-        <span class="text text-white-50">Update Item</span>
-      </button>
-    </div>
-  </form>
-  <button (click)="goToCreateSavedItem(item.id)" class="btn btn-info" style="margin-left: 10px">Add SavedItem</button>
-
-      <button (click)="getSavedItems()" class="btn btn-info" style="margin-left: 10px">Show SavedItems</button>
-  </div>
-    <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-        <th>Name</th>
-        <th>Unit</th>
-        <th>Description</th>
-        <th>Volume</th>
-        <th>Quantity</th>
-        <th>Warehouse</th>
-        </thead>
-        <tbody>
-           <tr *ngFor="let savedItem of savedItems; let i= index " >
-          <td>{{item.name}}</td>
-          <td>{{item.unit}}</td>
-          <td>{{item.description}}</td>
-          <td>{{item.volume}}</td>
-          <td>{{savedItem.quantity}}</td>
-             <td><ul *ngFor="let w of warehouses[i].path">
-               <p>{{w}}</p>
-             </ul></td>
-
-          <td><button  class="btn btn-info" style="margin-left: 10px" (click)="goToMoveSavedItem(item.id, savedItem.id)">Move</button>
-            <button class="btn btn-danger" (click)="goToOutSavedItem(item.id, savedItem.id)">Out</button></td>
-        </tr>
-        </tbody>
-      </table>
+              <span class="text text-white-50">Update Item</span>
+            </button>
+          </div>
+        </form>
+        <button (click)="itemService.goToCreateSavedItem(item.id)" class="btn btn-info" style="margin-left: 10px">Add SavedItem</button>
+      </div>
+      <div *ngIf="warehouses.length>0" class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+          <th>Name</th>
+          <th>Unit</th>
+          <th>Description</th>
+          <th>Volume</th>
+          <th>Quantity</th>
+          <th>Warehouse</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let savedItem of savedItems; let i= index " >
+            <td>{{item.name}}</td>
+            <td>{{item.unit}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.volume}}</td>
+            <td>{{savedItem.quantity}}</td>
+            <td><ul *ngFor="let w of warehouses[i].path.values(); let i = index">
+              <p>{{w}}</p>
+            </ul></td>
+            <td><button  class="btn btn-info" style="margin-left: 10px" (click)="itemService.goToMoveSavedItem(item.id, savedItem.id)">Move</button>
+              <button class="btn btn-danger" (click)="itemService.goToOutSavedItem(item.id, savedItem.id)">Out</button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

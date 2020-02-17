@@ -19,6 +19,7 @@ export class ItemCreateComponent implements OnInit {
 createItem() {
   this.itemService.addItem(this.item).subscribe(data => {
   this.itemResult = data;
+  this.itemService.goToUpdateItem(this.itemResult.id);
    });
 }
 }

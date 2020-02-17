@@ -9,6 +9,7 @@ import {SavedItemAssociateModel} from '../../models/savedItemAssociate.model';
 import {UsefulWarehouseModel} from '../../models/usefulWarehouse.model';
 import {Item} from "../../models/item.model";
 import {Associate} from "../../models/associate";
+import {WarehouseService} from "../../warehouse/service/warehouse.service";
 
 @Component({
   selector: 'app-saved-item-create',
@@ -16,24 +17,26 @@ import {Associate} from "../../models/associate";
   styleUrls: ['./saved-item-create.component.css']
 })
 export class SavedItemCreateComponent implements OnInit {
-  warehouses: UsefulWarehouseModel[];
+  usefulWarehouses: UsefulWarehouseModel[];
   associates: SavedItemAssociateModel[];
   itemTransactionRequest: ItemTransactionRequest  = new ItemTransactionRequest();
   savedItem: SavedItem = new SavedItem();
-  constructor(private activatedRoute: ActivatedRoute, private itemService: ItemService,  private associateService: AssociateService) {}
+  volume: number;
+  constructor(private activatedRoute: ActivatedRoute, private itemService: ItemService, private warehouseService: WarehouseService,
+              private associateService: AssociateService) {}
 
   findUsefulWarehouses() {
     const volume = this.itemTransactionRequest.quantity *
-      this.itemTransactionRequest.itemDto.volume;
-    this.itemService.findUsefulWarehouses(volume).subscribe(data => {
-      this.warehouses = data;
-
+      this.volume;
+    this.warehouseService.findUsefulWarehouses(volume).subscribe(data => {
+      this.usefulWarehouses = data;
     });
   }
 
 addSavedItem() {
   this.itemService.addSavedItem(this.itemTransactionRequest).subscribe(data => {
       this.savedItem = data;
+      this.itemService.goToUpdateItem(this.savedItem.itemId);
     });
 }
   findSupplier() {
@@ -41,8 +44,10 @@ addSavedItem() {
   }
   ngOnInit() {
     this.itemService.getItemById(Number(this.activatedRoute.snapshot.paramMap.get('id'))).subscribe(data => {
-      this.itemTransactionRequest.itemDto = data;
+      this.itemTransactionRequest.itemId = data.id;
+      this.volume = data.volume;
+      this.findSupplier();
     });
-    this.findSupplier();
+
   }
 }
