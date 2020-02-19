@@ -65,8 +65,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.deleteUserSubscription = this.userService.delete(this.user.id).subscribe(
       response => {
         if (response) {
-          this.loginService.logout();
           this.modalRef.close();
+          this.loginService.logout();
           this.router.navigate(['/sign-up']);
         }
       },
@@ -77,6 +77,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
           throw appError;
         }
       });
+
   }
 
   openDeleteModal(content) {
@@ -128,7 +129,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
           this.done = true;
         }, (appError: AppError) => {
           if (appError.status === 400) {
-            this.toastService.show('An incorrect password was provided.', {classname: 'bg-danger text-light', delay: 3000});
+            this.toastService.show('An incorrect password was provided.',
+              {classname: 'bg-danger text-light', delay: 3000});
           } else {
             throw appError;
           }

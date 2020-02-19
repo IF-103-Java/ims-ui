@@ -33,7 +33,7 @@ export class UserService {
   }
 
   updatePassword(data: ResetPassword): Observable<any> {
-    return this.http.post<User>(this.baseUrl + '/users/update-password', data,
+    return this.http.put<User>(this.baseUrl + '/users/update-password', data,
       {observe: 'response'})
       .pipe(
         catchError((error: HttpErrorResponse) => {
