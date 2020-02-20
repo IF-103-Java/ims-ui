@@ -13,7 +13,7 @@ export class RegistrationService {
   }
 
   public regUser(user: User): Observable<any> {
-    return this.http.post(this.baseUrl + '/signup', user)
+    return this.http.post(this.baseUrl + '/sign-up', user)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           return throwError(new AppError(error));

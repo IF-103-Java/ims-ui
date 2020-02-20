@@ -8,6 +8,7 @@ import {ItemTransactionRequest} from "../models/itemTransactionRequest.model";
 import {AssociateType} from "../models/associate-type.enum";
 import {SavedItemAssociateModel} from "../models/savedItemAssociate.model";
 import {UsefulWarehouseModel} from "../models/usefulWarehouse.model";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 const httpOptions = {
@@ -18,7 +19,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ItemService {
-  constructor(@Inject('BASE_API_URL') private baseUrl: string, private http: HttpClient) {
+  constructor(@Inject('BASE_API_URL', ) private baseUrl: string, private http: HttpClient,
+              private activatedRoute: ActivatedRoute, private router: Router ) {
   }
 
   public findSortedAndPaginatedItems(page: number, size: number, sort: string, direction: string) {
@@ -40,8 +42,8 @@ export class ItemService {
    public getItemById(itemId: number): Observable<Item> {
      return this.http.get<Item>(this.baseUrl + '/items/' + itemId);
    }
-  public deleteItem(itemId: number): Observable<boolean> {
-     return this.http.delete<boolean>(this.baseUrl + '/items/' + itemId);
+  public deleteItem(itemId: number) {
+ return  this.http.delete(this.baseUrl + `/items/` + itemId);
   }
   public updateItem(item: Item): Observable<Item> {
     return this.http.put<Item>(this.baseUrl + '/items', item);
@@ -61,7 +63,20 @@ export class ItemService {
   public findSuppliersByName(): Observable<SavedItemAssociateModel[]> {
     return this.http.get<SavedItemAssociateModel[]>(this.baseUrl + '/associates?type=SUPPLIER');
   }
-  public findUsefulWarehouses(capacity: number) {
-    return this.http.get<UsefulWarehouseModel[]>(this.baseUrl + '/savedItems/usefulWarehouses/' + capacity);
+
+  goToAddItem() {
+    this.router.navigate(['home', { outlets: { nav: ['create-item']}}]);
+  }
+  goToUpdateItem(itemId: number) {
+    this.router.navigate(['home', { outlets: { nav: ['update-item', itemId]}}]);
+  }
+  goToCreateSavedItem(itemId: number) {
+    this.router.navigate(['home', { outlets: { nav: ['create-savedItem', itemId]}}]);
+  }
+  goToMoveSavedItem(itemId: number, savedItemId: number) {
+    this.router.navigate(['home', { outlets: { nav: ['move-savedItem', itemId, savedItemId]}}]);
+  }
+  goToOutSavedItem(itemId: number, savedItemId: number) {
+    this.router.navigate(['home', { outlets: { nav: ['out-savedItem', itemId, savedItemId]}}]);
   }
 }

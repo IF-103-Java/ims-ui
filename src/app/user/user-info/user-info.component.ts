@@ -9,6 +9,7 @@ import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ToastService} from "../../websocket/notification/toast.service";
+import {ResetPassword} from "../../models/resetPassword.model";
 
 @Component({
   selector: 'app-user-info',
@@ -33,7 +34,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   firstName: String;
   lastName: String;
-  role: string;
 
   constructor(private userService: UserService,
               private loginService: LoginService,
@@ -46,12 +46,13 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCurrentUserSubscription = this.userService.getCurrentUser()
       .subscribe((response: HttpResponse<any>) => {
-        if (response) {
-          this.initUser(response);
+          if (response) {
+            this.initUser(response);
+          }
+        }, (appError: AppError) => {
+          throw appError;
         }
-      }, (appError: AppError) => {
-        throw appError;
-      });
+      );
   }
 
   initUser(response: HttpResponse<any>) {
@@ -63,13 +64,21 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   deleteUser() {
     this.deleteUserSubscription = this.userService.delete(this.user.id).subscribe(
-      resp => {
-        this.loginService.logout();
-        this.router.navigate(['/sign-up']);
+      response => {
+        if (response) {
+          this.modalRef.close();
+          this.loginService.logout();
+          this.router.navigate(['/sign-up']);
+        }
       },
       (appError: AppError) => {
-        throw appError;
+        if (appError.status === 404) {
+          this.toastService.show('User not found.', {classname: 'bg-danger text-light', delay: 3000});
+        } else {
+          throw appError;
+        }
       });
+
   }
 
   openDeleteModal(content) {
@@ -86,25 +95,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.editForm = false;
   }
 
-  update(data: any): any {
-    const user = new User;
-    user.firstName = data.firstName;
-    user.lastName = data.lastName;
-    this.updateUserSubscription = this.userService.update(user)
-      .subscribe((response: HttpResponse<any>) => {
-          if (response) {
-            this.user = response.body;
-            this.userService.refreshUsername(this.user);
-            this.editForm = false;
-            this.toastService.show('User was successfully updated.', {classname: 'bg-success text-light', delay: 3000});
-          }
-        }, (appError: AppError) => {
-          throw appError;
-        }
-      )
-
-  }
-
   isFormDisable() {
     if (this.editForm) {
       return false;
@@ -112,17 +102,40 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     return true;
   }
 
+  update(data: any): any {
+    const user = new User;
+    user.firstName = data.firstName;
+    user.lastName = data.lastName;
+    this.updateUserSubscription = this.userService.update(user)
+      .subscribe((response: HttpResponse<any>) => {
+        if (response) {
+          this.user = response.body;
+          this.userService.refreshUsername(this.user);
+          this.editForm = false;
+          this.toastService.show('User was successfully updated.',
+            {classname: 'bg-success text-light', delay: 3000});
+        }
+      }, (appError: AppError) => {
+        throw appError;
+      });
+  }
+
   changePassword(data: any) {
-    this.changePasswordSubscription = this.userService.updatePassword(data.password)
+    const resetPassword = new ResetPassword();
+    resetPassword.currentPassword = data.currentPassword;
+    resetPassword.newPassword = data.newPassword;
+    this.changePasswordSubscription = this.userService.updatePassword(resetPassword)
       .subscribe(
         response => {
           this.done = true;
         }, (appError: AppError) => {
-          throw appError;
-        }
-      )
-
-
+          if (appError.status === 400) {
+            this.toastService.show('An incorrect password was provided.',
+              {classname: 'bg-danger text-light', delay: 3000});
+          } else {
+            throw appError;
+          }
+        });
   }
 
   ngOnDestroy(): void {

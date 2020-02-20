@@ -3,32 +3,38 @@
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">Add SavedItem</h6>
   </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <form>
-        <div class="form-group">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <form>
+          <div class="form-group">
             <label for="quantity">Suppliers:</label>
-          <p><select class="custom-select" style="width: auto" name="pageSize"  [(ngModel)]="itemTransactionRequest.associateId">
-            <option *ngFor="let a of associates" [ngValue]="a.id">{{a.name}}</option>
-          </select></p>
-          <label for="quantity">Quantity: {{itemTransactionRequest.quantity}}</label>
-          <input type="text" [(ngModel)]="itemTransactionRequest.quantity" name="quantity" class="form-control" id="quantity">
-          <p>
-            <select class="custom-select" style="width: auto" name="pageSize"  [(ngModel)]="itemTransactionRequest.destinationWarehouseId">
-              <option *ngFor="let warehouseModel of warehouses" [ngValue]="warehouseModel.id">{{warehouseModel.name}}</option>
-            </select>
-            <button (click)="findUsefulWarehouses()" class="btn btn-info" style="margin-left: 10px">Find Useful Warehouses</button>
-          </p>
-          <button (click)="addSavedItem()" class="btn btn-success btn-icon-split">
+            <p><select class="custom-select" style="width: auto" name="pageSize"  [(ngModel)]="itemTransactionRequest.associateId">
+              <option *ngFor="let a of associates" [ngValue]="a.id">{{a.name}}</option>
+            </select></p>
+            <label for="quantity">Quantity:</label>
+            <input type="text" [(ngModel)]="itemTransactionRequest.quantity" name="quantity" class="form-control" id="quantity">
+            <p>
+              <select class="custom-select" style="width: auto" name="pageSize"  [(ngModel)]="itemTransactionRequest.destinationWarehouseId">
+                <option *ngFor="let usefulWarehouse of usefulWarehouses" [ngValue]="usefulWarehouse.id">
+                  <ul *ngFor="let w of usefulWarehouse.path; let i = index" style="list-style-type:none;">
+                    <span>{{w}}</span><span *ngIf="usefulWarehouse.path.length>(i+1)">--></span>
+                  </ul>
+                </option>
+              </select>
+              <button (click)="findUsefulWarehouses()" class="btn btn-info" style="margin-left: 10px">Find Useful Warehouses</button>
+            </p>
+            <button (click)="addSavedItem()" class="btn btn-success btn-icon-split">
                      <span class="icon text-white-50">
                       <i class="fas fa-check"></i>
                     </span>
-            <span class="text text-white-50">Add SavedItem</span>
-          </button>
-        </div>
-      </form>
-    </div>
+              <span class="text text-white-50">Add SavedItem</span>
+            </button>
+          </div>
+        </form>
+      </div>
 
+    </div>
   </div>
 </div>
 

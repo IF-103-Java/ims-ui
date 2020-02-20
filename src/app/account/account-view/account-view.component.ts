@@ -50,7 +50,6 @@ export class AccountViewComponent implements OnInit {
 
   deleteWorker(userId: bigint) {
     this.userService.delete(userId).subscribe(response => {
-      console.log(response);
       this.toastService.show('User was deleted.',{classname: 'bg-success text-light', delay: 5000});
       this.getWorkers();
     });

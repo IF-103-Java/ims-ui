@@ -1,7 +1,7 @@
 import {Item} from "./item.model";
 
 export class ItemTransactionRequest {
-  itemDto: Item;
+  itemId: number;
   savedItemId: number;
   quantity: number;
   associateId: number;

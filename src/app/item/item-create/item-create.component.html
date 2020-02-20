@@ -2,26 +2,28 @@
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">Add Item </h6>
   </div>
-  <div class="row">
-    <div class="col-sm-6">
-<form>
-  <div class="form-group">
-    <label for="name">Name:</label>
-    <input type="text" [(ngModel)]="item.name" name="name" class="form-control" id="name">
-    <label for="unit">Unit:</label>
-    <input type="text" [(ngModel)]="item.unit" name="unit" class="form-control" id="unit">
-    <label for="description">Description:</label>
-    <input type="text" [(ngModel)]="item.description" name="description" class="form-control" id="description">
-    <label for="volume">Volume:</label>
-    <input type="text" [(ngModel)]="item.volume" name="volume" class="form-control" id="volume">
-    <button (click)="createItem()" class="btn btn-success btn-icon-split">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <form>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" [(ngModel)]="item.name" name="name" class="form-control" id="name">
+            <label for="unit">Unit:</label>
+            <input type="text" [(ngModel)]="item.unit" name="unit" class="form-control" id="unit">
+            <label for="description">Description:</label>
+            <input type="text" [(ngModel)]="item.description" name="description" class="form-control" id="description">
+            <label for="volume">Volume:</label>
+            <input type="text" [(ngModel)]="item.volume" name="volume" class="form-control" id="volume">
+          </div>
+          <button  (click)="createItem()" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-check"></i>
                     </span>
-      <span class="text text-white-50">Add Item</span>
-    </button>
-  </div>
-</form>
- </div>
+          <span class="text text-white-50">Add Item</span>
+        </button>
+       </form>
+      </div>
+    </div>
   </div>
 </div>

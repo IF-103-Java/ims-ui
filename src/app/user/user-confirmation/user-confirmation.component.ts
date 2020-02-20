@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {Subscription} from "rxjs";
+import AppError from "../../errors/app-error";
 
 @Component({
   selector: 'app-user-confirmation',
@@ -11,7 +12,7 @@ import {Subscription} from "rxjs";
 export class UserConfirmationComponent implements OnInit {
   token: string;
   activateUserSubscription: Subscription;
-  messages: Map<string, string> = new Map<string, string>();
+  isSuccess = true;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService) {
@@ -28,11 +29,14 @@ export class UserConfirmationComponent implements OnInit {
     this.activateUserSubscription = this.userService.activateUser(this.token).subscribe(
       response => {
         if (response) {
-          this.messages['data'] = 'Your account has been successfully activated! Follow the login page to start work!';
-        } else {
-          this.messages['data'] = 'Something went wrong! Your account hasn\'t been activated!';
+          this.isSuccess = true;
         }
-
+      }, (appError: AppError) => {
+        if (appError.status === 404) {
+          this.isSuccess = false;
+        } else {
+          throw appError;
+        }
       }
     )
 
