@@ -12,7 +12,7 @@ import AppError from "../../errors/app-error";
 export class UserConfirmationComponent implements OnInit {
   token: string;
   activateUserSubscription: Subscription;
-  isSuccess: boolean;
+  isSuccess = true;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService) {
