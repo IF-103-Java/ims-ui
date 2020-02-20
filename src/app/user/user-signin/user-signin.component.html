@@ -38,7 +38,7 @@
          (click)="hidePassword = !hidePassword"
          [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'"
          aria-hidden="true "></i>
-      <div class="alert-danger center">
+      <div class="alert-danger center" >
         {{userErrors['data']}}
       </div>
       <div *ngIf="password.touched && password.invalid" class="alert-danger center">

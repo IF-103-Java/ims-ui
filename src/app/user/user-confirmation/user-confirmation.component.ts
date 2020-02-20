@@ -12,7 +12,7 @@ import AppError from "../../errors/app-error";
 export class UserConfirmationComponent implements OnInit {
   token: string;
   activateUserSubscription: Subscription;
-  messages: Map<string, string> = new Map<string, string>();
+  isSuccess: boolean;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService) {
@@ -29,11 +29,11 @@ export class UserConfirmationComponent implements OnInit {
     this.activateUserSubscription = this.userService.activateUser(this.token).subscribe(
       response => {
         if (response) {
-          this.messages['data'] = 'Your account has been successfully activated! Follow the login page to start work!';
+          this.isSuccess = true;
         }
       }, (appError: AppError) => {
         if (appError.status === 404) {
-          this.messages['data'] = 'Something went wrong! Your account hasn\'t been activated!';
+          this.isSuccess = false;
         } else {
           throw appError;
         }

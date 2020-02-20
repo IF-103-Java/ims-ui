@@ -45,7 +45,7 @@ export class UserSigninComponent implements OnDestroy {
         }
       }, (appError: AppError) => {
         if (appError.status === 401) {
-          this.userErrors['data'] = 'User with these data not found.';
+          this.userErrors['data'] = 'The credentials you\'ve provided are incorrect.';
         } else {
           throw appError;
         }
