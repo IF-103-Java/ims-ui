@@ -2,7 +2,21 @@
   <div class="text-center">
     <h1 class="text-gray-900 mb-2">Activation!</h1>
     <p class="mb-4">
-    <h1>{{messages['data']}}</h1>
+    <div *ngIf="this.isSuccess; then showSuccess else showError"></div>
+    <ng-template #showSuccess>
+      <h3>Your account has been successfully activated! <br>
+        Please, follow the login page to start work!</h3>
+      <div class="input-container">
+        <button class="small" routerLink="/sign-in">Login!</button>
+      </div>
+    </ng-template>
+    <ng-template #showError>
+      <h3>Something went wrong! Your account hasn't been activated.<br>
+        Please,follow the registration page!</h3>
+      <div class="input-container">
+        <button class="small" routerLink="/sign-up">Create an Account!</button>
+      </div>
+    </ng-template>
     <hr>
   </div>
 </div>

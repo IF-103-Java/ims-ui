@@ -17,6 +17,7 @@ export class UserSignupComponent implements OnDestroy {
   hidePassword = true;
   regUserSubscription: Subscription;
   load = false;
+  done = false;
 
   constructor(private registrationService: RegistrationService,
               private router: Router) {
@@ -40,7 +41,7 @@ export class UserSignupComponent implements OnDestroy {
     this.regUserSubscription = this.registrationService.regUser(user)
       .subscribe((response: HttpResponse<any>) => {
         if (response) {
-          this.router.navigate(['sign-in']);
+          this.done = true;
         }
       }, (appError: AppError) => {
         if (appError.status === 500) {

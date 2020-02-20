@@ -13,7 +13,7 @@ export class GlobalErrorHandler implements ErrorHandler {
   handleError(appError: HttpErrorResponse): void {
     switch (appError.status) {
       case 0: {
-        this.toastService.show('No Network access or Server not work',
+        this.toastService.show('No network access or Server doesn\'t work',
           {classname: 'bg-danger text-light', delay: 3000});
         break;
       }

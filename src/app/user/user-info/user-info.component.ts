@@ -46,12 +46,13 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCurrentUserSubscription = this.userService.getCurrentUser()
       .subscribe((response: HttpResponse<any>) => {
-        if (response) {
-          this.initUser(response);
+          if (response) {
+            this.initUser(response);
+          }
+        }, (appError: AppError) => {
+          throw appError;
         }
-      }, (appError: AppError) => {
-        throw appError;
-      });
+      );
   }
 
   initUser(response: HttpResponse<any>) {
