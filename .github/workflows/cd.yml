@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Build & Push docker image
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           registry: docker.io
           name: if103java/ims-ui
